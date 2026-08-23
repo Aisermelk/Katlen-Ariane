@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katlen Ariane | Psicanalista</title>
+    <meta name="description" content="Atendimento psicanalítico para mulheres, famílias, crianças e adolescentes. Especialista em Neurociência do Desenvolvimento aplicada ao Autismo.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <span class="name">KATLEN ARIANE</span>
+                <span class="sub">PSICANALISTA</span>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#atendimento">Atendimento</a></li>
+                    <li><a href="#neuro">Neurodesenvolvimento</a></li>
+                    <li><a href="#contato" class="btn btn-primary">AGENDAR UMA CONVERSA</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-toggle" id="mobile-menu">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <h1>Um espaço de escuta, acolhimento e compreensão para diferentes momentos da vida.</h1>
+                <p>Apoio profissional e humano para o desenvolvimento emocional e fortalecimento de vínculos.</p>
+                <div class="target-audience">
+                    <span>Mulheres</span> • <span>Famílias</span> • <span>Crianças</span> • <span>Adolescentes</span>
+                </div>
+                <div class="cta-group">
+                    <a href="#contato" class="btn btn-primary btn-large">Agende uma conversa</a>
+                    <a href="#atendimento" class="btn btn-outline">Conheça meu trabalho</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <!-- Elemento decorativo orgânico -->
+                <div class="shape-blob"></div>
+                <div class="hero-image-placeholder">
+                    <!-- Placeholder para foto profissional -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Atendimento -->
+    <section id="atendimento" class="services">
+        <div class="container">
+            <h2 class="section-title">Para quem é o atendimento?</h2>
+            <div class="services-grid">
+                <!-- Card Mulheres -->
+                <div class="service-card" style="border-top: 5px solid #FF6F91;">
+                    <div class="icon coral">♀</div>
+                    <h3>Mulheres</h3>
+                    <p>Espaço de escuta e reflexão sobre a subjetividade feminina, desafios contemporâneos e fases da vida.</p>
+                </div>
+                <!-- Card Famílias -->
+                <div class="service-card" style="border-top: 5px solid #45C9A1;">
+                    <div class="icon mint">🏠</div>
+                    <h3>Famílias</h3>
+                    <p>Apoio na construção de vínculos saudáveis, mediação de conflitos e compreensão das dinâmicas familiares.</p>
+                </div>
+                <!-- Card Crianças -->
+                <div class="service-card" style="border-top: 5px solid #FFD43B;">
+                    <div class="icon yellow">🎨</div>
+                    <h3>Crianças</h3>
+                    <p>Atendimento lúdico que respeita o tempo da infância, auxiliando na expressão de emoções e desenvolvimento.</p>
+                </div>
+                <!-- Card Adolescentes -->
+                <div class="service-card" style="border-top: 5px solid #8B5CF6;">
+                    <div class="icon purple">🎧</div>
+                    <h3>Adolescentes</h3>
+                    <p>Escuta atenta para as transformações, busca por identidade e os desafios emocionais desta transição.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Neurociência (Área Complementar) -->
+    <section id="neuro" class="neuro-section">
+        <div class="container">
+            <div class="neuro-box">
+                <div class="neuro-text">
+                    <h2>Neurociência do Desenvolvimento e Autismo</h2>
+                    <p>Como área complementar à psicanálise, utilizo conhecimentos da neurociência para oferecer uma compreensão profunda do neurodesenvolvimento.</p>
+                    <p>O foco é a singularidade de cada indivíduo dentro do espectro, priorizando o acolhimento da família e a criação de contextos que favoreçam o desenvolvimento pleno, sem rótulos limitantes.</p>
+                </div>
+                <div class="neuro-icon">🧠</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulário -->
+    <section id="contato" class="contact">
+        <div class="container contact-grid">
+            <div class="contact-info">
+                <h2>Vamos conversar?</h2>
+                <p>Sinta-se à vontade para tirar suas dúvidas ou agendar uma primeira conversa.</p>
+                <div class="registration-box" id="prof-reg-container">
+                    <small id="reg-label"></small>
+                    <strong id="reg-value"></strong>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form id="main-form" method="POST">
+                    <input type="text" name="nome" placeholder="Seu nome" required>
+                    <input type="email" name="email" placeholder="Seu e-mail" required>
+                    <input type="text" name="whatsapp" placeholder="Seu WhatsApp" required>
+                    <select name="busca_atendimento" required>
+                        <option value="" disabled selected>Quem busca atendimento?</option>
+                        <option value="Para mim">Para mim</option>
+                        <option value="Para meu filho(a)">Para meu filho(a)</option>
+                        <option value="Para um adolescente">Para um adolescente</option>
+                        <option value="Para minha família">Para minha família</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+                    <textarea name="mensagem" placeholder="Sua mensagem" rows="4"></textarea>
+                    <label class="consent">
+                        <input type="checkbox" required> Aceito o tratamento dos meus dados para este contato.
+                    </label>
+                    <button type="submit" class="btn btn-primary w-full">ENVIAR MENSAGEM</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Flutuante -->
+    <a href="#" class="whatsapp-float" id="whatsapp-link" target="_blank">
+        <span>Fale comigo</span>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
+
+    <!-- JS -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
