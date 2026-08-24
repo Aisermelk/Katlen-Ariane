@@ -10,7 +10,9 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Katlen Ariane | Psicanalista Clínica</title>
+    <title>
+        Katlen Ariane | Psicanalista Clínica
+    </title>
 
     <meta
         name="description"
@@ -60,7 +62,7 @@
 
     <!-- =====================================================
          FAVICON
-         PNG PRIMEIRO
+         PNG COMO PRIMEIRA OPÇÃO
          ===================================================== -->
 
     <link
@@ -69,9 +71,8 @@
         type="image/png"
     >
 
-    <!-- Fallback WebP -->
     <link
-        rel="icon"
+        rel="alternate icon"
         href="assets/katlen-logo.webp"
         type="image/webp"
     >
@@ -81,7 +82,10 @@
          FONTES
          ===================================================== -->
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
 
     <link
         rel="preconnect"
@@ -115,6 +119,7 @@
          ===================================================== -->
 
     <script type="application/ld+json">
+
     {
         "@context": "https://schema.org",
         "@type": "Person",
@@ -127,6 +132,7 @@
             "Neurodesenvolvimento"
         ]
     }
+
     </script>
 
 </head>
@@ -135,9 +141,9 @@
 <body>
 
 
-<!-- =====================================================
-     MENU SUPERIOR FLUTUANTE
-     ===================================================== -->
+<!-- =========================================================
+     CABEÇALHO
+     ========================================================= -->
 
 <header class="site-header">
 
@@ -145,8 +151,7 @@
 
 
         <!-- =================================================
-             LOGO
-             PNG É A PRIMEIRA OPÇÃO
+             MARCA
              ================================================= -->
 
         <a
@@ -155,36 +160,37 @@
             aria-label="Katlen Ariane - início"
         >
 
-            <picture>
+            <!--
+                PNG PRINCIPAL
+                WEBP COMO FALLBACK
+            -->
 
-                <!-- PNG -->
-                <source
-                    srcset="assets/katlen-logo.png"
-                    type="image/png"
-                >
+            <img
+                src="assets/katlen-logo.png"
+                data-fallback="assets/katlen-logo.webp"
+                class="brand-logo"
+                alt="Logo Katlen Ariane"
+                width="42"
+                height="42"
+            >
 
-                <!-- WebP -->
-                <source
-                    srcset="assets/katlen-logo.webp"
-                    type="image/webp"
-                >
+            <span class="brand-text">
 
-                <!-- Fallback -->
-                <img
-                    src="assets/katlen-logo.png"
-                    alt="Katlen Ariane — Psicanalista Clínica"
-                    class="brand-logo"
-                    width="180"
-                    height="auto"
-                >
+                <span class="brand-name">
+                    Katlen Ariane
+                </span>
 
-            </picture>
+                <span class="brand-sub">
+                    PSICANALISTA CLÍNICA | CBPC 2022-6172
+                </span>
+
+            </span>
 
         </a>
 
 
         <!-- =================================================
-             NAVEGAÇÃO
+             MENU
              ================================================= -->
 
         <nav
@@ -278,16 +284,16 @@
 </header>
 
 
-<!-- =====================================================
+<!-- =========================================================
      CONTEÚDO PRINCIPAL
-     ===================================================== -->
+     ========================================================= -->
 
 <main>
 
 
-<!-- =====================================================
+<!-- =========================================================
      HERO
-     ===================================================== -->
+     ========================================================= -->
 
 <section
     id="inicio"
@@ -313,7 +319,9 @@
     <div class="container hero-grid">
 
 
-        <!-- TEXTO -->
+        <!-- =================================================
+             TEXTO
+             ================================================= -->
 
         <div class="hero-copy">
 
@@ -335,7 +343,7 @@
             </p>
 
 
-            <!-- PÚBLICOS -->
+            <!-- PÚBLICO -->
 
             <div class="target-audience">
 
@@ -389,33 +397,19 @@
 
         <!-- =================================================
              IMAGEM HERO
-             PNG PRIMEIRO / WEBP FALLBACK
              ================================================= -->
 
         <div class="hero-visual">
 
             <div class="hero-image">
 
-                <picture>
-
-                    <source
-                        srcset="assets/katlen-hero.png"
-                        type="image/png"
-                    >
-
-                    <source
-                        srcset="assets/katlen-hero.webp"
-                        type="image/webp"
-                    >
-
-                    <img
-                        src="assets/katlen-hero.png"
-                        alt="Katlen Ariane, Psicanalista Clínica"
-                        loading="eager"
-                        fetchpriority="high"
-                    >
-
-                </picture>
+                <img
+                    src="assets/katlen-hero.png"
+                    data-fallback="assets/katlen-hero.webp"
+                    alt="Katlen Ariane, Psicanalista Clínica"
+                    loading="eager"
+                    fetchpriority="high"
+                >
 
             </div>
 
@@ -448,9 +442,9 @@
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      SOBRE
-     ===================================================== -->
+     ========================================================= -->
 
 <section
     id="sobre"
@@ -460,29 +454,16 @@
     <div class="container about-grid">
 
 
-        <!-- IMAGEM SOBRE -->
+        <!-- IMAGEM -->
 
         <div class="about-image">
 
-            <picture>
-
-                <source
-                    srcset="assets/katlen-sobre.png"
-                    type="image/png"
-                >
-
-                <source
-                    srcset="assets/katlen-sobre.webp"
-                    type="image/webp"
-                >
-
-                <img
-                    src="assets/katlen-sobre.png"
-                    alt="Katlen Ariane em seu espaço profissional"
-                    loading="lazy"
-                >
-
-            </picture>
+            <img
+                src="assets/katlen-sobre.png"
+                data-fallback="assets/katlen-sobre.webp"
+                alt="Katlen Ariane em seu espaço profissional"
+                loading="lazy"
+            >
 
         </div>
 
@@ -503,10 +484,12 @@
 
 
             <p id="about-formacao">
+
                 Psicanalista dedicada a construir
                 um espaço de escuta e reflexão,
                 respeitando a singularidade de cada
                 pessoa e de cada história.
+
             </p>
 
 
@@ -536,9 +519,9 @@
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      ATENDIMENTO
-     ===================================================== -->
+     ========================================================= -->
 
 <section
     id="atendimento"
@@ -576,9 +559,13 @@
         <div class="audience-grid">
 
 
+            <!-- FAMÍLIAS -->
+
             <article class="audience-card family">
 
-                <span>01</span>
+                <span>
+                    01
+                </span>
 
                 <h3>
                     Famílias
@@ -595,9 +582,13 @@
             </article>
 
 
+            <!-- MULHERES -->
+
             <article class="audience-card women">
 
-                <span>02</span>
+                <span>
+                    02
+                </span>
 
                 <h3>
                     Mulheres
@@ -614,9 +605,13 @@
             </article>
 
 
+            <!-- CRIANÇAS -->
+
             <article class="audience-card children">
 
-                <span>03</span>
+                <span>
+                    03
+                </span>
 
                 <h3>
                     Crianças
@@ -633,9 +628,13 @@
             </article>
 
 
+            <!-- ADOLESCENTES -->
+
             <article class="audience-card teens">
 
-                <span>04</span>
+                <span>
+                    04
+                </span>
 
                 <h3>
                     Adolescentes
@@ -658,9 +657,9 @@
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      NEURODESENVOLVIMENTO
-     ===================================================== -->
+     ========================================================= -->
 
 <section
     id="neuro"
@@ -720,9 +719,9 @@
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      PRIMEIRA CONSULTA
-     ===================================================== -->
+     ========================================================= -->
 
 <section
     id="primeira-consulta"
@@ -760,7 +759,9 @@
 
             <div class="step">
 
-                <span>01</span>
+                <span>
+                    01
+                </span>
 
                 <div>
 
@@ -780,7 +781,9 @@
 
             <div class="step">
 
-                <span>02</span>
+                <span>
+                    02
+                </span>
 
                 <div>
 
@@ -801,7 +804,9 @@
 
             <div class="step">
 
-                <span>03</span>
+                <span>
+                    03
+                </span>
 
                 <div>
 
@@ -825,9 +830,9 @@
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      DEPOIMENTOS
-     ===================================================== -->
+     ========================================================= -->
 
 <section
     id="depoimentos"
@@ -939,9 +944,9 @@
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      SOBRE A PSICANÁLISE
-     ===================================================== -->
+     ========================================================= -->
 
 <section
     class="psycho section"
@@ -983,29 +988,16 @@
         </div>
 
 
-        <!-- IMAGEM CONSULTÓRIO -->
+        <!-- IMAGEM DO CONSULTÓRIO -->
 
         <div class="room-image">
 
-            <picture>
-
-                <source
-                    srcset="assets/consultorio.png"
-                    type="image/png"
-                >
-
-                <source
-                    srcset="assets/consultorio.webp"
-                    type="image/webp"
-                >
-
-                <img
-                    src="assets/consultorio.png"
-                    alt="Espaço de atendimento"
-                    loading="lazy"
-                >
-
-            </picture>
+            <img
+                src="assets/consultorio.png"
+                data-fallback="assets/consultorio.webp"
+                alt="Espaço de atendimento"
+                loading="lazy"
+            >
 
         </div>
 
@@ -1014,9 +1006,9 @@
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      CONTATO
-     ===================================================== -->
+     ========================================================= -->
 
 <section
     id="contato"
@@ -1222,9 +1214,9 @@
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      POLÍTICA DE PRIVACIDADE
-     ===================================================== -->
+     ========================================================= -->
 
 <section
     id="privacidade"
@@ -1275,16 +1267,18 @@
 </main>
 
 
-<!-- =====================================================
+<!-- =========================================================
      RODAPÉ
-     ===================================================== -->
+     ========================================================= -->
 
 <footer class="site-footer">
 
     <div class="container footer-grid">
 
 
-        <!-- MARCA -->
+        <!-- =================================================
+             MARCA
+             ================================================= -->
 
         <div class="footer-brand">
 
@@ -1294,26 +1288,26 @@
                 aria-label="Katlen Ariane - início"
             >
 
-                <picture>
+                <img
+                    src="assets/katlen-logo.png"
+                    data-fallback="assets/katlen-logo.webp"
+                    class="brand-logo"
+                    alt="Logo Katlen Ariane"
+                    width="42"
+                    height="42"
+                >
 
-                    <source
-                        srcset="assets/katlen-logo.png"
-                        type="image/png"
-                    >
+                <span class="brand-text">
 
-                    <source
-                        srcset="assets/katlen-logo.webp"
-                        type="image/webp"
-                    >
+                    <span class="brand-name">
+                        Katlen Ariane
+                    </span>
 
-                    <img
-                        src="assets/katlen-logo.png"
-                        alt="Katlen Ariane — Psicanalista Clínica"
-                        class="brand-logo"
-                        loading="lazy"
-                    >
+                    <span class="brand-sub">
+                        PSICANALISTA CLÍNICA
+                    </span>
 
-                </picture>
+                </span>
 
             </a>
 
@@ -1326,7 +1320,9 @@
         </div>
 
 
-        <!-- NAVEGAÇÃO -->
+        <!-- =================================================
+             NAVEGAÇÃO
+             ================================================= -->
 
         <div>
 
@@ -1370,7 +1366,9 @@
         </div>
 
 
-        <!-- ATENDIMENTO -->
+        <!-- =================================================
+             ATENDIMENTO
+             ================================================= -->
 
         <div>
 
@@ -1400,7 +1398,9 @@
         </div>
 
 
-        <!-- REDES SOCIAIS -->
+        <!-- =================================================
+             REDES SOCIAIS
+             ================================================= -->
 
         <div>
 
@@ -1471,7 +1471,9 @@
     </div>
 
 
-    <!-- COPYRIGHT -->
+    <!-- =================================================
+         COPYRIGHT
+         ================================================= -->
 
     <div class="container footer-bottom">
 
@@ -1485,9 +1487,9 @@
 </footer>
 
 
-<!-- =====================================================
+<!-- =========================================================
      WHATSAPP FLUTUANTE
-     ===================================================== -->
+     ========================================================= -->
 
 <a
     href="#"
@@ -1506,14 +1508,57 @@
 </a>
 
 
-<!-- =====================================================
+<!-- =========================================================
      JAVASCRIPT
-     ===================================================== -->
+     ========================================================= -->
 
 <script
     type="module"
     src="js/main.js"
 ></script>
+
+
+<!-- =========================================================
+     FALLBACK DAS IMAGENS
+     
+     PNG é sempre tentado primeiro.
+     Se o PNG não existir, usa o WEBP definido
+     em data-fallback.
+     ========================================================= -->
+
+<script>
+
+document
+    .querySelectorAll("img[data-fallback]")
+    .forEach(function (img) {
+
+        img.addEventListener(
+            "error",
+            function () {
+
+                const fallback =
+                    img.getAttribute(
+                        "data-fallback"
+                    );
+
+                if (
+                    fallback &&
+                    img.src.indexOf(fallback) === -1
+                ) {
+
+                    img.src = fallback;
+
+                }
+
+            },
+            {
+                once: true
+            }
+        );
+
+    });
+
+</script>
 
 
 </body>
