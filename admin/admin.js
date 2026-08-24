@@ -1,26 +1,10 @@
-/* =========================================================
-   ADM KATLEN ARIANE
-   ADMIN.JS
-   ========================================================= */
-
 "use strict";
-
 
 /* =========================================================
    CONFIGURAÇÃO
    ========================================================= */
 
-/*
- * Se o Worker estiver no mesmo domínio do painel:
- *
- *     const API = "";
- *
- * Se o Worker estiver em outro domínio:
- *
- *     const API = "https://seu-worker.seu-subdominio.workers.dev";
- */
-
-const API = "";
+const API = "https://katlen-admin.aisermelk.workers.dev";
 
 
 /* =========================================================
@@ -30,69 +14,44 @@ const API = "";
 const loginView = document.getElementById("login-view");
 const panelView = document.getElementById("panel-view");
 
+const loginForm = document.getElementById("login-form");
+const configForm = document.getElementById("config-form");
+
 const loginUser = document.getElementById("login-user");
 const loginPass = document.getElementById("login-pass");
 
-const btnLogin = document.getElementById("btn-login");
-const btnSave = document.getElementById("btn-save");
-const btnLogout = document.getElementById("btn-logout");
+const loginButton = document.getElementById("login-button");
+const saveButton = document.getElementById("save-button");
+const logoutButton = document.getElementById("logout-button");
 
-const msg = document.getElementById("msg");
+const message = document.getElementById("message");
+const saveStatus = document.getElementById("save-status");
 
 
 /* =========================================================
    MENSAGENS
    ========================================================= */
 
-function showMsg(text, type = "success") {
+function showMessage(text, type = "") {
+    if (!message) return;
 
-    if (!msg) return;
+    message.textContent = text;
+    message.className = "save-message";
 
-    msg.textContent = text;
-
-    msg.className = "";
-
-    if (type === "error") {
-        msg.classList.add("message-error");
-    }
-
-    if (type === "success") {
-        msg.classList.add("message-success");
-    }
-
-    if (type === "info") {
-        msg.classList.add("message-info");
+    if (type) {
+        message.classList.add(type);
     }
 }
 
 
-/* =========================================================
-   ESTADO DOS BOTÕES
-   ========================================================= */
+function showSaveStatus(text, type = "") {
+    if (!saveStatus) return;
 
-function setButtonLoading(button, loading, loadingText = "Aguarde...") {
+    saveStatus.textContent = text;
+    saveStatus.className = "save-message";
 
-    if (!button) return;
-
-    if (loading) {
-
-        button.dataset.originalText = button.textContent;
-
-        button.textContent = loadingText;
-
-        button.disabled = true;
-
-        button.classList.add("is-loading");
-
-    } else {
-
-        button.textContent =
-            button.dataset.originalText ||
-            button.textContent;
-
-        button.disabled = false;
-
-        button.classList.remove("is-loading");
+    if (type) {
+        saveStatus.classList.add(type);
     }
 }
 
@@ -102,25 +61,23 @@ function setButtonLoading(button, loading, loadingText = "Aguarde...") {
    ========================================================= */
 
 function showLogin() {
-
     if (loginView) {
-        loginView.style.display = "block";
+        loginView.hidden = false;
     }
 
     if (panelView) {
-        panelView.style.display = "none";
+        panelView.hidden = true;
     }
 }
 
 
 function showPanel() {
-
     if (loginView) {
-        loginView.style.display = "none";
+        loginView.hidden = true;
     }
 
     if (panelView) {
-        panelView.style.display = "block";
+        panelView.hidden = false;
     }
 }
 
@@ -129,7 +86,7 @@ function showPanel() {
    API
    ========================================================= */
 
-async function apiFetch(endpoint, options = {}) {
+async function apiRequest(endpoint, options = {}) {
 
     const response = await fetch(
         `${API}${endpoint}`,
@@ -140,13 +97,26 @@ async function apiFetch(endpoint, options = {}) {
 
             headers: {
                 "Content-Type": "application/json",
-
                 ...(options.headers || {})
             }
         }
     );
 
-    return response;
+    let data = {};
+
+    try {
+        data = await response.json();
+    } catch {
+        data = {};
+    }
+
+    if (!response.ok) {
+        throw new Error(
+            data.error || `Erro HTTP ${response.status}`
+        );
+    }
+
+    return data;
 }
 
 
@@ -165,7 +135,7 @@ async function login() {
 
     if (!username) {
 
-        showMsg(
+        showMessage(
             "Informe o usuário.",
             "error"
         );
@@ -178,7 +148,7 @@ async function login() {
 
     if (!password) {
 
-        showMsg(
+        showMessage(
             "Informe a senha.",
             "error"
         );
@@ -189,16 +159,13 @@ async function login() {
     }
 
 
-    setButtonLoading(
-        btnLogin,
-        true,
-        "Entrando..."
-    );
+    loginButton.disabled = true;
+    loginButton.textContent = "Entrando...";
 
 
     try {
 
-        const response = await apiFetch(
+        await apiRequest(
             "/api/login",
             {
                 method: "POST",
@@ -211,59 +178,28 @@ async function login() {
         );
 
 
-        let data = {};
+        loginPass.value = "";
 
-        try {
-            data = await response.json();
-        } catch {
-            data = {};
-        }
+        showPanel();
 
-
-        if (!response.ok) {
-
-            showMsg(
-                data.error ||
-                "Usuário ou senha inválidos.",
-                "error"
-            );
-
-            return;
-        }
-
-
-        showMsg(
-            "Login realizado com sucesso.",
-            "success"
-        );
-
-
-        if (loginPass) {
-            loginPass.value = "";
-        }
-
-
-        await loadPanel();
+        await loadConfig();
 
 
     } catch (error) {
 
-        console.error(
-            "Erro no login:",
-            error
-        );
+        console.error("Erro no login:", error);
 
-        showMsg(
-            "Não foi possível conectar ao servidor.",
+        showMessage(
+            error.message ||
+            "Usuário ou senha inválidos.",
             "error"
         );
 
+
     } finally {
 
-        setButtonLoading(
-            btnLogin,
-            false
-        );
+        loginButton.disabled = false;
+        loginButton.textContent = "Entrar";
     }
 }
 
@@ -276,25 +212,13 @@ async function checkSession() {
 
     try {
 
-        const response =
-            await apiFetch(
+        const config =
+            await apiRequest(
                 "/api/admin/config",
                 {
                     method: "GET"
                 }
             );
-
-
-        if (!response.ok) {
-
-            showLogin();
-
-            return false;
-        }
-
-
-        const config =
-            await response.json();
 
 
         fillForm(config);
@@ -306,17 +230,7 @@ async function checkSession() {
 
     } catch (error) {
 
-        console.error(
-            "Erro ao verificar sessão:",
-            error
-        );
-
         showLogin();
-
-        showMsg(
-            "Não foi possível verificar a sessão.",
-            "error"
-        );
 
         return false;
     }
@@ -324,43 +238,20 @@ async function checkSession() {
 
 
 /* =========================================================
-   CARREGAR PAINEL
+   CARREGAR CONFIGURAÇÕES
    ========================================================= */
 
-async function loadPanel() {
+async function loadConfig() {
 
     try {
 
-        const response =
-            await apiFetch(
+        const config =
+            await apiRequest(
                 "/api/admin/config",
                 {
                     method: "GET"
                 }
             );
-
-
-        if (response.status === 401) {
-
-            showLogin();
-
-            return;
-        }
-
-
-        if (!response.ok) {
-
-            showMsg(
-                "Não foi possível carregar as configurações.",
-                "error"
-            );
-
-            return;
-        }
-
-
-        const config =
-            await response.json();
 
 
         fillForm(config);
@@ -371,12 +262,15 @@ async function loadPanel() {
     } catch (error) {
 
         console.error(
-            "Erro ao carregar painel:",
+            "Erro ao carregar configurações:",
             error
         );
 
-        showMsg(
-            "Erro ao carregar as configurações.",
+
+        showLogin();
+
+        showMessage(
+            "Sua sessão não está mais ativa.",
             "error"
         );
     }
@@ -389,10 +283,36 @@ async function loadPanel() {
 
 function fillForm(config = {}) {
 
+    setValue(
+        "professionalRegistration",
+        config.professionalRegistration
+    );
 
-    /* -----------------------------------------------------
-       CONTATO
-       ----------------------------------------------------- */
+
+    setValue(
+        "professionalRegistrationLabel",
+        config.professionalRegistrationLabel ||
+        "Registro profissional"
+    );
+
+
+    setValue(
+        "formacao",
+        config.formacao
+    );
+
+
+    setValue(
+        "especializacoes",
+        config.especializacoes
+    );
+
+
+    setValue(
+        "experiencia",
+        config.experiencia
+    );
+
 
     setValue(
         "whatsapp",
@@ -411,10 +331,6 @@ function fillForm(config = {}) {
         config.formspreeEndpoint
     );
 
-
-    /* -----------------------------------------------------
-       REDES SOCIAIS
-       ----------------------------------------------------- */
 
     setValue(
         "instagram",
@@ -440,39 +356,6 @@ function fillForm(config = {}) {
     );
 
 
-    /* -----------------------------------------------------
-       INFORMAÇÕES PROFISSIONAIS
-       ----------------------------------------------------- */
-
-    setValue(
-        "professionalRegistration",
-        config.professionalRegistration ||
-        "CBPC 2022-6172"
-    );
-
-
-    setValue(
-        "formacao",
-        config.formacao
-    );
-
-
-    setValue(
-        "especializacoes",
-        config.especializacoes
-    );
-
-
-    setValue(
-        "experiencia",
-        config.experiencia
-    );
-
-
-    /* -----------------------------------------------------
-       RASTREAMENTO
-       ----------------------------------------------------- */
-
     setValue(
         "metaPixelId",
         config.metaPixelId
@@ -491,35 +374,31 @@ function fillForm(config = {}) {
     );
 
 
-    /* -----------------------------------------------------
-       TOGGLES
-       ----------------------------------------------------- */
-
     const tracking =
         config.trackingEnabled || {};
 
 
     setChecked(
         "pixelEnabled",
-        !!tracking.pixel
+        tracking.pixel
     );
 
 
     setChecked(
         "gaEnabled",
-        !!tracking.ga
+        tracking.ga
     );
 
 
     setChecked(
         "gtmEnabled",
-        !!tracking.gtm
+        tracking.gtm
     );
 }
 
 
 /* =========================================================
-   HELPERS DE FORMULÁRIO
+   HELPERS
    ========================================================= */
 
 function setValue(id, value) {
@@ -576,8 +455,6 @@ function collectConfig() {
 
     return {
 
-        /* Contato */
-
         whatsapp:
             getValue("whatsapp"),
 
@@ -587,8 +464,6 @@ function collectConfig() {
         formspreeEndpoint:
             getValue("formspreeEndpoint"),
 
-
-        /* Redes sociais */
 
         instagram:
             getValue("instagram"),
@@ -603,16 +478,18 @@ function collectConfig() {
             getValue("linkedin"),
 
 
-        /* Profissional */
-
         professionalRegistrationLabel:
+            getValue(
+                "professionalRegistrationLabel"
+            ) ||
             "Registro profissional",
+
 
         professionalRegistration:
             getValue(
                 "professionalRegistration"
-            ) ||
-            "CBPC 2022-6172",
+            ),
+
 
         formacao:
             getValue("formacao"),
@@ -623,8 +500,6 @@ function collectConfig() {
         experiencia:
             getValue("experiencia"),
 
-
-        /* Rastreamento */
 
         metaPixelId:
             getValue("metaPixelId"),
@@ -652,16 +527,14 @@ function collectConfig() {
 
 
 /* =========================================================
-   VALIDAR CONFIGURAÇÃO
+   VALIDAÇÃO
    ========================================================= */
 
 function validateConfig(config) {
 
     if (
         config.whatsapp &&
-        !/^[0-9]+$/.test(
-            config.whatsapp
-        )
+        !/^[0-9]+$/.test(config.whatsapp)
     ) {
 
         return {
@@ -722,7 +595,7 @@ function validateConfig(config) {
 
 
 /* =========================================================
-   SALVAR
+   SALVAR CONFIGURAÇÕES
    ========================================================= */
 
 async function saveConfig() {
@@ -737,7 +610,7 @@ async function saveConfig() {
 
     if (!validation.valid) {
 
-        showMsg(
+        showSaveStatus(
             validation.message,
             "error"
         );
@@ -746,17 +619,14 @@ async function saveConfig() {
     }
 
 
-    setButtonLoading(
-        btnSave,
-        true,
-        "Salvando..."
-    );
+    saveButton.disabled = true;
+    saveButton.textContent = "Salvando...";
 
 
     try {
 
-        const response =
-            await apiFetch(
+        const data =
+            await apiRequest(
                 "/api/admin/config",
                 {
                     method: "PUT",
@@ -767,44 +637,6 @@ async function saveConfig() {
             );
 
 
-        let data = {};
-
-        try {
-
-            data =
-                await response.json();
-
-        } catch {
-
-            data = {};
-        }
-
-
-        if (response.status === 401) {
-
-            showLogin();
-
-            showMsg(
-                "Sua sessão expirou. Faça login novamente.",
-                "error"
-            );
-
-            return;
-        }
-
-
-        if (!response.ok) {
-
-            showMsg(
-                data.error ||
-                "Erro ao salvar as alterações.",
-                "error"
-            );
-
-            return;
-        }
-
-
         if (data.config) {
 
             fillForm(
@@ -813,8 +645,8 @@ async function saveConfig() {
         }
 
 
-        showMsg(
-            "Alterações salvas com sucesso.",
+        showSaveStatus(
+            "Configurações salvas com sucesso.",
             "success"
         );
 
@@ -826,17 +658,36 @@ async function saveConfig() {
             error
         );
 
-        showMsg(
-            "Não foi possível salvar as alterações.",
+
+        if (
+            error.message.includes(
+                "Não autenticado"
+            )
+        ) {
+
+            showLogin();
+
+            showMessage(
+                "Sua sessão expirou. Faça login novamente.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        showSaveStatus(
+            error.message ||
+            "Não foi possível salvar as configurações.",
             "error"
         );
 
+
     } finally {
 
-        setButtonLoading(
-            btnSave,
-            false
-        );
+        saveButton.disabled = false;
+        saveButton.textContent =
+            "Salvar configurações";
     }
 }
 
@@ -847,21 +698,19 @@ async function saveConfig() {
 
 async function logout() {
 
-    setButtonLoading(
-        btnLogout,
-        true,
-        "Saindo..."
-    );
+    logoutButton.disabled = true;
+    logoutButton.textContent = "Saindo...";
 
 
     try {
 
-        await apiFetch(
+        await apiRequest(
             "/api/logout",
             {
                 method: "POST"
             }
         );
+
 
     } catch (error) {
 
@@ -869,6 +718,7 @@ async function logout() {
             "Erro ao sair:",
             error
         );
+
 
     } finally {
 
@@ -882,49 +732,16 @@ async function logout() {
             loginPass.value = "";
         }
 
-        showMsg(
+
+        showMessage(
             "Sessão encerrada.",
             "success"
         );
 
-        setButtonLoading(
-            btnLogout,
-            false
-        );
+
+        logoutButton.disabled = false;
+        logoutButton.textContent = "Sair";
     }
-}
-
-
-/* =========================================================
-   ENTER NO LOGIN
-   ========================================================= */
-
-function setupLoginKeyboard() {
-
-    if (!loginUser || !loginPass) {
-        return;
-    }
-
-
-    [loginUser, loginPass].forEach(
-        input => {
-
-            input.addEventListener(
-                "keydown",
-                event => {
-
-                    if (
-                        event.key === "Enter"
-                    ) {
-
-                        event.preventDefault();
-
-                        login();
-                    }
-                }
-            );
-        }
-    );
 }
 
 
@@ -934,35 +751,41 @@ function setupLoginKeyboard() {
 
 function setupEvents() {
 
+    if (loginForm) {
 
-    if (btnLogin) {
+        loginForm.addEventListener(
+            "submit",
+            event => {
 
-        btnLogin.addEventListener(
-            "click",
-            login
+                event.preventDefault();
+
+                login();
+            }
         );
     }
 
 
-    if (btnSave) {
+    if (configForm) {
 
-        btnSave.addEventListener(
-            "click",
-            saveConfig
+        configForm.addEventListener(
+            "submit",
+            event => {
+
+                event.preventDefault();
+
+                saveConfig();
+            }
         );
     }
 
 
-    if (btnLogout) {
+    if (logoutButton) {
 
-        btnLogout.addEventListener(
+        logoutButton.addEventListener(
             "click",
             logout
         );
     }
-
-
-    setupLoginKeyboard();
 }
 
 
@@ -980,11 +803,16 @@ async function init() {
 }
 
 
-/* =========================================================
-   START
-   ========================================================= */
+if (
+    document.readyState === "loading"
+) {
 
-document.addEventListener(
-    "DOMContentLoaded",
-    init
-);
+    document.addEventListener(
+        "DOMContentLoaded",
+        init
+    );
+
+} else {
+
+    init();
+}
