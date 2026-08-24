@@ -11,23 +11,31 @@
    ========================================================= */
 
 /*
- * O site e o Worker trabalham no mesmo domínio.
+ * O site está hospedado no Cloudflare Pages.
  *
- * Público:
- *   GET /api/config
+ * A API administrativa está no Cloudflare Worker:
  *
- * Administrativo:
- *   /api/admin/config
+ * https://katlen-admin.aisermelk.workers.dev
  *
- * Não coloque aqui senha, token ou qualquer Secret.
+ * A configuração pública é obtida através de:
+ *
+ * /api/config
+ *
+ * NÃO coloque senhas, tokens ou Secrets aqui.
  */
 
-const CONFIG_API_URL = "/api/config";
+const CONFIG_API_URL =
+    "https://katlen-admin.aisermelk.workers.dev/api/config";
 
 
 /* =========================================================
    2. CONFIGURAÇÃO FALLBACK
    ========================================================= */
+
+/*
+ * Caso o Worker fique temporariamente indisponível,
+ * o site continua funcionando utilizando estes valores.
+ */
 
 const FALLBACK_CONFIG = {
 
@@ -113,9 +121,45 @@ async function loadConfig() {
         }
 
 
+        /*
+         * Verificação adicional.
+         *
+         * Evita tentar interpretar HTML como JSON.
+         */
+
+        const contentType =
+            response.headers.get(
+                "content-type"
+            ) || "";
+
+
+        if (
+            !contentType
+                .toLowerCase()
+                .includes(
+                    "application/json"
+                )
+        ) {
+
+            const text =
+                await response.text();
+
+
+            throw new Error(
+                "A API não retornou JSON. " +
+                `Resposta recebida: ${text.substring(0, 120)}`
+            );
+        }
+
+
         const remoteConfig =
             await response.json();
 
+
+        /*
+         * Combina a configuração
+         * do Worker com o fallback.
+         */
 
         return {
 
@@ -146,7 +190,13 @@ async function loadConfig() {
 
 
         return {
-            ...FALLBACK_CONFIG
+
+            ...FALLBACK_CONFIG,
+
+            trackingEnabled: {
+
+                ...FALLBACK_CONFIG.trackingEnabled
+            }
         };
     }
 }
@@ -268,7 +318,8 @@ function setupProfessionalRegistration(
         }
 
 
-        container.style.display = "";
+        container.style.display =
+            "";
 
 
     } else {
@@ -301,6 +352,9 @@ function setupFooter(config) {
 
             footerWhatsapp.textContent =
                 config.whatsapp;
+
+            footerWhatsapp.style.display =
+                "";
 
         } else {
 
@@ -372,6 +426,10 @@ function setupFooter(config) {
 
 function setupAbout(config) {
 
+    /*
+     * Formação
+     */
+
     const aboutFormacao =
         getElement(
             "about-formacao"
@@ -392,6 +450,10 @@ function setupAbout(config) {
         }
     }
 
+
+    /*
+     * Especializações
+     */
 
     const aboutEspecializacoes =
         getElement(
@@ -416,6 +478,10 @@ function setupAbout(config) {
         }
     }
 
+
+    /*
+     * Experiência
+     */
 
     const aboutExperiencia =
         getElement(
@@ -624,6 +690,7 @@ function setupFormspree(config) {
      * https://formspree.io/f/abc123
      */
 
+
     if (
         endpoint.startsWith(
             "http://"
@@ -719,8 +786,7 @@ function setupSocialLinks(config) {
 
 
     /*
-     * Suporte aos IDs
-     * utilizados no index atual.
+     * Compatibilidade com IDs
      */
 
     const legacyMap = {
@@ -878,6 +944,12 @@ function setupMobileMenu() {
     );
 
 
+    mobileMenu.setAttribute(
+        "aria-label",
+        "Abrir menu"
+    );
+
+
     mobileMenu.addEventListener(
         "click",
         () => {
@@ -909,6 +981,10 @@ function setupMobileMenu() {
         }
     );
 
+
+    /*
+     * Fecha o menu ao clicar em um link
+     */
 
     nav
         .querySelectorAll("a")
@@ -942,6 +1018,10 @@ function setupMobileMenu() {
             );
         });
 
+
+    /*
+     * ESC fecha o menu
+     */
 
     document.addEventListener(
         "keydown",
@@ -1011,9 +1091,7 @@ function setupSmoothNavigation() {
 
 
                     /*
-                     * Não intercepta links
-                     * externos transformados
-                     * em WhatsApp.
+                     * Não intercepta links externos.
                      */
 
                     if (
@@ -1097,8 +1175,7 @@ function setupTestimonials() {
 
 
     /*
-     * Não são inseridos
-     * depoimentos automaticamente.
+     * Não inserir depoimentos automaticamente.
      */
 
     section.dataset.ready =
@@ -1128,8 +1205,7 @@ function setupCurrentYear() {
 
 
     /*
-     * Compatibilidade com o
-     * footer atual.
+     * Compatibilidade com footer atual.
      */
 
     document
@@ -1158,7 +1234,9 @@ function injectTrackingScripts(config) {
 
 
     /*
+     * =====================================================
      * GOOGLE TAG MANAGER
+     * =====================================================
      */
 
     if (
@@ -1214,7 +1292,9 @@ function injectTrackingScripts(config) {
 
 
     /*
+     * =====================================================
      * GOOGLE ANALYTICS
+     * =====================================================
      */
 
     if (
@@ -1285,7 +1365,9 @@ function injectTrackingScripts(config) {
 
 
     /*
+     * =====================================================
      * META PIXEL
+     * =====================================================
      */
 
     if (
@@ -1406,7 +1488,86 @@ function removeEmptyDynamicElements() {
 
 
 /* =========================================================
-   18. INICIALIZAÇÃO
+   18. TESTE DA API
+   ========================================================= */
+
+/*
+ * Mantemos uma função simples para verificar
+ * se o Worker está respondendo corretamente.
+ */
+
+async function checkAPIConnection() {
+
+    try {
+
+        const response =
+            await fetch(
+                CONFIG_API_URL,
+                {
+                    method: "GET",
+
+                    credentials: "omit",
+
+                    cache: "no-store",
+
+                    headers: {
+                        "Accept":
+                            "application/json"
+                    }
+                }
+            );
+
+
+        if (!response.ok) {
+
+            console.warn(
+                `Worker respondeu HTTP ${response.status}.`
+            );
+
+            return false;
+        }
+
+
+        const contentType =
+            response.headers.get(
+                "content-type"
+            ) || "";
+
+
+        if (
+            !contentType
+                .toLowerCase()
+                .includes(
+                    "application/json"
+                )
+        ) {
+
+            console.warn(
+                "Worker não retornou JSON."
+            );
+
+            return false;
+        }
+
+
+        return true;
+
+
+    } catch (error) {
+
+        console.warn(
+            "Não foi possível conectar ao Worker.",
+            error
+        );
+
+
+        return false;
+    }
+}
+
+
+/* =========================================================
+   19. INICIALIZAÇÃO
    ========================================================= */
 
 async function initSite() {
@@ -1414,7 +1575,9 @@ async function initSite() {
     try {
 
         /*
-         * Carregar configuração
+         * =================================================
+         * CARREGAR CONFIGURAÇÃO
+         * =================================================
          */
 
         const config =
@@ -1422,7 +1585,9 @@ async function initSite() {
 
 
         /*
-         * Dados profissionais
+         * =================================================
+         * DADOS PROFISSIONAIS
+         * =================================================
          */
 
         setupProfessionalRegistration(
@@ -1431,7 +1596,9 @@ async function initSite() {
 
 
         /*
-         * Sobre
+         * =================================================
+         * SOBRE
+         * =================================================
          */
 
         setupAbout(
@@ -1440,7 +1607,9 @@ async function initSite() {
 
 
         /*
-         * WhatsApp
+         * =================================================
+         * WHATSAPP
+         * =================================================
          */
 
         setupWhatsApp(
@@ -1449,7 +1618,9 @@ async function initSite() {
 
 
         /*
-         * Formulário
+         * =================================================
+         * FORMSPREE
+         * =================================================
          */
 
         setupFormspree(
@@ -1458,7 +1629,9 @@ async function initSite() {
 
 
         /*
-         * Redes sociais
+         * =================================================
+         * REDES SOCIAIS
+         * =================================================
          */
 
         setupSocialLinks(
@@ -1467,7 +1640,9 @@ async function initSite() {
 
 
         /*
-         * Rodapé
+         * =================================================
+         * RODAPÉ
+         * =================================================
          */
 
         setupFooter(
@@ -1476,7 +1651,9 @@ async function initSite() {
 
 
         /*
-         * Links de contato
+         * =================================================
+         * CONTATO
+         * =================================================
          */
 
         setupContactLinks(
@@ -1485,42 +1662,54 @@ async function initSite() {
 
 
         /*
-         * Depoimentos
+         * =================================================
+         * DEPOIMENTOS
+         * =================================================
          */
 
         setupTestimonials();
 
 
         /*
-         * Menu mobile
+         * =================================================
+         * MENU MOBILE
+         * =================================================
          */
 
         setupMobileMenu();
 
 
         /*
-         * Navegação
+         * =================================================
+         * NAVEGAÇÃO
+         * =================================================
          */
 
         setupSmoothNavigation();
 
 
         /*
-         * Ano
+         * =================================================
+         * ANO
+         * =================================================
          */
 
         setupCurrentYear();
 
 
         /*
-         * Elementos dinâmicos
+         * =================================================
+         * ELEMENTOS DINÂMICOS
+         * =================================================
          */
 
         removeEmptyDynamicElements();
 
 
         /*
-         * Tracking por último
+         * =================================================
+         * TRACKING
+         * =================================================
          */
 
         injectTrackingScripts(
@@ -1529,7 +1718,9 @@ async function initSite() {
 
 
         /*
-         * Estado final
+         * =================================================
+         * ESTADO FINAL
+         * =================================================
          */
 
         document.documentElement
@@ -1549,6 +1740,12 @@ async function initSite() {
         );
 
 
+        console.info(
+            "API:",
+            CONFIG_API_URL
+        );
+
+
     } catch (error) {
 
         console.error(
@@ -1560,7 +1757,7 @@ async function initSite() {
 
 
 /* =========================================================
-   19. DOM READY
+   20. DOM READY
    ========================================================= */
 
 if (
@@ -1580,7 +1777,7 @@ if (
 
 
 /* =========================================================
-   20. PAGESHOW
+   21. PAGESHOW
    ========================================================= */
 
 window.addEventListener(
