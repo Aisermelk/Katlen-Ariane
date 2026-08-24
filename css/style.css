@@ -1,3 +1,4 @@
+```css
 /* =========================================================
    KATLEN ARIANE — PSICANALISTA CLÍNICA
    STYLE.CSS PRINCIPAL
@@ -240,6 +241,7 @@ p {
 
 .btn-primary:hover {
     background: var(--purple-dark);
+
     box-shadow:
         0 14px 30px rgba(118, 98, 143, .28);
 }
@@ -274,6 +276,7 @@ p {
     content: "";
 
     position: absolute;
+
     left: 0;
     bottom: -5px;
 
@@ -283,6 +286,7 @@ p {
     background: var(--coral);
 
     transform-origin: left;
+
     transition: transform var(--transition);
 }
 
@@ -324,31 +328,97 @@ p {
     -webkit-backdrop-filter: blur(18px);
 }
 
+
+/* =========================================================
+   MARCA
+   Formato:
+   [ LOGO ]  Katlen Ariane
+             PSICANALISTA CLÍNICA | CBPC 2022-6172
+   ========================================================= */
+
 .brand {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    flex-shrink: 0;
+
+    min-width: 0;
+
+    text-decoration: none;
+}
+
+.brand-logo {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     flex-shrink: 0;
 }
 
+.brand-logo img {
+    display: block;
+
+    width: 42px;
+    height: 42px;
+
+    object-fit: contain;
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    min-width: 0;
+
+    line-height: 1;
+}
+
 .brand-name {
+    display: block;
+
+    margin: 0;
+
     color: var(--ink);
 
     font-family: var(--font-display);
     font-size: 22px;
-    line-height: 1.1;
+    font-weight: 500;
+
+    line-height: 1.05;
+
+    letter-spacing: -.02em;
+
+    white-space: nowrap;
 }
 
 .brand-sub {
+    display: block;
+
     margin-top: 4px;
 
     color: var(--muted);
 
+    font-family: var(--font-body);
     font-size: 8px;
     font-weight: 600;
 
-    letter-spacing: .1em;
+    line-height: 1.2;
+
+    letter-spacing: .08em;
+
+    white-space: nowrap;
 }
+
+
+/* =========================================================
+   NAVEGAÇÃO
+   ========================================================= */
 
 .nav-menu {
     margin-left: auto;
@@ -400,6 +470,11 @@ p {
     transform: scaleX(1);
 }
 
+
+/* =========================================================
+   CTA DO HEADER
+   ========================================================= */
+
 .header-cta {
     display: inline-flex;
     align-items: center;
@@ -416,6 +491,8 @@ p {
     font-size: 12px;
     font-weight: 600;
 
+    white-space: nowrap;
+
     transition:
         transform var(--transition),
         background var(--transition);
@@ -423,8 +500,14 @@ p {
 
 .header-cta:hover {
     background: #c97d6c;
+
     transform: translateY(-2px);
 }
+
+
+/* =========================================================
+   MENU MOBILE
+   ========================================================= */
 
 .mobile-toggle {
     display: none;
@@ -435,6 +518,7 @@ p {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
     gap: 5px;
 
     background: transparent;
@@ -489,6 +573,7 @@ p {
     z-index: 2;
 
     display: grid;
+
     grid-template-columns: .95fr 1.05fr;
 
     align-items: center;
@@ -894,6 +979,7 @@ p {
 
 .section-heading {
     display: grid;
+
     grid-template-columns: 1fr .75fr;
 
     align-items: end;
@@ -927,6 +1013,7 @@ p {
 
 .section-heading.centered p {
     max-width: 560px;
+
     margin-inline: auto;
 }
 
@@ -1315,6 +1402,7 @@ p {
 
     font-family: var(--font-display);
     font-size: 55px;
+
     line-height: .8;
 }
 
@@ -1323,6 +1411,7 @@ p {
 
     font-family: var(--font-display);
     font-size: 21px;
+
     line-height: 1.45;
 }
 
@@ -1869,7 +1958,11 @@ textarea:focus-visible {
     }
 
     .hero-copy h1 {
-        font-size: clamp(50px, 7vw, 70px);
+        font-size: clamp(
+            50px,
+            7vw,
+            70px
+        );
     }
 
     .audience-grid {
@@ -1904,7 +1997,9 @@ textarea:focus-visible {
     }
 
 
-    /* HEADER */
+    /* =====================================================
+       HEADER MOBILE
+       ===================================================== */
 
     .site-header {
         top: 10px;
@@ -1916,6 +2011,40 @@ textarea:focus-visible {
         padding: 10px 16px;
 
         border-radius: 18px;
+
+        gap: 14px;
+    }
+
+    /* Marca no mobile */
+
+    .brand {
+        gap: 8px;
+
+        min-width: 0;
+    }
+
+    .brand-logo {
+        width: 38px;
+        height: 38px;
+    }
+
+    .brand-logo img {
+        width: 38px;
+        height: 38px;
+    }
+
+    .brand-name {
+        font-size: 20px;
+
+        line-height: 1.05;
+    }
+
+    .brand-sub {
+        margin-top: 3px;
+
+        font-size: 7px;
+
+        letter-spacing: .065em;
     }
 
     .nav-menu {
@@ -1936,6 +2065,7 @@ textarea:focus-visible {
         box-shadow: var(--shadow-md);
 
         backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
     }
 
     .nav-menu.active {
@@ -1975,11 +2105,16 @@ textarea:focus-visible {
 
     .mobile-toggle {
         display: flex;
+
         margin-left: auto;
+
+        flex-shrink: 0;
     }
 
 
-    /* HERO */
+    /* =====================================================
+       HERO
+       ===================================================== */
 
     .hero {
         min-height: auto;
@@ -2049,7 +2184,9 @@ textarea:focus-visible {
     }
 
 
-    /* SOBRE */
+    /* =====================================================
+       SOBRE
+       ===================================================== */
 
     .about-grid {
         grid-template-columns: 1fr;
@@ -2068,7 +2205,9 @@ textarea:focus-visible {
     }
 
 
-    /* HEADINGS */
+    /* =====================================================
+       HEADINGS
+       ===================================================== */
 
     .section-heading {
         grid-template-columns: 1fr;
@@ -2083,7 +2222,9 @@ textarea:focus-visible {
     }
 
 
-    /* ATENDIMENTO */
+    /* =====================================================
+       ATENDIMENTO
+       ===================================================== */
 
     .audience-grid {
         grid-template-columns: 1fr;
@@ -2094,7 +2235,9 @@ textarea:focus-visible {
     }
 
 
-    /* NEURO */
+    /* =====================================================
+       NEURO
+       ===================================================== */
 
     .neuro-card {
         grid-template-columns: 1fr;
@@ -2111,7 +2254,9 @@ textarea:focus-visible {
     }
 
 
-    /* PRIMEIRA CONSULTA */
+    /* =====================================================
+       PRIMEIRA CONSULTA
+       ===================================================== */
 
     .first-grid {
         grid-template-columns: 1fr;
@@ -2120,7 +2265,9 @@ textarea:focus-visible {
     }
 
 
-    /* DEPOIMENTOS */
+    /* =====================================================
+       DEPOIMENTOS
+       ===================================================== */
 
     .testimonial-grid {
         grid-template-columns: 1fr;
@@ -2131,7 +2278,9 @@ textarea:focus-visible {
     }
 
 
-    /* PSICANÁLISE */
+    /* =====================================================
+       PSICANÁLISE
+       ===================================================== */
 
     .psycho-grid {
         grid-template-columns: 1fr;
@@ -2144,7 +2293,9 @@ textarea:focus-visible {
     }
 
 
-    /* CONTATO */
+    /* =====================================================
+       CONTATO
+       ===================================================== */
 
     .contact-grid {
         grid-template-columns: 1fr;
@@ -2157,7 +2308,9 @@ textarea:focus-visible {
     }
 
 
-    /* FOOTER */
+    /* =====================================================
+       FOOTER
+       ===================================================== */
 
     .footer-grid {
         grid-template-columns: 1fr 1fr;
@@ -2185,16 +2338,41 @@ textarea:focus-visible {
         font-size: 40px;
     }
 
+
+    /* =====================================================
+       MARCA PEQUENA
+       ===================================================== */
+
+    .brand {
+        gap: 7px;
+    }
+
+    .brand-logo {
+        width: 34px;
+        height: 34px;
+    }
+
+    .brand-logo img {
+        width: 34px;
+        height: 34px;
+    }
+
     .brand-name {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .brand-sub {
-        font-size: 7px;
+        margin-top: 3px;
+
+        font-size: 6.2px;
+
+        letter-spacing: .055em;
     }
 
 
-    /* HERO */
+    /* =====================================================
+       HERO
+       ===================================================== */
 
     .hero {
         padding-top: 125px;
@@ -2254,14 +2432,18 @@ textarea:focus-visible {
     }
 
 
-    /* SOBRE */
+    /* =====================================================
+       SOBRE
+       ===================================================== */
 
     .about-image {
         min-height: 380px;
     }
 
 
-    /* CARDS */
+    /* =====================================================
+       CARDS
+       ===================================================== */
 
     .audience-card {
         min-height: 280px;
@@ -2270,7 +2452,9 @@ textarea:focus-visible {
     }
 
 
-    /* NEURO */
+    /* =====================================================
+       NEURO
+       ===================================================== */
 
     .neuro-card {
         padding: 38px 24px;
@@ -2281,7 +2465,9 @@ textarea:focus-visible {
     }
 
 
-    /* STEPS */
+    /* =====================================================
+       STEPS
+       ===================================================== */
 
     .step {
         grid-template-columns: 55px 1fr;
@@ -2295,7 +2481,9 @@ textarea:focus-visible {
     }
 
 
-    /* FORM */
+    /* =====================================================
+       FORM
+       ===================================================== */
 
     .form-row {
         grid-template-columns: 1fr;
@@ -2306,14 +2494,18 @@ textarea:focus-visible {
     }
 
 
-    /* FOOTER */
+    /* =====================================================
+       FOOTER
+       ===================================================== */
 
     .footer-grid {
         grid-template-columns: 1fr;
     }
 
 
-    /* WHATSAPP */
+    /* =====================================================
+       WHATSAPP
+       ===================================================== */
 
     .whatsapp-float {
         right: 14px;
@@ -2331,6 +2523,28 @@ textarea:focus-visible {
    ========================================================= */
 
 @media (max-width: 360px) {
+
+    .brand {
+        gap: 6px;
+    }
+
+    .brand-logo {
+        width: 31px;
+        height: 31px;
+    }
+
+    .brand-logo img {
+        width: 31px;
+        height: 31px;
+    }
+
+    .brand-name {
+        font-size: 17px;
+    }
+
+    .brand-sub {
+        font-size: 5.7px;
+    }
 
     .hero-copy h1 {
         font-size: 42px;
@@ -2352,3 +2566,4 @@ textarea:focus-visible {
         min-height: 390px;
     }
 }
+```
