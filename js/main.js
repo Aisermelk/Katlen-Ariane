@@ -1,31 +1,20 @@
 /* =========================================================
    KATLEN ARIANE — MAIN.JS
    Site institucional / Psicanálise
-   Integração com Cloudflare Worker + KV
+
+   Integração:
+   Cloudflare Worker + KV
+
+   API pública:
+   https://katlen-admin.aisermelk.workers.dev/api/config
    ========================================================= */
 
 "use strict";
 
 
 /* =========================================================
-   1. CONFIGURAÇÃO DO WORKER
+   1. CONFIGURAÇÃO DA API
    ========================================================= */
-
-/*
- * Worker responsável pela configuração do site:
- *
- * https://katlen-admin.aisermelk.workers.dev
- *
- * API pública:
- *
- * /api/config
- *
- * O site está hospedado no Cloudflare Pages:
- *
- * https://katlenarianeso.pages.dev
- *
- * Por isso usamos a URL completa do Worker.
- */
 
 const CONFIG_API_URL =
     "https://katlen-admin.aisermelk.workers.dev/api/config";
@@ -37,51 +26,251 @@ const CONFIG_API_URL =
 
 const FALLBACK_CONFIG = {
 
-    whatsapp: "",
+    site: {
 
-    endereco: "",
+        name:
+            "Katlen Ariane",
 
-    formspreeEndpoint: "",
+        profession:
+            "Psicanalista",
 
-    instagram: "",
+        registration:
+            "CBPC 2022-6172",
 
-    facebook: "",
+        description:
+            "",
 
-    tiktok: "",
+        phone:
+            "",
 
-    linkedin: "",
+        whatsapp:
+            "",
 
-    metaPixelId: "",
+        email:
+            "",
 
-    gaMeasurementId: "",
-
-    gtmId: "",
-
-    trackingEnabled: {
-
-        pixel: false,
-
-        ga: false,
-
-        gtm: false
+        address:
+            ""
     },
 
-    professionalRegistrationLabel:
-        "Registro profissional",
 
-    professionalRegistration:
-        "CBPC 2022-6172",
+    social: {
 
-    formacao: "",
+        instagram:
+            "",
 
-    especializacoes: "",
+        facebook:
+            "",
 
-    experiencia: ""
+        tiktok:
+            "",
+
+        linkedin:
+            ""
+    },
+
+
+    forms: {
+
+        formspree:
+            ""
+    },
+
+
+    tracking: {
+
+        metaPixel:
+            "",
+
+        googleAnalytics:
+            "",
+
+        googleTagManager:
+            "",
+
+        metaPixelEnabled:
+            false,
+
+        googleAnalyticsEnabled:
+            false,
+
+        googleTagManagerEnabled:
+            false
+    },
+
+
+    content: {
+
+        formation:
+            "",
+
+        specialization:
+            "",
+
+        experience:
+            "",
+
+        neurodevelopment:
+            ""
+    },
+
+
+    attendance: {
+
+        families:
+            true,
+
+        women:
+            true,
+
+        children:
+            true,
+
+        adolescents:
+            true
+    }
+
 };
 
 
 /* =========================================================
-   3. CARREGAR CONFIGURAÇÃO DO WORKER
+   3. UTILITÁRIOS
+   ========================================================= */
+
+function getElement(id) {
+
+    return document.getElementById(id);
+}
+
+
+function setText(id, value) {
+
+    const element =
+        getElement(id);
+
+    if (
+        !element ||
+        value === undefined ||
+        value === null
+    ) {
+
+        return;
+    }
+
+    element.textContent =
+        value;
+}
+
+
+function hideElement(element) {
+
+    if (!element) {
+        return;
+    }
+
+    element.style.display =
+        "none";
+}
+
+
+function showElement(
+    element,
+    display = ""
+) {
+
+    if (!element) {
+        return;
+    }
+
+    element.style.display =
+        display;
+}
+
+
+/* =========================================================
+   4. NORMALIZAÇÃO DA CONFIGURAÇÃO
+   ========================================================= */
+
+/*
+ * O Worker utiliza uma estrutura organizada:
+ *
+ * site.whatsapp
+ * site.address
+ * social.instagram
+ * tracking.metaPixel
+ * etc.
+ *
+ * O restante do site recebe exatamente essa estrutura.
+ */
+
+function normalizeConfig(remoteConfig) {
+
+    if (
+        !remoteConfig ||
+        typeof remoteConfig !== "object"
+    ) {
+
+        return structuredClone(
+            FALLBACK_CONFIG
+        );
+    }
+
+
+    return {
+
+        site: {
+
+            ...FALLBACK_CONFIG.site,
+
+            ...(remoteConfig.site || {})
+        },
+
+
+        social: {
+
+            ...FALLBACK_CONFIG.social,
+
+            ...(remoteConfig.social || {})
+        },
+
+
+        forms: {
+
+            ...FALLBACK_CONFIG.forms,
+
+            ...(remoteConfig.forms || {})
+        },
+
+
+        tracking: {
+
+            ...FALLBACK_CONFIG.tracking,
+
+            ...(remoteConfig.tracking || {})
+        },
+
+
+        content: {
+
+            ...FALLBACK_CONFIG.content,
+
+            ...(remoteConfig.content || {})
+        },
+
+
+        attendance: {
+
+            ...FALLBACK_CONFIG.attendance,
+
+            ...(remoteConfig.attendance || {})
+        }
+
+    };
+}
+
+
+/* =========================================================
+   5. CARREGAR CONFIGURAÇÃO DO WORKER
    ========================================================= */
 
 async function loadConfig() {
@@ -92,15 +281,20 @@ async function loadConfig() {
             await fetch(
                 CONFIG_API_URL,
                 {
-                    method: "GET",
+                    method:
+                        "GET",
 
-                    mode: "cors",
+                    mode:
+                        "cors",
 
-                    credentials: "omit",
+                    credentials:
+                        "omit",
 
-                    cache: "no-store",
+                    cache:
+                        "no-store",
 
                     headers: {
+
                         "Accept":
                             "application/json"
                     }
@@ -125,7 +319,9 @@ async function loadConfig() {
         if (
             !contentType
                 .toLowerCase()
-                .includes("application/json")
+                .includes(
+                    "application/json"
+                )
         ) {
 
             throw new Error(
@@ -138,30 +334,18 @@ async function loadConfig() {
             await response.json();
 
 
-        if (
-            !remoteConfig ||
-            typeof remoteConfig !== "object"
-        ) {
-
-            throw new Error(
-                "Configuração recebida inválida."
+        const config =
+            normalizeConfig(
+                remoteConfig
             );
-        }
 
 
-        return {
+        console.info(
+            "Configuração carregada do Worker."
+        );
 
-            ...FALLBACK_CONFIG,
 
-            ...remoteConfig,
-
-            trackingEnabled: {
-
-                ...FALLBACK_CONFIG.trackingEnabled,
-
-                ...(remoteConfig.trackingEnabled || {})
-            }
-        };
+        return config;
 
 
     } catch (error) {
@@ -179,86 +363,19 @@ async function loadConfig() {
 
 
         console.warn(
-            "O site continuará utilizando a configuração local."
+            "Utilizando configuração fallback."
         );
 
 
-        return {
-
-            ...FALLBACK_CONFIG
-        };
+        return structuredClone(
+            FALLBACK_CONFIG
+        );
     }
 }
 
 
 /* =========================================================
-   4. HELPERS
-   ========================================================= */
-
-function getElement(id) {
-
-    return document.getElementById(id);
-}
-
-
-function setText(id, value) {
-
-    const element =
-        getElement(id);
-
-
-    if (
-        !element ||
-        value === undefined ||
-        value === null
-    ) {
-
-        return;
-    }
-
-
-    element.textContent =
-        value;
-}
-
-
-function setDisplay(
-    id,
-    display = "block"
-) {
-
-    const element =
-        getElement(id);
-
-
-    if (!element) {
-        return;
-    }
-
-
-    element.style.display =
-        display;
-}
-
-
-function hideElement(id) {
-
-    const element =
-        getElement(id);
-
-
-    if (!element) {
-        return;
-    }
-
-
-    element.style.display =
-        "none";
-}
-
-
-/* =========================================================
-   5. REGISTRO PROFISSIONAL
+   6. REGISTRO PROFISSIONAL
    ========================================================= */
 
 function setupProfessionalRegistration(
@@ -288,42 +405,69 @@ function setupProfessionalRegistration(
     }
 
 
-    if (
-        config.professionalRegistration
-    ) {
-
-        if (label) {
-
-            label.textContent =
-                config.professionalRegistrationLabel ||
-                "Registro profissional";
-        }
+    const registration =
+        String(
+            config.site.registration ||
+            ""
+        ).trim();
 
 
-        if (value) {
+    if (!registration) {
 
-            value.textContent =
-                config.professionalRegistration;
-        }
+        hideElement(
+            container
+        );
 
-
-        container.style.display =
-            "";
-
-
-    } else {
-
-        container.style.display =
-            "none";
+        return;
     }
+
+
+    if (label) {
+
+        label.textContent =
+            "Registro profissional";
+    }
+
+
+    if (value) {
+
+        value.textContent =
+            registration;
+    }
+
+
+    showElement(
+        container
+    );
 }
 
 
 /* =========================================================
-   6. RODAPÉ
+   7. RODAPÉ
    ========================================================= */
 
 function setupFooter(config) {
+
+    const whatsapp =
+        String(
+            config.site.whatsapp ||
+            ""
+        ).trim();
+
+
+    const address =
+        String(
+            config.site.address ||
+            ""
+        ).trim();
+
+
+    const registration =
+        String(
+            config.site.registration ||
+            ""
+        ).trim();
+
 
     const footerWhatsapp =
         getElement(
@@ -333,19 +477,21 @@ function setupFooter(config) {
 
     if (footerWhatsapp) {
 
-        if (config.whatsapp) {
+        if (whatsapp) {
 
             footerWhatsapp.textContent =
-                config.whatsapp;
+                whatsapp;
 
-            footerWhatsapp.style.display =
-                "";
+            showElement(
+                footerWhatsapp
+            );
 
 
         } else {
 
-            footerWhatsapp.style.display =
-                "none";
+            hideElement(
+                footerWhatsapp
+            );
         }
     }
 
@@ -358,19 +504,21 @@ function setupFooter(config) {
 
     if (footerAddress) {
 
-        if (config.endereco) {
+        if (address) {
 
             footerAddress.textContent =
-                config.endereco;
+                address;
 
-            footerAddress.style.display =
-                "";
+            showElement(
+                footerAddress
+            );
 
 
         } else {
 
-            footerAddress.style.display =
-                "none";
+            hideElement(
+                footerAddress
+            );
         }
     }
 
@@ -383,28 +531,46 @@ function setupFooter(config) {
 
     if (footerRegistration) {
 
-        if (
-            config.professionalRegistration
-        ) {
-
-            footerRegistration.textContent =
-                config.professionalRegistration;
-
-
-        } else {
-
-            footerRegistration.textContent =
-                "Psicanalista Clínica";
-        }
+        footerRegistration.textContent =
+            registration ||
+            "Psicanalista Clínica";
     }
 }
 
 
 /* =========================================================
-   7. SOBRE / FORMAÇÃO
+   8. SOBRE / FORMAÇÃO
    ========================================================= */
 
 function setupAbout(config) {
+
+    const formacao =
+        String(
+            config.content.formation ||
+            ""
+        ).trim();
+
+
+    const especializacao =
+        String(
+            config.content.specialization ||
+            ""
+        ).trim();
+
+
+    const experiencia =
+        String(
+            config.content.experience ||
+            ""
+        ).trim();
+
+
+    const neurodevelopment =
+        String(
+            config.content.neurodevelopment ||
+            ""
+        ).trim();
+
 
     const aboutFormacao =
         getElement(
@@ -414,17 +580,9 @@ function setupAbout(config) {
 
     if (aboutFormacao) {
 
-        if (config.formacao) {
-
-            aboutFormacao.textContent =
-                config.formacao;
-
-
-        } else {
-
-            aboutFormacao.textContent =
-                "Psicanalista dedicada a construir um espaço de escuta e reflexão, respeitando a singularidade de cada pessoa e de cada história.";
-        }
+        aboutFormacao.textContent =
+            formacao ||
+            "Psicanalista dedicada a construir um espaço de escuta e reflexão, respeitando a singularidade de cada pessoa e de cada história.";
     }
 
 
@@ -436,19 +594,21 @@ function setupAbout(config) {
 
     if (aboutEspecializacoes) {
 
-        if (config.especializacoes) {
+        if (especializacao) {
 
             aboutEspecializacoes.textContent =
-                config.especializacoes;
+                especializacao;
 
-            aboutEspecializacoes.style.display =
-                "";
+            showElement(
+                aboutEspecializacoes
+            );
 
 
         } else {
 
-            aboutEspecializacoes.style.display =
-                "none";
+            hideElement(
+                aboutEspecializacoes
+            );
         }
     }
 
@@ -461,56 +621,104 @@ function setupAbout(config) {
 
     if (aboutExperiencia) {
 
-        if (config.experiencia) {
+        if (experiencia) {
 
             aboutExperiencia.textContent =
-                config.experiencia;
+                experiencia;
 
-            aboutExperiencia.style.display =
-                "";
+            showElement(
+                aboutExperiencia
+            );
 
 
         } else {
 
-            aboutExperiencia.style.display =
-                "none";
+            hideElement(
+                aboutExperiencia
+            );
+        }
+    }
+
+
+    const aboutNeuro =
+        getElement(
+            "about-neurodesenvolvimento"
+        );
+
+
+    if (aboutNeuro) {
+
+        if (neurodevelopment) {
+
+            aboutNeuro.textContent =
+                neurodevelopment;
+
+            showElement(
+                aboutNeuro
+            );
+
+
+        } else {
+
+            hideElement(
+                aboutNeuro
+            );
         }
     }
 }
 
 
 /* =========================================================
-   8. WHATSAPP
+   9. WHATSAPP
    ========================================================= */
+
+function normalizeWhatsAppNumber(
+    number
+) {
+
+    return String(
+        number || ""
+    )
+        .replace(/\D/g, "")
+        .trim();
+}
+
 
 function createWhatsAppURL(
     number,
     message
 ) {
 
-    if (!number) {
-        return "";
-    }
-
-
     const cleanNumber =
-        String(number)
-            .replace(/\D/g, "");
+        normalizeWhatsAppNumber(
+            number
+        );
 
 
     if (!cleanNumber) {
+
         return "";
     }
+
+
+    const encodedMessage =
+        encodeURIComponent(
+            message || ""
+        );
 
 
     return (
         `https://wa.me/${cleanNumber}` +
-        `?text=${encodeURIComponent(message)}`
+        `?text=${encodedMessage}`
     );
 }
 
 
 function setupWhatsApp(config) {
+
+    const whatsapp =
+        config.site.whatsapp;
+
 
     const message =
         "Olá Katlen, vim pelo site e gostaria de saber mais sobre o atendimento.";
@@ -518,10 +726,20 @@ function setupWhatsApp(config) {
 
     const whatsappURL =
         createWhatsAppURL(
-            config.whatsapp,
+            whatsapp,
             message
         );
 
+
+    console.info(
+        "WhatsApp configurado:",
+        whatsapp
+    );
+
+
+    /* -----------------------------------------
+       BOTÃO PRINCIPAL
+    ----------------------------------------- */
 
     const whatsappLink =
         getElement(
@@ -542,72 +760,150 @@ function setupWhatsApp(config) {
             whatsappLink.rel =
                 "noopener noreferrer";
 
-            whatsappLink.style.display =
-                "flex";
+            showElement(
+                whatsappLink,
+                "flex"
+            );
 
 
         } else {
 
-            whatsappLink.style.display =
-                "none";
+            hideElement(
+                whatsappLink
+            );
         }
     }
 
+
+    /* -----------------------------------------
+       DATA-WHATSAPP
+    ----------------------------------------- */
 
     document
         .querySelectorAll(
             "[data-whatsapp]"
         )
-        .forEach(element => {
+        .forEach(
+            element => {
 
-            if (!whatsappURL) {
+                if (!whatsappURL) {
 
-                element.style.display =
-                    "none";
+                    hideElement(
+                        element
+                    );
 
-                return;
+                    return;
+                }
+
+
+                element.href =
+                    whatsappURL;
+
+
+                element.target =
+                    "_blank";
+
+
+                element.rel =
+                    "noopener noreferrer";
+
+
+                showElement(
+                    element
+                );
             }
+        );
 
 
-            element.href =
-                whatsappURL;
-
-            element.target =
-                "_blank";
-
-            element.rel =
-                "noopener noreferrer";
-
-            element.style.display =
-                "";
-        });
-
+    /* -----------------------------------------
+       LINKS #WHATSAPP
+    ----------------------------------------- */
 
     document
         .querySelectorAll(
             'a[href="#whatsapp"]'
         )
-        .forEach(link => {
+        .forEach(
+            link => {
 
-            if (!whatsappURL) {
-                return;
+                if (!whatsappURL) {
+
+                    return;
+                }
+
+
+                link.href =
+                    whatsappURL;
+
+
+                link.target =
+                    "_blank";
+
+
+                link.rel =
+                    "noopener noreferrer";
             }
+        );
 
 
-            link.href =
-                whatsappURL;
+    /* -----------------------------------------
+       DATA-WHATSAPP-MESSAGE
+       Permite mensagem personalizada
+    ----------------------------------------- */
 
-            link.target =
-                "_blank";
+    document
+        .querySelectorAll(
+            "[data-whatsapp-message]"
+        )
+        .forEach(
+            element => {
 
-            link.rel =
-                "noopener noreferrer";
-        });
+                if (!whatsapp) {
+
+                    hideElement(
+                        element
+                    );
+
+                    return;
+                }
+
+
+                const customMessage =
+                    element.getAttribute(
+                        "data-whatsapp-message"
+                    ) ||
+                    message;
+
+
+                const customURL =
+                    createWhatsAppURL(
+                        whatsapp,
+                        customMessage
+                    );
+
+
+                element.href =
+                    customURL;
+
+
+                element.target =
+                    "_blank";
+
+
+                element.rel =
+                    "noopener noreferrer";
+
+
+                showElement(
+                    element
+                );
+            }
+        );
 }
 
 
 /* =========================================================
-   9. FORMSPREE
+   10. FORMSPREE
    ========================================================= */
 
 function setupFormspree(config) {
@@ -623,10 +919,17 @@ function setupFormspree(config) {
     }
 
 
-    if (!config.formspreeEndpoint) {
+    const configuredEndpoint =
+        String(
+            config.forms.formspree ||
+            ""
+        ).trim();
+
+
+    if (!configuredEndpoint) {
 
         console.warn(
-            "Formspree não configurado no painel administrativo."
+            "Formspree não configurado."
         );
 
         return;
@@ -634,9 +937,7 @@ function setupFormspree(config) {
 
 
     let endpoint =
-        String(
-            config.formspreeEndpoint
-        ).trim();
+        configuredEndpoint;
 
 
     if (
@@ -656,8 +957,14 @@ function setupFormspree(config) {
 
         endpoint =
             endpoint
-                .replace(/^\/+/, "")
-                .replace(/^f\//, "");
+                .replace(
+                    /^\/+/,
+                    ""
+                )
+                .replace(
+                    /^f\//,
+                    ""
+                );
 
 
         form.action =
@@ -667,11 +974,16 @@ function setupFormspree(config) {
 
     form.method =
         "POST";
+
+
+    console.info(
+        "Formspree configurado."
+    );
 }
 
 
 /* =========================================================
-   10. REDES SOCIAIS
+   11. REDES SOCIAIS
    ========================================================= */
 
 function setupSocialLinks(config) {
@@ -679,16 +991,16 @@ function setupSocialLinks(config) {
     const socialMap = {
 
         instagram:
-            config.instagram,
+            config.social.instagram,
 
         facebook:
-            config.facebook,
+            config.social.facebook,
 
         tiktok:
-            config.tiktok,
+            config.social.tiktok,
 
         linkedin:
-            config.linkedin
+            config.social.linkedin
     };
 
 
@@ -697,50 +1009,64 @@ function setupSocialLinks(config) {
     ).forEach(
         ([network, url]) => {
 
+            const cleanURL =
+                String(
+                    url || ""
+                ).trim();
+
+
             document
                 .querySelectorAll(
                     `[data-social="${network}"]`
                 )
-                .forEach(link => {
+                .forEach(
+                    link => {
 
-                    if (url) {
+                        if (cleanURL) {
 
-                        link.href =
-                            url;
+                            link.href =
+                                cleanURL;
 
-                        link.target =
-                            "_blank";
+                            link.target =
+                                "_blank";
 
-                        link.rel =
-                            "noopener noreferrer";
+                            link.rel =
+                                "noopener noreferrer";
 
-                        link.style.display =
-                            "";
+                            showElement(
+                                link
+                            );
 
 
-                    } else {
+                        } else {
 
-                        link.style.display =
-                            "none";
+                            hideElement(
+                                link
+                            );
+                        }
                     }
-                });
+                );
         }
     );
 
 
+    /* -----------------------------------------
+       COMPATIBILIDADE COM IDs ANTIGOS
+    ----------------------------------------- */
+
     const legacyMap = {
 
         "instagram-link":
-            config.instagram,
+            config.social.instagram,
 
         "facebook-link":
-            config.facebook,
+            config.social.facebook,
 
         "tiktok-link":
-            config.tiktok,
+            config.social.tiktok,
 
         "linkedin-link":
-            config.linkedin
+            config.social.linkedin
     };
 
 
@@ -758,10 +1084,16 @@ function setupSocialLinks(config) {
             }
 
 
-            if (url) {
+            const cleanURL =
+                String(
+                    url || ""
+                ).trim();
+
+
+            if (cleanURL) {
 
                 link.href =
-                    url;
+                    cleanURL;
 
                 link.target =
                     "_blank";
@@ -769,14 +1101,16 @@ function setupSocialLinks(config) {
                 link.rel =
                     "noopener noreferrer";
 
-                link.style.display =
-                    "";
+                showElement(
+                    link
+                );
 
 
             } else {
 
-                link.style.display =
-                    "none";
+                hideElement(
+                    link
+                );
             }
         }
     );
@@ -784,70 +1118,106 @@ function setupSocialLinks(config) {
 
 
 /* =========================================================
-   11. CONTATO
+   12. CONTATO
    ========================================================= */
 
 function setupContactLinks(config) {
+
+    const phone =
+        String(
+            config.site.phone ||
+            config.site.whatsapp ||
+            ""
+        ).trim();
+
+
+    const address =
+        String(
+            config.site.address ||
+            ""
+        ).trim();
+
 
     document
         .querySelectorAll(
             "[data-phone]"
         )
-        .forEach(element => {
+        .forEach(
+            element => {
 
-            if (!config.whatsapp) {
+                if (!phone) {
 
-                element.style.display =
-                    "none";
+                    hideElement(
+                        element
+                    );
 
-                return;
+                    return;
+                }
+
+
+                element.textContent =
+                    phone;
+
+
+                if (
+                    element.tagName
+                        .toLowerCase() ===
+                    "a"
+                ) {
+
+                    const cleanPhone =
+                        phone.replace(
+                            /\D/g,
+                            ""
+                        );
+
+
+                    if (cleanPhone) {
+
+                        element.href =
+                            `tel:+${cleanPhone}`;
+                    }
+                }
+
+
+                showElement(
+                    element
+                );
             }
-
-
-            const number =
-                String(
-                    config.whatsapp
-                ).replace(/\D/g, "");
-
-
-            element.textContent =
-                config.whatsapp;
-
-
-            if (
-                element.tagName.toLowerCase()
-                === "a"
-            ) {
-
-                element.href =
-                    `tel:+${number}`;
-            }
-        });
+        );
 
 
     document
         .querySelectorAll(
             "[data-address]"
         )
-        .forEach(element => {
+        .forEach(
+            element => {
 
-            if (!config.endereco) {
+                if (!address) {
 
-                element.style.display =
-                    "none";
+                    hideElement(
+                        element
+                    );
 
-                return;
+                    return;
+                }
+
+
+                element.textContent =
+                    address;
+
+
+                showElement(
+                    element
+                );
             }
-
-
-            element.textContent =
-                config.endereco;
-        });
+        );
 }
 
 
 /* =========================================================
-   12. MENU MOBILE
+   13. MENU MOBILE
    ========================================================= */
 
 function setupMobileMenu() {
@@ -864,7 +1234,11 @@ function setupMobileMenu() {
         );
 
 
-    if (!mobileMenu || !nav) {
+    if (
+        !mobileMenu ||
+        !nav
+    ) {
+
         return;
     }
 
@@ -914,36 +1288,40 @@ function setupMobileMenu() {
 
 
     nav
-        .querySelectorAll("a")
-        .forEach(link => {
+        .querySelectorAll(
+            "a"
+        )
+        .forEach(
+            link => {
 
-            link.addEventListener(
-                "click",
-                () => {
+                link.addEventListener(
+                    "click",
+                    () => {
 
-                    nav.classList.remove(
-                        "active"
-                    );
-
-
-                    mobileMenu.classList.remove(
-                        "open"
-                    );
+                        nav.classList.remove(
+                            "active"
+                        );
 
 
-                    mobileMenu.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
+                        mobileMenu.classList.remove(
+                            "open"
+                        );
 
 
-                    mobileMenu.setAttribute(
-                        "aria-label",
-                        "Abrir menu"
-                    );
-                }
-            );
-        });
+                        mobileMenu.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+
+                        mobileMenu.setAttribute(
+                            "aria-label",
+                            "Abrir menu"
+                        );
+                    }
+                );
+            }
+        );
 
 
     document.addEventListener(
@@ -984,7 +1362,7 @@ function setupMobileMenu() {
 
 
 /* =========================================================
-   13. NAVEGAÇÃO SUAVE
+   14. NAVEGAÇÃO SUAVE
    ========================================================= */
 
 function setupSmoothNavigation() {
@@ -993,91 +1371,97 @@ function setupSmoothNavigation() {
         .querySelectorAll(
             'a[href^="#"]'
         )
-        .forEach(link => {
+        .forEach(
+            link => {
 
-            link.addEventListener(
-                "click",
-                event => {
+                link.addEventListener(
+                    "click",
+                    event => {
 
-                    const targetId =
-                        link.getAttribute(
-                            "href"
-                        );
-
-
-                    if (
-                        !targetId ||
-                        targetId === "#"
-                    ) {
-                        return;
-                    }
+                        const targetId =
+                            link.getAttribute(
+                                "href"
+                            );
 
 
-                    if (
-                        link.target === "_blank"
-                    ) {
-                        return;
-                    }
+                        if (
+                            !targetId ||
+                            targetId === "#"
+                        ) {
+
+                            return;
+                        }
 
 
-                    const target =
-                        document.querySelector(
+                        if (
+                            link.target ===
+                            "_blank"
+                        ) {
+
+                            return;
+                        }
+
+
+                        const target =
+                            document.querySelector(
+                                targetId
+                            );
+
+
+                        if (!target) {
+
+                            return;
+                        }
+
+
+                        event.preventDefault();
+
+
+                        const header =
+                            document.querySelector(
+                                ".site-header"
+                            );
+
+
+                        const headerHeight =
+                            header
+                                ? header.offsetHeight
+                                : 0;
+
+
+                        const targetPosition =
+                            target
+                                .getBoundingClientRect()
+                                .top +
+                            window.scrollY -
+                            headerHeight -
+                            12;
+
+
+                        window.scrollTo({
+
+                            top:
+                                targetPosition,
+
+                            behavior:
+                                "smooth"
+                        });
+
+
+                        history.pushState(
+                            null,
+                            "",
                             targetId
                         );
-
-
-                    if (!target) {
-                        return;
                     }
-
-
-                    event.preventDefault();
-
-
-                    const header =
-                        document.querySelector(
-                            ".site-header"
-                        );
-
-
-                    const headerHeight =
-                        header
-                            ? header.offsetHeight
-                            : 0;
-
-
-                    const targetPosition =
-                        target
-                            .getBoundingClientRect()
-                            .top +
-                        window.scrollY -
-                        headerHeight -
-                        12;
-
-
-                    window.scrollTo({
-
-                        top:
-                            targetPosition,
-
-                        behavior:
-                            "smooth"
-                    });
-
-
-                    history.pushState(
-                        null,
-                        "",
-                        targetId
-                    );
-                }
-            );
-        });
+                );
+            }
+        );
 }
 
 
 /* =========================================================
-   14. DEPOIMENTOS
+   15. DEPOIMENTOS
    ========================================================= */
 
 function setupTestimonials() {
@@ -1099,50 +1483,70 @@ function setupTestimonials() {
 
 
 /* =========================================================
-   15. ANO AUTOMÁTICO
+   16. ANO AUTOMÁTICO
    ========================================================= */
 
 function setupCurrentYear() {
 
     const year =
-        new Date().getFullYear();
+        new Date()
+            .getFullYear();
 
 
     document
         .querySelectorAll(
             "[data-current-year]"
         )
-        .forEach(element => {
+        .forEach(
+            element => {
 
-            element.textContent =
-                year;
-        });
+                element.textContent =
+                    year;
+            }
+        );
 
 
     document
         .querySelectorAll(
             ".footer-bottom span"
         )
-        .forEach(element => {
+        .forEach(
+            element => {
 
-            element.innerHTML =
-                element.innerHTML.replace(
-                    /©\s*\d{4}/,
-                    `© ${year}`
-                );
-        });
+                element.innerHTML =
+                    element.innerHTML.replace(
+                        /©\s*\d{4}/,
+                        `© ${year}`
+                    );
+            }
+        );
 }
 
 
 /* =========================================================
-   16. GOOGLE TAG MANAGER
+   17. GOOGLE TAG MANAGER
    ========================================================= */
 
 function injectGTM(config) {
 
+    const enabled =
+        Boolean(
+            config.tracking
+                .googleTagManagerEnabled
+        );
+
+
+    const gtmId =
+        String(
+            config.tracking
+                .googleTagManager ||
+            ""
+        ).trim();
+
+
     if (
-        !config.trackingEnabled?.gtm ||
-        !config.gtmId
+        !enabled ||
+        !gtmId
     ) {
 
         return;
@@ -1151,7 +1555,7 @@ function injectGTM(config) {
 
     const existing =
         document.querySelector(
-            `script[data-gtm="${config.gtmId}"]`
+            `script[data-gtm="${gtmId}"]`
         );
 
 
@@ -1161,7 +1565,8 @@ function injectGTM(config) {
 
 
     window.dataLayer =
-        window.dataLayer || [];
+        window.dataLayer ||
+        [];
 
 
     window.dataLayer.push({
@@ -1185,28 +1590,52 @@ function injectGTM(config) {
 
 
     script.dataset.gtm =
-        config.gtmId;
+        gtmId;
 
 
     script.src =
-        `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(config.gtmId)}`;
+        "https://www.googletagmanager.com/gtm.js?id=" +
+        encodeURIComponent(
+            gtmId
+        );
 
 
     document.head.appendChild(
         script
     );
+
+
+    console.info(
+        "Google Tag Manager ativado:",
+        gtmId
+    );
 }
 
 
 /* =========================================================
-   17. GOOGLE ANALYTICS
+   18. GOOGLE ANALYTICS
    ========================================================= */
 
 function injectGA(config) {
 
+    const enabled =
+        Boolean(
+            config.tracking
+                .googleAnalyticsEnabled
+        );
+
+
+    const measurementId =
+        String(
+            config.tracking
+                .googleAnalytics ||
+            ""
+        ).trim();
+
+
     if (
-        !config.trackingEnabled?.ga ||
-        !config.gaMeasurementId
+        !enabled ||
+        !measurementId
     ) {
 
         return;
@@ -1215,7 +1644,7 @@ function injectGA(config) {
 
     const existing =
         document.querySelector(
-            `script[data-ga="${config.gaMeasurementId}"]`
+            `script[data-ga="${measurementId}"]`
         );
 
 
@@ -1235,13 +1664,13 @@ function injectGA(config) {
 
 
     script.dataset.ga =
-        config.gaMeasurementId;
+        measurementId;
 
 
     script.src =
         "https://www.googletagmanager.com/gtag/js?id=" +
         encodeURIComponent(
-            config.gaMeasurementId
+            measurementId
         );
 
 
@@ -1251,7 +1680,8 @@ function injectGA(config) {
 
 
     window.dataLayer =
-        window.dataLayer || [];
+        window.dataLayer ||
+        [];
 
 
     window.gtag =
@@ -1272,27 +1702,51 @@ function injectGA(config) {
 
     window.gtag(
         "config",
-        config.gaMeasurementId
+        measurementId
+    );
+
+
+    console.info(
+        "Google Analytics ativado:",
+        measurementId
     );
 }
 
 
 /* =========================================================
-   18. META PIXEL
+   19. META PIXEL
    ========================================================= */
 
 function injectMetaPixel(config) {
 
+    const enabled =
+        Boolean(
+            config.tracking
+                .metaPixelEnabled
+        );
+
+
+    const pixelId =
+        String(
+            config.tracking
+                .metaPixel ||
+            ""
+        ).trim();
+
+
     if (
-        !config.trackingEnabled?.pixel ||
-        !config.metaPixelId
+        !enabled ||
+        !pixelId
     ) {
 
         return;
     }
 
 
-    if (window.fbq) {
+    if (
+        window.fbq
+    ) {
+
         return;
     }
 
@@ -1350,7 +1804,7 @@ function injectMetaPixel(config) {
 
 
     script.dataset.metaPixel =
-        config.metaPixelId;
+        pixelId;
 
 
     script.src =
@@ -1364,7 +1818,7 @@ function injectMetaPixel(config) {
 
     window.fbq(
         "init",
-        config.metaPixelId
+        pixelId
     );
 
 
@@ -1372,25 +1826,41 @@ function injectMetaPixel(config) {
         "track",
         "PageView"
     );
+
+
+    console.info(
+        "Meta Pixel ativado:",
+        pixelId
+    );
 }
 
 
 /* =========================================================
-   19. TRACKING
+   20. TRACKING
    ========================================================= */
 
-function injectTrackingScripts(config) {
+function injectTrackingScripts(
+    config
+) {
 
-    injectGTM(config);
+    injectGTM(
+        config
+    );
 
-    injectGA(config);
 
-    injectMetaPixel(config);
+    injectGA(
+        config
+    );
+
+
+    injectMetaPixel(
+        config
+    );
 }
 
 
 /* =========================================================
-   20. ELEMENTOS DINÂMICOS
+   21. ELEMENTOS DINÂMICOS
    ========================================================= */
 
 function removeEmptyDynamicElements() {
@@ -1399,24 +1869,27 @@ function removeEmptyDynamicElements() {
         .querySelectorAll(
             "[data-dynamic]"
         )
-        .forEach(element => {
+        .forEach(
+            element => {
 
-            const text =
-                element.textContent
-                    .trim();
+                const text =
+                    element.textContent
+                        .trim();
 
 
-            if (!text) {
+                if (!text) {
 
-                element.style.display =
-                    "none";
+                    hideElement(
+                        element
+                    );
+                }
             }
-        });
+        );
 }
 
 
 /* =========================================================
-   21. INICIALIZAÇÃO
+   22. INICIALIZAÇÃO
    ========================================================= */
 
 async function initSite() {
@@ -1424,13 +1897,17 @@ async function initSite() {
     try {
 
         console.info(
-            "Katlen Ariane — carregando configuração..."
+            "Katlen Ariane — iniciando..."
         );
 
 
         const config =
             await loadConfig();
 
+
+        /* -----------------------------------------
+           CONTEÚDO
+        ----------------------------------------- */
 
         setupProfessionalRegistration(
             config
@@ -1442,20 +1919,36 @@ async function initSite() {
         );
 
 
+        /* -----------------------------------------
+           WHATSAPP
+        ----------------------------------------- */
+
         setupWhatsApp(
             config
         );
 
+
+        /* -----------------------------------------
+           FORMULÁRIO
+        ----------------------------------------- */
 
         setupFormspree(
             config
         );
 
 
+        /* -----------------------------------------
+           REDES
+        ----------------------------------------- */
+
         setupSocialLinks(
             config
         );
 
+
+        /* -----------------------------------------
+           CONTATO
+        ----------------------------------------- */
 
         setupFooter(
             config
@@ -1466,6 +1959,10 @@ async function initSite() {
             config
         );
 
+
+        /* -----------------------------------------
+           INTERFACE
+        ----------------------------------------- */
 
         setupTestimonials();
 
@@ -1482,10 +1979,18 @@ async function initSite() {
         removeEmptyDynamicElements();
 
 
+        /* -----------------------------------------
+           TRACKING
+        ----------------------------------------- */
+
         injectTrackingScripts(
             config
         );
 
+
+        /* -----------------------------------------
+           STATUS
+        ----------------------------------------- */
 
         document.documentElement
             .classList.add(
@@ -1500,7 +2005,7 @@ async function initSite() {
 
 
         console.info(
-            "Katlen Ariane — configuração carregada com sucesso."
+            "Katlen Ariane — site inicializado."
         );
 
 
@@ -1515,7 +2020,7 @@ async function initSite() {
 
 
 /* =========================================================
-   22. DOM READY
+   23. DOM READY
    ========================================================= */
 
 if (
@@ -1536,7 +2041,7 @@ if (
 
 
 /* =========================================================
-   23. PAGESHOW
+   24. PAGESHOW
    ========================================================= */
 
 window.addEventListener(
