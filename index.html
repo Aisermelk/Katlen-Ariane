@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -9,11 +10,14 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Katlen Ariane | Psicanalista Clínica</title>
+    <meta
+        name="robots"
+        content="index, follow"
+    >
 
     <meta
         name="description"
-        content="Um espaço de escuta, acolhimento e reflexão para diferentes momentos da vida. Atendimento para famílias, mulheres, crianças e adolescentes."
+        content="Katlen Ariane, Psicanalista Clínica. Um espaço de escuta, acolhimento e reflexão para diferentes momentos da vida."
     >
 
     <meta
@@ -21,7 +25,15 @@
         content="#F9F7F4"
     >
 
-    <!-- Open Graph -->
+    <title>
+        Katlen Ariane | Psicanalista Clínica
+    </title>
+
+
+    <!-- =====================================================
+         OPEN GRAPH
+         ===================================================== -->
+
     <meta
         property="og:title"
         content="Katlen Ariane | Psicanalista Clínica"
@@ -37,8 +49,20 @@
         content="website"
     >
 
-    <!-- Fontes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta
+        property="og:locale"
+        content="pt_BR"
+    >
+
+
+    <!-- =====================================================
+         FONTES
+         ===================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
 
     <link
         rel="preconnect"
@@ -51,26 +75,36 @@
         rel="stylesheet"
     >
 
-    <!-- CSS principal -->
+
+    <!-- =====================================================
+         CSS
+         ===================================================== -->
+
     <link
         rel="stylesheet"
         href="css/style.css"
     >
 
-    <!-- CSS responsivo -->
     <link
         rel="stylesheet"
         href="css/responsive.css"
     >
 
-    <!-- Dados estruturados -->
+
+    <!-- =====================================================
+         DADOS ESTRUTURADOS
+         ===================================================== -->
+
     <script type="application/ld+json">
+
     {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Katlen Ariane",
-        "jobTitle": "Psicanalista Clínica"
+        "jobTitle": "Psicanalista Clínica",
+        "description": "Psicanalista Clínica"
     }
+
     </script>
 
 </head>
@@ -79,16 +113,16 @@
 <body>
 
 
-<!-- =====================================================
-     MENU SUPERIOR FLUTUANTE
-     ===================================================== -->
+<!-- =========================================================
+     HEADER
+     ========================================================= -->
 
 <header class="site-header">
 
     <div class="container nav-inner">
 
 
-        <!-- IDENTIDADE -->
+        <!-- MARCA -->
 
         <a
             class="brand"
@@ -101,7 +135,7 @@
             </span>
 
             <span class="brand-sub">
-                PSICANALISTA CLÍNICA | CBPC 2022-6172
+                PSICANALISTA CLÍNICA
             </span>
 
         </a>
@@ -164,7 +198,7 @@
         </nav>
 
 
-        <!-- CTA DO MENU -->
+        <!-- CTA -->
 
         <a
             class="header-cta"
@@ -196,16 +230,16 @@
 </header>
 
 
-<!-- =====================================================
-     CONTEÚDO PRINCIPAL
-     ===================================================== -->
+<!-- =========================================================
+     MAIN
+     ========================================================= -->
 
 <main>
 
 
-<!-- =====================================================
+<!-- =========================================================
      HERO
-     ===================================================== -->
+     ========================================================= -->
 
 <section
     id="inicio"
@@ -302,23 +336,23 @@
 
             <div class="hero-image">
 
-    <img
-        src="assets/katlen-hero.png"
-        alt="Katlen Ariane, Psicanalista Clínica"
-    >
+                <img
+                    src="assets/katlen-hero.png"
+                    alt="Katlen Ariane, Psicanalista Clínica"
+                    loading="eager"
+                    fetchpriority="high"
+                >
 
-</div>
-
-
-                <div class="shape-tag shape-tag-coral">
-                    escuta
-                </div>
+            </div>
 
 
-                <div class="shape-tag shape-tag-yellow">
-                    acolhimento
-                </div>
+            <div class="shape-tag shape-tag-coral">
+                escuta
+            </div>
 
+
+            <div class="shape-tag shape-tag-yellow">
+                acolhimento
             </div>
 
         </div>
@@ -331,9 +365,9 @@
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      SOBRE
-     ===================================================== -->
+     ========================================================= -->
 
 <section
     id="sobre"
@@ -342,6 +376,8 @@
 
     <div class="container about-grid">
 
+
+        <!-- IMAGEM -->
 
         <div class="about-image">
 
@@ -353,6 +389,8 @@
 
         </div>
 
+
+        <!-- TEXTO -->
 
         <div class="about-copy">
 
@@ -367,17 +405,27 @@
             </h2>
 
 
-            <p id="about-formacao">
-
+            <p
+                id="about-formacao"
+                data-dynamic
+            >
                 Psicanalista dedicada a construir
                 um espaço de escuta e reflexão,
                 respeitando a singularidade de cada
                 pessoa e de cada história.
-
             </p>
 
 
-            <p id="about-especializacoes"></p>
+            <p
+                id="about-especializacoes"
+                data-dynamic
+            ></p>
+
+
+            <p
+                id="about-experiencia"
+                data-dynamic
+            ></p>
 
 
             <a
@@ -394,9 +442,9 @@
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      ATENDIMENTO
-     ===================================================== -->
+     ========================================================= -->
 
 <section
     id="atendimento"
@@ -532,9 +580,9 @@
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      NEURODESENVOLVIMENTO
-     ===================================================== -->
+     ========================================================= -->
 
 <section
     id="neuro"
@@ -594,9 +642,9 @@
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      PRIMEIRA CONSULTA
-     ===================================================== -->
+     ========================================================= -->
 
 <section
     id="primeira-consulta"
@@ -705,9 +753,9 @@
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      DEPOIMENTOS
-     ===================================================== -->
+     ========================================================= -->
 
 <section
     id="depoimentos"
@@ -810,9 +858,9 @@
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      SOBRE A PSICANÁLISE
-     ===================================================== -->
+     ========================================================= -->
 
 <section
     class="psycho section"
@@ -869,9 +917,9 @@
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      CONTATO
-     ===================================================== -->
+     ========================================================= -->
 
 <section
     id="contato"
@@ -885,6 +933,8 @@
 
     <div class="container contact-grid">
 
+
+        <!-- INTRODUÇÃO -->
 
         <div class="contact-intro">
 
@@ -906,14 +956,53 @@
             </p>
 
 
+            <!-- REGISTRO PROFISSIONAL -->
+
             <div
                 class="registration-box"
                 id="prof-reg-container"
+                data-dynamic
             >
 
-                <small id="reg-label"></small>
+                <small id="reg-label">
+                    Registro profissional
+                </small>
 
-                <strong id="reg-value"></strong>
+                <strong id="reg-value">
+                    CBPC 2022-6172
+                </strong>
+
+            </div>
+
+
+            <!-- WHATSAPP -->
+
+            <div
+                class="contact-info"
+                data-dynamic
+            >
+
+                <a
+                    href="#whatsapp"
+                    data-whatsapp
+                    aria-label="Conversar pelo WhatsApp"
+                >
+                    Falar pelo WhatsApp
+                </a>
+
+            </div>
+
+
+            <!-- ENDEREÇO -->
+
+            <div
+                class="contact-info"
+                data-dynamic
+            >
+
+                <span
+                    data-address
+                ></span>
 
             </div>
 
@@ -927,9 +1016,10 @@
             <form
                 id="main-form"
                 method="POST"
-                action="https://formspree.io/f/SEU_ID_AQUI"
+                action=""
             >
 
+                <!-- Nome -->
 
                 <div class="form-row">
 
@@ -943,7 +1033,7 @@
 
 
                     <input
-                        type="text"
+                        type="tel"
                         name="whatsapp"
                         placeholder="Seu WhatsApp"
                         autocomplete="tel"
@@ -953,6 +1043,8 @@
                 </div>
 
 
+                <!-- E-mail -->
+
                 <input
                     type="email"
                     name="email"
@@ -961,6 +1053,8 @@
                     required
                 >
 
+
+                <!-- Público -->
 
                 <select
                     name="busca_atendimento"
@@ -998,6 +1092,8 @@
                 </select>
 
 
+                <!-- Mensagem -->
+
                 <textarea
                     name="mensagem"
                     placeholder="Sua mensagem"
@@ -1005,11 +1101,14 @@
                 ></textarea>
 
 
+                <!-- Consentimento -->
+
                 <label class="consent">
 
                     <input
                         type="checkbox"
                         name="consentimento"
+                        value="sim"
                         required
                     >
 
@@ -1020,6 +1119,8 @@
 
                 </label>
 
+
+                <!-- BOTÃO -->
 
                 <button
                     type="submit"
@@ -1040,9 +1141,9 @@
 </main>
 
 
-<!-- =====================================================
-     RODAPÉ
-     ===================================================== -->
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
 
 <footer class="site-footer">
 
@@ -1125,15 +1226,26 @@
                 Atendimento
             </span>
 
+
             <span>
                 Online e presencial
             </span>
 
-            <span id="footer-whatsapp">
-                WhatsApp
-            </span>
 
-            <span id="footer-address"></span>
+            <a
+                id="footer-whatsapp"
+                href="#whatsapp"
+                data-whatsapp
+            >
+                WhatsApp
+            </a>
+
+
+            <span
+                id="footer-address"
+                data-address
+                data-dynamic
+            ></span>
 
         </div>
 
@@ -1149,11 +1261,13 @@
 
             <div class="social-links">
 
+
                 <a
                     id="instagram-link"
+                    data-social="instagram"
                     href="#"
                     target="_blank"
-                    rel="noopener"
+                    rel="noopener noreferrer"
                 >
                     Instagram
                 </a>
@@ -1161,9 +1275,10 @@
 
                 <a
                     id="facebook-link"
+                    data-social="facebook"
                     href="#"
                     target="_blank"
-                    rel="noopener"
+                    rel="noopener noreferrer"
                 >
                     Facebook
                 </a>
@@ -1171,9 +1286,10 @@
 
                 <a
                     id="tiktok-link"
+                    data-social="tiktok"
                     href="#"
                     target="_blank"
-                    rel="noopener"
+                    rel="noopener noreferrer"
                 >
                     TikTok
                 </a>
@@ -1181,9 +1297,10 @@
 
                 <a
                     id="linkedin-link"
+                    data-social="linkedin"
                     href="#"
                     target="_blank"
-                    rel="noopener"
+                    rel="noopener noreferrer"
                 >
                     LinkedIn
                 </a>
@@ -1191,12 +1308,17 @@
             </div>
 
 
+            <!-- REGISTRO -->
+
             <span class="footer-title footer-title-small">
                 Informações profissionais
             </span>
 
 
-            <span id="footer-registration">
+            <span
+                id="footer-registration"
+                data-dynamic
+            >
                 Psicanalista Clínica
             </span>
 
@@ -1205,10 +1327,16 @@
     </div>
 
 
+    <!-- COPYRIGHT -->
+
     <div class="container footer-bottom">
 
         <span>
-            © 2026 Katlen Ariane.
+            ©
+            <span data-current-year>
+                2026
+            </span>
+            Katlen Ariane.
             Todos os direitos reservados.
         </span>
 
@@ -1217,17 +1345,17 @@
 </footer>
 
 
-<!-- =====================================================
-     CONTATO FLUTUANTE
-     CANTO INFERIOR DIREITO
-     ===================================================== -->
+<!-- =========================================================
+     WHATSAPP FLUTUANTE
+     ========================================================= -->
 
 <a
-    href="#"
+    href="#whatsapp"
     class="whatsapp-float"
     id="whatsapp-link"
+    data-whatsapp
     target="_blank"
-    rel="noopener"
+    rel="noopener noreferrer"
     style="display:none;"
     aria-label="Conversar pelo WhatsApp"
 >
@@ -1239,9 +1367,9 @@
 </a>
 
 
-<!-- =====================================================
+<!-- =========================================================
      JAVASCRIPT
-     ===================================================== -->
+     ========================================================= -->
 
 <script
     type="module"
