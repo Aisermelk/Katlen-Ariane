@@ -5,20 +5,28 @@ export default {
 
         /*
          * =====================================================
-         * CORS
+         * HEADERS
          * =====================================================
          */
 
         const corsHeaders = {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type"
+            "Access-Control-Allow-Origin":
+                "https://katlenarianeso.pages.dev",
+
+            "Access-Control-Allow-Methods":
+                "GET, POST, PUT, OPTIONS",
+
+            "Access-Control-Allow-Headers":
+                "Content-Type, Authorization",
+
+            "Cache-Control":
+                "no-store"
         };
 
 
         /*
          * =====================================================
-         * OPTIONS / CORS
+         * CORS
          * =====================================================
          */
 
@@ -34,6 +42,7 @@ export default {
         /*
          * =====================================================
          * API PÚBLICA
+         * GET /api/config
          * =====================================================
          */
 
@@ -41,6 +50,51 @@ export default {
             url.pathname === "/api/config" &&
             request.method === "GET"
         ) {
+
+            const defaultConfig = {
+
+                whatsapp: "",
+
+                endereco: "",
+
+                formspreeEndpoint: "",
+
+                instagram: "",
+
+                facebook: "",
+
+                tiktok: "",
+
+                linkedin: "",
+
+                metaPixelId: "",
+
+                gaMeasurementId: "",
+
+                gtmId: "",
+
+                trackingEnabled: {
+
+                    pixel: false,
+
+                    ga: false,
+
+                    gtm: false
+                },
+
+                professionalRegistrationLabel:
+                    "Registro profissional",
+
+                professionalRegistration:
+                    "CBPC 2022-6172",
+
+                formacao: "",
+
+                especializacoes: "",
+
+                experiencia: ""
+            };
+
 
             try {
 
@@ -53,90 +107,25 @@ export default {
                     );
 
 
-                /*
-                 * Se ainda não existir
-                 * configuração no KV
-                 */
+                const finalConfig = {
 
-                if (!config) {
+                    ...defaultConfig,
 
-                    const defaultConfig = {
+                    ...(config || {}),
 
-                        whatsapp: "",
+                    trackingEnabled: {
 
-                        endereco: "",
+                        ...defaultConfig.trackingEnabled,
 
-                        formspreeEndpoint: "",
+                        ...(config?.trackingEnabled || {})
+                    }
+                };
 
-
-                        instagram: "",
-
-                        facebook: "",
-
-                        tiktok: "",
-
-                        linkedin: "",
-
-
-                        metaPixelId: "",
-
-                        gaMeasurementId: "",
-
-                        gtmId: "",
-
-
-                        trackingEnabled: {
-
-                            pixel: false,
-
-                            ga: false,
-
-                            gtm: false
-                        },
-
-
-                        professionalRegistrationLabel:
-                            "Registro profissional",
-
-                        professionalRegistration:
-                            "CBPC 2022-6172",
-
-
-                        formacao: "",
-
-                        especializacoes: "",
-
-                        experiencia: ""
-                    };
-
-
-                    return new Response(
-                        JSON.stringify(
-                            defaultConfig
-                        ),
-                        {
-                            status: 200,
-
-                            headers: {
-                                ...corsHeaders,
-
-                                "Content-Type":
-                                    "application/json",
-
-                                "Cache-Control":
-                                    "no-store"
-                            }
-                        }
-                    );
-                }
-
-
-                /*
-                 * Retorna configuração
-                 */
 
                 return new Response(
-                    JSON.stringify(config),
+                    JSON.stringify(
+                        finalConfig
+                    ),
                     {
                         status: 200,
 
@@ -144,10 +133,7 @@ export default {
                             ...corsHeaders,
 
                             "Content-Type":
-                                "application/json",
-
-                            "Cache-Control":
-                                "no-store"
+                                "application/json"
                         }
                     }
                 );
@@ -156,7 +142,7 @@ export default {
             } catch (error) {
 
                 console.error(
-                    "Erro ao consultar SITE_KV:",
+                    "Erro ao acessar SITE_KV:",
                     error
                 );
 
@@ -164,7 +150,9 @@ export default {
                 return new Response(
                     JSON.stringify({
                         error:
-                            "Erro ao carregar configuração."
+                            "Erro ao carregar configuração.",
+                        message:
+                            error.message
                     }),
                     {
                         status: 500,
@@ -183,20 +171,25 @@ export default {
 
         /*
          * =====================================================
-         * TESTE DO WORKER
+         * STATUS DO WORKER
          * =====================================================
          */
 
         if (
-            url.pathname === "/" ||
-            url.pathname === "/health"
+            url.pathname === "/" &&
+            request.method === "GET"
         ) {
 
             return new Response(
                 JSON.stringify({
+
                     status: "online",
-                    worker: "katlen-admin",
-                    api: "/api/config"
+
+                    worker:
+                        "katlen-admin",
+
+                    api:
+                        "/api/config"
                 }),
                 {
                     status: 200,
@@ -220,7 +213,12 @@ export default {
 
         return new Response(
             JSON.stringify({
-                error: "Rota não encontrada"
+
+                error:
+                    "Rota não encontrada",
+
+                path:
+                    url.pathname
             }),
             {
                 status: 404,
