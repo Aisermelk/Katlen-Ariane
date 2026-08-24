@@ -60,10 +60,24 @@
          FAVICON
          ===================================================== -->
 
+    <!-- WebP para navegadores que suportam -->
     <link
         rel="icon"
-        href="assets/favicon.png"
+        href="assets/katlen-logo.webp"
+        type="image/webp"
+    >
+
+    <!-- PNG como fallback -->
+    <link
+        rel="icon"
+        href="assets/katlen-logo.png"
         type="image/png"
+    >
+
+    <!-- Ícone para dispositivos Apple -->
+    <link
+        rel="apple-touch-icon"
+        href="assets/katlen-logo.png"
     >
 
 
@@ -147,12 +161,35 @@
             aria-label="Katlen Ariane - início"
         >
 
-            <span class="brand-name">
-                Katlen Ariane
-            </span>
+            <!-- WebP -->
+            <picture>
 
-            <span class="brand-sub">
-                PSICANALISTA CLÍNICA
+                <source
+                    srcset="assets/katlen-logo.webp"
+                    type="image/webp"
+                >
+
+                <!-- PNG fallback -->
+                <img
+                    src="assets/katlen-logo.png"
+                    alt="Katlen Ariane"
+                    class="brand-logo"
+                    width="160"
+                    height="auto"
+                >
+
+            </picture>
+
+            <span class="brand-text">
+
+                <span class="brand-name">
+                    Katlen Ariane
+                </span>
+
+                <span class="brand-sub">
+                    PSICANALISTA CLÍNICA
+                </span>
+
             </span>
 
         </a>
@@ -362,12 +399,23 @@
 
             <div class="hero-image">
 
-                <img
-                    src="assets/katlen-hero.png"
-                    alt="Katlen Ariane, Psicanalista Clínica"
-                    loading="eager"
-                    fetchpriority="high"
-                >
+                <picture>
+
+                    <source
+                        srcset="assets/katlen-hero.webp"
+                        type="image/webp"
+                    >
+
+                    <img
+                        src="assets/katlen-hero.png"
+                        alt="Katlen Ariane, Psicanalista Clínica"
+                        loading="eager"
+                        fetchpriority="high"
+                        width="800"
+                        height="900"
+                    >
+
+                </picture>
 
             </div>
 
@@ -416,11 +464,22 @@
 
         <div class="about-image">
 
-            <img
-                src="assets/katlen-sobre.png"
-                alt="Katlen Ariane em seu espaço profissional"
-                loading="lazy"
-            >
+            <picture>
+
+                <source
+                    srcset="assets/katlen-sobre.webp"
+                    type="image/webp"
+                >
+
+                <img
+                    src="assets/katlen-sobre.png"
+                    alt="Katlen Ariane em seu espaço profissional"
+                    loading="lazy"
+                    width="800"
+                    height="900"
+                >
+
+            </picture>
 
         </div>
 
@@ -943,13 +1002,26 @@
         </div>
 
 
+        <!-- IMAGEM DO CONSULTÓRIO -->
+
         <div class="room-image">
 
-            <img
-                src="assets/consultorio.png"
-                alt="Espaço de atendimento"
-                loading="lazy"
-            >
+            <picture>
+
+                <source
+                    srcset="assets/consultorio.webp"
+                    type="image/webp"
+                >
+
+                <img
+                    src="assets/consultorio.png"
+                    alt="Espaço de atendimento"
+                    loading="lazy"
+                    width="900"
+                    height="700"
+                >
+
+            </picture>
 
         </div>
 
@@ -1247,14 +1319,36 @@
             <a
                 class="brand"
                 href="#inicio"
+                aria-label="Katlen Ariane - início"
             >
 
-                <span class="brand-name">
-                    Katlen Ariane
-                </span>
+                <picture>
 
-                <span class="brand-sub">
-                    PSICANALISTA CLÍNICA
+                    <source
+                        srcset="assets/katlen-logo.webp"
+                        type="image/webp"
+                    >
+
+                    <img
+                        src="assets/katlen-logo.png"
+                        alt="Katlen Ariane"
+                        class="brand-logo"
+                        width="160"
+                        height="auto"
+                    >
+
+                </picture>
+
+                <span class="brand-text">
+
+                    <span class="brand-name">
+                        Katlen Ariane
+                    </span>
+
+                    <span class="brand-sub">
+                        PSICANALISTA CLÍNICA
+                    </span>
+
                 </span>
 
             </a>
@@ -1438,11 +1532,11 @@
     target="_blank"
     rel="noopener noreferrer"
     style="display:none;"
-    aria-label="Conversar pelo WhatsApp"
+    aria-label="Falar pelo WhatsApp"
 >
 
     <span>
-        Quero conversar
+        Falar pelo WhatsApp
     </span>
 
 </a>
