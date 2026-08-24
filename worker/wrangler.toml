@@ -2,10 +2,24 @@ name = "katlen-admin"
 main = "worker.js"
 compatibility_date = "2026-08-01"
 
-kv_namespaces = [
-  { binding = "SITE_KV", id = "COLOQUE_AQUI_O_ID_DO_NAMESPACE" }
-]
+# =========================================================
+# CLOUDFLARE KV
+# =========================================================
 
-# Secrets (NÃO vão neste arquivo — defina via `wrangler secret put`):
-#   SESSION_SECRET
-#   SETUP_TOKEN
+[[kv_namespaces]]
+binding = "SITE_KV"
+id = "9029bb29b25b4c899f3a25e63f7fd3bb"
+
+
+# =========================================================
+# VARIÁVEIS / SECRETS
+# =========================================================
+#
+# NÃO coloque SESSION_SECRET nem SETUP_TOKEN aqui.
+#
+# Eles serão configurados como Secrets no Cloudflare:
+#
+# SESSION_SECRET
+# SETUP_TOKEN
+#
+# =========================================================
