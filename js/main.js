@@ -1,6 +1,7 @@
 /* =========================================================
    KATLEN ARIANE — MAIN.JS
    Site institucional / Psicanálise
+   Integração com Cloudflare Worker + KV
    ========================================================= */
 
 "use strict";
@@ -11,17 +12,19 @@
    ========================================================= */
 
 /*
- * O site está hospedado no Cloudflare Pages.
- *
- * A API administrativa está no Cloudflare Worker:
+ * Worker responsável pela configuração do site:
  *
  * https://katlen-admin.aisermelk.workers.dev
  *
- * A configuração pública é obtida através de:
+ * API pública:
  *
  * /api/config
  *
- * NÃO coloque senhas, tokens ou Secrets aqui.
+ * O site está hospedado no Cloudflare Pages:
+ *
+ * https://katlenarianeso.pages.dev
+ *
+ * Por isso usamos a URL completa do Worker.
  */
 
 const CONFIG_API_URL =
@@ -32,11 +35,6 @@ const CONFIG_API_URL =
    2. CONFIGURAÇÃO FALLBACK
    ========================================================= */
 
-/*
- * Caso o Worker fique temporariamente indisponível,
- * o site continua funcionando utilizando estes valores.
- */
-
 const FALLBACK_CONFIG = {
 
     whatsapp: "",
@@ -44,7 +42,6 @@ const FALLBACK_CONFIG = {
     endereco: "",
 
     formspreeEndpoint: "",
-
 
     instagram: "",
 
@@ -54,13 +51,11 @@ const FALLBACK_CONFIG = {
 
     linkedin: "",
 
-
     metaPixelId: "",
 
     gaMeasurementId: "",
 
     gtmId: "",
-
 
     trackingEnabled: {
 
@@ -71,13 +66,11 @@ const FALLBACK_CONFIG = {
         gtm: false
     },
 
-
     professionalRegistrationLabel:
         "Registro profissional",
 
     professionalRegistration:
         "CBPC 2022-6172",
-
 
     formacao: "",
 
@@ -88,7 +81,7 @@ const FALLBACK_CONFIG = {
 
 
 /* =========================================================
-   3. CARREGAR CONFIGURAÇÃO
+   3. CARREGAR CONFIGURAÇÃO DO WORKER
    ========================================================= */
 
 async function loadConfig() {
@@ -100,6 +93,8 @@ async function loadConfig() {
                 CONFIG_API_URL,
                 {
                     method: "GET",
+
+                    mode: "cors",
 
                     credentials: "omit",
 
@@ -121,12 +116,6 @@ async function loadConfig() {
         }
 
 
-        /*
-         * Verificação adicional.
-         *
-         * Evita tentar interpretar HTML como JSON.
-         */
-
         const contentType =
             response.headers.get(
                 "content-type"
@@ -136,18 +125,11 @@ async function loadConfig() {
         if (
             !contentType
                 .toLowerCase()
-                .includes(
-                    "application/json"
-                )
+                .includes("application/json")
         ) {
 
-            const text =
-                await response.text();
-
-
             throw new Error(
-                "A API não retornou JSON. " +
-                `Resposta recebida: ${text.substring(0, 120)}`
+                "O Worker não retornou JSON."
             );
         }
 
@@ -156,10 +138,16 @@ async function loadConfig() {
             await response.json();
 
 
-        /*
-         * Combina a configuração
-         * do Worker com o fallback.
-         */
+        if (
+            !remoteConfig ||
+            typeof remoteConfig !== "object"
+        ) {
+
+            throw new Error(
+                "Configuração recebida inválida."
+            );
+        }
+
 
         return {
 
@@ -179,8 +167,14 @@ async function loadConfig() {
     } catch (error) {
 
         console.warn(
-            "Não foi possível carregar a configuração do Admin.",
+            "Não foi possível carregar a configuração do Worker.",
             error
+        );
+
+
+        console.warn(
+            "URL utilizada:",
+            CONFIG_API_URL
         );
 
 
@@ -191,12 +185,7 @@ async function loadConfig() {
 
         return {
 
-            ...FALLBACK_CONFIG,
-
-            trackingEnabled: {
-
-                ...FALLBACK_CONFIG.trackingEnabled
-            }
+            ...FALLBACK_CONFIG
         };
     }
 }
@@ -336,10 +325,6 @@ function setupProfessionalRegistration(
 
 function setupFooter(config) {
 
-    /*
-     * WhatsApp
-     */
-
     const footerWhatsapp =
         getElement(
             "footer-whatsapp"
@@ -356,6 +341,7 @@ function setupFooter(config) {
             footerWhatsapp.style.display =
                 "";
 
+
         } else {
 
             footerWhatsapp.style.display =
@@ -363,10 +349,6 @@ function setupFooter(config) {
         }
     }
 
-
-    /*
-     * Endereço
-     */
 
     const footerAddress =
         getElement(
@@ -384,6 +366,7 @@ function setupFooter(config) {
             footerAddress.style.display =
                 "";
 
+
         } else {
 
             footerAddress.style.display =
@@ -391,10 +374,6 @@ function setupFooter(config) {
         }
     }
 
-
-    /*
-     * Registro profissional
-     */
 
     const footerRegistration =
         getElement(
@@ -411,6 +390,7 @@ function setupFooter(config) {
             footerRegistration.textContent =
                 config.professionalRegistration;
 
+
         } else {
 
             footerRegistration.textContent =
@@ -426,10 +406,6 @@ function setupFooter(config) {
 
 function setupAbout(config) {
 
-    /*
-     * Formação
-     */
-
     const aboutFormacao =
         getElement(
             "about-formacao"
@@ -443,6 +419,7 @@ function setupAbout(config) {
             aboutFormacao.textContent =
                 config.formacao;
 
+
         } else {
 
             aboutFormacao.textContent =
@@ -450,10 +427,6 @@ function setupAbout(config) {
         }
     }
 
-
-    /*
-     * Especializações
-     */
 
     const aboutEspecializacoes =
         getElement(
@@ -471,6 +444,7 @@ function setupAbout(config) {
             aboutEspecializacoes.style.display =
                 "";
 
+
         } else {
 
             aboutEspecializacoes.style.display =
@@ -478,10 +452,6 @@ function setupAbout(config) {
         }
     }
 
-
-    /*
-     * Experiência
-     */
 
     const aboutExperiencia =
         getElement(
@@ -498,6 +468,7 @@ function setupAbout(config) {
 
             aboutExperiencia.style.display =
                 "";
+
 
         } else {
 
@@ -552,10 +523,6 @@ function setupWhatsApp(config) {
         );
 
 
-    /*
-     * Botão flutuante
-     */
-
     const whatsappLink =
         getElement(
             "whatsapp-link"
@@ -587,10 +554,6 @@ function setupWhatsApp(config) {
     }
 
 
-    /*
-     * Links com data-whatsapp
-     */
-
     document
         .querySelectorAll(
             "[data-whatsapp]"
@@ -619,10 +582,6 @@ function setupWhatsApp(config) {
                 "";
         });
 
-
-    /*
-     * Links com href="#whatsapp"
-     */
 
     document
         .querySelectorAll(
@@ -680,17 +639,6 @@ function setupFormspree(config) {
         ).trim();
 
 
-    /*
-     * Permite:
-     *
-     * abc123
-     *
-     * f/abc123
-     *
-     * https://formspree.io/f/abc123
-     */
-
-
     if (
         endpoint.startsWith(
             "http://"
@@ -702,6 +650,7 @@ function setupFormspree(config) {
 
         form.action =
             endpoint;
+
 
     } else {
 
@@ -743,12 +692,6 @@ function setupSocialLinks(config) {
     };
 
 
-    /*
-     * Suporte a:
-     *
-     * data-social="instagram"
-     */
-
     Object.entries(
         socialMap
     ).forEach(
@@ -784,10 +727,6 @@ function setupSocialLinks(config) {
         }
     );
 
-
-    /*
-     * Compatibilidade com IDs
-     */
 
     const legacyMap = {
 
@@ -850,10 +789,6 @@ function setupSocialLinks(config) {
 
 function setupContactLinks(config) {
 
-    /*
-     * Elementos com data-phone
-     */
-
     document
         .querySelectorAll(
             "[data-phone]"
@@ -889,10 +824,6 @@ function setupContactLinks(config) {
             }
         });
 
-
-    /*
-     * Elementos com data-address
-     */
 
     document
         .querySelectorAll(
@@ -982,10 +913,6 @@ function setupMobileMenu() {
     );
 
 
-    /*
-     * Fecha o menu ao clicar em um link
-     */
-
     nav
         .querySelectorAll("a")
         .forEach(link => {
@@ -1018,10 +945,6 @@ function setupMobileMenu() {
             );
         });
 
-
-    /*
-     * ESC fecha o menu
-     */
 
     document.addEventListener(
         "keydown",
@@ -1089,10 +1012,6 @@ function setupSmoothNavigation() {
                         return;
                     }
 
-
-                    /*
-                     * Não intercepta links externos.
-                     */
 
                     if (
                         link.target === "_blank"
@@ -1174,10 +1093,6 @@ function setupTestimonials() {
     }
 
 
-    /*
-     * Não inserir depoimentos automaticamente.
-     */
-
     section.dataset.ready =
         "true";
 }
@@ -1204,10 +1119,6 @@ function setupCurrentYear() {
         });
 
 
-    /*
-     * Compatibilidade com footer atual.
-     */
-
     document
         .querySelectorAll(
             ".footer-bottom span"
@@ -1224,245 +1135,262 @@ function setupCurrentYear() {
 
 
 /* =========================================================
-   16. TRACKING
+   16. GOOGLE TAG MANAGER
    ========================================================= */
 
-function injectTrackingScripts(config) {
-
-    const tracking =
-        config.trackingEnabled || {};
-
-
-    /*
-     * =====================================================
-     * GOOGLE TAG MANAGER
-     * =====================================================
-     */
+function injectGTM(config) {
 
     if (
-        tracking.gtm &&
-        config.gtmId
+        !config.trackingEnabled?.gtm ||
+        !config.gtmId
     ) {
 
-        const existingGtm =
-            document.querySelector(
-                `script[data-gtm="${config.gtmId}"]`
-            );
-
-
-        if (!existingGtm) {
-
-            window.dataLayer =
-                window.dataLayer || [];
-
-
-            window.dataLayer.push({
-
-                "gtm.start":
-                    new Date().getTime(),
-
-                event:
-                    "gtm.js"
-            });
-
-
-            const script =
-                document.createElement(
-                    "script"
-                );
-
-
-            script.async =
-                true;
-
-
-            script.dataset.gtm =
-                config.gtmId;
-
-
-            script.src =
-                `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(config.gtmId)}`;
-
-
-            document.head.appendChild(
-                script
-            );
-        }
+        return;
     }
 
 
-    /*
-     * =====================================================
-     * GOOGLE ANALYTICS
-     * =====================================================
-     */
-
-    if (
-        tracking.ga &&
-        config.gaMeasurementId
-    ) {
-
-        const existingGa =
-            document.querySelector(
-                `script[data-ga="${config.gaMeasurementId}"]`
-            );
+    const existing =
+        document.querySelector(
+            `script[data-gtm="${config.gtmId}"]`
+        );
 
 
-        if (!existingGa) {
-
-            const script =
-                document.createElement(
-                    "script"
-                );
-
-
-            script.async =
-                true;
-
-
-            script.src =
-                "https://www.googletagmanager.com/gtag/js?id=" +
-                encodeURIComponent(
-                    config.gaMeasurementId
-                );
-
-
-            script.dataset.ga =
-                config.gaMeasurementId;
-
-
-            document.head.appendChild(
-                script
-            );
-
-
-            window.dataLayer =
-                window.dataLayer || [];
-
-
-            window.gtag =
-                window.gtag ||
-                function () {
-
-                    window.dataLayer.push(
-                        arguments
-                    );
-                };
-
-
-            window.gtag(
-                "js",
-                new Date()
-            );
-
-
-            window.gtag(
-                "config",
-                config.gaMeasurementId
-            );
-        }
+    if (existing) {
+        return;
     }
 
 
-    /*
-     * =====================================================
-     * META PIXEL
-     * =====================================================
-     */
-
-    if (
-        tracking.pixel &&
-        config.metaPixelId
-    ) {
-
-        const existingPixel =
-            document.querySelector(
-                `script[data-meta-pixel="${config.metaPixelId}"]`
-            );
+    window.dataLayer =
+        window.dataLayer || [];
 
 
-        if (
-            !existingPixel &&
-            !window.fbq
-        ) {
+    window.dataLayer.push({
 
-            window.fbq =
-                function () {
+        "gtm.start":
+            new Date().getTime(),
 
-                    window.fbq.callMethod
-                        ? window.fbq.callMethod.apply(
-                            window.fbq,
-                            arguments
-                        )
-                        : window.fbq.queue.push(
-                            arguments
-                        );
-                };
+        event:
+            "gtm.js"
+    });
 
 
-            if (!window._fbq) {
-
-                window._fbq =
-                    window.fbq;
-            }
-
-
-            window.fbq.push =
-                window.fbq;
+    const script =
+        document.createElement(
+            "script"
+        );
 
 
-            window.fbq.loaded =
-                true;
+    script.async =
+        true;
 
 
-            window.fbq.version =
-                "2.0";
+    script.dataset.gtm =
+        config.gtmId;
 
 
-            window.fbq.queue =
-                [];
+    script.src =
+        `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(config.gtmId)}`;
 
 
-            const script =
-                document.createElement(
-                    "script"
-                );
-
-
-            script.async =
-                true;
-
-
-            script.src =
-                "https://connect.facebook.net/en_US/fbevents.js";
-
-
-            script.dataset.metaPixel =
-                config.metaPixelId;
-
-
-            document.head.appendChild(
-                script
-            );
-
-
-            window.fbq(
-                "init",
-                config.metaPixelId
-            );
-
-
-            window.fbq(
-                "track",
-                "PageView"
-            );
-        }
-    }
+    document.head.appendChild(
+        script
+    );
 }
 
 
 /* =========================================================
-   17. PROTEÇÃO DE ELEMENTOS DINÂMICOS
+   17. GOOGLE ANALYTICS
+   ========================================================= */
+
+function injectGA(config) {
+
+    if (
+        !config.trackingEnabled?.ga ||
+        !config.gaMeasurementId
+    ) {
+
+        return;
+    }
+
+
+    const existing =
+        document.querySelector(
+            `script[data-ga="${config.gaMeasurementId}"]`
+        );
+
+
+    if (existing) {
+        return;
+    }
+
+
+    const script =
+        document.createElement(
+            "script"
+        );
+
+
+    script.async =
+        true;
+
+
+    script.dataset.ga =
+        config.gaMeasurementId;
+
+
+    script.src =
+        "https://www.googletagmanager.com/gtag/js?id=" +
+        encodeURIComponent(
+            config.gaMeasurementId
+        );
+
+
+    document.head.appendChild(
+        script
+    );
+
+
+    window.dataLayer =
+        window.dataLayer || [];
+
+
+    window.gtag =
+        window.gtag ||
+        function () {
+
+            window.dataLayer.push(
+                arguments
+            );
+        };
+
+
+    window.gtag(
+        "js",
+        new Date()
+    );
+
+
+    window.gtag(
+        "config",
+        config.gaMeasurementId
+    );
+}
+
+
+/* =========================================================
+   18. META PIXEL
+   ========================================================= */
+
+function injectMetaPixel(config) {
+
+    if (
+        !config.trackingEnabled?.pixel ||
+        !config.metaPixelId
+    ) {
+
+        return;
+    }
+
+
+    if (window.fbq) {
+        return;
+    }
+
+
+    window.fbq =
+        function () {
+
+            if (
+                window.fbq.callMethod
+            ) {
+
+                window.fbq.callMethod.apply(
+                    window.fbq,
+                    arguments
+                );
+
+
+            } else {
+
+                window.fbq.queue.push(
+                    arguments
+                );
+            }
+        };
+
+
+    window.fbq.push =
+        window.fbq;
+
+
+    window.fbq.loaded =
+        true;
+
+
+    window.fbq.version =
+        "2.0";
+
+
+    window.fbq.queue =
+        [];
+
+
+    window._fbq =
+        window.fbq;
+
+
+    const script =
+        document.createElement(
+            "script"
+        );
+
+
+    script.async =
+        true;
+
+
+    script.dataset.metaPixel =
+        config.metaPixelId;
+
+
+    script.src =
+        "https://connect.facebook.net/en_US/fbevents.js";
+
+
+    document.head.appendChild(
+        script
+    );
+
+
+    window.fbq(
+        "init",
+        config.metaPixelId
+    );
+
+
+    window.fbq(
+        "track",
+        "PageView"
+    );
+}
+
+
+/* =========================================================
+   19. TRACKING
+   ========================================================= */
+
+function injectTrackingScripts(config) {
+
+    injectGTM(config);
+
+    injectGA(config);
+
+    injectMetaPixel(config);
+}
+
+
+/* =========================================================
+   20. ELEMENTOS DINÂMICOS
    ========================================================= */
 
 function removeEmptyDynamicElements() {
@@ -1488,240 +1416,76 @@ function removeEmptyDynamicElements() {
 
 
 /* =========================================================
-   18. TESTE DA API
-   ========================================================= */
-
-/*
- * Mantemos uma função simples para verificar
- * se o Worker está respondendo corretamente.
- */
-
-async function checkAPIConnection() {
-
-    try {
-
-        const response =
-            await fetch(
-                CONFIG_API_URL,
-                {
-                    method: "GET",
-
-                    credentials: "omit",
-
-                    cache: "no-store",
-
-                    headers: {
-                        "Accept":
-                            "application/json"
-                    }
-                }
-            );
-
-
-        if (!response.ok) {
-
-            console.warn(
-                `Worker respondeu HTTP ${response.status}.`
-            );
-
-            return false;
-        }
-
-
-        const contentType =
-            response.headers.get(
-                "content-type"
-            ) || "";
-
-
-        if (
-            !contentType
-                .toLowerCase()
-                .includes(
-                    "application/json"
-                )
-        ) {
-
-            console.warn(
-                "Worker não retornou JSON."
-            );
-
-            return false;
-        }
-
-
-        return true;
-
-
-    } catch (error) {
-
-        console.warn(
-            "Não foi possível conectar ao Worker.",
-            error
-        );
-
-
-        return false;
-    }
-}
-
-
-/* =========================================================
-   19. INICIALIZAÇÃO
+   21. INICIALIZAÇÃO
    ========================================================= */
 
 async function initSite() {
 
     try {
 
-        /*
-         * =================================================
-         * CARREGAR CONFIGURAÇÃO
-         * =================================================
-         */
+        console.info(
+            "Katlen Ariane — carregando configuração..."
+        );
+
 
         const config =
             await loadConfig();
 
-
-        /*
-         * =================================================
-         * DADOS PROFISSIONAIS
-         * =================================================
-         */
 
         setupProfessionalRegistration(
             config
         );
 
 
-        /*
-         * =================================================
-         * SOBRE
-         * =================================================
-         */
-
         setupAbout(
             config
         );
 
-
-        /*
-         * =================================================
-         * WHATSAPP
-         * =================================================
-         */
 
         setupWhatsApp(
             config
         );
 
 
-        /*
-         * =================================================
-         * FORMSPREE
-         * =================================================
-         */
-
         setupFormspree(
             config
         );
 
-
-        /*
-         * =================================================
-         * REDES SOCIAIS
-         * =================================================
-         */
 
         setupSocialLinks(
             config
         );
 
 
-        /*
-         * =================================================
-         * RODAPÉ
-         * =================================================
-         */
-
         setupFooter(
             config
         );
 
-
-        /*
-         * =================================================
-         * CONTATO
-         * =================================================
-         */
 
         setupContactLinks(
             config
         );
 
 
-        /*
-         * =================================================
-         * DEPOIMENTOS
-         * =================================================
-         */
-
         setupTestimonials();
 
-
-        /*
-         * =================================================
-         * MENU MOBILE
-         * =================================================
-         */
 
         setupMobileMenu();
 
 
-        /*
-         * =================================================
-         * NAVEGAÇÃO
-         * =================================================
-         */
-
         setupSmoothNavigation();
 
-
-        /*
-         * =================================================
-         * ANO
-         * =================================================
-         */
 
         setupCurrentYear();
 
 
-        /*
-         * =================================================
-         * ELEMENTOS DINÂMICOS
-         * =================================================
-         */
-
         removeEmptyDynamicElements();
 
-
-        /*
-         * =================================================
-         * TRACKING
-         * =================================================
-         */
 
         injectTrackingScripts(
             config
         );
 
-
-        /*
-         * =================================================
-         * ESTADO FINAL
-         * =================================================
-         */
 
         document.documentElement
             .classList.add(
@@ -1736,13 +1500,7 @@ async function initSite() {
 
 
         console.info(
-            "Katlen Ariane — site inicializado com sucesso."
-        );
-
-
-        console.info(
-            "API:",
-            CONFIG_API_URL
+            "Katlen Ariane — configuração carregada com sucesso."
         );
 
 
@@ -1757,7 +1515,7 @@ async function initSite() {
 
 
 /* =========================================================
-   20. DOM READY
+   22. DOM READY
    ========================================================= */
 
 if (
@@ -1770,6 +1528,7 @@ if (
         initSite
     );
 
+
 } else {
 
     initSite();
@@ -1777,7 +1536,7 @@ if (
 
 
 /* =========================================================
-   21. PAGESHOW
+   23. PAGESHOW
    ========================================================= */
 
 window.addEventListener(
@@ -1800,6 +1559,7 @@ window.addEventListener(
             !nav ||
             !mobileMenu
         ) {
+
             return;
         }
 
