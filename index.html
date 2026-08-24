@@ -10,9 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        Katlen Ariane | Psicanalista Clínica
-    </title>
+    <title>Katlen Ariane | Psicanalista Clínica</title>
 
     <meta
         name="description"
@@ -62,17 +60,19 @@
 
     <!-- =====================================================
          FAVICON
+         PNG PRIMEIRO
          ===================================================== -->
 
     <link
         rel="icon"
-        href="assets/favicon.png"
+        href="assets/katlen-logo.png"
         type="image/png"
     >
 
+    <!-- Fallback WebP -->
     <link
         rel="icon"
-        href="assets/favicon.webp"
+        href="assets/katlen-logo.webp"
         type="image/webp"
     >
 
@@ -81,10 +81,7 @@
          FONTES
          ===================================================== -->
 
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link
         rel="preconnect"
@@ -93,7 +90,7 @@
     >
 
     <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap"
         rel="stylesheet"
     >
 
@@ -139,7 +136,7 @@
 
 
 <!-- =====================================================
-     MENU SUPERIOR
+     MENU SUPERIOR FLUTUANTE
      ===================================================== -->
 
 <header class="site-header">
@@ -149,6 +146,7 @@
 
         <!-- =================================================
              LOGO
+             PNG É A PRIMEIRA OPÇÃO
              ================================================= -->
 
         <a
@@ -157,16 +155,27 @@
             aria-label="Katlen Ariane - início"
         >
 
-            <picture class="brand-logo">
+            <picture>
 
+                <!-- PNG -->
+                <source
+                    srcset="assets/katlen-logo.png"
+                    type="image/png"
+                >
+
+                <!-- WebP -->
                 <source
                     srcset="assets/katlen-logo.webp"
                     type="image/webp"
                 >
 
+                <!-- Fallback -->
                 <img
                     src="assets/katlen-logo.png"
                     alt="Katlen Ariane — Psicanalista Clínica"
+                    class="brand-logo"
+                    width="180"
+                    height="auto"
                 >
 
             </picture>
@@ -234,14 +243,14 @@
 
 
         <!-- =================================================
-             CTA DO MENU
+             CTA
              ================================================= -->
 
         <a
             class="header-cta"
             href="#contato"
         >
-            Quero conversar
+            Falar pelo WhatsApp
         </a>
 
 
@@ -357,7 +366,7 @@
                     href="#contato"
                     class="btn btn-primary"
                 >
-                    Quero conversar
+                    Falar pelo WhatsApp
                 </a>
 
                 <a
@@ -378,13 +387,21 @@
         </div>
 
 
-        <!-- IMAGEM -->
+        <!-- =================================================
+             IMAGEM HERO
+             PNG PRIMEIRO / WEBP FALLBACK
+             ================================================= -->
 
         <div class="hero-visual">
 
             <div class="hero-image">
 
                 <picture>
+
+                    <source
+                        srcset="assets/katlen-hero.png"
+                        type="image/png"
+                    >
 
                     <source
                         srcset="assets/katlen-hero.webp"
@@ -443,11 +460,16 @@
     <div class="container about-grid">
 
 
-        <!-- IMAGEM -->
+        <!-- IMAGEM SOBRE -->
 
         <div class="about-image">
 
             <picture>
+
+                <source
+                    srcset="assets/katlen-sobre.png"
+                    type="image/png"
+                >
 
                 <source
                     srcset="assets/katlen-sobre.webp"
@@ -556,9 +578,7 @@
 
             <article class="audience-card family">
 
-                <span>
-                    01
-                </span>
+                <span>01</span>
 
                 <h3>
                     Famílias
@@ -577,9 +597,7 @@
 
             <article class="audience-card women">
 
-                <span>
-                    02
-                </span>
+                <span>02</span>
 
                 <h3>
                     Mulheres
@@ -598,9 +616,7 @@
 
             <article class="audience-card children">
 
-                <span>
-                    03
-                </span>
+                <span>03</span>
 
                 <h3>
                     Crianças
@@ -619,9 +635,7 @@
 
             <article class="audience-card teens">
 
-                <span>
-                    04
-                </span>
+                <span>04</span>
 
                 <h3>
                     Adolescentes
@@ -746,9 +760,7 @@
 
             <div class="step">
 
-                <span>
-                    01
-                </span>
+                <span>01</span>
 
                 <div>
 
@@ -768,9 +780,7 @@
 
             <div class="step">
 
-                <span>
-                    02
-                </span>
+                <span>02</span>
 
                 <div>
 
@@ -791,9 +801,7 @@
 
             <div class="step">
 
-                <span>
-                    03
-                </span>
+                <span>03</span>
 
                 <div>
 
@@ -975,9 +983,16 @@
         </div>
 
 
+        <!-- IMAGEM CONSULTÓRIO -->
+
         <div class="room-image">
 
             <picture>
+
+                <source
+                    srcset="assets/consultorio.png"
+                    type="image/png"
+                >
 
                 <source
                     srcset="assets/consultorio.webp"
@@ -1068,7 +1083,6 @@
                 href="#whatsapp"
                 class="contact-whatsapp"
                 data-whatsapp
-                aria-label="Falar pelo WhatsApp"
             >
                 Falar pelo WhatsApp
             </a>
@@ -1084,7 +1098,9 @@
         </div>
 
 
-        <!-- FORMULÁRIO -->
+        <!-- =================================================
+             FORMULÁRIO
+             ================================================= -->
 
         <div class="contact-form">
 
@@ -1095,7 +1111,6 @@
                 novalidate
             >
 
-
                 <div class="form-row">
 
                     <input
@@ -1105,7 +1120,6 @@
                         autocomplete="name"
                         required
                     >
-
 
                     <input
                         type="tel"
@@ -1270,9 +1284,7 @@
     <div class="container footer-grid">
 
 
-        <!-- =================================================
-             MARCA
-             ================================================= -->
+        <!-- MARCA -->
 
         <div class="footer-brand">
 
@@ -1282,7 +1294,12 @@
                 aria-label="Katlen Ariane - início"
             >
 
-                <picture class="brand-logo">
+                <picture>
+
+                    <source
+                        srcset="assets/katlen-logo.png"
+                        type="image/png"
+                    >
 
                     <source
                         srcset="assets/katlen-logo.webp"
@@ -1292,6 +1309,8 @@
                     <img
                         src="assets/katlen-logo.png"
                         alt="Katlen Ariane — Psicanalista Clínica"
+                        class="brand-logo"
+                        loading="lazy"
                     >
 
                 </picture>
@@ -1307,9 +1326,7 @@
         </div>
 
 
-        <!-- =================================================
-             NAVEGAÇÃO
-             ================================================= -->
+        <!-- NAVEGAÇÃO -->
 
         <div>
 
@@ -1353,9 +1370,7 @@
         </div>
 
 
-        <!-- =================================================
-             ATENDIMENTO
-             ================================================= -->
+        <!-- ATENDIMENTO -->
 
         <div>
 
@@ -1372,7 +1387,6 @@
                 id="footer-whatsapp"
                 href="#whatsapp"
                 data-whatsapp
-                aria-label="Falar pelo WhatsApp"
             >
                 Falar pelo WhatsApp
             </a>
@@ -1386,9 +1400,7 @@
         </div>
 
 
-        <!-- =================================================
-             REDES SOCIAIS
-             ================================================= -->
+        <!-- REDES SOCIAIS -->
 
         <div>
 
@@ -1459,9 +1471,7 @@
     </div>
 
 
-    <!-- =================================================
-         COPYRIGHT
-         ================================================= -->
+    <!-- COPYRIGHT -->
 
     <div class="container footer-bottom">
 
