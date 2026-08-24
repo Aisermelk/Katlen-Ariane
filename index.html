@@ -10,9 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        Katlen Ariane | Psicanalista Clínica
-    </title>
+    <title>Katlen Ariane | Psicanalista Clínica</title>
 
     <meta
         name="description"
@@ -62,7 +60,7 @@
 
     <!-- =====================================================
          FAVICON
-         PNG COMO PRIMEIRA OPÇÃO
+         PNG PRIMEIRO + WEBP COMO FALLBACK
          ===================================================== -->
 
     <link
@@ -72,7 +70,7 @@
     >
 
     <link
-        rel="alternate icon"
+        rel="icon"
         href="assets/katlen-logo.webp"
         type="image/webp"
     >
@@ -94,7 +92,7 @@
     >
 
     <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap"
         rel="stylesheet"
     >
 
@@ -141,9 +139,9 @@
 <body>
 
 
-<!-- =========================================================
-     CABEÇALHO
-     ========================================================= -->
+<!-- =====================================================
+     MENU SUPERIOR FLUTUANTE
+     ===================================================== -->
 
 <header class="site-header">
 
@@ -151,7 +149,7 @@
 
 
         <!-- =================================================
-             MARCA
+             IDENTIDADE / LOGO
              ================================================= -->
 
         <a
@@ -160,19 +158,37 @@
             aria-label="Katlen Ariane - início"
         >
 
-            <!--
-                PNG PRINCIPAL
-                WEBP COMO FALLBACK
-            -->
+            <!-- LOGO PEQUENA -->
 
-            <img
-                src="assets/katlen-logo.png"
-                data-fallback="assets/katlen-logo.webp"
-                class="brand-logo"
-                alt="Logo Katlen Ariane"
-                width="42"
-                height="42"
-            >
+            <picture class="brand-logo">
+
+                <!-- PNG é a primeira opção -->
+
+                <source
+                    srcset="assets/katlen-logo.png"
+                    type="image/png"
+                >
+
+                <!-- WEBP como alternativa -->
+
+                <source
+                    srcset="assets/katlen-logo.webp"
+                    type="image/webp"
+                >
+
+                <img
+                    src="assets/katlen-logo.png"
+                    alt=""
+                    width="42"
+                    height="42"
+                    loading="eager"
+                    decoding="async"
+                >
+
+            </picture>
+
+
+            <!-- NOME + PROFISSÃO -->
 
             <span class="brand-text">
 
@@ -190,7 +206,7 @@
 
 
         <!-- =================================================
-             MENU
+             NAVEGAÇÃO
              ================================================= -->
 
         <nav
@@ -256,7 +272,7 @@
             class="header-cta"
             href="#contato"
         >
-            Falar pelo WhatsApp
+            Quero conversar
         </a>
 
 
@@ -284,16 +300,16 @@
 </header>
 
 
-<!-- =========================================================
+<!-- =====================================================
      CONTEÚDO PRINCIPAL
-     ========================================================= -->
+     ===================================================== -->
 
 <main>
 
 
-<!-- =========================================================
+<!-- =====================================================
      HERO
-     ========================================================= -->
+     ===================================================== -->
 
 <section
     id="inicio"
@@ -319,9 +335,7 @@
     <div class="container hero-grid">
 
 
-        <!-- =================================================
-             TEXTO
-             ================================================= -->
+        <!-- TEXTO -->
 
         <div class="hero-copy">
 
@@ -343,7 +357,7 @@
             </p>
 
 
-            <!-- PÚBLICO -->
+            <!-- PÚBLICOS -->
 
             <div class="target-audience">
 
@@ -374,7 +388,7 @@
                     href="#contato"
                     class="btn btn-primary"
                 >
-                    Falar pelo WhatsApp
+                    Quero conversar
                 </a>
 
                 <a
@@ -395,9 +409,7 @@
         </div>
 
 
-        <!-- =================================================
-             IMAGEM HERO
-             ================================================= -->
+        <!-- IMAGEM -->
 
         <div class="hero-visual">
 
@@ -405,7 +417,6 @@
 
                 <img
                     src="assets/katlen-hero.png"
-                    data-fallback="assets/katlen-hero.webp"
                     alt="Katlen Ariane, Psicanalista Clínica"
                     loading="eager"
                     fetchpriority="high"
@@ -442,9 +453,9 @@
 </section>
 
 
-<!-- =========================================================
+<!-- =====================================================
      SOBRE
-     ========================================================= -->
+     ===================================================== -->
 
 <section
     id="sobre"
@@ -454,21 +465,30 @@
     <div class="container about-grid">
 
 
-        <!-- IMAGEM -->
-
         <div class="about-image">
 
-            <img
-                src="assets/katlen-sobre.png"
-                data-fallback="assets/katlen-sobre.webp"
-                alt="Katlen Ariane em seu espaço profissional"
-                loading="lazy"
-            >
+            <picture>
+
+                <source
+                    srcset="assets/katlen-sobre.png"
+                    type="image/png"
+                >
+
+                <source
+                    srcset="assets/katlen-sobre.webp"
+                    type="image/webp"
+                >
+
+                <img
+                    src="assets/katlen-sobre.png"
+                    alt="Katlen Ariane em seu espaço profissional"
+                    loading="lazy"
+                >
+
+            </picture>
 
         </div>
 
-
-        <!-- TEXTO -->
 
         <div class="about-copy">
 
@@ -484,12 +504,10 @@
 
 
             <p id="about-formacao">
-
                 Psicanalista dedicada a construir
                 um espaço de escuta e reflexão,
                 respeitando a singularidade de cada
                 pessoa e de cada história.
-
             </p>
 
 
@@ -519,9 +537,9 @@
 </section>
 
 
-<!-- =========================================================
+<!-- =====================================================
      ATENDIMENTO
-     ========================================================= -->
+     ===================================================== -->
 
 <section
     id="atendimento"
@@ -559,8 +577,6 @@
         <div class="audience-grid">
 
 
-            <!-- FAMÍLIAS -->
-
             <article class="audience-card family">
 
                 <span>
@@ -581,8 +597,6 @@
 
             </article>
 
-
-            <!-- MULHERES -->
 
             <article class="audience-card women">
 
@@ -605,8 +619,6 @@
             </article>
 
 
-            <!-- CRIANÇAS -->
-
             <article class="audience-card children">
 
                 <span>
@@ -627,8 +639,6 @@
 
             </article>
 
-
-            <!-- ADOLESCENTES -->
 
             <article class="audience-card teens">
 
@@ -657,9 +667,9 @@
 </section>
 
 
-<!-- =========================================================
+<!-- =====================================================
      NEURODESENVOLVIMENTO
-     ========================================================= -->
+     ===================================================== -->
 
 <section
     id="neuro"
@@ -719,9 +729,9 @@
 </section>
 
 
-<!-- =========================================================
+<!-- =====================================================
      PRIMEIRA CONSULTA
-     ========================================================= -->
+     ===================================================== -->
 
 <section
     id="primeira-consulta"
@@ -830,9 +840,9 @@
 </section>
 
 
-<!-- =========================================================
+<!-- =====================================================
      DEPOIMENTOS
-     ========================================================= -->
+     ===================================================== -->
 
 <section
     id="depoimentos"
@@ -944,9 +954,9 @@
 </section>
 
 
-<!-- =========================================================
+<!-- =====================================================
      SOBRE A PSICANÁLISE
-     ========================================================= -->
+     ===================================================== -->
 
 <section
     class="psycho section"
@@ -988,16 +998,27 @@
         </div>
 
 
-        <!-- IMAGEM DO CONSULTÓRIO -->
-
         <div class="room-image">
 
-            <img
-                src="assets/consultorio.png"
-                data-fallback="assets/consultorio.webp"
-                alt="Espaço de atendimento"
-                loading="lazy"
-            >
+            <picture>
+
+                <source
+                    srcset="assets/consultorio.png"
+                    type="image/png"
+                >
+
+                <source
+                    srcset="assets/consultorio.webp"
+                    type="image/webp"
+                >
+
+                <img
+                    src="assets/consultorio.png"
+                    alt="Espaço de atendimento"
+                    loading="lazy"
+                >
+
+            </picture>
 
         </div>
 
@@ -1006,9 +1027,9 @@
 </section>
 
 
-<!-- =========================================================
+<!-- =====================================================
      CONTATO
-     ========================================================= -->
+     ===================================================== -->
 
 <section
     id="contato"
@@ -1029,8 +1050,6 @@
     <div class="container contact-grid">
 
 
-        <!-- INTRODUÇÃO -->
-
         <div class="contact-intro">
 
             <span class="eyebrow">
@@ -1050,8 +1069,6 @@
                 possível acompanhamento.
             </p>
 
-
-            <!-- REGISTRO -->
 
             <div
                 class="registration-box"
@@ -1080,8 +1097,6 @@
             </a>
 
 
-            <!-- ENDEREÇO -->
-
             <p
                 class="contact-address"
                 data-address
@@ -1090,9 +1105,7 @@
         </div>
 
 
-        <!-- =================================================
-             FORMULÁRIO
-             ================================================= -->
+        <!-- FORMULÁRIO -->
 
         <div class="contact-form">
 
@@ -1214,9 +1227,9 @@
 </section>
 
 
-<!-- =========================================================
+<!-- =====================================================
      POLÍTICA DE PRIVACIDADE
-     ========================================================= -->
+     ===================================================== -->
 
 <section
     id="privacidade"
@@ -1267,18 +1280,16 @@
 </main>
 
 
-<!-- =========================================================
+<!-- =====================================================
      RODAPÉ
-     ========================================================= -->
+     ===================================================== -->
 
 <footer class="site-footer">
 
     <div class="container footer-grid">
 
 
-        <!-- =================================================
-             MARCA
-             ================================================= -->
+        <!-- MARCA -->
 
         <div class="footer-brand">
 
@@ -1288,14 +1299,28 @@
                 aria-label="Katlen Ariane - início"
             >
 
-                <img
-                    src="assets/katlen-logo.png"
-                    data-fallback="assets/katlen-logo.webp"
-                    class="brand-logo"
-                    alt="Logo Katlen Ariane"
-                    width="42"
-                    height="42"
-                >
+                <picture class="brand-logo">
+
+                    <source
+                        srcset="assets/katlen-logo.png"
+                        type="image/png"
+                    >
+
+                    <source
+                        srcset="assets/katlen-logo.webp"
+                        type="image/webp"
+                    >
+
+                    <img
+                        src="assets/katlen-logo.png"
+                        alt=""
+                        width="38"
+                        height="38"
+                        loading="lazy"
+                    >
+
+                </picture>
+
 
                 <span class="brand-text">
 
@@ -1320,9 +1345,7 @@
         </div>
 
 
-        <!-- =================================================
-             NAVEGAÇÃO
-             ================================================= -->
+        <!-- NAVEGAÇÃO -->
 
         <div>
 
@@ -1366,9 +1389,7 @@
         </div>
 
 
-        <!-- =================================================
-             ATENDIMENTO
-             ================================================= -->
+        <!-- ATENDIMENTO -->
 
         <div>
 
@@ -1386,7 +1407,7 @@
                 href="#whatsapp"
                 data-whatsapp
             >
-                Falar pelo WhatsApp
+                WhatsApp
             </a>
 
 
@@ -1398,9 +1419,7 @@
         </div>
 
 
-        <!-- =================================================
-             REDES SOCIAIS
-             ================================================= -->
+        <!-- REDES SOCIAIS -->
 
         <div>
 
@@ -1471,9 +1490,7 @@
     </div>
 
 
-    <!-- =================================================
-         COPYRIGHT
-         ================================================= -->
+    <!-- COPYRIGHT -->
 
     <div class="container footer-bottom">
 
@@ -1487,9 +1504,9 @@
 </footer>
 
 
-<!-- =========================================================
+<!-- =====================================================
      WHATSAPP FLUTUANTE
-     ========================================================= -->
+     ===================================================== -->
 
 <a
     href="#"
@@ -1508,57 +1525,14 @@
 </a>
 
 
-<!-- =========================================================
+<!-- =====================================================
      JAVASCRIPT
-     ========================================================= -->
+     ===================================================== -->
 
 <script
     type="module"
     src="js/main.js"
 ></script>
-
-
-<!-- =========================================================
-     FALLBACK DAS IMAGENS
-     
-     PNG é sempre tentado primeiro.
-     Se o PNG não existir, usa o WEBP definido
-     em data-fallback.
-     ========================================================= -->
-
-<script>
-
-document
-    .querySelectorAll("img[data-fallback]")
-    .forEach(function (img) {
-
-        img.addEventListener(
-            "error",
-            function () {
-
-                const fallback =
-                    img.getAttribute(
-                        "data-fallback"
-                    );
-
-                if (
-                    fallback &&
-                    img.src.indexOf(fallback) === -1
-                ) {
-
-                    img.src = fallback;
-
-                }
-
-            },
-            {
-                once: true
-            }
-        );
-
-    });
-
-</script>
 
 
 </body>
