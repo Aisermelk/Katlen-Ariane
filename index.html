@@ -60,7 +60,6 @@
 
     <!-- =====================================================
          FAVICON
-         PNG PRIMEIRO + WEBP COMO FALLBACK
          ===================================================== -->
 
     <link
@@ -70,7 +69,7 @@
     >
 
     <link
-        rel="icon"
+        rel="alternate icon"
         href="assets/katlen-logo.webp"
         type="image/webp"
     >
@@ -92,7 +91,7 @@
     >
 
     <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap"
         rel="stylesheet"
     >
 
@@ -140,7 +139,7 @@
 
 
 <!-- =====================================================
-     MENU SUPERIOR FLUTUANTE
+     MENU SUPERIOR
      ===================================================== -->
 
 <header class="site-header">
@@ -149,7 +148,7 @@
 
 
         <!-- =================================================
-             IDENTIDADE / LOGO
+             MARCA
              ================================================= -->
 
         <a
@@ -162,14 +161,14 @@
 
             <picture class="brand-logo">
 
-                <!-- PNG é a primeira opção -->
+                <!-- PNG: primeira opção -->
 
                 <source
                     srcset="assets/katlen-logo.png"
                     type="image/png"
                 >
 
-                <!-- WEBP como alternativa -->
+                <!-- WEBP: alternativa -->
 
                 <source
                     srcset="assets/katlen-logo.webp"
@@ -179,16 +178,16 @@
                 <img
                     src="assets/katlen-logo.png"
                     alt=""
+                    aria-hidden="true"
                     width="42"
                     height="42"
                     loading="eager"
-                    decoding="async"
                 >
 
             </picture>
 
 
-            <!-- NOME + PROFISSÃO -->
+            <!-- TEXTO DA MARCA -->
 
             <span class="brand-text">
 
@@ -265,7 +264,7 @@
 
 
         <!-- =================================================
-             CTA
+             CTA DO MENU
              ================================================= -->
 
         <a
@@ -335,7 +334,9 @@
     <div class="container hero-grid">
 
 
-        <!-- TEXTO -->
+        <!-- =================================================
+             TEXTO
+             ================================================= -->
 
         <div class="hero-copy">
 
@@ -409,18 +410,38 @@
         </div>
 
 
-        <!-- IMAGEM -->
+        <!-- =================================================
+             IMAGEM HERO
+             ================================================= -->
 
         <div class="hero-visual">
 
             <div class="hero-image">
 
-                <img
-                    src="assets/katlen-hero.png"
-                    alt="Katlen Ariane, Psicanalista Clínica"
-                    loading="eager"
-                    fetchpriority="high"
-                >
+                <picture>
+
+                    <!-- PNG: primeira opção -->
+
+                    <source
+                        srcset="assets/katlen-hero.png"
+                        type="image/png"
+                    >
+
+                    <!-- WEBP: alternativa -->
+
+                    <source
+                        srcset="assets/katlen-hero.webp"
+                        type="image/webp"
+                    >
+
+                    <img
+                        src="assets/katlen-hero.png"
+                        alt="Katlen Ariane, Psicanalista Clínica"
+                        loading="eager"
+                        fetchpriority="high"
+                    >
+
+                </picture>
 
             </div>
 
@@ -465,14 +486,20 @@
     <div class="container about-grid">
 
 
+        <!-- IMAGEM -->
+
         <div class="about-image">
 
             <picture>
+
+                <!-- PNG: primeira opção -->
 
                 <source
                     srcset="assets/katlen-sobre.png"
                     type="image/png"
                 >
+
+                <!-- WEBP: alternativa -->
 
                 <source
                     srcset="assets/katlen-sobre.webp"
@@ -490,6 +517,8 @@
         </div>
 
 
+        <!-- TEXTO -->
+
         <div class="about-copy">
 
             <span class="eyebrow">
@@ -504,10 +533,12 @@
 
 
             <p id="about-formacao">
+
                 Psicanalista dedicada a construir
                 um espaço de escuta e reflexão,
                 respeitando a singularidade de cada
                 pessoa e de cada história.
+
             </p>
 
 
@@ -577,6 +608,8 @@
         <div class="audience-grid">
 
 
+            <!-- FAMÍLIAS -->
+
             <article class="audience-card family">
 
                 <span>
@@ -597,6 +630,8 @@
 
             </article>
 
+
+            <!-- MULHERES -->
 
             <article class="audience-card women">
 
@@ -619,6 +654,8 @@
             </article>
 
 
+            <!-- CRIANÇAS -->
+
             <article class="audience-card children">
 
                 <span>
@@ -639,6 +676,8 @@
 
             </article>
 
+
+            <!-- ADOLESCENTES -->
 
             <article class="audience-card teens">
 
@@ -998,14 +1037,20 @@
         </div>
 
 
+        <!-- IMAGEM DO CONSULTÓRIO -->
+
         <div class="room-image">
 
             <picture>
+
+                <!-- PNG: primeira opção -->
 
                 <source
                     srcset="assets/consultorio.png"
                     type="image/png"
                 >
+
+                <!-- WEBP: alternativa -->
 
                 <source
                     srcset="assets/consultorio.webp"
@@ -1050,6 +1095,10 @@
     <div class="container contact-grid">
 
 
+        <!-- =================================================
+             INTRODUÇÃO
+             ================================================= -->
+
         <div class="contact-intro">
 
             <span class="eyebrow">
@@ -1070,6 +1119,8 @@
             </p>
 
 
+            <!-- REGISTRO -->
+
             <div
                 class="registration-box"
                 id="prof-reg-container"
@@ -1086,7 +1137,9 @@
             </div>
 
 
-            <!-- WHATSAPP -->
+            <!-- =================================================
+                 WHATSAPP
+                 ================================================= -->
 
             <a
                 href="#whatsapp"
@@ -1097,6 +1150,8 @@
             </a>
 
 
+            <!-- ENDEREÇO -->
+
             <p
                 class="contact-address"
                 data-address
@@ -1105,7 +1160,9 @@
         </div>
 
 
-        <!-- FORMULÁRIO -->
+        <!-- =================================================
+             FORMULÁRIO
+             ================================================= -->
 
         <div class="contact-form">
 
@@ -1116,6 +1173,9 @@
                 novalidate
             >
 
+
+                <!-- NOME + WHATSAPP -->
+
                 <div class="form-row">
 
                     <input
@@ -1125,6 +1185,7 @@
                         autocomplete="name"
                         required
                     >
+
 
                     <input
                         type="tel"
@@ -1138,6 +1199,8 @@
                 </div>
 
 
+                <!-- E-MAIL -->
+
                 <input
                     type="email"
                     name="email"
@@ -1146,6 +1209,8 @@
                     required
                 >
 
+
+                <!-- PÚBLICO -->
 
                 <select
                     name="busca_atendimento"
@@ -1183,12 +1248,16 @@
                 </select>
 
 
+                <!-- MENSAGEM -->
+
                 <textarea
                     name="mensagem"
                     placeholder="Sua mensagem"
                     rows="5"
                 ></textarea>
 
+
+                <!-- CONSENTIMENTO -->
 
                 <label class="consent">
 
@@ -1199,6 +1268,7 @@
                     >
 
                     <span>
+
                         Li e concordo com a
                         <a
                             href="#privacidade"
@@ -1206,10 +1276,13 @@
                         >
                             Política de Privacidade
                         </a>.
+
                     </span>
 
                 </label>
 
+
+                <!-- BOTÃO -->
 
                 <button
                     type="submit"
@@ -1289,7 +1362,9 @@
     <div class="container footer-grid">
 
 
-        <!-- MARCA -->
+        <!-- =================================================
+             MARCA DO RODAPÉ
+             ================================================= -->
 
         <div class="footer-brand">
 
@@ -1314,6 +1389,7 @@
                     <img
                         src="assets/katlen-logo.png"
                         alt=""
+                        aria-hidden="true"
                         width="38"
                         height="38"
                         loading="lazy"
@@ -1345,7 +1421,9 @@
         </div>
 
 
-        <!-- NAVEGAÇÃO -->
+        <!-- =================================================
+             NAVEGAÇÃO
+             ================================================= -->
 
         <div>
 
@@ -1389,7 +1467,9 @@
         </div>
 
 
-        <!-- ATENDIMENTO -->
+        <!-- =================================================
+             ATENDIMENTO
+             ================================================= -->
 
         <div>
 
@@ -1407,7 +1487,7 @@
                 href="#whatsapp"
                 data-whatsapp
             >
-                WhatsApp
+                Falar pelo WhatsApp
             </a>
 
 
@@ -1419,7 +1499,9 @@
         </div>
 
 
-        <!-- REDES SOCIAIS -->
+        <!-- =================================================
+             REDES SOCIAIS
+             ================================================= -->
 
         <div>
 
@@ -1490,7 +1572,9 @@
     </div>
 
 
-    <!-- COPYRIGHT -->
+    <!-- =================================================
+         COPYRIGHT
+         ================================================= -->
 
     <div class="container footer-bottom">
 
