@@ -1,42 +1,36 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 
 <head>
+    <meta charset="UTF-8">
 
-```
-<meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+    <meta
+        name="robots"
+        content="noindex, nofollow"
+    >
 
-<title>ADM | Katlen Ariane</title>
+    <title>ADM | Katlen Ariane</title>
 
-<meta
-    name="description"
-    content="Painel administrativo do site Katlen Ariane."
->
-
-<link
-    rel="stylesheet"
-    href="admin.css"
->
-```
-
+    <link
+        rel="stylesheet"
+        href="admin.css"
+    >
 </head>
 
 <body>
 
-```
 <header class="admin-header">
 
-    <div class="admin-header-inner">
+    <div class="header-inner">
 
-        <div class="admin-brand">
+        <div class="brand">
 
-            <div class="admin-logo">
+            <div class="brand-mark">
                 KA
             </div>
 
@@ -49,8 +43,8 @@
 
         <a
             href="../index.html"
-            class="view-site"
             target="_blank"
+            class="view-site"
         >
             Ver site
         </a>
@@ -62,524 +56,557 @@
 
 <main class="admin-main">
 
-    <div class="admin-container">
+    <div class="container">
 
-        <div class="page-heading">
+        <div
+            id="message"
+            class="message"
+            aria-live="polite"
+        ></div>
 
-            <span class="eyebrow">
-                Administração
-            </span>
 
-            <h1>
-                Configurações do site
-            </h1>
+        <!-- LOGIN -->
 
-            <p>
-                Atualize as informações que serão
-                utilizadas no site da Katlen Ariane.
-            </p>
+        <section
+            id="login-view"
+            class="login-card"
+        >
 
-        </div>
+            <div class="login-heading">
 
+                <span class="eyebrow">
+                    Acesso restrito
+                </span>
 
-        <form id="admin-form">
+                <h1>
+                    Entrar no painel
+                </h1>
 
+                <p>
+                    Acesse as configurações do site.
+                </p>
 
-            <!-- =================================================
-                 DADOS PROFISSIONAIS
-                 ================================================= -->
+            </div>
 
-            <section class="admin-card">
 
-                <div class="card-heading">
+            <form id="login-form">
 
-                    <span class="card-number">
-                        01
-                    </span>
+                <div class="field">
 
-                    <div>
+                    <label for="login-user">
+                        Usuário
+                    </label>
 
-                        <h2>
-                            Dados profissionais
-                        </h2>
-
-                        <p>
-                            Informações principais da profissional.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="form-grid">
-
-                    <div class="field field-full">
-
-                        <label for="nome">
-                            Nome
-                        </label>
-
-                        <input
-                            type="text"
-                            id="nome"
-                            name="nome"
-                            placeholder="Katlen Ariane"
-                        >
-
-                    </div>
-
-
-                    <div class="field">
-
-                        <label for="registro">
-                            Registro profissional
-                        </label>
-
-                        <input
-                            type="text"
-                            id="registro"
-                            name="registro"
-                            placeholder="CBPC 2022-6172"
-                        >
-
-                    </div>
-
-
-                    <div class="field">
-
-                        <label for="profissao">
-                            Profissão
-                        </label>
-
-                        <input
-                            type="text"
-                            id="profissao"
-                            name="profissao"
-                            placeholder="Psicanalista Clínica"
-                        >
-
-                    </div>
-
-
-                    <div class="field field-full">
-
-                        <label for="formacao">
-                            Formação
-                        </label>
-
-                        <textarea
-                            id="formacao"
-                            name="formacao"
-                            rows="4"
-                            placeholder="Digite a formação profissional..."
-                        ></textarea>
-
-                    </div>
-
-
-                    <div class="field field-full">
-
-                        <label for="especializacoes">
-                            Especializações
-                        </label>
-
-                        <textarea
-                            id="especializacoes"
-                            name="especializacoes"
-                            rows="4"
-                            placeholder="Digite as especializações..."
-                        ></textarea>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 CONTATO
-                 ================================================= -->
-
-            <section class="admin-card">
-
-                <div class="card-heading">
-
-                    <span class="card-number">
-                        02
-                    </span>
-
-                    <div>
-
-                        <h2>
-                            Contato
-                        </h2>
-
-                        <p>
-                            Informações utilizadas para contato.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="form-grid">
-
-                    <div class="field">
-
-                        <label for="whatsapp">
-                            WhatsApp
-                        </label>
-
-                        <input
-                            type="tel"
-                            id="whatsapp"
-                            name="whatsapp"
-                            placeholder="(00) 00000-0000"
-                        >
-
-                    </div>
-
-
-                    <div class="field">
-
-                        <label for="email">
-                            E-mail
-                        </label>
-
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="contato@email.com"
-                        >
-
-                    </div>
-
-
-                    <div class="field field-full">
-
-                        <label for="endereco">
-                            Endereço
-                        </label>
-
-                        <input
-                            type="text"
-                            id="endereco"
-                            name="endereco"
-                            placeholder="Endereço do atendimento"
-                        >
-
-                    </div>
-
-
-                    <div class="field">
-
-                        <label for="atendimento">
-                            Modalidade
-                        </label>
-
-                        <select
-                            id="atendimento"
-                            name="atendimento"
-                        >
-
-                            <option value="">
-                                Selecione
-                            </option>
-
-                            <option value="online">
-                                Online
-                            </option>
-
-                            <option value="presencial">
-                                Presencial
-                            </option>
-
-                            <option value="online-presencial">
-                                Online e presencial
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 FORMSPREE
-                 ================================================= -->
-
-            <section class="admin-card">
-
-                <div class="card-heading">
-
-                    <span class="card-number">
-                        03
-                    </span>
-
-                    <div>
-
-                        <h2>
-                            Formulário
-                        </h2>
-
-                        <p>
-                            Configure o recebimento dos contatos.
-                        </p>
-
-                    </div>
+                    <input
+                        type="text"
+                        id="login-user"
+                        autocomplete="username"
+                        required
+                    >
 
                 </div>
 
 
                 <div class="field">
 
-                    <label for="formspree">
-                        Endpoint do Formspree
+                    <label for="login-pass">
+                        Senha
                     </label>
 
                     <input
-                        type="url"
-                        id="formspree"
-                        name="formspreeEndpoint"
-                        placeholder="https://formspree.io/f/xxxxxxxx"
+                        type="password"
+                        id="login-pass"
+                        autocomplete="current-password"
+                        required
                     >
 
-                    <small>
-                        Exemplo: https://formspree.io/f/xxxxxxxx
-                    </small>
-
                 </div>
 
-            </section>
-
-
-            <!-- =================================================
-                 REDES SOCIAIS
-                 ================================================= -->
-
-            <section class="admin-card">
-
-                <div class="card-heading">
-
-                    <span class="card-number">
-                        04
-                    </span>
-
-                    <div>
-
-                        <h2>
-                            Redes sociais
-                        </h2>
-
-                        <p>
-                            Links das redes sociais profissionais.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="form-grid">
-
-                    <div class="field">
-
-                        <label for="instagram">
-                            Instagram
-                        </label>
-
-                        <input
-                            type="url"
-                            id="instagram"
-                            name="instagram"
-                            placeholder="https://instagram.com/..."
-                        >
-
-                    </div>
-
-
-                    <div class="field">
-
-                        <label for="facebook">
-                            Facebook
-                        </label>
-
-                        <input
-                            type="url"
-                            id="facebook"
-                            name="facebook"
-                            placeholder="https://facebook.com/..."
-                        >
-
-                    </div>
-
-
-                    <div class="field">
-
-                        <label for="tiktok">
-                            TikTok
-                        </label>
-
-                        <input
-                            type="url"
-                            id="tiktok"
-                            name="tiktok"
-                            placeholder="https://tiktok.com/@..."
-                        >
-
-                    </div>
-
-
-                    <div class="field">
-
-                        <label for="linkedin">
-                            LinkedIn
-                        </label>
-
-                        <input
-                            type="url"
-                            id="linkedin"
-                            name="linkedin"
-                            placeholder="https://linkedin.com/in/..."
-                        >
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 TEXTOS DO SITE
-                 ================================================= -->
-
-            <section class="admin-card">
-
-                <div class="card-heading">
-
-                    <span class="card-number">
-                        05
-                    </span>
-
-                    <div>
-
-                        <h2>
-                            Conteúdo
-                        </h2>
-
-                        <p>
-                            Textos principais exibidos no site.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="form-grid">
-
-                    <div class="field field-full">
-
-                        <label for="about">
-                            Texto sobre
-                        </label>
-
-                        <textarea
-                            id="about"
-                            name="about"
-                            rows="6"
-                            placeholder="Texto apresentado na seção Sobre..."
-                        ></textarea>
-
-                    </div>
-
-
-                    <div class="field field-full">
-
-                        <label for="neuro">
-                            Texto sobre neurodesenvolvimento
-                        </label>
-
-                        <textarea
-                            id="neuro"
-                            name="neuro"
-                            rows="6"
-                            placeholder="Texto da seção Neurodesenvolvimento..."
-                        ></textarea>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 AÇÕES
-                 ================================================= -->
-
-            <div class="admin-actions">
-
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    id="reset-button"
-                >
-                    Limpar
-                </button>
 
                 <button
                     type="submit"
                     class="btn btn-primary"
                 >
-                    Salvar configurações
+                    Entrar
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- PAINEL -->
+
+        <section
+            id="panel-view"
+            class="panel"
+            hidden
+        >
+
+            <div class="page-heading">
+
+                <div>
+
+                    <span class="eyebrow">
+                        Administração
+                    </span>
+
+                    <h1>
+                        Configurações do site
+                    </h1>
+
+                    <p>
+                        Atualize as informações utilizadas
+                        pelo site da Katlen Ariane.
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    id="logout-button"
+                    class="btn btn-secondary"
+                >
+                    Sair
                 </button>
 
             </div>
 
 
-            <div
-                class="save-message"
-                id="save-message"
-                role="status"
-                aria-live="polite"
-            ></div>
+            <form id="config-form">
 
 
-        </form>
+                <!-- DADOS PROFISSIONAIS -->
+
+                <section class="card">
+
+                    <div class="card-title">
+
+                        <span>01</span>
+
+                        <div>
+                            <h2>Dados profissionais</h2>
+                            <p>
+                                Informações profissionais exibidas no site.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="grid">
+
+                        <div class="field">
+
+                            <label for="professionalRegistration">
+                                Registro profissional
+                            </label>
+
+                            <input
+                                type="text"
+                                id="professionalRegistration"
+                            >
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label for="professionalRegistrationLabel">
+                                Nome do registro
+                            </label>
+
+                            <input
+                                type="text"
+                                id="professionalRegistrationLabel"
+                                value="Registro profissional"
+                            >
+
+                        </div>
+
+
+                        <div class="field full">
+
+                            <label for="formacao">
+                                Formação
+                            </label>
+
+                            <textarea
+                                id="formacao"
+                                rows="4"
+                            ></textarea>
+
+                        </div>
+
+
+                        <div class="field full">
+
+                            <label for="especializacoes">
+                                Especializações
+                            </label>
+
+                            <textarea
+                                id="especializacoes"
+                                rows="4"
+                            ></textarea>
+
+                        </div>
+
+
+                        <div class="field full">
+
+                            <label for="experiencia">
+                                Experiência
+                            </label>
+
+                            <textarea
+                                id="experiencia"
+                                rows="4"
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- CONTATO -->
+
+                <section class="card">
+
+                    <div class="card-title">
+
+                        <span>02</span>
+
+                        <div>
+                            <h2>Contato</h2>
+                            <p>
+                                Informações para contato e atendimento.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="grid">
+
+                        <div class="field">
+
+                            <label for="whatsapp">
+                                WhatsApp
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="whatsapp"
+                                placeholder="5511999999999"
+                            >
+
+                            <small>
+                                Somente números, incluindo DDI e DDD.
+                            </small>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label for="endereco">
+                                Endereço
+                            </label>
+
+                            <input
+                                type="text"
+                                id="endereco"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- FORMSPREE -->
+
+                <section class="card">
+
+                    <div class="card-title">
+
+                        <span>03</span>
+
+                        <div>
+                            <h2>Formulário</h2>
+                            <p>
+                                Configuração do recebimento dos contatos.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="formspreeEndpoint">
+                            Endpoint do Formspree
+                        </label>
+
+                        <input
+                            type="url"
+                            id="formspreeEndpoint"
+                            placeholder="https://formspree.io/f/xxxxxxxx"
+                        >
+
+                        <small>
+                            Cole aqui o endpoint completo do formulário.
+                        </small>
+
+                    </div>
+
+                </section>
+
+
+                <!-- REDES SOCIAIS -->
+
+                <section class="card">
+
+                    <div class="card-title">
+
+                        <span>04</span>
+
+                        <div>
+                            <h2>Redes sociais</h2>
+                            <p>
+                                Links das redes profissionais.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="grid">
+
+                        <div class="field">
+
+                            <label for="instagram">
+                                Instagram
+                            </label>
+
+                            <input
+                                type="url"
+                                id="instagram"
+                                placeholder="https://instagram.com/..."
+                            >
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label for="facebook">
+                                Facebook
+                            </label>
+
+                            <input
+                                type="url"
+                                id="facebook"
+                                placeholder="https://facebook.com/..."
+                            >
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label for="tiktok">
+                                TikTok
+                            </label>
+
+                            <input
+                                type="url"
+                                id="tiktok"
+                                placeholder="https://tiktok.com/@..."
+                            >
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label for="linkedin">
+                                LinkedIn
+                            </label>
+
+                            <input
+                                type="url"
+                                id="linkedin"
+                                placeholder="https://linkedin.com/in/..."
+                            >
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- RASTREAMENTO -->
+
+                <section class="card">
+
+                    <div class="card-title">
+
+                        <span>05</span>
+
+                        <div>
+                            <h2>Rastreamento</h2>
+                            <p>
+                                Integrações de marketing e análise.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="tracking">
+
+                        <div class="tracking-item">
+
+                            <div class="field">
+
+                                <label for="metaPixelId">
+                                    Meta Pixel ID
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="metaPixelId"
+                                >
+
+                            </div>
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    id="pixelEnabled"
+                                >
+
+                                <span></span>
+
+                                Ativar Pixel
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="tracking-item">
+
+                            <div class="field">
+
+                                <label for="gaMeasurementId">
+                                    Google Analytics
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="gaMeasurementId"
+                                    placeholder="G-XXXXXXXXXX"
+                                >
+
+                            </div>
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    id="gaEnabled"
+                                >
+
+                                <span></span>
+
+                                Ativar GA
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="tracking-item">
+
+                            <div class="field">
+
+                                <label for="gtmId">
+                                    Google Tag Manager
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="gtmId"
+                                    placeholder="GTM-XXXXXXX"
+                                >
+
+                            </div>
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    id="gtmEnabled"
+                                >
+
+                                <span></span>
+
+                                Ativar GTM
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <div class="save-area">
+
+                    <span id="save-status"></span>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        id="save-button"
+                    >
+                        Salvar configurações
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
 
     </div>
 
 </main>
 
 
-<footer class="admin-footer">
+<footer class="footer">
 
-    <div class="admin-container">
+    <span>
+        ADM Katlen Ariane
+    </span>
 
-        <span>
-            ADM Katlen Ariane
-        </span>
-
-        <span>
-            V8 Digital
-        </span>
-
-    </div>
+    <span>
+        V8 Digital
+    </span>
 
 </footer>
 
 
 <script src="admin.js"></script>
-```
 
 </body>
 
