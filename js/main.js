@@ -3,135 +3,218 @@
    Site institucional / Psicanálise
    ========================================================= */
 
+"use strict";
+
+
 /* =========================================================
    1. CONFIGURAÇÃO DO WORKER
    ========================================================= */
 
-// URL real do Worker administrativo.
-// Substitua pelo endereço do seu Worker quando estiver publicado.
-const CONFIG_API_URL =
-    "https://katlen-admin.example.workers.dev/api/config";
+/*
+ * O site e o Worker trabalham no mesmo domínio.
+ *
+ * Público:
+ *   GET /api/config
+ *
+ * Administrativo:
+ *   /api/admin/config
+ *
+ * Não coloque aqui senha, token ou qualquer Secret.
+ */
+
+const CONFIG_API_URL = "/api/config";
 
 
 /* =========================================================
    2. CONFIGURAÇÃO FALLBACK
-   Usada quando o Worker estiver indisponível.
    ========================================================= */
 
 const FALLBACK_CONFIG = {
+
     whatsapp: "",
+
     endereco: "",
 
     formspreeEndpoint: "",
 
+
     instagram: "",
+
     facebook: "",
+
     tiktok: "",
+
     linkedin: "",
 
+
     metaPixelId: "",
+
     gaMeasurementId: "",
+
     gtmId: "",
 
+
     trackingEnabled: {
+
         pixel: false,
+
         ga: false,
+
         gtm: false
     },
 
-    professionalRegistrationLabel: "Registro profissional",
-    professionalRegistration: "CBPC 2022-6172",
+
+    professionalRegistrationLabel:
+        "Registro profissional",
+
+    professionalRegistration:
+        "CBPC 2022-6172",
+
 
     formacao: "",
+
     especializacoes: "",
+
     experiencia: ""
 };
 
 
 /* =========================================================
-   3. CARREGAMENTO DA CONFIGURAÇÃO
+   3. CARREGAR CONFIGURAÇÃO
    ========================================================= */
 
 async function loadConfig() {
+
     try {
-        const response = await fetch(CONFIG_API_URL, {
-            method: "GET",
-            credentials: "omit",
-            cache: "no-store"
-        });
+
+        const response =
+            await fetch(
+                CONFIG_API_URL,
+                {
+                    method: "GET",
+
+                    credentials: "omit",
+
+                    cache: "no-store",
+
+                    headers: {
+                        "Accept":
+                            "application/json"
+                    }
+                }
+            );
+
 
         if (!response.ok) {
+
             throw new Error(
-                `Configuração indisponível: HTTP ${response.status}`
+                `HTTP ${response.status}`
             );
         }
 
-        const remoteConfig = await response.json();
+
+        const remoteConfig =
+            await response.json();
+
 
         return {
+
             ...FALLBACK_CONFIG,
+
             ...remoteConfig,
 
             trackingEnabled: {
+
                 ...FALLBACK_CONFIG.trackingEnabled,
+
                 ...(remoteConfig.trackingEnabled || {})
             }
         };
 
+
     } catch (error) {
+
         console.warn(
             "Não foi possível carregar a configuração do Admin.",
             error
         );
 
+
         console.warn(
             "O site continuará utilizando a configuração local."
         );
 
-        return FALLBACK_CONFIG;
+
+        return {
+            ...FALLBACK_CONFIG
+        };
     }
 }
 
 
 /* =========================================================
-   4. FUNÇÕES AUXILIARES
+   4. HELPERS
    ========================================================= */
 
 function getElement(id) {
+
     return document.getElementById(id);
 }
 
 
 function setText(id, value) {
-    const element = getElement(id);
 
-    if (!element || value === undefined || value === null) {
+    const element =
+        getElement(id);
+
+
+    if (
+        !element ||
+        value === undefined ||
+        value === null
+    ) {
+
         return;
     }
 
-    element.textContent = value;
+
+    element.textContent =
+        value;
 }
 
 
-function setDisplay(id, display = "block") {
-    const element = getElement(id);
+function setDisplay(
+    id,
+    display = "block"
+) {
+
+    const element =
+        getElement(id);
+
 
     if (!element) {
         return;
     }
 
-    element.style.display = display;
+
+    element.style.display =
+        display;
 }
 
 
 function hideElement(id) {
-    const element = getElement(id);
+
+    const element =
+        getElement(id);
+
 
     if (!element) {
         return;
     }
 
-    element.style.display = "none";
+
+    element.style.display =
+        "none";
 }
 
 
@@ -139,112 +222,222 @@ function hideElement(id) {
    5. REGISTRO PROFISSIONAL
    ========================================================= */
 
-function setupProfessionalRegistration(config) {
+function setupProfessionalRegistration(
+    config
+) {
 
-    const container = getElement("prof-reg-container");
-    const label = getElement("reg-label");
-    const value = getElement("reg-value");
+    const container =
+        getElement(
+            "prof-reg-container"
+        );
+
+
+    const label =
+        getElement(
+            "reg-label"
+        );
+
+
+    const value =
+        getElement(
+            "reg-value"
+        );
+
 
     if (!container) {
         return;
     }
 
-    if (config.professionalRegistration) {
+
+    if (
+        config.professionalRegistration
+    ) {
 
         if (label) {
+
             label.textContent =
                 config.professionalRegistrationLabel ||
                 "Registro profissional";
         }
 
+
         if (value) {
+
             value.textContent =
                 config.professionalRegistration;
         }
 
+
         container.style.display = "";
+
 
     } else {
 
-        container.style.display = "none";
+        container.style.display =
+            "none";
     }
 }
 
 
 /* =========================================================
-   6. BARRA / INFORMAÇÕES DE CONTATO
+   6. RODAPÉ
    ========================================================= */
 
-function setupTopContact(config) {
+function setupFooter(config) {
 
-    const whatsappPill = getElement("top-whatsapp-pill");
-    const whatsappText = getElement("top-whatsapp-text");
+    /*
+     * WhatsApp
+     */
 
-    if (whatsappPill) {
+    const footerWhatsapp =
+        getElement(
+            "footer-whatsapp"
+        );
+
+
+    if (footerWhatsapp) {
 
         if (config.whatsapp) {
 
-            if (whatsappText) {
-                whatsappText.textContent =
-                    config.whatsapp;
-            }
-
-            whatsappPill.style.display = "flex";
+            footerWhatsapp.textContent =
+                config.whatsapp;
 
         } else {
 
-            whatsappPill.style.display = "none";
+            footerWhatsapp.style.display =
+                "none";
         }
     }
 
 
-    const addressPill = getElement("top-address-pill");
-    const addressText = getElement("top-address-text");
+    /*
+     * Endereço
+     */
 
-    if (addressPill) {
+    const footerAddress =
+        getElement(
+            "footer-address"
+        );
+
+
+    if (footerAddress) {
 
         if (config.endereco) {
 
-            if (addressText) {
-                addressText.textContent =
-                    config.endereco;
-            }
+            footerAddress.textContent =
+                config.endereco;
 
-            addressPill.style.display = "flex";
+            footerAddress.style.display =
+                "";
 
         } else {
 
-            addressPill.style.display = "none";
+            footerAddress.style.display =
+                "none";
+        }
+    }
+
+
+    /*
+     * Registro profissional
+     */
+
+    const footerRegistration =
+        getElement(
+            "footer-registration"
+        );
+
+
+    if (footerRegistration) {
+
+        if (
+            config.professionalRegistration
+        ) {
+
+            footerRegistration.textContent =
+                config.professionalRegistration;
+
+        } else {
+
+            footerRegistration.textContent =
+                "Psicanalista Clínica";
         }
     }
 }
 
 
 /* =========================================================
-   7. SOBRE / FORMAÇÃO / ESPECIALIZAÇÕES
+   7. SOBRE / FORMAÇÃO
    ========================================================= */
 
 function setupAbout(config) {
 
-    if (config.formacao) {
-        setText(
-            "about-formacao",
-            config.formacao
+    const aboutFormacao =
+        getElement(
+            "about-formacao"
         );
+
+
+    if (aboutFormacao) {
+
+        if (config.formacao) {
+
+            aboutFormacao.textContent =
+                config.formacao;
+
+        } else {
+
+            aboutFormacao.textContent =
+                "Psicanalista dedicada a construir um espaço de escuta e reflexão, respeitando a singularidade de cada pessoa e de cada história.";
+        }
     }
 
-    if (config.especializacoes) {
-        setText(
-            "about-especializacoes",
-            config.especializacoes
+
+    const aboutEspecializacoes =
+        getElement(
+            "about-especializacoes"
         );
+
+
+    if (aboutEspecializacoes) {
+
+        if (config.especializacoes) {
+
+            aboutEspecializacoes.textContent =
+                config.especializacoes;
+
+            aboutEspecializacoes.style.display =
+                "";
+
+        } else {
+
+            aboutEspecializacoes.style.display =
+                "none";
+        }
     }
 
-    if (config.experiencia) {
-        setText(
-            "about-experiencia",
-            config.experiencia
+
+    const aboutExperiencia =
+        getElement(
+            "about-experiencia"
         );
+
+
+    if (aboutExperiencia) {
+
+        if (config.experiencia) {
+
+            aboutExperiencia.textContent =
+                config.experiencia;
+
+            aboutExperiencia.style.display =
+                "";
+
+        } else {
+
+            aboutExperiencia.style.display =
+                "none";
+        }
     }
 }
 
@@ -253,20 +446,30 @@ function setupAbout(config) {
    8. WHATSAPP
    ========================================================= */
 
-function createWhatsAppURL(number, message) {
+function createWhatsAppURL(
+    number,
+    message
+) {
 
     if (!number) {
         return "";
     }
 
+
     const cleanNumber =
-        String(number).replace(/\D/g, "");
+        String(number)
+            .replace(/\D/g, "");
+
 
     if (!cleanNumber) {
         return "";
     }
 
-    return `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
+
+    return (
+        `https://wa.me/${cleanNumber}` +
+        `?text=${encodeURIComponent(message)}`
+    );
 }
 
 
@@ -275,6 +478,7 @@ function setupWhatsApp(config) {
     const message =
         "Olá Katlen, vim pelo site e gostaria de saber mais sobre o atendimento.";
 
+
     const whatsappURL =
         createWhatsAppURL(
             config.whatsapp,
@@ -282,10 +486,15 @@ function setupWhatsApp(config) {
         );
 
 
-    /* Botão flutuante */
+    /*
+     * Botão flutuante
+     */
 
     const whatsappLink =
-        getElement("whatsapp-link");
+        getElement(
+            "whatsapp-link"
+        );
+
 
     if (whatsappLink) {
 
@@ -303,6 +512,7 @@ function setupWhatsApp(config) {
             whatsappLink.style.display =
                 "flex";
 
+
         } else {
 
             whatsappLink.style.display =
@@ -311,36 +521,53 @@ function setupWhatsApp(config) {
     }
 
 
-    /* Botões com data-whatsapp */
+    /*
+     * Links com data-whatsapp
+     */
 
     document
-        .querySelectorAll("[data-whatsapp]")
-        .forEach(button => {
+        .querySelectorAll(
+            "[data-whatsapp]"
+        )
+        .forEach(element => {
 
             if (!whatsappURL) {
+
+                element.style.display =
+                    "none";
+
                 return;
             }
 
-            button.href =
+
+            element.href =
                 whatsappURL;
 
-            button.target =
+            element.target =
                 "_blank";
 
-            button.rel =
+            element.rel =
                 "noopener noreferrer";
+
+            element.style.display =
+                "";
         });
 
 
-    /* Links ou botões que utilizam #whatsapp */
+    /*
+     * Links com href="#whatsapp"
+     */
 
     document
-        .querySelectorAll('a[href="#whatsapp"]')
+        .querySelectorAll(
+            'a[href="#whatsapp"]'
+        )
         .forEach(link => {
 
             if (!whatsappURL) {
                 return;
             }
+
 
             link.href =
                 whatsappURL;
@@ -361,49 +588,69 @@ function setupWhatsApp(config) {
 function setupFormspree(config) {
 
     const form =
-        getElement("main-form");
+        getElement(
+            "main-form"
+        );
+
 
     if (!form) {
         return;
     }
 
-    if (config.formspreeEndpoint) {
 
-        let endpoint =
-            config.formspreeEndpoint.trim();
+    if (!config.formspreeEndpoint) {
 
-        /*
-         * Permite configurar tanto:
-         *
-         * abc123
-         *
-         * quanto:
-         *
-         * https://formspree.io/f/abc123
-         */
+        console.warn(
+            "Formspree não configurado no painel administrativo."
+        );
 
-        if (
-            endpoint.startsWith("http://") ||
-            endpoint.startsWith("https://")
-        ) {
-
-            form.action =
-                endpoint;
-
-        } else {
-
-            endpoint =
-                endpoint.replace(/^\/+/, "");
-
-            endpoint =
-                endpoint.replace(/^f\//, "");
-
-            form.action =
-                `https://formspree.io/f/${endpoint}`;
-        }
-
-        form.method = "POST";
+        return;
     }
+
+
+    let endpoint =
+        String(
+            config.formspreeEndpoint
+        ).trim();
+
+
+    /*
+     * Permite:
+     *
+     * abc123
+     *
+     * f/abc123
+     *
+     * https://formspree.io/f/abc123
+     */
+
+    if (
+        endpoint.startsWith(
+            "http://"
+        ) ||
+        endpoint.startsWith(
+            "https://"
+        )
+    ) {
+
+        form.action =
+            endpoint;
+
+    } else {
+
+        endpoint =
+            endpoint
+                .replace(/^\/+/, "")
+                .replace(/^f\//, "");
+
+
+        form.action =
+            `https://formspree.io/f/${endpoint}`;
+    }
+
+
+    form.method =
+        "POST";
 }
 
 
@@ -414,19 +661,31 @@ function setupFormspree(config) {
 function setupSocialLinks(config) {
 
     const socialMap = {
-        instagram: config.instagram,
-        facebook: config.facebook,
-        tiktok: config.tiktok,
-        linkedin: config.linkedin
+
+        instagram:
+            config.instagram,
+
+        facebook:
+            config.facebook,
+
+        tiktok:
+            config.tiktok,
+
+        linkedin:
+            config.linkedin
     };
 
 
-    Object.entries(socialMap)
-        .forEach(([network, url]) => {
+    /*
+     * Suporte a:
+     *
+     * data-social="instagram"
+     */
 
-            if (!url) {
-                return;
-            }
+    Object.entries(
+        socialMap
+    ).forEach(
+        ([network, url]) => {
 
             document
                 .querySelectorAll(
@@ -434,246 +693,159 @@ function setupSocialLinks(config) {
                 )
                 .forEach(link => {
 
-                    link.href = url;
-                    link.target = "_blank";
-                    link.rel =
-                        "noopener noreferrer";
+                    if (url) {
 
-                    link.style.display = "";
+                        link.href =
+                            url;
+
+                        link.target =
+                            "_blank";
+
+                        link.rel =
+                            "noopener noreferrer";
+
+                        link.style.display =
+                            "";
+
+
+                    } else {
+
+                        link.style.display =
+                            "none";
+                    }
                 });
-        });
+        }
+    );
 
 
     /*
-     * Também suporta IDs antigos,
-     * caso ainda existam no HTML.
+     * Suporte aos IDs
+     * utilizados no index atual.
      */
 
     const legacyMap = {
-        "instagram-link": config.instagram,
-        "facebook-link": config.facebook,
-        "tiktok-link": config.tiktok,
-        "linkedin-link": config.linkedin
+
+        "instagram-link":
+            config.instagram,
+
+        "facebook-link":
+            config.facebook,
+
+        "tiktok-link":
+            config.tiktok,
+
+        "linkedin-link":
+            config.linkedin
     };
 
 
-    Object.entries(legacyMap)
-        .forEach(([id, url]) => {
+    Object.entries(
+        legacyMap
+    ).forEach(
+        ([id, url]) => {
 
             const link =
                 getElement(id);
+
 
             if (!link) {
                 return;
             }
 
+
             if (url) {
 
-                link.href = url;
-                link.target = "_blank";
+                link.href =
+                    url;
+
+                link.target =
+                    "_blank";
+
                 link.rel =
                     "noopener noreferrer";
+
+                link.style.display =
+                    "";
+
 
             } else {
 
                 link.style.display =
                     "none";
             }
-        });
+        }
+    );
 }
 
 
 /* =========================================================
-   11. TRACKING
+   11. CONTATO
    ========================================================= */
 
-function injectTrackingScripts(config) {
+function setupContactLinks(config) {
 
     /*
-     * GOOGLE TAG MANAGER
+     * Elementos com data-phone
      */
 
-    if (
-        config.trackingEnabled?.gtm &&
-        config.gtmId
-    ) {
+    document
+        .querySelectorAll(
+            "[data-phone]"
+        )
+        .forEach(element => {
 
-        if (
-            document.querySelector(
-                `script[data-gtm="${config.gtmId}"]`
-            )
-        ) {
-            return;
-        }
+            if (!config.whatsapp) {
 
-        const script =
-            document.createElement("script");
+                element.style.display =
+                    "none";
 
-        script.async = true;
-
-        script.dataset.gtm =
-            config.gtmId;
-
-        script.innerHTML = `
-            (function(w,d,s,l,i){
-                w[l]=w[l]||[];
-                w[l].push({
-                    'gtm.start':
-                    new Date().getTime(),
-                    event:'gtm.js'
-                });
-
-                var f=d.getElementsByTagName(s)[0],
-                    j=d.createElement(s),
-                    dl=l!='dataLayer'
-                    ?'&l='+l:'';
-
-                j.async=true;
-
-                j.src=
-                    'https://www.googletagmanager.com/gtm.js?id='
-                    +i+dl;
-
-                f.parentNode.insertBefore(j,f);
-
-            })(window,document,'script','dataLayer','${config.gtmId}');
-        `;
-
-        document.head.appendChild(script);
-    }
-
-
-    /*
-     * GOOGLE ANALYTICS
-     */
-
-    if (
-        config.trackingEnabled?.ga &&
-        config.gaMeasurementId
-    ) {
-
-        if (
-            document.querySelector(
-                `script[data-ga="${config.gaMeasurementId}"]`
-            )
-        ) {
-            return;
-        }
-
-        const script =
-            document.createElement("script");
-
-        script.async = true;
-
-        script.src =
-            `https://www.googletagmanager.com/gtag/js?id=${config.gaMeasurementId}`;
-
-        script.dataset.ga =
-            config.gaMeasurementId;
-
-        document.head.appendChild(script);
-
-
-        const configScript =
-            document.createElement("script");
-
-        configScript.innerHTML = `
-            window.dataLayer =
-                window.dataLayer || [];
-
-            function gtag(){
-                dataLayer.push(arguments);
+                return;
             }
 
-            gtag('js', new Date());
 
-            gtag(
-                'config',
-                '${config.gaMeasurementId}'
-            );
-        `;
+            const number =
+                String(
+                    config.whatsapp
+                ).replace(/\D/g, "");
 
-        document.head.appendChild(
-            configScript
-        );
-    }
+
+            element.textContent =
+                config.whatsapp;
+
+
+            if (
+                element.tagName.toLowerCase()
+                === "a"
+            ) {
+
+                element.href =
+                    `tel:+${number}`;
+            }
+        });
 
 
     /*
-     * META PIXEL
+     * Elementos com data-address
      */
 
-    if (
-        config.trackingEnabled?.pixel &&
-        config.metaPixelId
-    ) {
+    document
+        .querySelectorAll(
+            "[data-address]"
+        )
+        .forEach(element => {
 
-        if (
-            window.fbq ||
-            document.querySelector(
-                `script[data-meta-pixel="${config.metaPixelId}"]`
-            )
-        ) {
-            return;
-        }
+            if (!config.endereco) {
 
-        const script =
-            document.createElement("script");
+                element.style.display =
+                    "none";
 
-        script.dataset.metaPixel =
-            config.metaPixelId;
+                return;
+            }
 
-        script.innerHTML = `
-            !function(f,b,e,v,n,t,s)
-            {
-                if(f.fbq)return;
 
-                n=f.fbq=function(){
-                    n.callMethod ?
-                    n.callMethod.apply(
-                        n,
-                        arguments
-                    ) :
-                    n.queue.push(arguments)
-                };
-
-                if(!f._fbq)
-                    f._fbq=n;
-
-                n.push=n;
-                n.loaded=!0;
-                n.version='2.0';
-                n.queue=[];
-
-                t=b.createElement(e);
-                t.async=!0;
-                t.src=v;
-
-                s=b.getElementsByTagName(e)[0];
-                s.parentNode.insertBefore(t,s);
-
-            }(
-                window,
-                document,
-                'script',
-                'https://connect.facebook.net/en_US/fbevents.js'
-            );
-
-            fbq(
-                'init',
-                '${config.metaPixelId}'
-            );
-
-            fbq(
-                'track',
-                'PageView'
-            );
-        `;
-
-        document.head.appendChild(
-            script
-        );
-    }
+            element.textContent =
+                config.endereco;
+        });
 }
 
 
@@ -684,10 +856,16 @@ function injectTrackingScripts(config) {
 function setupMobileMenu() {
 
     const mobileMenu =
-        getElement("mobile-menu");
+        getElement(
+            "mobile-menu"
+        );
+
 
     const nav =
-        document.querySelector(".nav-menu");
+        document.querySelector(
+            ".nav-menu"
+        );
+
 
     if (!mobileMenu || !nav) {
         return;
@@ -709,15 +887,18 @@ function setupMobileMenu() {
                     "active"
                 );
 
+
             mobileMenu.classList.toggle(
                 "open",
                 isOpen
             );
 
+
             mobileMenu.setAttribute(
                 "aria-expanded",
                 String(isOpen)
             );
+
 
             mobileMenu.setAttribute(
                 "aria-label",
@@ -728,11 +909,6 @@ function setupMobileMenu() {
         }
     );
 
-
-    /*
-     * Fecha o menu quando o usuário
-     * seleciona uma opção.
-     */
 
     nav
         .querySelectorAll("a")
@@ -746,14 +922,17 @@ function setupMobileMenu() {
                         "active"
                     );
 
+
                     mobileMenu.classList.remove(
                         "open"
                     );
+
 
                     mobileMenu.setAttribute(
                         "aria-expanded",
                         "false"
                     );
+
 
                     mobileMenu.setAttribute(
                         "aria-label",
@@ -764,30 +943,36 @@ function setupMobileMenu() {
         });
 
 
-    /*
-     * Fecha o menu com ESC.
-     */
-
     document.addEventListener(
         "keydown",
         event => {
 
             if (
                 event.key === "Escape" &&
-                nav.classList.contains("active")
+                nav.classList.contains(
+                    "active"
+                )
             ) {
 
                 nav.classList.remove(
                     "active"
                 );
 
+
                 mobileMenu.classList.remove(
                     "open"
                 );
 
+
                 mobileMenu.setAttribute(
                     "aria-expanded",
                     "false"
+                );
+
+
+                mobileMenu.setAttribute(
+                    "aria-label",
+                    "Abrir menu"
                 );
             }
         }
@@ -796,7 +981,7 @@ function setupMobileMenu() {
 
 
 /* =========================================================
-   13. NAVEGAÇÃO / SCROLL SUAVE
+   13. NAVEGAÇÃO SUAVE
    ========================================================= */
 
 function setupSmoothNavigation() {
@@ -812,8 +997,10 @@ function setupSmoothNavigation() {
                 event => {
 
                     const targetId =
-                        link
-                            .getAttribute("href");
+                        link.getAttribute(
+                            "href"
+                        );
+
 
                     if (
                         !targetId ||
@@ -822,45 +1009,64 @@ function setupSmoothNavigation() {
                         return;
                     }
 
+
+                    /*
+                     * Não intercepta links
+                     * externos transformados
+                     * em WhatsApp.
+                     */
+
+                    if (
+                        link.target === "_blank"
+                    ) {
+                        return;
+                    }
+
+
                     const target =
                         document.querySelector(
                             targetId
                         );
 
+
                     if (!target) {
                         return;
                     }
 
+
                     event.preventDefault();
+
 
                     const header =
                         document.querySelector(
-                            ".site-header, header"
+                            ".site-header"
                         );
+
 
                     const headerHeight =
                         header
                             ? header.offsetHeight
                             : 0;
 
+
                     const targetPosition =
-                        target.getBoundingClientRect()
+                        target
+                            .getBoundingClientRect()
                             .top +
                         window.scrollY -
                         headerHeight -
                         12;
 
+
                     window.scrollTo({
+
                         top:
                             targetPosition,
+
                         behavior:
                             "smooth"
                     });
 
-                    /*
-                     * Atualiza a URL sem
-                     * recarregar a página.
-                     */
 
                     history.pushState(
                         null,
@@ -880,21 +1086,19 @@ function setupSmoothNavigation() {
 function setupTestimonials() {
 
     const section =
-        document.getElementById(
+        getElement(
             "depoimentos"
         );
+
 
     if (!section) {
         return;
     }
 
+
     /*
-     * A seção é independente de
-     * Neurodesenvolvimento.
-     *
-     * Não inserimos depoimentos
-     * automaticamente para evitar
-     * depoimentos fictícios.
+     * Não são inseridos
+     * depoimentos automaticamente.
      */
 
     section.dataset.ready =
@@ -903,13 +1107,14 @@ function setupTestimonials() {
 
 
 /* =========================================================
-   15. ANO AUTOMÁTICO DO FOOTER
+   15. ANO AUTOMÁTICO
    ========================================================= */
 
 function setupCurrentYear() {
 
     const year =
         new Date().getFullYear();
+
 
     document
         .querySelectorAll(
@@ -920,69 +1125,262 @@ function setupCurrentYear() {
             element.textContent =
                 year;
         });
+
+
+    /*
+     * Compatibilidade com o
+     * footer atual.
+     */
+
+    document
+        .querySelectorAll(
+            ".footer-bottom span"
+        )
+        .forEach(element => {
+
+            element.innerHTML =
+                element.innerHTML.replace(
+                    /©\s*\d{4}/,
+                    `© ${year}`
+                );
+        });
 }
 
 
 /* =========================================================
-   16. LINKS DE CONTATO
+   16. TRACKING
    ========================================================= */
 
-function setupContactLinks(config) {
+function injectTrackingScripts(config) {
 
-    /*
-     * Telefone / WhatsApp
-     */
-
-    document
-        .querySelectorAll(
-            "[data-phone]"
-        )
-        .forEach(element => {
-
-            if (!config.whatsapp) {
-                return;
-            }
-
-            const number =
-                String(config.whatsapp)
-                    .replace(/\D/g, "");
-
-            element.textContent =
-                config.whatsapp;
-
-            if (
-                element.tagName
-                    .toLowerCase() === "a"
-            ) {
-
-                element.href =
-                    `tel:+${number}`;
-            }
-        });
+    const tracking =
+        config.trackingEnabled || {};
 
 
     /*
-     * Endereço
+     * GOOGLE TAG MANAGER
      */
 
-    document
-        .querySelectorAll(
-            "[data-address]"
-        )
-        .forEach(element => {
+    if (
+        tracking.gtm &&
+        config.gtmId
+    ) {
 
-            if (!config.endereco) {
-                return;
+        const existingGtm =
+            document.querySelector(
+                `script[data-gtm="${config.gtmId}"]`
+            );
+
+
+        if (!existingGtm) {
+
+            window.dataLayer =
+                window.dataLayer || [];
+
+
+            window.dataLayer.push({
+
+                "gtm.start":
+                    new Date().getTime(),
+
+                event:
+                    "gtm.js"
+            });
+
+
+            const script =
+                document.createElement(
+                    "script"
+                );
+
+
+            script.async =
+                true;
+
+
+            script.dataset.gtm =
+                config.gtmId;
+
+
+            script.src =
+                `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(config.gtmId)}`;
+
+
+            document.head.appendChild(
+                script
+            );
+        }
+    }
+
+
+    /*
+     * GOOGLE ANALYTICS
+     */
+
+    if (
+        tracking.ga &&
+        config.gaMeasurementId
+    ) {
+
+        const existingGa =
+            document.querySelector(
+                `script[data-ga="${config.gaMeasurementId}"]`
+            );
+
+
+        if (!existingGa) {
+
+            const script =
+                document.createElement(
+                    "script"
+                );
+
+
+            script.async =
+                true;
+
+
+            script.src =
+                "https://www.googletagmanager.com/gtag/js?id=" +
+                encodeURIComponent(
+                    config.gaMeasurementId
+                );
+
+
+            script.dataset.ga =
+                config.gaMeasurementId;
+
+
+            document.head.appendChild(
+                script
+            );
+
+
+            window.dataLayer =
+                window.dataLayer || [];
+
+
+            window.gtag =
+                window.gtag ||
+                function () {
+
+                    window.dataLayer.push(
+                        arguments
+                    );
+                };
+
+
+            window.gtag(
+                "js",
+                new Date()
+            );
+
+
+            window.gtag(
+                "config",
+                config.gaMeasurementId
+            );
+        }
+    }
+
+
+    /*
+     * META PIXEL
+     */
+
+    if (
+        tracking.pixel &&
+        config.metaPixelId
+    ) {
+
+        const existingPixel =
+            document.querySelector(
+                `script[data-meta-pixel="${config.metaPixelId}"]`
+            );
+
+
+        if (
+            !existingPixel &&
+            !window.fbq
+        ) {
+
+            window.fbq =
+                function () {
+
+                    window.fbq.callMethod
+                        ? window.fbq.callMethod.apply(
+                            window.fbq,
+                            arguments
+                        )
+                        : window.fbq.queue.push(
+                            arguments
+                        );
+                };
+
+
+            if (!window._fbq) {
+
+                window._fbq =
+                    window.fbq;
             }
 
-            element.textContent =
-                config.endereco;
-        });
+
+            window.fbq.push =
+                window.fbq;
+
+
+            window.fbq.loaded =
+                true;
+
+
+            window.fbq.version =
+                "2.0";
+
+
+            window.fbq.queue =
+                [];
+
+
+            const script =
+                document.createElement(
+                    "script"
+                );
+
+
+            script.async =
+                true;
+
+
+            script.src =
+                "https://connect.facebook.net/en_US/fbevents.js";
+
+
+            script.dataset.metaPixel =
+                config.metaPixelId;
+
+
+            document.head.appendChild(
+                script
+            );
+
+
+            window.fbq(
+                "init",
+                config.metaPixelId
+            );
+
+
+            window.fbq(
+                "track",
+                "PageView"
+            );
+        }
+    }
 }
 
 
 /* =========================================================
-   17. PROTEÇÃO CONTRA ERROS VISUAIS
+   17. PROTEÇÃO DE ELEMENTOS DINÂMICOS
    ========================================================= */
 
 function removeEmptyDynamicElements() {
@@ -997,7 +1395,9 @@ function removeEmptyDynamicElements() {
                 element.textContent
                     .trim();
 
+
             if (!text) {
+
                 element.style.display =
                     "none";
             }
@@ -1006,110 +1406,181 @@ function removeEmptyDynamicElements() {
 
 
 /* =========================================================
-   18. INICIALIZAÇÃO DO SITE
+   18. INICIALIZAÇÃO
    ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    async () => {
+async function initSite() {
 
-        try {
+    try {
 
-            /*
-             * Carrega configuração
-             */
+        /*
+         * Carregar configuração
+         */
 
-            const config =
-                await loadConfig();
+        const config =
+            await loadConfig();
 
 
-            /*
-             * Inicializa componentes
-             */
+        /*
+         * Dados profissionais
+         */
 
-            setupProfessionalRegistration(
-                config
+        setupProfessionalRegistration(
+            config
+        );
+
+
+        /*
+         * Sobre
+         */
+
+        setupAbout(
+            config
+        );
+
+
+        /*
+         * WhatsApp
+         */
+
+        setupWhatsApp(
+            config
+        );
+
+
+        /*
+         * Formulário
+         */
+
+        setupFormspree(
+            config
+        );
+
+
+        /*
+         * Redes sociais
+         */
+
+        setupSocialLinks(
+            config
+        );
+
+
+        /*
+         * Rodapé
+         */
+
+        setupFooter(
+            config
+        );
+
+
+        /*
+         * Links de contato
+         */
+
+        setupContactLinks(
+            config
+        );
+
+
+        /*
+         * Depoimentos
+         */
+
+        setupTestimonials();
+
+
+        /*
+         * Menu mobile
+         */
+
+        setupMobileMenu();
+
+
+        /*
+         * Navegação
+         */
+
+        setupSmoothNavigation();
+
+
+        /*
+         * Ano
+         */
+
+        setupCurrentYear();
+
+
+        /*
+         * Elementos dinâmicos
+         */
+
+        removeEmptyDynamicElements();
+
+
+        /*
+         * Tracking por último
+         */
+
+        injectTrackingScripts(
+            config
+        );
+
+
+        /*
+         * Estado final
+         */
+
+        document.documentElement
+            .classList.add(
+                "js-ready"
             );
 
-            setupTopContact(
-                config
-            );
 
-            setupAbout(
-                config
-            );
-
-            setupWhatsApp(
-                config
-            );
-
-            setupFormspree(
-                config
-            );
-
-            setupSocialLinks(
-                config
-            );
-
-            setupContactLinks(
-                config
-            );
-
-            setupTestimonials();
-
-            setupMobileMenu();
-
-            setupSmoothNavigation();
-
-            setupCurrentYear();
-
-            removeEmptyDynamicElements();
-
-
-            /*
-             * Tracking deve ser
-             * carregado por último.
-             */
-
-            injectTrackingScripts(
-                config
+        document.body
+            .classList.add(
+                "site-ready"
             );
 
 
-            /*
-             * Marca o site como
-             * completamente inicializado.
-             */
-
-            document.documentElement
-                .classList.add(
-                    "js-ready"
-                );
-
-            document.body
-                .classList.add(
-                    "site-ready"
-                );
+        console.info(
+            "Katlen Ariane — site inicializado com sucesso."
+        );
 
 
-            console.info(
-                "Katlen Ariane — site inicializado."
-            );
+    } catch (error) {
 
-
-        } catch (error) {
-
-            console.error(
-                "Erro ao inicializar o site:",
-                error
-            );
-        }
+        console.error(
+            "Erro ao inicializar o site:",
+            error
+        );
     }
-);
+}
 
 
 /* =========================================================
-   19. SUPORTE AO RETORNO DO NAVEGADOR
+   19. DOM READY
+   ========================================================= */
+
+if (
+    document.readyState ===
+    "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initSite
+    );
+
+} else {
+
+    initSite();
+}
+
+
+/* =========================================================
+   20. PAGESHOW
    ========================================================= */
 
 window.addEventListener(
@@ -1121,24 +1592,40 @@ window.addEventListener(
                 ".nav-menu"
             );
 
-        const mobileMenu =
-            getElement("mobile-menu");
 
-        if (!nav || !mobileMenu) {
+        const mobileMenu =
+            getElement(
+                "mobile-menu"
+            );
+
+
+        if (
+            !nav ||
+            !mobileMenu
+        ) {
             return;
         }
+
 
         nav.classList.remove(
             "active"
         );
 
+
         mobileMenu.classList.remove(
             "open"
         );
 
+
         mobileMenu.setAttribute(
             "aria-expanded",
             "false"
+        );
+
+
+        mobileMenu.setAttribute(
+            "aria-label",
+            "Abrir menu"
         );
     }
 );
