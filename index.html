@@ -39,6 +39,7 @@
 
     <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link
         rel="preconnect"
         href="https://fonts.gstatic.com"
@@ -50,12 +51,13 @@
         rel="stylesheet"
     >
 
-    <!-- CSS -->
+    <!-- CSS principal -->
     <link
         rel="stylesheet"
         href="css/style.css"
     >
 
+    <!-- CSS responsivo -->
     <link
         rel="stylesheet"
         href="css/responsive.css"
@@ -70,19 +72,23 @@
         "jobTitle": "Psicanalista Clínica"
     }
     </script>
+
 </head>
 
 
 <body>
 
 
-<!-- ======================================================
-     HEADER
-     ====================================================== -->
+<!-- =====================================================
+     MENU SUPERIOR FLUTUANTE
+     ===================================================== -->
 
 <header class="site-header">
 
     <div class="container nav-inner">
+
+
+        <!-- IDENTIDADE -->
 
         <a
             class="brand"
@@ -101,8 +107,11 @@
         </a>
 
 
+        <!-- NAVEGAÇÃO -->
+
         <nav
             class="nav-menu"
+            id="primary-navigation"
             aria-label="Navegação principal"
         >
 
@@ -155,6 +164,8 @@
         </nav>
 
 
+        <!-- CTA DO MENU -->
+
         <a
             class="header-cta"
             href="#contato"
@@ -162,6 +173,8 @@
             Quero conversar
         </a>
 
+
+        <!-- MENU MOBILE -->
 
         <button
             class="mobile-toggle"
@@ -183,16 +196,16 @@
 </header>
 
 
-<!-- ======================================================
+<!-- =====================================================
      CONTEÚDO PRINCIPAL
-     ====================================================== -->
+     ===================================================== -->
 
 <main>
 
 
-<!-- ======================================================
+<!-- =====================================================
      HERO
-     ====================================================== -->
+     ===================================================== -->
 
 <section
     id="inicio"
@@ -200,6 +213,7 @@
 >
 
     <div class="hero-orb hero-orb-purple"></div>
+
     <div class="hero-orb hero-orb-coral"></div>
 
     <div class="hero-stroke"></div>
@@ -230,6 +244,8 @@
             </p>
 
 
+            <!-- PÚBLICOS -->
+
             <div class="target-audience">
 
                 <span class="audience-family">
@@ -250,6 +266,8 @@
 
             </div>
 
+
+            <!-- AÇÕES -->
 
             <div class="hero-actions">
 
@@ -278,7 +296,7 @@
         </div>
 
 
-        <!-- IMAGEM / COMPOSIÇÃO -->
+        <!-- IMAGEM -->
 
         <div class="hero-visual">
 
@@ -320,9 +338,9 @@
 </section>
 
 
-<!-- ======================================================
+<!-- =====================================================
      SOBRE
-     ====================================================== -->
+     ===================================================== -->
 
 <section
     id="sobre"
@@ -383,9 +401,9 @@
 </section>
 
 
-<!-- ======================================================
+<!-- =====================================================
      ATENDIMENTO
-     ====================================================== -->
+     ===================================================== -->
 
 <section
     id="atendimento"
@@ -521,9 +539,9 @@
 </section>
 
 
-<!-- ======================================================
+<!-- =====================================================
      NEURODESENVOLVIMENTO
-     ====================================================== -->
+     ===================================================== -->
 
 <section
     id="neuro"
@@ -573,6 +591,7 @@
             </span>
 
             <i></i>
+
             <b></b>
 
         </div>
@@ -582,9 +601,9 @@
 </section>
 
 
-<!-- ======================================================
+<!-- =====================================================
      PRIMEIRA CONSULTA
-     ====================================================== -->
+     ===================================================== -->
 
 <section
     id="primeira-consulta"
@@ -686,7 +705,6 @@
 
             </div>
 
-
         </div>
 
     </div>
@@ -694,9 +712,9 @@
 </section>
 
 
-<!-- ======================================================
+<!-- =====================================================
      DEPOIMENTOS
-     ====================================================== -->
+     ===================================================== -->
 
 <section
     id="depoimentos"
@@ -792,7 +810,6 @@
 
             </article>
 
-
         </div>
 
     </div>
@@ -800,9 +817,9 @@
 </section>
 
 
-<!-- ======================================================
+<!-- =====================================================
      SOBRE A PSICANÁLISE
-     ====================================================== -->
+     ===================================================== -->
 
 <section
     class="psycho section"
@@ -859,9 +876,9 @@
 </section>
 
 
-<!-- ======================================================
+<!-- =====================================================
      CONTATO
-     ====================================================== -->
+     ===================================================== -->
 
 <section
     id="contato"
@@ -869,6 +886,7 @@
 >
 
     <div class="contact-shape contact-purple"></div>
+
     <div class="contact-shape contact-coral"></div>
 
 
@@ -909,6 +927,8 @@
         </div>
 
 
+        <!-- FORMULÁRIO -->
+
         <div class="contact-form">
 
             <form
@@ -916,6 +936,7 @@
                 method="POST"
                 action="https://formspree.io/f/SEU_ID_AQUI"
             >
+
 
                 <div class="form-row">
 
@@ -926,6 +947,7 @@
                         autocomplete="name"
                         required
                     >
+
 
                     <input
                         type="text"
@@ -960,23 +982,23 @@
                         Quem busca atendimento?
                     </option>
 
-                    <option>
+                    <option value="para-mim">
                         Para mim
                     </option>
 
-                    <option>
+                    <option value="filho">
                         Para meu filho(a)
                     </option>
 
-                    <option>
+                    <option value="adolescente">
                         Para um adolescente
                     </option>
 
-                    <option>
+                    <option value="familia">
                         Para minha família
                     </option>
 
-                    <option>
+                    <option value="outro">
                         Outro
                     </option>
 
@@ -1025,9 +1047,9 @@
 </main>
 
 
-<!-- ======================================================
-     FOOTER
-     ====================================================== -->
+<!-- =====================================================
+     RODAPÉ
+     ===================================================== -->
 
 <footer class="site-footer">
 
@@ -1123,7 +1145,7 @@
         </div>
 
 
-        <!-- REDES -->
+        <!-- REDES SOCIAIS -->
 
         <div>
 
@@ -1143,6 +1165,7 @@
                     Instagram
                 </a>
 
+
                 <a
                     id="facebook-link"
                     href="#"
@@ -1152,6 +1175,7 @@
                     Facebook
                 </a>
 
+
                 <a
                     id="tiktok-link"
                     href="#"
@@ -1160,6 +1184,7 @@
                 >
                     TikTok
                 </a>
+
 
                 <a
                     id="linkedin-link"
@@ -1179,7 +1204,7 @@
 
 
             <span id="footer-registration">
-                Psicanalista
+                Psicanalista Clínica
             </span>
 
         </div>
@@ -1199,9 +1224,10 @@
 </footer>
 
 
-<!-- ======================================================
-     WHATSAPP
-     ====================================================== -->
+<!-- =====================================================
+     CONTATO FLUTUANTE
+     CANTO INFERIOR DIREITO
+     ===================================================== -->
 
 <a
     href="#"
@@ -1212,11 +1238,17 @@
     style="display:none;"
     aria-label="Conversar pelo WhatsApp"
 >
-    Quero conversar
+
+    <span>
+        Quero conversar
+    </span>
+
 </a>
 
 
-<!-- JAVASCRIPT -->
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
 
 <script
     type="module"
