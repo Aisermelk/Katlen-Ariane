@@ -1,169 +1,182 @@
 /* =========================================================
-   RESPONSIVIDADE COMPLETA
+   RESPONSIVE.CSS
+   Katlen Ariane — Psicanalista Clínica
    ========================================================= */
 
 
 /* =========================================================
-   TABLET / NOTEBOOK
-   Até 1050px
+   TABLETS — ATÉ 1024PX
    ========================================================= */
 
-@media (max-width: 1050px) {
+@media (max-width: 1024px) {
 
     .container {
-        width: min(
-            var(--container),
-            calc(100% - 40px)
-        );
+        padding-left: 28px;
+        padding-right: 28px;
     }
 
-    /* MENU */
+    /* -------------------------
+       MENU SUPERIOR
+       ------------------------- */
+
+    .site-header {
+        padding: 14px 20px;
+    }
+
+    .nav-inner {
+        max-width: 100%;
+        padding: 0;
+    }
 
     .nav-menu ul {
         gap: 18px;
     }
 
     .nav-menu a {
-        font-size: 0.68rem;
+        font-size: 0.76rem;
+    }
+
+    .header-cta {
+        padding: 11px 18px;
+        font-size: 0.78rem;
     }
 
 
-    /* HERO */
+    /* -------------------------
+       HERO
+       ------------------------- */
+
+    .hero {
+        padding: 110px 0 80px;
+    }
 
     .hero-grid {
-        grid-template-columns:
-            minmax(0, 1fr)
-            minmax(300px, 0.75fr);
-
+        grid-template-columns: 1fr 0.85fr;
         gap: 45px;
     }
 
-    .hero-content h1 {
-        font-size: clamp(
-            3rem,
-            5vw,
-            4.5rem
-        );
+    .hero-copy h1 {
+        font-size: 3.4rem;
     }
 
-    .hero-visual {
-        min-height: 450px;
+    .hero-copy p {
+        font-size: 1rem;
+        max-width: 560px;
     }
 
-    .hero-photo {
-        width: min(
-            350px,
-            90%
-        );
+    .hero-image-wrap {
+        max-width: 420px;
+        margin-left: auto;
     }
 
 
-    /* SOBRE */
+    /* -------------------------
+       SOBRE
+       ------------------------- */
 
     .about-grid {
-        gap: 55px;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: 45px;
+    }
+
+    .about-image {
+        min-height: 470px;
     }
 
 
-    /* ATENDIMENTO */
+    /* -------------------------
+       ATENDIMENTO
+       ------------------------- */
 
-    .services-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
+    .audience-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
     }
 
 
-    /* PRIMEIRA CONSULTA */
+    /* -------------------------
+       NEURODESENVOLVIMENTO
+       ------------------------- */
 
-    .first-visit-grid {
-        gap: 55px;
+    .neuro-card {
+        padding: 55px;
+    }
+
+    .neuro-copy {
+        max-width: 650px;
     }
 
 
-    /* CONTATO */
+    /* -------------------------
+       PRIMEIRA CONSULTA
+       ------------------------- */
+
+    .first-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 45px;
+    }
+
+
+    /* -------------------------
+       DEPOIMENTOS
+       ------------------------- */
+
+    .testimonial-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .testimonial-card:last-child {
+        grid-column: 1 / -1;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+
+    /* -------------------------
+       PSICANÁLISE
+       ------------------------- */
+
+    .psycho-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 45px;
+    }
+
+
+    /* -------------------------
+       CONTATO
+       ------------------------- */
 
     .contact-grid {
-        gap: 55px;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
     }
 
 
-    /* DEPOIMENTOS */
-
-    .testimonials-grid,
-    .depoimentos-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-
-    /* FOOTER */
+    /* -------------------------
+       FOOTER
+       ------------------------- */
 
     .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
         gap: 40px;
     }
 }
 
 
+
 /* =========================================================
-   TABLET / MOBILE
-   Até 800px
+   TABLETS / CELULARES — ATÉ 768PX
    ========================================================= */
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
 
-    /* CONTAINER */
+    body {
+        overflow-x: hidden;
+    }
 
     .container {
-        width: calc(100% - 32px);
-    }
-
-
-    /* =====================================================
-       TOPO
-       ===================================================== */
-
-    .top-bar {
-        display: none;
-    }
-
-
-    /* =====================================================
-       HEADER
-       ===================================================== */
-
-    .main-header {
-        position: sticky;
-        top: 0;
-    }
-
-    .nav-inner {
-        min-height: 72px;
-
-        padding:
-            0 16px;
-
-        justify-content:
-            space-between;
-    }
-
-
-    /* LOGO */
-
-    .logo .name {
-        font-size: 1.85rem;
-    }
-
-    .logo .sub {
-        font-size: 0.54rem;
-    }
-
-
-    /* =====================================================
-       BOTÃO MOBILE
-       ===================================================== */
-
-    .mobile-toggle {
-        display: flex;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
 
@@ -171,122 +184,117 @@
        MENU MOBILE
        ===================================================== */
 
+    .site-header {
+        position: fixed;
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        width: auto;
+        padding: 12px 16px;
+        border-radius: 22px;
+    }
+
+    .nav-inner {
+        min-height: 54px;
+    }
+
+    .brand-name {
+        font-size: 1.45rem;
+    }
+
+    .brand-sub {
+        font-size: 0.52rem;
+        letter-spacing: 1.7px;
+    }
+
     .nav-menu {
-
         position: absolute;
-
-        top: 100%;
-
+        top: calc(100% + 10px);
         left: 0;
-
         right: 0;
 
-        display: none;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
 
-        max-height: none;
+        border-radius: 20px;
 
-        overflow: visible;
+        max-height: 0;
+        overflow: hidden;
 
-        padding:
-            12px 16px 24px;
+        opacity: 0;
+        visibility: hidden;
 
-        background:
-            rgba(
-                249,
-                247,
-                244,
-                0.98
-            );
+        transform: translateY(-8px);
 
-        backdrop-filter:
-            blur(18px);
+        transition:
+            max-height 0.35s ease,
+            opacity 0.25s ease,
+            transform 0.25s ease,
+            visibility 0.25s ease;
 
-        border-bottom:
-            1px solid var(--border);
-
-        box-shadow:
-            0 15px 35px
-            rgba(
-                39,
-                36,
-                42,
-                0.08
-            );
+        box-shadow: 0 18px 45px rgba(40, 30, 60, 0.12);
     }
 
     .nav-menu.active {
-        display: block;
+        max-height: 520px;
+
+        opacity: 1;
+        visibility: visible;
+
+        transform: translateY(0);
+
+        overflow-y: auto;
     }
 
     .nav-menu ul {
-
         display: flex;
-
         flex-direction: column;
-
         align-items: stretch;
 
         gap: 0;
 
-        width: 100%;
-
-        padding: 0;
+        padding: 12px 18px 18px;
     }
 
     .nav-menu ul li {
-
         width: 100%;
-
-        padding: 0;
-
-        border-bottom:
-            1px solid
-            rgba(
-                39,
-                36,
-                42,
-                0.06
-            );
-    }
-
-    .nav-menu ul li:last-child {
-        border-bottom: none;
     }
 
     .nav-menu a {
-
         display: block;
-
         width: 100%;
 
-        padding:
-            15px 5px;
+        padding: 13px 8px;
 
-        font-size: 0.73rem;
+        font-size: 0.82rem;
+        letter-spacing: 0.4px;
 
-        letter-spacing: 1px;
+        border-bottom: 1px solid rgba(40, 30, 60, 0.06);
     }
 
-    .nav-menu a::after {
+    .nav-menu li:last-child a {
+        border-bottom: none;
+    }
+
+    .nav-menu a:hover {
+        padding-left: 14px;
+    }
+
+
+    /* BOTÃO QUERO CONVERSAR */
+
+    .header-cta {
         display: none;
     }
 
-    .nav-menu a[href="#contato"] {
+    .mobile-toggle {
+        display: flex;
 
-        margin-top: 12px;
+        width: 36px;
+        height: 36px;
 
-        padding:
-            14px 18px;
-
-        text-align: center;
-
-        border-radius: 999px;
-
-        background:
-            var(--ink);
-
-        color:
-            var(--white);
+        flex-shrink: 0;
     }
 
 
@@ -295,104 +303,56 @@
        ===================================================== */
 
     .hero {
-
         min-height: auto;
 
-        padding:
-            70px 0 100px;
+        padding: 145px 0 80px;
     }
 
     .hero-grid {
-
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
 
         gap: 50px;
     }
 
-    .hero-content {
-
-        max-width: 100%;
-
-        text-align: left;
+    .hero-copy {
+        max-width: 650px;
     }
 
-    .hero-content h1 {
-
-        max-width: 700px;
-
-        font-size:
-            clamp(
-                2.8rem,
-                10vw,
-                4.5rem
-            );
-
-        line-height: 1;
+    .hero-copy h1 {
+        font-size: clamp(2.4rem, 8vw, 3.4rem);
+        line-height: 1.08;
     }
 
-    .hero p {
-
-        max-width: 620px;
-
+    .hero-copy p {
         font-size: 1rem;
+        line-height: 1.7;
     }
-
-    .target-audience {
-
-        gap: 7px;
-    }
-
-    .target-audience span {
-
-        padding:
-            7px 11px;
-
-        font-size:
-            0.72rem;
-    }
-
-
-    /* HERO BOTÕES */
 
     .hero-actions {
-
         display: flex;
-
         flex-direction: column;
-
-        align-items: stretch;
-
-        gap: 12px;
-
-        max-width: 360px;
+        align-items: flex-start;
+        gap: 18px;
     }
 
     .hero-actions .btn {
-
-        width: 100%;
-
-        text-align: center;
+        width: auto;
     }
 
-
-    /* =====================================================
-       HERO VISUAL
-       ===================================================== */
-
-    .hero-visual {
-
-        min-height: 410px;
-
-        width: 100%;
+    .under-link {
+        margin-left: 0;
     }
 
-    .hero-photo {
+    .hero-image-wrap {
+        width: 100%;
+        max-width: 430px;
 
-        width:
-            min(
-                330px,
-                75vw
-            );
+        margin: 0 auto;
+    }
+
+    .hero-caption {
+        margin-top: 20px;
     }
 
 
@@ -401,38 +361,30 @@
        ===================================================== */
 
     .about {
-
-        padding:
-            90px 0;
+        padding: 75px 0;
     }
 
     .about-grid {
+        display: flex;
+        flex-direction: column;
 
-        grid-template-columns: 1fr;
-
-        gap: 50px;
+        gap: 40px;
     }
 
-    .about-photo {
+    .about-image {
+        width: 100%;
+        max-width: 390px;
+        min-height: 430px;
 
-        width: min(
-            390px,
-            85%
-        );
-
-        margin:
-            0 auto;
+        margin: 0 auto;
     }
 
-    .about-text {
-
-        max-width: 100%;
+    .about-copy {
+        max-width: 650px;
     }
 
-    .about-details {
-
-        grid-template-columns:
-            1fr;
+    .about-copy h2 {
+        font-size: 2.2rem;
     }
 
 
@@ -440,58 +392,59 @@
        ATENDIMENTO
        ===================================================== */
 
-    .services {
-
-        padding:
-            90px 0;
+    .audiences {
+        padding: 75px 0;
     }
 
     .section-heading {
-
-        margin-bottom:
-            45px;
+        display: block;
     }
 
-    .services-grid {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
-        gap: 15px;
+    .section-heading > p {
+        margin-top: 15px;
+        max-width: 600px;
     }
 
-    .service-card {
+    .audience-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 35px;
+    }
 
-        min-height:
-            250px;
+    .audience-card {
+        min-height: 260px;
+        padding: 28px;
+    }
 
-        padding:
-            25px;
+    .audience-card h3 {
+        font-size: 1.35rem;
     }
 
 
     /* =====================================================
-       NEURODESENVOLVIMENTO
+       NEURO
        ===================================================== */
 
-    .neuro-section {
-
-        padding:
-            80px 0;
+    .neuro {
+        padding: 70px 0;
     }
 
-    .neuro-box {
+    .neuro-card {
+        display: flex;
+        flex-direction: column;
 
-        grid-template-columns:
-            1fr;
+        padding: 42px 30px;
 
-        gap: 25px;
+        gap: 35px;
+    }
 
-        padding:
-            45px 30px;
+    .neuro-copy h2 {
+        font-size: 2rem;
+    }
 
-        text-align:
-            left;
+    .neuro-art {
+        width: 100%;
+        min-height: 180px;
     }
 
 
@@ -499,18 +452,23 @@
        PRIMEIRA CONSULTA
        ===================================================== */
 
-    .first-visit {
-
-        padding:
-            90px 0;
+    .first {
+        padding: 75px 0;
     }
 
-    .first-visit-grid {
-
-        grid-template-columns:
-            1fr;
+    .first-grid {
+        display: flex;
+        flex-direction: column;
 
         gap: 45px;
+    }
+
+    .first-copy h2 {
+        font-size: 2.2rem;
+    }
+
+    .steps {
+        width: 100%;
     }
 
 
@@ -518,25 +476,56 @@
        DEPOIMENTOS
        ===================================================== */
 
-    .testimonials,
-    .depoimentos {
-
-        padding:
-            90px 0;
+    .testimonials {
+        padding: 75px 0;
     }
 
-    .testimonials-grid,
-    .depoimentos-grid {
+    .section-heading.centered {
+        text-align: center;
+    }
 
-        grid-template-columns:
-            1fr;
+    .testimonial-grid {
+        display: flex;
+        flex-direction: column;
+
+        gap: 18px;
+
+        margin-top: 35px;
     }
 
     .testimonial-card,
-    .depoimento-card {
+    .testimonial-card:last-child {
+        width: 100%;
+        max-width: none;
+    }
 
-        padding:
-            30px;
+    .testimonial-card.featured {
+        transform: none;
+    }
+
+
+    /* =====================================================
+       SOBRE A PSICANÁLISE
+       ===================================================== */
+
+    .psycho {
+        padding: 75px 0;
+    }
+
+    .psycho-grid {
+        display: flex;
+        flex-direction: column;
+
+        gap: 40px;
+    }
+
+    .psycho-copy h2 {
+        font-size: 2.2rem;
+    }
+
+    .room-image {
+        width: 100%;
+        min-height: 350px;
     }
 
 
@@ -545,28 +534,28 @@
        ===================================================== */
 
     .contact {
-
-        padding:
-            90px 0;
+        padding: 75px 0;
     }
 
     .contact-grid {
+        display: flex;
+        flex-direction: column;
 
-        grid-template-columns:
-            1fr;
-
-        gap: 45px;
+        gap: 40px;
     }
 
-    .contact-info {
-
-        padding-top: 0;
+    .contact-intro h2 {
+        font-size: 2.25rem;
     }
 
     .contact-form {
+        width: 100%;
+    }
 
-        padding:
-            32px 25px;
+    .form-row {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
     }
 
 
@@ -575,374 +564,323 @@
        ===================================================== */
 
     .footer-grid {
-
-        grid-template-columns:
-            1fr;
-
+        grid-template-columns: 1fr;
         gap: 35px;
     }
 
     .footer-bottom {
-
-        flex-direction:
-            column;
-
-        align-items:
-            flex-start;
-
-        gap: 10px;
+        text-align: center;
+        padding-top: 25px;
     }
 
 
     /* =====================================================
-       WHATSAPP
+       WHATSAPP FLUTUANTE
        ===================================================== */
 
     .whatsapp-float {
+        position: fixed;
 
-        right: 15px;
+        right: 18px;
+        bottom: 18px;
 
-        bottom: 15px;
+        width: 58px;
+        height: 58px;
 
-        min-height: 46px;
+        padding: 0;
 
-        padding:
-            12px 17px;
+        border-radius: 50%;
 
-        font-size:
-            0.74rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        z-index: 2000;
+
+        box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    .whatsapp-float span {
+        display: none;
+    }
+
+    .wa-icon {
+        font-size: 1.3rem;
     }
 }
 
 
+
 /* =========================================================
-   CELULAR
-   Até 520px
+   CELULARES — ATÉ 540PX
    ========================================================= */
 
-@media (max-width: 520px) {
-
-    /* =====================================================
-       GERAL
-       ===================================================== */
+@media (max-width: 540px) {
 
     .container {
-
-        width:
-            calc(100% - 28px);
-    }
-
-    h2 {
-
-        font-size:
-            2.4rem;
+        padding-left: 18px;
+        padding-right: 18px;
     }
 
 
-    /* =====================================================
-       HEADER
-       ===================================================== */
+    /* MENU */
 
-    .nav-inner {
+    .site-header {
+        top: 8px;
+        left: 8px;
+        right: 8px;
 
-        min-height:
-            68px;
+        border-radius: 19px;
+
+        padding: 10px 14px;
     }
 
-    .logo .name {
+    .brand-name {
+        font-size: 1.3rem;
+    }
 
-        font-size:
-            1.65rem;
+    .brand-sub {
+        font-size: 0.48rem;
+        letter-spacing: 1.5px;
     }
 
 
-    /* =====================================================
-       HERO
-       ===================================================== */
+    /* HERO */
 
     .hero {
-
-        padding:
-            55px 0 80px;
+        padding-top: 125px;
+        padding-bottom: 65px;
     }
 
-    .hero-content h1 {
-
-        font-size:
-            clamp(
-                2.6rem,
-                13vw,
-                3.7rem
-            );
-
-        letter-spacing:
-            -0.045em;
+    .hero-copy h1 {
+        font-size: 2.45rem;
     }
 
-    .hero p {
-
-        font-size:
-            0.94rem;
-
-        line-height:
-            1.7;
+    .hero-copy p {
+        font-size: 0.95rem;
     }
 
-    .target-audience span {
+    .hero-actions {
+        width: 100%;
+    }
 
-        font-size:
-            0.68rem;
+    .hero-actions .btn {
+        width: 100%;
+        text-align: center;
+    }
 
-        padding:
-            6px 9px;
+    .hero-image-wrap {
+        max-width: 340px;
+    }
+
+    .shape-tag {
+        font-size: 0.72rem;
+        padding: 7px 12px;
     }
 
 
-    /* =====================================================
-       HERO VISUAL
-       ===================================================== */
+    /* SOBRE */
 
-    .hero-visual {
-
-        min-height:
-            350px;
+    .about,
+    .audiences,
+    .first,
+    .testimonials,
+    .psycho,
+    .contact {
+        padding-top: 65px;
+        padding-bottom: 65px;
     }
 
-    .hero-photo {
-
-        width:
-            75vw;
-
-        max-width:
-            300px;
+    .about-image {
+        min-height: 380px;
     }
 
-
-    /* FORMAS */
-
-    .organic-coral {
-
-        width:
-            115px;
-
-        height:
-            115px;
-    }
-
-    .organic-purple {
-
-        width:
-            145px;
-
-        height:
-            100px;
-    }
-
-    .organic-blue {
-
-        width:
-            85px;
-
-        height:
-            85px;
-    }
-
-    .organic-yellow {
-
-        width:
-            80px;
-
-        height:
-            60px;
+    .about-copy h2,
+    .first-copy h2,
+    .psycho-copy h2,
+    .contact-intro h2 {
+        font-size: 2rem;
     }
 
 
-    /* =====================================================
-       ATENDIMENTO
-       ===================================================== */
+    /* ATENDIMENTO */
 
-    .services-grid {
-
-        grid-template-columns:
-            1fr;
+    .audience-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
     }
 
-    .service-card {
-
-        min-height:
-            225px;
-
-        padding:
-            25px;
+    .audience-card {
+        min-height: 220px;
+        padding: 26px;
     }
 
 
-    /* =====================================================
-       NEURO
-       ===================================================== */
+    /* NEURO */
 
-    .neuro-box {
-
-        padding:
-            38px 24px;
-
-        border-radius:
-            24px;
+    .neuro {
+        padding: 60px 0;
     }
 
-    .neuro-box h2 {
-
-        font-size:
-            2.25rem;
+    .neuro-card {
+        padding: 35px 24px;
+        border-radius: 24px;
     }
 
-
-    /* =====================================================
-       PRIMEIRA CONSULTA
-       ===================================================== */
-
-    .steps-list {
-
-        gap:
-            5px;
+    .neuro-copy h2 {
+        font-size: 1.8rem;
     }
 
-    .steps-list li {
-
-        grid-template-columns:
-            42px 1fr;
-
-        gap:
-            13px;
-
-        padding:
-            20px 0;
-    }
-
-    .steps-list li::before {
-
-        width:
-            40px;
-
-        height:
-            40px;
-    }
-
-    .steps-list strong {
-
-        font-size:
-            1.1rem;
+    .neuro-art {
+        min-height: 150px;
     }
 
 
-    /* =====================================================
-       DEPOIMENTOS
-       ===================================================== */
+    /* PRIMEIRA CONSULTA */
 
-    .testimonial-card,
-    .depoimento-card {
-
-        padding:
-            27px 24px;
+    .steps {
+        gap: 25px;
     }
 
-    .testimonial-card p,
-    .depoimento-card p {
-
-        font-size:
-            1.05rem;
+    .step {
+        gap: 15px;
     }
 
 
-    /* =====================================================
-       CONTATO
-       ===================================================== */
+    /* DEPOIMENTOS */
+
+    .testimonial-card {
+        padding: 28px 24px;
+    }
+
+    .quote-mark {
+        font-size: 3rem;
+    }
+
+
+    /* CONTATO */
 
     .contact-form {
-
-        padding:
-            25px 18px;
-
-        border-radius:
-            22px;
+        padding: 25px 20px;
+        border-radius: 20px;
     }
 
     .contact-form input,
     .contact-form select,
     .contact-form textarea {
-
-        padding:
-            14px;
-
-        font-size:
-            0.9rem;
+        font-size: 0.95rem;
     }
 
 
-    /* =====================================================
-       WHATSAPP
-       ===================================================== */
+    /* WHATSAPP */
 
     .whatsapp-float {
+        width: 55px;
+        height: 55px;
 
-        right:
-            12px;
-
-        bottom:
-            12px;
-
-        padding:
-            11px 15px;
-
-        font-size:
-            0.7rem;
+        right: 15px;
+        bottom: 15px;
     }
 }
 
 
+
 /* =========================================================
-   CELULAR MUITO PEQUENO
-   Até 380px
+   CELULARES PEQUENOS — ATÉ 380PX
    ========================================================= */
 
 @media (max-width: 380px) {
 
-    .hero-content h1 {
-
-        font-size:
-            2.45rem;
+    .site-header {
+        left: 6px;
+        right: 6px;
     }
 
-    .hero-visual {
-
-        min-height:
-            315px;
+    .brand-name {
+        font-size: 1.15rem;
     }
 
-    .hero-photo {
-
-        width:
-            78vw;
+    .brand-sub {
+        font-size: 0.43rem;
     }
 
-    .service-card {
-
-        min-height:
-            210px;
-
-        padding:
-            22px;
+    .hero {
+        padding-top: 115px;
     }
 
-    .neuro-box {
+    .hero-copy h1 {
+        font-size: 2.15rem;
+    }
 
-        padding:
-            32px 20px;
+    .hero-copy p {
+        font-size: 0.9rem;
+    }
+
+    .about-image {
+        min-height: 330px;
+    }
+
+    .audience-card {
+        padding: 23px;
+    }
+
+    .neuro-card {
+        padding: 30px 20px;
     }
 
     .contact-form {
+        padding: 22px 17px;
+    }
 
-        padding:
-            22px 15px;
+    .whatsapp-float {
+        width: 52px;
+        height: 52px;
+
+        right: 12px;
+        bottom: 12px;
+    }
+}
+
+
+
+/* =========================================================
+   ACESSIBILIDADE
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .site-header,
+    .nav-menu,
+    .nav-menu a,
+    .whatsapp-float,
+    .hero *,
+    .audience-card,
+    .testimonial-card {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+
+
+/* =========================================================
+   TELAS TOUCH
+   ========================================================= */
+
+@media (hover: none) and (pointer: coarse) {
+
+    .nav-menu a {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+
+    .btn {
+        min-height: 46px;
+    }
+
+    .whatsapp-float {
+        touch-action: manipulation;
     }
 }
