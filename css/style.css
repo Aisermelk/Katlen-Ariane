@@ -1,9 +1,13 @@
+/* =========================================================
+   MARCA — KATLEN ARIANE
+   ========================================================= */
+
 .brand {
     display: flex;
     align-items: center;
     gap: 10px;
-
     flex-shrink: 0;
+    text-decoration: none;
 }
 
 .brand-logo {
@@ -32,6 +36,7 @@
     justify-content: center;
 
     line-height: 1;
+    min-width: 0;
 }
 
 .brand-name {
@@ -54,6 +59,7 @@
 
     color: var(--muted);
 
+    font-family: var(--font-body);
     font-size: 8px;
     font-weight: 600;
 
