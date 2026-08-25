@@ -45,6 +45,7 @@
 
     /* Layout */
     --container: 1180px;
+
     --radius-sm: 12px;
     --radius-md: 20px;
     --radius-lg: 32px;
@@ -240,6 +241,7 @@ p {
 
 .btn-primary:hover {
     background: var(--purple-dark);
+
     box-shadow:
         0 14px 30px rgba(118, 98, 143, .28);
 }
@@ -274,6 +276,7 @@ p {
     content: "";
 
     position: absolute;
+
     left: 0;
     bottom: -5px;
 
@@ -283,6 +286,7 @@ p {
     background: var(--coral);
 
     transform-origin: left;
+
     transition: transform var(--transition);
 }
 
@@ -339,9 +343,6 @@ p {
     min-width: 175px;
 }
 
-
-/* Área da logo */
-
 .brand-logo {
     width: 42px;
     height: 42px;
@@ -359,9 +360,6 @@ p {
 
     object-fit: contain;
 }
-
-
-/* Texto da marca */
 
 .brand-text {
     display: flex;
@@ -484,6 +482,7 @@ p {
 
 .header-cta:hover {
     background: #c97d6c;
+
     transform: translateY(-2px);
 }
 
@@ -556,6 +555,7 @@ p {
     z-index: 2;
 
     display: grid;
+
     grid-template-columns: .95fr 1.05fr;
 
     align-items: center;
@@ -700,53 +700,28 @@ p {
     transform: scale(1.025);
 }
 
-.hero-orb {
-    position: absolute;
 
-    border-radius: 50%;
+/* =========================================================
+   CÍRCULOS DECORATIVOS DO HERO — REMOVIDOS
+   ========================================================= */
 
-    pointer-events: none;
-}
+/*
+   Os elementos .hero-orb e .hero-stroke eram responsáveis
+   pelos círculos/transparências sobre a imagem.
 
-.hero-orb-purple {
-    width: 260px;
-    height: 260px;
+   Eles ficam desativados para deixar somente a imagem
+   do consultório.
+*/
 
-    right: 5%;
-    top: 13%;
-
-    background: var(--purple-light);
-
-    opacity: .7;
-}
-
-.hero-orb-coral {
-    width: 160px;
-    height: 160px;
-
-    left: 43%;
-    bottom: 5%;
-
-    background: var(--coral-light);
-
-    opacity: .7;
-}
-
+.hero-orb,
 .hero-stroke {
-    position: absolute;
-
-    width: 420px;
-    height: 420px;
-
-    right: 10%;
-    top: 27%;
-
-    border: 1px solid rgba(118, 98, 143, .18);
-
-    border-radius: 50%;
-
-    transform: rotate(20deg);
+    display: none !important;
 }
+
+
+/* =========================================================
+   FORMAS DECORATIVAS DO HERO
+   ========================================================= */
 
 .shape-tag {
     position: absolute;
@@ -945,6 +920,7 @@ p {
 
 .section-heading {
     display: grid;
+
     grid-template-columns: 1fr .75fr;
 
     align-items: end;
@@ -978,6 +954,7 @@ p {
 
 .section-heading.centered p {
     max-width: 560px;
+
     margin-inline: auto;
 }
 
@@ -1026,6 +1003,7 @@ p {
     margin-bottom: 15px;
 
     font-family: var(--font-display);
+
     font-size: 32px;
     font-weight: 500;
 }
@@ -1098,6 +1076,7 @@ p {
     min-height: 530px;
 
     display: grid;
+
     grid-template-columns: 1fr .75fr;
 
     align-items: center;
@@ -1197,6 +1176,7 @@ p {
     color: #fff;
 
     font-family: var(--font-display);
+
     font-size: 25px;
 
     transform: rotate(-8deg);
@@ -1266,6 +1246,7 @@ p {
 
 .step {
     display: grid;
+
     grid-template-columns: 70px 1fr;
 
     gap: 25px;
@@ -1305,6 +1286,7 @@ p {
     margin-bottom: 6px;
 
     font-family: var(--font-display);
+
     font-size: 25px;
     font-weight: 500;
 }
@@ -1365,7 +1347,9 @@ p {
     color: var(--coral);
 
     font-family: var(--font-display);
+
     font-size: 55px;
+
     line-height: .8;
 }
 
@@ -1373,7 +1357,9 @@ p {
     margin-bottom: auto;
 
     font-family: var(--font-display);
+
     font-size: 21px;
+
     line-height: 1.45;
 }
 
@@ -1581,9 +1567,11 @@ p {
 
 .registration-box {
     display: inline-flex;
+
     flex-direction: column;
 
     margin-top: 20px;
+
     padding: 17px 20px;
 
     border: 1px solid var(--border);
@@ -1597,9 +1585,11 @@ p {
     color: var(--muted);
 
     font-size: 10px;
+
     font-weight: 600;
 
     letter-spacing: .08em;
+
     text-transform: uppercase;
 }
 
@@ -1632,6 +1622,7 @@ p {
 
 #main-form {
     display: flex;
+
     flex-direction: column;
 
     gap: 14px;
@@ -1657,6 +1648,7 @@ p {
     outline: none;
 
     background: #fff;
+
     color: var(--ink);
 
     transition:
@@ -1704,6 +1696,7 @@ p {
 
 .consent {
     display: flex;
+
     align-items: flex-start;
 
     gap: 10px;
@@ -1728,6 +1721,7 @@ p {
     color: var(--muted);
 
     font-size: 11px;
+
     line-height: 1.5;
 }
 
@@ -1774,7 +1768,9 @@ p {
 
 .footer-grid > div:not(.footer-brand) {
     display: flex;
+
     flex-direction: column;
+
     align-items: flex-start;
 
     gap: 9px;
@@ -1786,9 +1782,11 @@ p {
     color: #fff;
 
     font-size: 11px;
+
     font-weight: 600;
 
     letter-spacing: .12em;
+
     text-transform: uppercase;
 }
 
@@ -1807,7 +1805,9 @@ p {
 
 .social-links {
     display: flex;
+
     flex-direction: column;
+
     gap: 8px;
 }
 
@@ -1830,14 +1830,21 @@ p {
    16. WHATSAPP FLUTUANTE
    ========================================================= */
 
+/*
+   DESKTOP
+   Continua como botão com texto.
+*/
+
 .whatsapp-float {
     position: fixed;
+
     z-index: 999;
 
     right: 24px;
     bottom: 24px;
 
     display: inline-flex;
+
     align-items: center;
     justify-content: center;
 
@@ -1848,9 +1855,11 @@ p {
     border-radius: 999px;
 
     background: #4f8061;
+
     color: #fff;
 
     font-size: 12px;
+
     font-weight: 600;
 
     box-shadow:
@@ -1882,6 +1891,7 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
     outline: 3px solid rgba(118,98,143,.35);
+
     outline-offset: 3px;
 }
 
@@ -1895,7 +1905,9 @@ textarea:focus-visible {
     *::before,
     *::after {
         animation-duration: .01ms !important;
+
         animation-iteration-count: 1 !important;
+
         transition-duration: .01ms !important;
     }
 }
@@ -1955,7 +1967,9 @@ textarea:focus-visible {
     }
 
 
-    /* HEADER */
+    /* =====================================================
+       HEADER
+       ===================================================== */
 
     .site-header {
         top: 10px;
@@ -1969,10 +1983,14 @@ textarea:focus-visible {
         border-radius: 18px;
     }
 
-    /* MARCA MOBILE */
+
+    /* =====================================================
+       MARCA MOBILE
+       ===================================================== */
 
     .brand {
         gap: 9px;
+
         min-width: 0;
     }
 
@@ -1993,10 +2011,16 @@ textarea:focus-visible {
         letter-spacing: .065em;
     }
 
+
+    /* =====================================================
+       MENU MOBILE
+       ===================================================== */
+
     .nav-menu {
         position: absolute;
 
         top: calc(100% + 10px);
+
         left: 0;
         right: 0;
 
@@ -2019,6 +2043,7 @@ textarea:focus-visible {
 
     .nav-menu ul {
         flex-direction: column;
+
         align-items: stretch;
 
         gap: 0;
@@ -2050,11 +2075,14 @@ textarea:focus-visible {
 
     .mobile-toggle {
         display: flex;
+
         margin-left: auto;
     }
 
 
-    /* HERO */
+    /* =====================================================
+       HERO
+       ===================================================== */
 
     .hero {
         min-height: auto;
@@ -2110,21 +2138,31 @@ textarea:focus-visible {
 
     .hero-image {
         width: min(100%, 420px);
+
         height: 500px;
     }
 
+
+    /* =====================================================
+       FORMAS DO HERO
+       ===================================================== */
+
     .shape-tag-coral {
         left: 3%;
+
         bottom: 70px;
     }
 
     .shape-tag-yellow {
         right: 2%;
+
         top: 30px;
     }
 
 
-    /* SOBRE */
+    /* =====================================================
+       SOBRE
+       ===================================================== */
 
     .about-grid {
         grid-template-columns: 1fr;
@@ -2143,7 +2181,9 @@ textarea:focus-visible {
     }
 
 
-    /* HEADINGS */
+    /* =====================================================
+       HEADINGS
+       ===================================================== */
 
     .section-heading {
         grid-template-columns: 1fr;
@@ -2158,7 +2198,9 @@ textarea:focus-visible {
     }
 
 
-    /* ATENDIMENTO */
+    /* =====================================================
+       ATENDIMENTO
+       ===================================================== */
 
     .audience-grid {
         grid-template-columns: 1fr;
@@ -2169,7 +2211,9 @@ textarea:focus-visible {
     }
 
 
-    /* NEURO */
+    /* =====================================================
+       NEURO
+       ===================================================== */
 
     .neuro-card {
         grid-template-columns: 1fr;
@@ -2186,7 +2230,9 @@ textarea:focus-visible {
     }
 
 
-    /* PRIMEIRA CONSULTA */
+    /* =====================================================
+       PRIMEIRA CONSULTA
+       ===================================================== */
 
     .first-grid {
         grid-template-columns: 1fr;
@@ -2195,7 +2241,9 @@ textarea:focus-visible {
     }
 
 
-    /* DEPOIMENTOS */
+    /* =====================================================
+       DEPOIMENTOS
+       ===================================================== */
 
     .testimonial-grid {
         grid-template-columns: 1fr;
@@ -2206,7 +2254,9 @@ textarea:focus-visible {
     }
 
 
-    /* PSICANÁLISE */
+    /* =====================================================
+       PSICANÁLISE
+       ===================================================== */
 
     .psycho-grid {
         grid-template-columns: 1fr;
@@ -2219,7 +2269,9 @@ textarea:focus-visible {
     }
 
 
-    /* CONTATO */
+    /* =====================================================
+       CONTATO
+       ===================================================== */
 
     .contact-grid {
         grid-template-columns: 1fr;
@@ -2232,12 +2284,77 @@ textarea:focus-visible {
     }
 
 
-    /* FOOTER */
+    /* =====================================================
+       FOOTER
+       ===================================================== */
 
     .footer-grid {
         grid-template-columns: 1fr 1fr;
 
         gap: 45px 30px;
+    }
+
+
+    /* =====================================================
+       WHATSAPP MOBILE
+       ===================================================== */
+
+    /*
+       No celular:
+       - somente círculo verde
+       - sem texto
+       - ícone de telefone
+       - fixo no canto inferior direito
+    */
+
+    .whatsapp-float {
+        width: 56px;
+        height: 56px;
+
+        min-height: 56px;
+
+        padding: 0;
+
+        right: 18px;
+        bottom: 18px;
+
+        border-radius: 50%;
+
+        font-size: 0;
+
+        line-height: 1;
+
+        box-shadow:
+            0 10px 28px rgba(79,128,97,.30);
+    }
+
+    .whatsapp-float::before {
+        content: "☎";
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        width: 100%;
+        height: 100%;
+
+        color: #fff;
+
+        font-family: Arial, sans-serif;
+
+        font-size: 25px;
+
+        line-height: 1;
+    }
+
+    .whatsapp-float:hover {
+        transform: translateY(-3px);
+
+        background: #416b51;
+
+        box-shadow:
+            0 14px 32px rgba(79,128,97,.36);
     }
 }
 
@@ -2261,7 +2378,9 @@ textarea:focus-visible {
     }
 
 
-    /* MARCA */
+    /* =====================================================
+       MARCA
+       ===================================================== */
 
     .brand {
         gap: 8px;
@@ -2278,11 +2397,14 @@ textarea:focus-visible {
 
     .brand-sub {
         font-size: 6px;
+
         letter-spacing: .045em;
     }
 
 
-    /* HERO */
+    /* =====================================================
+       HERO
+       ===================================================== */
 
     .hero {
         padding-top: 125px;
@@ -2342,14 +2464,18 @@ textarea:focus-visible {
     }
 
 
-    /* SOBRE */
+    /* =====================================================
+       SOBRE
+       ===================================================== */
 
     .about-image {
         min-height: 380px;
     }
 
 
-    /* CARDS */
+    /* =====================================================
+       CARDS
+       ===================================================== */
 
     .audience-card {
         min-height: 280px;
@@ -2358,7 +2484,9 @@ textarea:focus-visible {
     }
 
 
-    /* NEURO */
+    /* =====================================================
+       NEURO
+       ===================================================== */
 
     .neuro-card {
         padding: 38px 24px;
@@ -2369,7 +2497,9 @@ textarea:focus-visible {
     }
 
 
-    /* STEPS */
+    /* =====================================================
+       STEPS
+       ===================================================== */
 
     .step {
         grid-template-columns: 55px 1fr;
@@ -2383,7 +2513,9 @@ textarea:focus-visible {
     }
 
 
-    /* FORM */
+    /* =====================================================
+       FORM
+       ===================================================== */
 
     .form-row {
         grid-template-columns: 1fr;
@@ -2394,22 +2526,31 @@ textarea:focus-visible {
     }
 
 
-    /* FOOTER */
+    /* =====================================================
+       FOOTER
+       ===================================================== */
 
     .footer-grid {
         grid-template-columns: 1fr;
     }
 
 
-    /* WHATSAPP */
+    /* =====================================================
+       WHATSAPP — MOBILE PEQUENO
+       ===================================================== */
 
     .whatsapp-float {
+        width: 52px;
+        height: 52px;
+
+        min-height: 52px;
+
         right: 14px;
         bottom: 14px;
+    }
 
-        min-height: 50px;
-
-        padding: 0 18px;
+    .whatsapp-float::before {
+        font-size: 23px;
     }
 }
 
@@ -2452,5 +2593,21 @@ textarea:focus-visible {
     .hero-visual {
         min-height: 390px;
     }
+
+
+    /* WHATSAPP */
+
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+
+        min-height: 50px;
+
+        right: 12px;
+        bottom: 12px;
+    }
+
+    .whatsapp-float::before {
+        font-size: 22px;
+    }
 }
-remova esse e outos dessse que estão nas imagens que ainda nao carreguei
