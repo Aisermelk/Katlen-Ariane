@@ -705,14 +705,6 @@ p {
    CÍRCULOS DECORATIVOS DO HERO — REMOVIDOS
    ========================================================= */
 
-/*
-   Os elementos .hero-orb e .hero-stroke eram responsáveis
-   pelos círculos/transparências sobre a imagem.
-
-   Eles ficam desativados para deixar somente a imagem
-   do consultório.
-*/
-
 .hero-orb,
 .hero-stroke {
     display: none !important;
@@ -1424,6 +1416,11 @@ p {
     font-size: 17px;
 }
 
+
+/* =========================================================
+   IMAGEM DA SALA
+   ========================================================= */
+
 .room-image {
     position: relative;
 
@@ -1447,18 +1444,24 @@ p {
     box-shadow: var(--shadow-md);
 }
 
+
+/*
+   CÍRCULO GRANDE REMOVIDO
+
+   O antigo .room-image::before criava o círculo
+   branco/translúcido que ficava sobre a fotografia.
+
+   Ele foi removido para que a imagem fique limpa.
+*/
+
 .room-image::before {
-    content: "";
-
-    position: absolute;
-
-    width: 300px;
-    height: 300px;
-
-    border-radius: 50%;
-
-    background: rgba(255,255,255,.4);
+    display: none !important;
 }
+
+
+/*
+   Pequeno detalhe coral mantido no canto inferior.
+*/
 
 .room-image::after {
     content: "";
@@ -1829,11 +1832,6 @@ p {
 /* =========================================================
    16. WHATSAPP FLUTUANTE
    ========================================================= */
-
-/*
-   DESKTOP
-   Continua como botão com texto.
-*/
 
 .whatsapp-float {
     position: fixed;
@@ -2298,14 +2296,6 @@ textarea:focus-visible {
     /* =====================================================
        WHATSAPP MOBILE
        ===================================================== */
-
-    /*
-       No celular:
-       - somente círculo verde
-       - sem texto
-       - ícone de telefone
-       - fixo no canto inferior direito
-    */
 
     .whatsapp-float {
         width: 56px;
