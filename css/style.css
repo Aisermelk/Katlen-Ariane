@@ -1,6 +1,7 @@
 /* =========================================================
    KATLEN ARIANE — PSICANALISTA CLÍNICA
    STYLE.CSS PRINCIPAL
+   Adaptado ao novo index
    ========================================================= */
 
 
@@ -9,8 +10,6 @@
    ========================================================= */
 
 :root {
-
-    /* Cores principais */
     --bg: #faf7f3;
     --bg-soft: #f3eee8;
     --bg-white: #ffffff;
@@ -29,21 +28,20 @@
     --yellow: #d9b35b;
     --yellow-light: #f3e8c9;
 
-    --green: #7d9585;
+    --green: #25D366;
+    --green-dark: #1da851;
+    --green-soft: #e9f8ee;
 
     --border: rgba(48, 44, 43, .12);
     --border-strong: rgba(48, 44, 43, .18);
 
-    /* Sombras */
     --shadow-sm: 0 8px 24px rgba(48, 44, 43, .06);
     --shadow-md: 0 18px 45px rgba(48, 44, 43, .09);
     --shadow-lg: 0 30px 70px rgba(48, 44, 43, .12);
 
-    /* Tipografia */
     --font-body: "DM Sans", sans-serif;
     --font-display: "Fraunces", serif;
 
-    /* Layout */
     --container: 1180px;
 
     --radius-sm: 12px;
@@ -51,7 +49,6 @@
     --radius-lg: 32px;
     --radius-xl: 42px;
 
-    /* Transições */
     --transition: .3s ease;
 }
 
@@ -144,7 +141,7 @@ h3 {
 
 
 /* =========================================================
-   04. SEÇÕES
+   04. SEÇÕES E ELEMENTOS GERAIS
    ========================================================= */
 
 .section {
@@ -702,18 +699,13 @@ p {
 
 
 /* =========================================================
-   CÍRCULOS DECORATIVOS DO HERO — REMOVIDOS
+   FORMAS DECORATIVAS
    ========================================================= */
 
 .hero-orb,
 .hero-stroke {
     display: none !important;
 }
-
-
-/* =========================================================
-   FORMAS DECORATIVAS DO HERO
-   ========================================================= */
 
 .shape-tag {
     position: absolute;
@@ -1444,24 +1436,9 @@ p {
     box-shadow: var(--shadow-md);
 }
 
-
-/*
-   CÍRCULO GRANDE REMOVIDO
-
-   O antigo .room-image::before criava o círculo
-   branco/translúcido que ficava sobre a fotografia.
-
-   Ele foi removido para que a imagem fique limpa.
-*/
-
 .room-image::before {
     display: none !important;
 }
-
-
-/*
-   Pequeno detalhe coral mantido no canto inferior.
-*/
 
 .room-image::after {
     content: "";
@@ -1831,37 +1808,48 @@ p {
 
 /* =========================================================
    16. WHATSAPP FLUTUANTE
+   =========================================================
+   Compatível com:
+   
+   <a class="whatsapp-float" href="...">
+       <svg>...</svg>
+       <span>Quero conversar</span>
+   </a>
+   
+   O botão usa o ícone SVG do WhatsApp definido no index.
    ========================================================= */
 
 .whatsapp-float {
     position: fixed;
 
-    z-index: 999;
+    z-index: 9999;
 
     right: 24px;
     bottom: 24px;
 
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
 
-    min-height: 54px;
+    gap: 10px;
+
+    min-height: 56px;
 
     padding: 0 22px;
 
     border-radius: 999px;
 
-    background: #4f8061;
+    background: var(--green);
 
     color: #fff;
 
-    font-size: 12px;
-
+    font-size: 13px;
     font-weight: 600;
 
+    line-height: 1;
+
     box-shadow:
-        0 14px 35px rgba(79,128,97,.28);
+        0 12px 30px rgba(37, 211, 102, .28);
 
     transition:
         transform var(--transition),
@@ -1870,12 +1858,30 @@ p {
 }
 
 .whatsapp-float:hover {
-    background: #416b51;
+    background: var(--green-dark);
+
+    color: #fff;
 
     transform: translateY(-4px);
 
     box-shadow:
-        0 18px 40px rgba(79,128,97,.35);
+        0 17px 38px rgba(37, 211, 102, .35);
+}
+
+.whatsapp-float svg {
+    width: 25px;
+    height: 25px;
+
+    flex-shrink: 0;
+
+    display: block;
+
+    fill: currentColor;
+}
+
+.whatsapp-float span {
+    display: inline-flex;
+    align-items: center;
 }
 
 
@@ -1983,7 +1989,7 @@ textarea:focus-visible {
 
 
     /* =====================================================
-       MARCA MOBILE
+       MARCA
        ===================================================== */
 
     .brand {
@@ -2011,7 +2017,7 @@ textarea:focus-visible {
 
 
     /* =====================================================
-       MENU MOBILE
+       MENU
        ===================================================== */
 
     .nav-menu {
@@ -2310,41 +2316,28 @@ textarea:focus-visible {
 
         border-radius: 50%;
 
-        font-size: 0;
-
-        line-height: 1;
+        gap: 0;
 
         box-shadow:
-            0 10px 28px rgba(79,128,97,.30);
+            0 10px 28px rgba(37, 211, 102, .30);
     }
 
-    .whatsapp-float::before {
-        content: "☎";
+    .whatsapp-float span {
+        display: none;
+    }
 
-        display: flex;
-
-        align-items: center;
-        justify-content: center;
-
-        width: 100%;
-        height: 100%;
-
-        color: #fff;
-
-        font-family: Arial, sans-serif;
-
-        font-size: 25px;
-
-        line-height: 1;
+    .whatsapp-float svg {
+        width: 29px;
+        height: 29px;
     }
 
     .whatsapp-float:hover {
         transform: translateY(-3px);
 
-        background: #416b51;
+        background: var(--green-dark);
 
         box-shadow:
-            0 14px 32px rgba(79,128,97,.36);
+            0 14px 32px rgba(37, 211, 102, .36);
     }
 }
 
@@ -2526,7 +2519,7 @@ textarea:focus-visible {
 
 
     /* =====================================================
-       WHATSAPP — MOBILE PEQUENO
+       WHATSAPP
        ===================================================== */
 
     .whatsapp-float {
@@ -2539,8 +2532,9 @@ textarea:focus-visible {
         bottom: 14px;
     }
 
-    .whatsapp-float::before {
-        font-size: 23px;
+    .whatsapp-float svg {
+        width: 27px;
+        height: 27px;
     }
 }
 
@@ -2585,7 +2579,9 @@ textarea:focus-visible {
     }
 
 
-    /* WHATSAPP */
+    /* =====================================================
+       WHATSAPP
+       ===================================================== */
 
     .whatsapp-float {
         width: 50px;
@@ -2597,7 +2593,8 @@ textarea:focus-visible {
         bottom: 12px;
     }
 
-    .whatsapp-float::before {
-        font-size: 22px;
+    .whatsapp-float svg {
+        width: 25px;
+        height: 25px;
     }
 }
