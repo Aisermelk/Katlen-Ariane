@@ -544,33 +544,33 @@ function setupFooter(config) {
 
 function setupAbout(config) {
 
-    const formacao =
-        String(
-            config.content.formation ||
-            ""
-        ).trim();
-
-
     const especializacao =
         String(
-            config.content.specialization ||
+            config.content?.specialization ||
             ""
         ).trim();
 
 
     const experiencia =
         String(
-            config.content.experience ||
+            config.content?.experience ||
             ""
         ).trim();
 
 
     const neurodevelopment =
         String(
-            config.content.neurodevelopment ||
+            config.content?.neurodevelopment ||
             ""
         ).trim();
 
+
+    /* =====================================================
+       FORMAÇÃO / SOBRE
+       
+       O conteúdo principal já está no index.html.
+       Não sobrescrever com o Worker.
+       ===================================================== */
 
     const aboutFormacao =
         getElement(
@@ -580,11 +580,20 @@ function setupAbout(config) {
 
     if (aboutFormacao) {
 
-        aboutFormacao.textContent =
-            formacao ||
-            "Psicanalista dedicada a construir um espaço de escuta e reflexão, respeitando a singularidade de cada pessoa e de cada história.";
+        /*
+         * Mantém o conteúdo original do HTML.
+         *
+         * Isso preserva:
+         * - os 3 parágrafos
+         * - <br><br>
+         * - toda a formatação definida no index.html
+         */
     }
 
+
+    /* =====================================================
+       ESPECIALIZAÇÕES
+       ===================================================== */
 
     const aboutEspecializacoes =
         getElement(
@@ -603,7 +612,6 @@ function setupAbout(config) {
                 aboutEspecializacoes
             );
 
-
         } else {
 
             hideElement(
@@ -612,6 +620,10 @@ function setupAbout(config) {
         }
     }
 
+
+    /* =====================================================
+       EXPERIÊNCIA
+       ===================================================== */
 
     const aboutExperiencia =
         getElement(
@@ -630,7 +642,6 @@ function setupAbout(config) {
                 aboutExperiencia
             );
 
-
         } else {
 
             hideElement(
@@ -639,6 +650,10 @@ function setupAbout(config) {
         }
     }
 
+
+    /* =====================================================
+       NEURODESENVOLVIMENTO
+       ===================================================== */
 
     const aboutNeuro =
         getElement(
@@ -657,7 +672,6 @@ function setupAbout(config) {
                 aboutNeuro
             );
 
-
         } else {
 
             hideElement(
@@ -666,7 +680,6 @@ function setupAbout(config) {
         }
     }
 }
-
 
 /* =========================================================
    9. WHATSAPP
