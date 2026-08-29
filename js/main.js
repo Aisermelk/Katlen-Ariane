@@ -1,1239 +1,1509 @@
 /* =========================================================
-   KATLEN ARIANE — MAIN.JS
-   Site institucional / Psicanálise
+KATLEN ARIANE — MAIN.JS
+Site institucional / Psicanálise
 
-   Integração:
-   Cloudflare Worker + KV
+Integração:
+V8 Admin Universal
 
-   API pública:
-   https://katlen-admin.aisermelk.workers.dev/api/config
-   ========================================================= */
+O V8 Loader é responsável por:
+
+* WhatsApp
+* Redes sociais
+* Formspree
+* Meta Pixel
+* Google Analytics
+* Google Tag Manager
+* Leads
+* Configurações dinâmicas
+
+Project ID:
+51922766-9775-47eb-ace0-a90af01dd9bb
+========================================================= */
 
 "use strict";
 
-
 /* =========================================================
-   1. CONFIGURAÇÃO DA API
+
+1. CONFIGURAÇÃO
    ========================================================= */
 
-const CONFIG_API_URL =
-    "https://katlen-admin.aisermelk.workers.dev/api/config";
-
-
-/* =========================================================
-   2. CONFIGURAÇÃO FALLBACK
-   ========================================================= */
-
-const FALLBACK_CONFIG = {
-
-    site: {
-
-        name:
-            "Katlen Ariane",
-
-        profession:
-            "Psicanalista",
-
-        registration:
-            "CBPC 2022-6172",
-
-        description:
-            "",
-
-        phone:
-            "",
-
-        whatsapp:
-            "",
-
-        email:
-            "",
-
-        address:
-            ""
-    },
-
-
-    social: {
-
-        instagram:
-            "",
-
-        facebook:
-            "",
-
-        tiktok:
-            "",
-
-        linkedin:
-            ""
-    },
-
-
-    forms: {
-
-        formspree:
-            ""
-    },
-
-
-    tracking: {
-
-        metaPixel:
-            "",
-
-        googleAnalytics:
-            "",
-
-        googleTagManager:
-            "",
-
-        metaPixelEnabled:
-            false,
-
-        googleAnalyticsEnabled:
-            false,
-
-        googleTagManagerEnabled:
-            false
-    },
-
-
-    content: {
-
-        formation:
-            "",
-
-        specialization:
-            "",
-
-        experience:
-            "",
-
-        neurodevelopment:
-            ""
-    },
-
-
-    attendance: {
-
-        families:
-            true,
-
-        women:
-            true,
-
-        children:
-            true,
-
-        adolescents:
-            true
-    }
-
-};
-
+const V8_PROJECT_ID =
+"51922766-9775-47eb-ace0-a90af01dd9bb";
 
 /* =========================================================
-   3. UTILITÁRIOS
-   ========================================================= */
+2. UTILITÁRIOS
+========================================================= */
 
 function getElement(id) {
 
-    return document.getElementById(id);
-}
+```
+return document.getElementById(id);
+```
 
+}
 
 function setText(id, value) {
 
-    const element =
-        getElement(id);
+```
+const element =
+    getElement(id);
 
-    if (
-        !element ||
-        value === undefined ||
-        value === null
-    ) {
+if (
+    !element ||
+    value === undefined ||
+    value === null
+) {
 
-        return;
-    }
-
-    element.textContent =
-        value;
+    return;
 }
 
+element.textContent =
+    String(value);
+```
+
+}
 
 function hideElement(element) {
 
-    if (!element) {
-        return;
-    }
-
-    element.style.display =
-        "none";
+```
+if (!element) {
+    return;
 }
 
+element.style.display =
+    "none";
+```
+
+}
 
 function showElement(
-    element,
-    display = ""
+element,
+display = ""
 ) {
 
-    if (!element) {
-        return;
-    }
+```
+if (!element) {
+    return;
+}
 
-    element.style.display =
-        display;
+element.style.display =
+    display;
+```
+
+}
+
+/* =========================================================
+3. CONFIGURAÇÃO RECEBIDA DO V8 ADMIN
+========================================================= */
+
+let V8_CONFIG = null;
+
+function getConfigValue(
+path,
+fallback = ""
+) {
+
+```
+if (
+    !V8_CONFIG ||
+    !path
+) {
+
+    return fallback;
 }
 
 
-/* =========================================================
-   4. NORMALIZAÇÃO DA CONFIGURAÇÃO
-   ========================================================= */
+const value =
+    path
+        .split(".")
+        .reduce(
+            (
+                current,
+                key
+            ) => {
 
-/*
- * O Worker utiliza uma estrutura organizada:
- *
- * site.whatsapp
- * site.address
- * social.instagram
- * tracking.metaPixel
- * etc.
- *
- * O restante do site recebe exatamente essa estrutura.
- */
+                if (
+                    current ===
+                    null ||
+                    current ===
+                    undefined
+                ) {
 
-function normalizeConfig(remoteConfig) {
-
-    if (
-        !remoteConfig ||
-        typeof remoteConfig !== "object"
-    ) {
-
-        return structuredClone(
-            FALLBACK_CONFIG
-        );
-    }
-
-
-    return {
-
-        site: {
-
-            ...FALLBACK_CONFIG.site,
-
-            ...(remoteConfig.site || {})
-        },
-
-
-        social: {
-
-            ...FALLBACK_CONFIG.social,
-
-            ...(remoteConfig.social || {})
-        },
-
-
-        forms: {
-
-            ...FALLBACK_CONFIG.forms,
-
-            ...(remoteConfig.forms || {})
-        },
-
-
-        tracking: {
-
-            ...FALLBACK_CONFIG.tracking,
-
-            ...(remoteConfig.tracking || {})
-        },
-
-
-        content: {
-
-            ...FALLBACK_CONFIG.content,
-
-            ...(remoteConfig.content || {})
-        },
-
-
-        attendance: {
-
-            ...FALLBACK_CONFIG.attendance,
-
-            ...(remoteConfig.attendance || {})
-        }
-
-    };
-}
-
-
-/* =========================================================
-   5. CARREGAR CONFIGURAÇÃO DO WORKER
-   ========================================================= */
-
-async function loadConfig() {
-
-    try {
-
-        const response =
-            await fetch(
-                CONFIG_API_URL,
-                {
-                    method:
-                        "GET",
-
-                    mode:
-                        "cors",
-
-                    credentials:
-                        "omit",
-
-                    cache:
-                        "no-store",
-
-                    headers: {
-
-                        "Accept":
-                            "application/json"
-                    }
+                    return undefined;
                 }
-            );
 
+                return current[key];
 
-        if (!response.ok) {
-
-            throw new Error(
-                `HTTP ${response.status}`
-            );
-        }
-
-
-        const contentType =
-            response.headers.get(
-                "content-type"
-            ) || "";
-
-
-        if (
-            !contentType
-                .toLowerCase()
-                .includes(
-                    "application/json"
-                )
-        ) {
-
-            throw new Error(
-                "O Worker não retornou JSON."
-            );
-        }
-
-
-        const remoteConfig =
-            await response.json();
-
-
-        const config =
-            normalizeConfig(
-                remoteConfig
-            );
-
-
-        console.info(
-            "Configuração carregada do Worker."
+            },
+            V8_CONFIG
         );
 
 
-        return config;
+if (
+    value ===
+    undefined ||
+    value ===
+    null
+) {
 
-
-    } catch (error) {
-
-        console.warn(
-            "Não foi possível carregar a configuração do Worker.",
-            error
-        );
-
-
-        console.warn(
-            "URL utilizada:",
-            CONFIG_API_URL
-        );
-
-
-        console.warn(
-            "Utilizando configuração fallback."
-        );
-
-
-        return structuredClone(
-            FALLBACK_CONFIG
-        );
-    }
+    return fallback;
 }
 
 
+return value;
+```
+
+}
+
 /* =========================================================
-   6. REGISTRO PROFISSIONAL
-   ========================================================= */
+4. REGISTRO PROFISSIONAL
+========================================================= */
 
-function setupProfessionalRegistration(
-    config
-) {
+function setupProfessionalRegistration() {
 
-    const container =
-        getElement(
-            "prof-reg-container"
-        );
-
-
-    const label =
-        getElement(
-            "reg-label"
-        );
+```
+const container =
+    getElement(
+        "prof-reg-container"
+    );
 
 
-    const value =
-        getElement(
-            "reg-value"
-        );
+const label =
+    getElement(
+        "reg-label"
+    );
 
 
-    if (!container) {
-        return;
-    }
+const value =
+    getElement(
+        "reg-value"
+    );
 
 
-    const registration =
-        String(
-            config.site.registration ||
-            ""
-        ).trim();
+if (!container) {
+    return;
+}
 
 
-    if (!registration) {
-
-        hideElement(
-            container
-        );
-
-        return;
-    }
-
-
-    if (label) {
-
-        label.textContent =
-            "Registro profissional";
-    }
+const registration =
+    String(
+        getConfigValue(
+            "site.registration",
+            "CBPC 2022-6172"
+        )
+    ).trim();
 
 
-    if (value) {
+if (!registration) {
 
-        value.textContent =
-            registration;
-    }
-
-
-    showElement(
+    hideElement(
         container
     );
+
+    return;
 }
 
 
-/* =========================================================
-   7. RODAPÉ
-   ========================================================= */
+if (label) {
 
-function setupFooter(config) {
-
-    const whatsapp =
-        String(
-            config.site.whatsapp ||
-            ""
-        ).trim();
-
-
-    const address =
-        String(
-            config.site.address ||
-            ""
-        ).trim();
-
-
-    const registration =
-        String(
-            config.site.registration ||
-            ""
-        ).trim();
-
-
-    const footerWhatsapp =
-        getElement(
-            "footer-whatsapp"
-        );
-
-
-    if (footerWhatsapp) {
-
-        if (whatsapp) {
-
-            footerWhatsapp.textContent =
-                whatsapp;
-
-            showElement(
-                footerWhatsapp
-            );
-
-
-        } else {
-
-            hideElement(
-                footerWhatsapp
-            );
-        }
-    }
-
-
-    const footerAddress =
-        getElement(
-            "footer-address"
-        );
-
-
-    if (footerAddress) {
-
-        if (address) {
-
-            footerAddress.textContent =
-                address;
-
-            showElement(
-                footerAddress
-            );
-
-
-        } else {
-
-            hideElement(
-                footerAddress
-            );
-        }
-    }
-
-
-    const footerRegistration =
-        getElement(
-            "footer-registration"
-        );
-
-
-    if (footerRegistration) {
-
-        footerRegistration.textContent =
-            registration ||
-            "Psicanalista Clínica";
-    }
+    label.textContent =
+        "Registro profissional";
 }
 
 
-/* =========================================================
-   8. SOBRE / FORMAÇÃO
-   ========================================================= */
+if (value) {
 
-function setupAbout(config) {
-
-    const especializacao =
-        String(
-            config.content?.specialization ||
-            ""
-        ).trim();
+    value.textContent =
+        registration;
+}
 
 
-    const experiencia =
-        String(
-            config.content?.experience ||
-            ""
-        ).trim();
+showElement(
+    container
+);
+```
 
-
-    const neurodevelopment =
-        String(
-            config.content?.neurodevelopment ||
-            ""
-        ).trim();
-
-
-    /* =====================================================
-       FORMAÇÃO / SOBRE
-       
-       O conteúdo principal já está no index.html.
-       Não sobrescrever com o Worker.
-       ===================================================== */
-
-    const aboutFormacao =
-        getElement(
-            "about-formacao"
-        );
-
-
-    if (aboutFormacao) {
-
-        /*
-         * Mantém o conteúdo original do HTML.
-         *
-         * Isso preserva:
-         * - os 3 parágrafos
-         * - <br><br>
-         * - toda a formatação definida no index.html
-         */
-    }
-
-
-    /* =====================================================
-       ESPECIALIZAÇÕES
-       ===================================================== */
-
-    const aboutEspecializacoes =
-        getElement(
-            "about-especializacoes"
-        );
-
-
-    if (aboutEspecializacoes) {
-
-        if (especializacao) {
-
-            aboutEspecializacoes.textContent =
-                especializacao;
-
-            showElement(
-                aboutEspecializacoes
-            );
-
-        } else {
-
-            hideElement(
-                aboutEspecializacoes
-            );
-        }
-    }
-
-
-    /* =====================================================
-       EXPERIÊNCIA
-       ===================================================== */
-
-    const aboutExperiencia =
-        getElement(
-            "about-experiencia"
-        );
-
-
-    if (aboutExperiencia) {
-
-        if (experiencia) {
-
-            aboutExperiencia.textContent =
-                experiencia;
-
-            showElement(
-                aboutExperiencia
-            );
-
-        } else {
-
-            hideElement(
-                aboutExperiencia
-            );
-        }
-    }
-
-
-    /* =====================================================
-       NEURODESENVOLVIMENTO
-       ===================================================== */
-
-    const aboutNeuro =
-        getElement(
-            "about-neurodesenvolvimento"
-        );
-
-
-    if (aboutNeuro) {
-
-        if (neurodevelopment) {
-
-            aboutNeuro.textContent =
-                neurodevelopment;
-
-            showElement(
-                aboutNeuro
-            );
-
-        } else {
-
-            hideElement(
-                aboutNeuro
-            );
-        }
-    }
 }
 
 /* =========================================================
-   9. WHATSAPP
-   ========================================================= */
+5. RODAPÉ
+========================================================= */
 
-function normalizeWhatsAppNumber(
-    number
-) {
+function setupFooter() {
 
-    return String(
-        number || ""
-    )
-        .replace(/\D/g, "")
-        .trim();
-}
-
-
-function createWhatsAppURL(
-    number,
-    message
-) {
-
-    const cleanNumber =
-        normalizeWhatsAppNumber(
-            number
-        );
+```
+const whatsapp =
+    String(
+        getConfigValue(
+            "site.whatsapp",
+            ""
+        )
+    ).trim();
 
 
-    if (!cleanNumber) {
-
-        return "";
-    }
-
-
-    const encodedMessage =
-        encodeURIComponent(
-            message || ""
-        );
+const address =
+    String(
+        getConfigValue(
+            "site.address",
+            ""
+        )
+    ).trim();
 
 
-    return (
-        `https://wa.me/${cleanNumber}` +
-        `?text=${encodedMessage}`
-    );
-}
+const registration =
+    String(
+        getConfigValue(
+            "site.registration",
+            "CBPC 2022-6172"
+        )
+    ).trim();
 
 
-function setupWhatsApp(config) {
-
-    const whatsapp =
-        config.site.whatsapp;
-
-
-    const message =
-        "Olá Katlen, vim pelo site e gostaria de saber mais sobre o atendimento.";
-
-
-    const whatsappURL =
-        createWhatsAppURL(
-            whatsapp,
-            message
-        );
-
-
-    console.info(
-        "WhatsApp configurado:",
-        whatsapp
+const footerWhatsapp =
+    getElement(
+        "footer-whatsapp"
     );
 
 
-    /* -----------------------------------------
-       BOTÃO PRINCIPAL
-    ----------------------------------------- */
+if (footerWhatsapp) {
 
-    const whatsappLink =
-        getElement(
-            "whatsapp-link"
+    if (whatsapp) {
+
+        showElement(
+            footerWhatsapp
         );
-
-
-    if (whatsappLink) {
-
-        if (whatsappURL) {
-
-            whatsappLink.href =
-                whatsappURL;
-
-            whatsappLink.target =
-                "_blank";
-
-            whatsappLink.rel =
-                "noopener noreferrer";
-
-            showElement(
-                whatsappLink,
-                "flex"
-            );
-
-
-        } else {
-
-            hideElement(
-                whatsappLink
-            );
-        }
-    }
-
-
-    /* -----------------------------------------
-       DATA-WHATSAPP
-    ----------------------------------------- */
-
-    document
-        .querySelectorAll(
-            "[data-whatsapp]"
-        )
-        .forEach(
-            element => {
-
-                if (!whatsappURL) {
-
-                    hideElement(
-                        element
-                    );
-
-                    return;
-                }
-
-
-                element.href =
-                    whatsappURL;
-
-
-                element.target =
-                    "_blank";
-
-
-                element.rel =
-                    "noopener noreferrer";
-
-
-                showElement(
-                    element
-                );
-            }
-        );
-
-
-    /* -----------------------------------------
-       LINKS #WHATSAPP
-    ----------------------------------------- */
-
-    document
-        .querySelectorAll(
-            'a[href="#whatsapp"]'
-        )
-        .forEach(
-            link => {
-
-                if (!whatsappURL) {
-
-                    return;
-                }
-
-
-                link.href =
-                    whatsappURL;
-
-
-                link.target =
-                    "_blank";
-
-
-                link.rel =
-                    "noopener noreferrer";
-            }
-        );
-
-
-    /* -----------------------------------------
-       DATA-WHATSAPP-MESSAGE
-       Permite mensagem personalizada
-    ----------------------------------------- */
-
-    document
-        .querySelectorAll(
-            "[data-whatsapp-message]"
-        )
-        .forEach(
-            element => {
-
-                if (!whatsapp) {
-
-                    hideElement(
-                        element
-                    );
-
-                    return;
-                }
-
-
-                const customMessage =
-                    element.getAttribute(
-                        "data-whatsapp-message"
-                    ) ||
-                    message;
-
-
-                const customURL =
-                    createWhatsAppURL(
-                        whatsapp,
-                        customMessage
-                    );
-
-
-                element.href =
-                    customURL;
-
-
-                element.target =
-                    "_blank";
-
-
-                element.rel =
-                    "noopener noreferrer";
-
-
-                showElement(
-                    element
-                );
-            }
-        );
-}
-
-
-/* =========================================================
-   10. FORMSPREE
-   ========================================================= */
-
-function setupFormspree(config) {
-
-    const form =
-        getElement(
-            "main-form"
-        );
-
-
-    if (!form) {
-        return;
-    }
-
-
-    const configuredEndpoint =
-        String(
-            config.forms.formspree ||
-            ""
-        ).trim();
-
-
-    if (!configuredEndpoint) {
-
-        console.warn(
-            "Formspree não configurado."
-        );
-
-        return;
-    }
-
-
-    let endpoint =
-        configuredEndpoint;
-
-
-    if (
-        endpoint.startsWith(
-            "http://"
-        ) ||
-        endpoint.startsWith(
-            "https://"
-        )
-    ) {
-
-        form.action =
-            endpoint;
-
 
     } else {
 
-        endpoint =
-            endpoint
-                .replace(
-                    /^\/+/,
-                    ""
-                )
-                .replace(
-                    /^f\//,
-                    ""
-                );
-
-
-        form.action =
-            `https://formspree.io/f/${endpoint}`;
+        hideElement(
+            footerWhatsapp
+        );
     }
-
-
-    form.method =
-        "POST";
-
-
-    console.info(
-        "Formspree configurado."
-    );
 }
 
 
-/* =========================================================
-   11. REDES SOCIAIS
-   ========================================================= */
-
-function setupSocialLinks(config) {
-
-    const socialMap = {
-
-        instagram:
-            config.social.instagram,
-
-        facebook:
-            config.social.facebook,
-
-        tiktok:
-            config.social.tiktok,
-
-        linkedin:
-            config.social.linkedin
-    };
-
-
-    Object.entries(
-        socialMap
-    ).forEach(
-        ([network, url]) => {
-
-            const cleanURL =
-                String(
-                    url || ""
-                ).trim();
-
-
-            document
-                .querySelectorAll(
-                    `[data-social="${network}"]`
-                )
-                .forEach(
-                    link => {
-
-                        if (cleanURL) {
-
-                            link.href =
-                                cleanURL;
-
-                            link.target =
-                                "_blank";
-
-                            link.rel =
-                                "noopener noreferrer";
-
-                            showElement(
-                                link
-                            );
-
-
-                        } else {
-
-                            hideElement(
-                                link
-                            );
-                        }
-                    }
-                );
-        }
+const footerAddress =
+    getElement(
+        "footer-address"
     );
 
 
-    /* -----------------------------------------
-       COMPATIBILIDADE COM IDs ANTIGOS
-    ----------------------------------------- */
+if (footerAddress) {
 
-    const legacyMap = {
+    if (address) {
 
-        "instagram-link":
-            config.social.instagram,
+        footerAddress.textContent =
+            address;
 
-        "facebook-link":
-            config.social.facebook,
+        showElement(
+            footerAddress
+        );
 
-        "tiktok-link":
-            config.social.tiktok,
+    } else {
 
-        "linkedin-link":
-            config.social.linkedin
-    };
-
-
-    Object.entries(
-        legacyMap
-    ).forEach(
-        ([id, url]) => {
-
-            const link =
-                getElement(id);
+        hideElement(
+            footerAddress
+        );
+    }
+}
 
 
-            if (!link) {
+const footerRegistration =
+    getElement(
+        "footer-registration"
+    );
+
+
+if (footerRegistration) {
+
+    footerRegistration.textContent =
+        registration ||
+        "Psicanalista Clínica";
+}
+```
+
+}
+
+/* =========================================================
+6. CONTEÚDO SOBRE
+========================================================= */
+
+function setupAbout() {
+
+```
+const especializacao =
+    String(
+        getConfigValue(
+            "content.specialization",
+            ""
+        )
+    ).trim();
+
+
+const experiencia =
+    String(
+        getConfigValue(
+            "content.experience",
+            ""
+        )
+    ).trim();
+
+
+const neurodevelopment =
+    String(
+        getConfigValue(
+            "content.neurodevelopment",
+            ""
+        )
+    ).trim();
+
+
+/*
+ * O conteúdo principal de formação
+ * permanece no index.html.
+ */
+
+
+const aboutEspecializacoes =
+    getElement(
+        "about-especializacoes"
+    );
+
+
+if (aboutEspecializacoes) {
+
+    if (especializacao) {
+
+        aboutEspecializacoes.textContent =
+            especializacao;
+
+        showElement(
+            aboutEspecializacoes
+        );
+
+    } else {
+
+        hideElement(
+            aboutEspecializacoes
+        );
+    }
+}
+
+
+const aboutExperiencia =
+    getElement(
+        "about-experiencia"
+    );
+
+
+if (aboutExperiencia) {
+
+    if (experiencia) {
+
+        aboutExperiencia.textContent =
+            experiencia;
+
+        showElement(
+            aboutExperiencia
+        );
+
+    } else {
+
+        hideElement(
+            aboutExperiencia
+        );
+    }
+}
+
+
+const aboutNeuro =
+    getElement(
+        "about-neurodesenvolvimento"
+    );
+
+
+if (aboutNeuro) {
+
+    if (neurodevelopment) {
+
+        aboutNeuro.textContent =
+            neurodevelopment;
+
+        showElement(
+            aboutNeuro
+        );
+
+    } else {
+
+        hideElement(
+            aboutNeuro
+        );
+    }
+}
+```
+
+}
+
+/* =========================================================
+7. WHATSAPP
+========================================================= */
+
+function normalizeWhatsAppNumber(
+number
+) {
+
+```
+return String(
+    number || ""
+)
+    .replace(
+        /\D/g,
+        ""
+    )
+    .trim();
+```
+
+}
+
+function createWhatsAppURL(
+number,
+message
+) {
+
+```
+const cleanNumber =
+    normalizeWhatsAppNumber(
+        number
+    );
+
+
+if (!cleanNumber) {
+
+    return "";
+}
+
+
+const encodedMessage =
+    encodeURIComponent(
+        message || ""
+    );
+
+
+return (
+    "https://wa.me/" +
+    cleanNumber +
+    "?text=" +
+    encodedMessage
+);
+```
+
+}
+
+function setupWhatsApp() {
+
+```
+const whatsapp =
+    String(
+        getConfigValue(
+            "site.whatsapp",
+            ""
+        )
+    ).trim();
+
+
+const message =
+    "Olá Katlen, vim pelo site e gostaria de saber mais sobre o atendimento.";
+
+
+const whatsappURL =
+    createWhatsAppURL(
+        whatsapp,
+        message
+    );
+
+
+console.info(
+    "V8 Admin — WhatsApp:",
+    whatsapp
+        ? "configurado"
+        : "não configurado"
+);
+
+
+/*
+ * Botão flutuante
+ */
+
+const whatsappLink =
+    getElement(
+        "whatsapp-link"
+    );
+
+
+if (whatsappLink) {
+
+    if (whatsappURL) {
+
+        whatsappLink.href =
+            whatsappURL;
+
+        whatsappLink.target =
+            "_blank";
+
+        whatsappLink.rel =
+            "noopener noreferrer";
+
+        whatsappLink.style.display =
+            "flex";
+
+    } else {
+
+        hideElement(
+            whatsappLink
+        );
+    }
+}
+
+
+/*
+ * Elementos data-whatsapp
+ */
+
+document
+    .querySelectorAll(
+        "[data-whatsapp]"
+    )
+    .forEach(
+        element => {
+
+            if (!whatsappURL) {
+
+                hideElement(
+                    element
+                );
+
                 return;
             }
 
 
-            const cleanURL =
-                String(
-                    url || ""
-                ).trim();
+            element.href =
+                whatsappURL;
 
 
-            if (cleanURL) {
+            element.target =
+                "_blank";
 
-                link.href =
-                    cleanURL;
 
-                link.target =
-                    "_blank";
+            element.rel =
+                "noopener noreferrer";
 
-                link.rel =
-                    "noopener noreferrer";
 
-                showElement(
-                    link
+            showElement(
+                element
+            );
+        }
+    );
+
+
+/*
+ * Links antigos #whatsapp
+ */
+
+document
+    .querySelectorAll(
+        'a[href="#whatsapp"]'
+    )
+    .forEach(
+        link => {
+
+            if (!whatsappURL) {
+                return;
+            }
+
+
+            link.href =
+                whatsappURL;
+
+
+            link.target =
+                "_blank";
+
+
+            link.rel =
+                "noopener noreferrer";
+        }
+    );
+
+
+/*
+ * Mensagens personalizadas
+ */
+
+document
+    .querySelectorAll(
+        "[data-whatsapp-message]"
+    )
+    .forEach(
+        element => {
+
+            if (!whatsapp) {
+
+                hideElement(
+                    element
+                );
+
+                return;
+            }
+
+
+            const customMessage =
+                element.getAttribute(
+                    "data-whatsapp-message"
+                ) ||
+                message;
+
+
+            const customURL =
+                createWhatsAppURL(
+                    whatsapp,
+                    customMessage
                 );
 
 
-            } else {
+            element.href =
+                customURL;
+
+
+            element.target =
+                "_blank";
+
+
+            element.rel =
+                "noopener noreferrer";
+
+
+            showElement(
+                element
+            );
+        }
+    );
+```
+
+}
+
+/* =========================================================
+8. CONTATO
+========================================================= */
+
+function setupContactLinks() {
+
+```
+const phone =
+    String(
+        getConfigValue(
+            "site.phone",
+            getConfigValue(
+                "site.whatsapp",
+                ""
+            )
+        )
+    ).trim();
+
+
+const address =
+    String(
+        getConfigValue(
+            "site.address",
+            ""
+        )
+    ).trim();
+
+
+document
+    .querySelectorAll(
+        "[data-phone]"
+    )
+    .forEach(
+        element => {
+
+            if (!phone) {
 
                 hideElement(
-                    link
+                    element
+                );
+
+                return;
+            }
+
+
+            element.textContent =
+                phone;
+
+
+            if (
+                element.tagName
+                    .toLowerCase() ===
+                "a"
+            ) {
+
+                const cleanPhone =
+                    phone.replace(
+                        /\D/g,
+                        ""
+                    );
+
+
+                if (cleanPhone) {
+
+                    element.href =
+                        "tel:+" +
+                        cleanPhone;
+                }
+            }
+
+
+            showElement(
+                element
+            );
+        }
+    );
+
+
+document
+    .querySelectorAll(
+        "[data-address]"
+    )
+    .forEach(
+        element => {
+
+            if (!address) {
+
+                hideElement(
+                    element
+                );
+
+                return;
+            }
+
+
+            element.textContent =
+                address;
+
+
+            showElement(
+                element
+            );
+        }
+    );
+```
+
+}
+
+/* =========================================================
+9. REDES SOCIAIS
+========================================================= */
+
+function setupSocialLinks() {
+
+```
+const socialMap = {
+
+    instagram:
+        getConfigValue(
+            "social.instagram",
+            ""
+        ),
+
+    facebook:
+        getConfigValue(
+            "social.facebook",
+            ""
+        ),
+
+    tiktok:
+        getConfigValue(
+            "social.tiktok",
+            ""
+        ),
+
+    linkedin:
+        getConfigValue(
+            "social.linkedin",
+            ""
+        )
+};
+
+
+Object.entries(
+    socialMap
+).forEach(
+    (
+        [
+            network,
+            url
+        ]
+    ) => {
+
+        const cleanURL =
+            String(
+                url || ""
+            ).trim();
+
+
+        document
+            .querySelectorAll(
+                `[data-social="${network}"]`
+            )
+            .forEach(
+                link => {
+
+                    if (cleanURL) {
+
+                        link.href =
+                            cleanURL;
+
+                        link.target =
+                            "_blank";
+
+                        link.rel =
+                            "noopener noreferrer";
+
+                        showElement(
+                            link
+                        );
+
+                    } else {
+
+                        hideElement(
+                            link
+                        );
+                    }
+                }
+            );
+    }
+);
+```
+
+}
+
+/* =========================================================
+10. FORMSPREE
+========================================================= */
+
+function setupFormspree() {
+
+```
+const form =
+    getElement(
+        "main-form"
+    );
+
+
+if (!form) {
+    return;
+}
+
+
+const configuredEndpoint =
+    String(
+        getConfigValue(
+            "formspree",
+            getConfigValue(
+                "forms.formspree",
+                ""
+            )
+        )
+    ).trim();
+
+
+if (!configuredEndpoint) {
+
+    console.warn(
+        "V8 Admin — Formspree não configurado."
+    );
+
+    return;
+}
+
+
+let endpoint =
+    configuredEndpoint;
+
+
+if (
+    endpoint.startsWith(
+        "http://"
+    ) ||
+    endpoint.startsWith(
+        "https://"
+    )
+) {
+
+    form.action =
+        endpoint;
+
+} else {
+
+    endpoint =
+        endpoint
+            .replace(
+                /^\/+/,
+                ""
+            )
+            .replace(
+                /^f\//,
+                ""
+            );
+
+
+    form.action =
+        "https://formspree.io/f/" +
+        endpoint;
+}
+
+
+form.method =
+    "POST";
+
+
+console.info(
+    "V8 Admin — Formspree configurado."
+);
+```
+
+}
+
+/* =========================================================
+11. MENU MOBILE
+========================================================= */
+
+function setupMobileMenu() {
+
+```
+const mobileMenu =
+    getElement(
+        "mobile-menu"
+    );
+
+
+const nav =
+    document.querySelector(
+        ".nav-menu"
+    );
+
+
+if (
+    !mobileMenu ||
+    !nav
+) {
+
+    return;
+}
+
+
+mobileMenu.setAttribute(
+    "aria-expanded",
+    "false"
+);
+
+
+mobileMenu.setAttribute(
+    "aria-label",
+    "Abrir menu"
+);
+
+
+mobileMenu.addEventListener(
+    "click",
+    () => {
+
+        const isOpen =
+            nav.classList.toggle(
+                "active"
+            );
+
+
+        mobileMenu.classList.toggle(
+            "open",
+            isOpen
+        );
+
+
+        mobileMenu.setAttribute(
+            "aria-expanded",
+            String(isOpen)
+        );
+
+
+        mobileMenu.setAttribute(
+            "aria-label",
+            isOpen
+                ? "Fechar menu"
+                : "Abrir menu"
+        );
+    }
+);
+
+
+nav
+    .querySelectorAll(
+        "a"
+    )
+    .forEach(
+        link => {
+
+            link.addEventListener(
+                "click",
+                () => {
+
+                    nav.classList.remove(
+                        "active"
+                    );
+
+
+                    mobileMenu.classList.remove(
+                        "open"
+                    );
+
+
+                    mobileMenu.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+
+                    mobileMenu.setAttribute(
+                        "aria-label",
+                        "Abrir menu"
+                    );
+                }
+            );
+        }
+    );
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Escape" &&
+            nav.classList.contains(
+                "active"
+            )
+        ) {
+
+            nav.classList.remove(
+                "active"
+            );
+
+
+            mobileMenu.classList.remove(
+                "open"
+            );
+
+
+            mobileMenu.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+
+            mobileMenu.setAttribute(
+                "aria-label",
+                "Abrir menu"
+            );
+        }
+    }
+);
+```
+
+}
+
+/* =========================================================
+12. NAVEGAÇÃO SUAVE
+========================================================= */
+
+function setupSmoothNavigation() {
+
+```
+document
+    .querySelectorAll(
+        'a[href^="#"]'
+    )
+    .forEach(
+        link => {
+
+            link.addEventListener(
+                "click",
+                event => {
+
+                    const targetId =
+                        link.getAttribute(
+                            "href"
+                        );
+
+
+                    if (
+                        !targetId ||
+                        targetId === "#"
+                    ) {
+
+                        return;
+                    }
+
+
+                    if (
+                        link.target ===
+                        "_blank"
+                    ) {
+
+                        return;
+                    }
+
+
+                    const target =
+                        document.querySelector(
+                            targetId
+                        );
+
+
+                    if (!target) {
+
+                        return;
+                    }
+
+
+                    event.preventDefault();
+
+
+                    const header =
+                        document.querySelector(
+                            ".site-header"
+                        );
+
+
+                    const headerHeight =
+                        header
+                            ? header.offsetHeight
+                            : 0;
+
+
+                    const targetPosition =
+                        target
+                            .getBoundingClientRect()
+                            .top +
+                        window.scrollY -
+                        headerHeight -
+                        12;
+
+
+                    window.scrollTo({
+
+                        top:
+                            targetPosition,
+
+                        behavior:
+                            "smooth"
+                    });
+
+
+                    history.pushState(
+                        null,
+                        "",
+                        targetId
+                    );
+                }
+            );
+        }
+    );
+```
+
+}
+
+/* =========================================================
+13. DEPOIMENTOS
+========================================================= */
+
+function setupTestimonials() {
+
+```
+const section =
+    getElement(
+        "depoimentos"
+    );
+
+
+if (!section) {
+    return;
+}
+
+
+section.dataset.ready =
+    "true";
+```
+
+}
+
+/* =========================================================
+14. ANO AUTOMÁTICO
+========================================================= */
+
+function setupCurrentYear() {
+
+```
+const year =
+    new Date()
+        .getFullYear();
+
+
+document
+    .querySelectorAll(
+        "[data-current-year]"
+    )
+    .forEach(
+        element => {
+
+            element.textContent =
+                "© " +
+                year +
+                " Katlen Ariane. Todos os direitos reservados.";
+        }
+    );
+```
+
+}
+
+/* =========================================================
+15. CAMPOS DINÂMICOS
+========================================================= */
+
+function removeEmptyDynamicElements() {
+
+```
+document
+    .querySelectorAll(
+        "[data-dynamic]"
+    )
+    .forEach(
+        element => {
+
+            const text =
+                element.textContent
+                    .trim();
+
+
+            if (!text) {
+
+                hideElement(
+                    element
                 );
             }
         }
     );
+```
+
 }
 
-
 /* =========================================================
-   12. CONTATO
-   ========================================================= */
+16. EVENTO V8 ADMIN
+========================================================= */
 
-function setupContactLinks(config) {
+function setupV8AdminListener() {
 
-    const phone =
-        String(
-            config.site.phone ||
-            config.site.whatsapp ||
-            ""
-        ).trim();
+```
+document.addEventListener(
+    "v8admin:ready",
+    event => {
 
-
-    const address =
-        String(
-            config.site.address ||
-            ""
-        ).trim();
+        V8_CONFIG =
+            event.detail || {};
 
 
-    document
-        .querySelectorAll(
-            "[data-phone]"
-        )
-        .forEach(
-            element => {
-
-                if (!phone) {
-
-                    hideElement(
-                        element
-                    );
-
-                    return;
-                }
-
-
-                element.textContent =
-                    phone;
-
-
-                if (
-                    element.tagName
-                        .toLowerCase() ===
-                    "a"
-                ) {
-
-                    const cleanPhone =
-                        phone.replace(
-                            /\D/g,
-                            ""
-                        );
-
-
-                    if (cleanPhone) {
-
-                        element.href =
-                            `tel:+${cleanPhone}`;
-                    }
-                }
-
-
-                showElement(
-                    element
-                );
-            }
+        console.info(
+            "V8 Admin Universal conectado.",
+            V8_PROJECT_ID
         );
 
 
-    document
-        .querySelectorAll(
-            "[data-address]"
-        )
-        .forEach(
-            element => {
+        /*
+         * Executa tudo que depende
+         * da configuração do painel.
+         */
 
-                if (!address) {
+        setupProfessionalRegistration();
 
-                    hideElement(
-                        element
-                    );
+        setupAbout();
 
-                    return;
-                }
+        setupWhatsApp();
 
+        setupFormspree();
 
-                element.textContent =
-                    address;
+        setupSocialLinks();
 
+        setupFooter();
 
-                showElement(
-                    element
-                );
-            }
-        );
+        setupContactLinks();
+
+        removeEmptyDynamicElements();
+    },
+    {
+        once: true
+    }
+);
+```
+
 }
 
+/* =========================================================
+17. INICIALIZAÇÃO DA INTERFACE
+========================================================= */
+
+function initInterface() {
+
+```
+setupTestimonials();
+
+setupMobileMenu();
+
+setupSmoothNavigation();
+
+setupCurrentYear();
+
+document.documentElement
+    .classList.add(
+        "js-ready"
+    );
+
+
+document.body
+    .classList.add(
+        "site-ready"
+    );
+
+
+console.info(
+    "Katlen Ariane — interface inicializada."
+);
+```
+
+}
 
 /* =========================================================
-   13. MENU MOBILE
-   ========================================================= */
+18. INICIALIZAÇÃO PRINCIPAL
+========================================================= */
 
-function setupMobileMenu() {
+function initSite() {
+
+```
+try {
+
+    console.info(
+        "Katlen Ariane — iniciando..."
+    );
+
+
+    /*
+     * Primeiro prepara o listener.
+     *
+     * O v8-loader.js dispara
+     * v8admin:ready quando terminar
+     * de carregar a configuração.
+     */
+
+    setupV8AdminListener();
+
+
+    /*
+     * Interface independente do painel.
+     */
+
+    initInterface();
+
+
+    /*
+     * Caso o loader já tenha carregado
+     * antes deste arquivo.
+     */
+
+    if (
+        window.V8_ADMIN_CONFIG
+    ) {
+
+        V8_CONFIG =
+            window.V8_ADMIN_CONFIG;
+
+
+        setupProfessionalRegistration();
+
+        setupAbout();
+
+        setupWhatsApp();
+
+        setupFormspree();
+
+        setupSocialLinks();
+
+        setupFooter();
+
+        setupContactLinks();
+
+        removeEmptyDynamicElements();
+    }
+
+
+} catch (error) {
+
+    console.error(
+        "Erro ao inicializar o site:",
+        error
+    );
+}
+```
+
+}
+
+/* =========================================================
+19. DOM READY
+========================================================= */
+
+if (
+document.readyState ===
+"loading"
+) {
+
+```
+document.addEventListener(
+    "DOMContentLoaded",
+    initSite,
+    {
+        once: true
+    }
+);
+```
+
+} else {
+
+```
+initSite();
+```
+
+}
+
+/* =========================================================
+20. PAGESHOW
+========================================================= */
+
+window.addEventListener(
+"pageshow",
+() => {
+
+```
+    const nav =
+        document.querySelector(
+            ".nav-menu"
+        );
+
 
     const mobileMenu =
         getElement(
@@ -1241,19 +1511,23 @@ function setupMobileMenu() {
         );
 
 
-    const nav =
-        document.querySelector(
-            ".nav-menu"
-        );
-
-
     if (
-        !mobileMenu ||
-        !nav
+        !nav ||
+        !mobileMenu
     ) {
 
         return;
     }
+
+
+    nav.classList.remove(
+        "active"
+    );
+
+
+    mobileMenu.classList.remove(
+        "open"
+    );
 
 
     mobileMenu.setAttribute(
@@ -1266,846 +1540,11 @@ function setupMobileMenu() {
         "aria-label",
         "Abrir menu"
     );
-
-
-    mobileMenu.addEventListener(
-        "click",
-        () => {
-
-            const isOpen =
-                nav.classList.toggle(
-                    "active"
-                );
-
-
-            mobileMenu.classList.toggle(
-                "open",
-                isOpen
-            );
-
-
-            mobileMenu.setAttribute(
-                "aria-expanded",
-                String(isOpen)
-            );
-
-
-            mobileMenu.setAttribute(
-                "aria-label",
-                isOpen
-                    ? "Fechar menu"
-                    : "Abrir menu"
-            );
-        }
-    );
-
-
-    nav
-        .querySelectorAll(
-            "a"
-        )
-        .forEach(
-            link => {
-
-                link.addEventListener(
-                    "click",
-                    () => {
-
-                        nav.classList.remove(
-                            "active"
-                        );
-
-
-                        mobileMenu.classList.remove(
-                            "open"
-                        );
-
-
-                        mobileMenu.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
-
-
-                        mobileMenu.setAttribute(
-                            "aria-label",
-                            "Abrir menu"
-                        );
-                    }
-                );
-            }
-        );
-
-
-    document.addEventListener(
-        "keydown",
-        event => {
-
-            if (
-                event.key === "Escape" &&
-                nav.classList.contains(
-                    "active"
-                )
-            ) {
-
-                nav.classList.remove(
-                    "active"
-                );
-
-
-                mobileMenu.classList.remove(
-                    "open"
-                );
-
-
-                mobileMenu.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-
-                mobileMenu.setAttribute(
-                    "aria-label",
-                    "Abrir menu"
-                );
-            }
-        }
-    );
 }
+```
 
-
-/* =========================================================
-   14. NAVEGAÇÃO SUAVE
-   ========================================================= */
-
-function setupSmoothNavigation() {
-
-    document
-        .querySelectorAll(
-            'a[href^="#"]'
-        )
-        .forEach(
-            link => {
-
-                link.addEventListener(
-                    "click",
-                    event => {
-
-                        const targetId =
-                            link.getAttribute(
-                                "href"
-                            );
-
-
-                        if (
-                            !targetId ||
-                            targetId === "#"
-                        ) {
-
-                            return;
-                        }
-
-
-                        if (
-                            link.target ===
-                            "_blank"
-                        ) {
-
-                            return;
-                        }
-
-
-                        const target =
-                            document.querySelector(
-                                targetId
-                            );
-
-
-                        if (!target) {
-
-                            return;
-                        }
-
-
-                        event.preventDefault();
-
-
-                        const header =
-                            document.querySelector(
-                                ".site-header"
-                            );
-
-
-                        const headerHeight =
-                            header
-                                ? header.offsetHeight
-                                : 0;
-
-
-                        const targetPosition =
-                            target
-                                .getBoundingClientRect()
-                                .top +
-                            window.scrollY -
-                            headerHeight -
-                            12;
-
-
-                        window.scrollTo({
-
-                            top:
-                                targetPosition,
-
-                            behavior:
-                                "smooth"
-                        });
-
-
-                        history.pushState(
-                            null,
-                            "",
-                            targetId
-                        );
-                    }
-                );
-            }
-        );
-}
-
-
-/* =========================================================
-   15. DEPOIMENTOS
-   ========================================================= */
-
-function setupTestimonials() {
-
-    const section =
-        getElement(
-            "depoimentos"
-        );
-
-
-    if (!section) {
-        return;
-    }
-
-
-    section.dataset.ready =
-        "true";
-}
-
-
-/* =========================================================
-   16. ANO AUTOMÁTICO
-   ========================================================= */
-
-function setupCurrentYear() {
-
-    const year =
-        new Date()
-            .getFullYear();
-
-
-    document
-        .querySelectorAll(
-            "[data-current-year]"
-        )
-        .forEach(
-            element => {
-
-                element.textContent =
-                    year;
-            }
-        );
-
-
-    document
-        .querySelectorAll(
-            ".footer-bottom span"
-        )
-        .forEach(
-            element => {
-
-                element.innerHTML =
-                    element.innerHTML.replace(
-                        /©\s*\d{4}/,
-                        `© ${year}`
-                    );
-            }
-        );
-}
-
-
-/* =========================================================
-   17. GOOGLE TAG MANAGER
-   ========================================================= */
-
-function injectGTM(config) {
-
-    const enabled =
-        Boolean(
-            config.tracking
-                .googleTagManagerEnabled
-        );
-
-
-    const gtmId =
-        String(
-            config.tracking
-                .googleTagManager ||
-            ""
-        ).trim();
-
-
-    if (
-        !enabled ||
-        !gtmId
-    ) {
-
-        return;
-    }
-
-
-    const existing =
-        document.querySelector(
-            `script[data-gtm="${gtmId}"]`
-        );
-
-
-    if (existing) {
-        return;
-    }
-
-
-    window.dataLayer =
-        window.dataLayer ||
-        [];
-
-
-    window.dataLayer.push({
-
-        "gtm.start":
-            new Date().getTime(),
-
-        event:
-            "gtm.js"
-    });
-
-
-    const script =
-        document.createElement(
-            "script"
-        );
-
-
-    script.async =
-        true;
-
-
-    script.dataset.gtm =
-        gtmId;
-
-
-    script.src =
-        "https://www.googletagmanager.com/gtm.js?id=" +
-        encodeURIComponent(
-            gtmId
-        );
-
-
-    document.head.appendChild(
-        script
-    );
-
-
-    console.info(
-        "Google Tag Manager ativado:",
-        gtmId
-    );
-}
-
-
-/* =========================================================
-   18. GOOGLE ANALYTICS
-   ========================================================= */
-
-function injectGA(config) {
-
-    const enabled =
-        Boolean(
-            config.tracking
-                .googleAnalyticsEnabled
-        );
-
-
-    const measurementId =
-        String(
-            config.tracking
-                .googleAnalytics ||
-            ""
-        ).trim();
-
-
-    if (
-        !enabled ||
-        !measurementId
-    ) {
-
-        return;
-    }
-
-
-    const existing =
-        document.querySelector(
-            `script[data-ga="${measurementId}"]`
-        );
-
-
-    if (existing) {
-        return;
-    }
-
-
-    const script =
-        document.createElement(
-            "script"
-        );
-
-
-    script.async =
-        true;
-
-
-    script.dataset.ga =
-        measurementId;
-
-
-    script.src =
-        "https://www.googletagmanager.com/gtag/js?id=" +
-        encodeURIComponent(
-            measurementId
-        );
-
-
-    document.head.appendChild(
-        script
-    );
-
-
-    window.dataLayer =
-        window.dataLayer ||
-        [];
-
-
-    window.gtag =
-        window.gtag ||
-        function () {
-
-            window.dataLayer.push(
-                arguments
-            );
-        };
-
-
-    window.gtag(
-        "js",
-        new Date()
-    );
-
-
-    window.gtag(
-        "config",
-        measurementId
-    );
-
-
-    console.info(
-        "Google Analytics ativado:",
-        measurementId
-    );
-}
-
-
-/* =========================================================
-   19. META PIXEL
-   ========================================================= */
-
-function injectMetaPixel(config) {
-
-    const enabled =
-        Boolean(
-            config.tracking
-                .metaPixelEnabled
-        );
-
-
-    const pixelId =
-        String(
-            config.tracking
-                .metaPixel ||
-            ""
-        ).trim();
-
-
-    if (
-        !enabled ||
-        !pixelId
-    ) {
-
-        return;
-    }
-
-
-    if (
-        window.fbq
-    ) {
-
-        return;
-    }
-
-
-    window.fbq =
-        function () {
-
-            if (
-                window.fbq.callMethod
-            ) {
-
-                window.fbq.callMethod.apply(
-                    window.fbq,
-                    arguments
-                );
-
-
-            } else {
-
-                window.fbq.queue.push(
-                    arguments
-                );
-            }
-        };
-
-
-    window.fbq.push =
-        window.fbq;
-
-
-    window.fbq.loaded =
-        true;
-
-
-    window.fbq.version =
-        "2.0";
-
-
-    window.fbq.queue =
-        [];
-
-
-    window._fbq =
-        window.fbq;
-
-
-    const script =
-        document.createElement(
-            "script"
-        );
-
-
-    script.async =
-        true;
-
-
-    script.dataset.metaPixel =
-        pixelId;
-
-
-    script.src =
-        "https://connect.facebook.net/en_US/fbevents.js";
-
-
-    document.head.appendChild(
-        script
-    );
-
-
-    window.fbq(
-        "init",
-        pixelId
-    );
-
-
-    window.fbq(
-        "track",
-        "PageView"
-    );
-
-
-    console.info(
-        "Meta Pixel ativado:",
-        pixelId
-    );
-}
-
-
-/* =========================================================
-   20. TRACKING
-   ========================================================= */
-
-function injectTrackingScripts(
-    config
-) {
-
-    injectGTM(
-        config
-    );
-
-
-    injectGA(
-        config
-    );
-
-
-    injectMetaPixel(
-        config
-    );
-}
-
-
-/* =========================================================
-   21. ELEMENTOS DINÂMICOS
-   ========================================================= */
-
-function removeEmptyDynamicElements() {
-
-    document
-        .querySelectorAll(
-            "[data-dynamic]"
-        )
-        .forEach(
-            element => {
-
-                const text =
-                    element.textContent
-                        .trim();
-
-
-                if (!text) {
-
-                    hideElement(
-                        element
-                    );
-                }
-            }
-        );
-}
-
-
-/* =========================================================
-   22. INICIALIZAÇÃO
-   ========================================================= */
-
-async function initSite() {
-
-    try {
-
-        console.info(
-            "Katlen Ariane — iniciando..."
-        );
-
-
-        const config =
-            await loadConfig();
-
-
-        /* -----------------------------------------
-           CONTEÚDO
-        ----------------------------------------- */
-
-        setupProfessionalRegistration(
-            config
-        );
-
-
-        setupAbout(
-            config
-        );
-
-
-        /* -----------------------------------------
-           WHATSAPP
-        ----------------------------------------- */
-
-        setupWhatsApp(
-            config
-        );
-
-
-        /* -----------------------------------------
-           FORMULÁRIO
-        ----------------------------------------- */
-
-        setupFormspree(
-            config
-        );
-
-
-        /* -----------------------------------------
-           REDES
-        ----------------------------------------- */
-
-        setupSocialLinks(
-            config
-        );
-
-
-        /* -----------------------------------------
-           CONTATO
-        ----------------------------------------- */
-
-        setupFooter(
-            config
-        );
-
-
-        setupContactLinks(
-            config
-        );
-
-
-        /* -----------------------------------------
-           INTERFACE
-        ----------------------------------------- */
-
-        setupTestimonials();
-
-
-        setupMobileMenu();
-
-
-        setupSmoothNavigation();
-
-
-        setupCurrentYear();
-
-
-        removeEmptyDynamicElements();
-
-
-        /* -----------------------------------------
-           TRACKING
-        ----------------------------------------- */
-
-        injectTrackingScripts(
-            config
-        );
-
-
-        /* -----------------------------------------
-           STATUS
-        ----------------------------------------- */
-
-        document.documentElement
-            .classList.add(
-                "js-ready"
-            );
-
-
-        document.body
-            .classList.add(
-                "site-ready"
-            );
-
-
-        console.info(
-            "Katlen Ariane — site inicializado."
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            "Erro ao inicializar o site:",
-            error
-        );
-    }
-}
-
-
-/* =========================================================
-   23. DOM READY
-   ========================================================= */
-
-if (
-    document.readyState ===
-    "loading"
-) {
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        initSite
-    );
-
-
-} else {
-
-    initSite();
-}
-
-
-/* =========================================================
-   24. PAGESHOW
-   ========================================================= */
-
-window.addEventListener(
-    "pageshow",
-    () => {
-
-        const nav =
-            document.querySelector(
-                ".nav-menu"
-            );
-
-
-        const mobileMenu =
-            getElement(
-                "mobile-menu"
-            );
-
-
-        if (
-            !nav ||
-            !mobileMenu
-        ) {
-
-            return;
-        }
-
-
-        nav.classList.remove(
-            "active"
-        );
-
-
-        mobileMenu.classList.remove(
-            "open"
-        );
-
-
-        mobileMenu.setAttribute(
-            "aria-expanded",
-            "false"
-        );
-
-
-        mobileMenu.setAttribute(
-            "aria-label",
-            "Abrir menu"
-        );
-    }
 );
 
-
 /* =========================================================
-   FIM DO MAIN.JS
-   ========================================================= */
+FIM DO MAIN.JS
+========================================================= */
