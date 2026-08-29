@@ -1,35 +1,30 @@
-```javascript
 /* =========================================================
    KATLEN ARIANE — MAIN.JS
-   Site institucional / Psicanálise
-
-   Integração:
-   V8 Admin Universal
-
-   Project ID:
-   51922766-9775-47eb-ace0-a90af01dd9bb
-========================================================= */
+   Integração V8 Admin Universal
+   ========================================================= */
 
 "use strict";
 
 /* =========================================================
-   1. CONFIGURAÇÃO
-========================================================= */
+   CONFIGURAÇÃO
+   ========================================================= */
 
-const V8_PROJECT_ID =
-    "51922766-9775-47eb-ace0-a90af01dd9bb";
+const V8_PROJECT_ID = "51922766-9775-47eb-ace0-a90af01dd9bb";
 
 let V8_CONFIG = null;
 
+
 /* =========================================================
-   2. UTILITÁRIOS
-========================================================= */
+   UTILITÁRIOS
+   ========================================================= */
 
 function getElement(id) {
     return document.getElementById(id);
 }
 
+
 function setText(id, value) {
+
     const element = getElement(id);
 
     if (!element || value === undefined || value === null) {
@@ -39,21 +34,26 @@ function setText(id, value) {
     element.textContent = String(value);
 }
 
-function showElement(element, display = "") {
-    if (!element) return;
-
-    element.style.display = display;
-}
 
 function hideElement(element) {
-    if (!element) return;
+
+    if (!element) {
+        return;
+    }
 
     element.style.display = "none";
 }
 
-/* =========================================================
-   3. CONFIGURAÇÃO V8
-========================================================= */
+
+function showElement(element, display = "") {
+
+    if (!element) {
+        return;
+    }
+
+    element.style.display = display;
+}
+
 
 function getConfigValue(path, fallback = "") {
 
@@ -63,18 +63,21 @@ function getConfigValue(path, fallback = "") {
 
     const value = path
         .split(".")
-        .reduce((current, key) => {
+        .reduce(
+            (current, key) => {
 
-            if (
-                current === null ||
-                current === undefined
-            ) {
-                return undefined;
-            }
+                if (
+                    current === null ||
+                    current === undefined
+                ) {
+                    return undefined;
+                }
 
-            return current[key];
+                return current[key];
 
-        }, V8_CONFIG);
+            },
+            V8_CONFIG
+        );
 
     if (
         value === undefined ||
@@ -86,18 +89,75 @@ function getConfigValue(path, fallback = "") {
     return value;
 }
 
+
 /* =========================================================
-   4. WHATSAPP
-========================================================= */
+   WHATSAPP
+   ========================================================= */
+
+/*
+ * Aceita:
+ *
+ * site.whatsapp
+ * contact.whatsapp
+ * site.phone
+ * contact.phone
+ */
+
+function getWhatsAppNumber() {
+
+    const possibleValues = [
+
+        getConfigValue(
+            "contact.whatsapp",
+            ""
+        ),
+
+        getConfigValue(
+            "site.whatsapp",
+            ""
+        ),
+
+        getConfigValue(
+            "contact.phone",
+            ""
+        ),
+
+        getConfigValue(
+            "site.phone",
+            ""
+        )
+
+    ];
+
+    for (const value of possibleValues) {
+
+        const normalized = String(
+            value || ""
+        ).trim();
+
+        if (normalized) {
+            return normalized;
+        }
+    }
+
+    return "";
+}
+
 
 function normalizeWhatsAppNumber(number) {
 
-    return String(number || "")
+    return String(
+        number || ""
+    )
         .replace(/\D/g, "")
         .trim();
 }
 
-function createWhatsAppURL(number, message = "") {
+
+function createWhatsAppURL(
+    number,
+    message = ""
+) {
 
     const cleanNumber =
         normalizeWhatsAppNumber(number);
@@ -117,192 +177,240 @@ function createWhatsAppURL(number, message = "") {
     );
 }
 
+
 function setupWhatsApp() {
 
-    /*
-     * Aceita as duas estruturas mais comuns
-     * utilizadas pelo V8 Admin.
-     */
-
     const whatsapp =
-        String(
-            getConfigValue(
-                "site.whatsapp",
-                getConfigValue(
-                    "contact.whatsapp",
-                    ""
-                )
-            )
-        ).trim();
+        getWhatsAppNumber();
 
-    const defaultMessage =
+    const message =
         "Olá Katlen, vim pelo site e gostaria de saber mais sobre o atendimento.";
 
     const whatsappURL =
         createWhatsAppURL(
             whatsapp,
-            defaultMessage
+            message
         );
 
     console.info(
         "V8 Admin — WhatsApp:",
         whatsapp
-            ? "configurado"
-            : "não configurado"
+            ? whatsapp
+            : "NÃO CONFIGURADO"
     );
 
-    /* -----------------------------------------------------
-       BOTÃO FLUTUANTE
-    ----------------------------------------------------- */
+    console.info(
+        "V8 Admin — URL WhatsApp:",
+        whatsappURL
+            ? whatsappURL
+            : "NÃO GERADA"
+    );
 
-    const floatingButton =
+
+    /*
+     * =====================================================
+     * BOTÃO FLUTUANTE
+     * =====================================================
+     */
+
+    const whatsappLink =
         getElement("whatsapp-link");
 
-    if (floatingButton) {
+    if (whatsappLink) {
 
         if (whatsappURL) {
 
-            floatingButton.href =
+            whatsappLink.href =
                 whatsappURL;
 
-            floatingButton.target =
+            whatsappLink.target =
                 "_blank";
 
-            floatingButton.rel =
+            whatsappLink.rel =
                 "noopener noreferrer";
 
-            floatingButton.style.display =
+            whatsappLink.style.display =
                 "flex";
+
+            whatsappLink.removeAttribute(
+                "onclick"
+            );
 
         } else {
 
-            hideElement(
-                floatingButton
-            );
+            whatsappLink.style.display =
+                "none";
         }
     }
 
-    /* -----------------------------------------------------
-       BOTÕES COM DATA-V8
-    ----------------------------------------------------- */
+
+    /*
+     * =====================================================
+     * TODOS OS ELEMENTOS data-v8
+     * =====================================================
+     */
 
     document
         .querySelectorAll(
             '[data-v8="contact.whatsapp"]'
         )
-        .forEach(element => {
+        .forEach(
+            element => {
 
-            if (!whatsappURL) {
-                hideElement(element);
-                return;
+                if (!whatsappURL) {
+
+                    hideElement(
+                        element
+                    );
+
+                    return;
+                }
+
+                element.href =
+                    whatsappURL;
+
+                element.target =
+                    "_blank";
+
+                element.rel =
+                    "noopener noreferrer";
+
+                element.removeAttribute(
+                    "onclick"
+                );
+
+                showElement(
+                    element
+                );
             }
+        );
 
-            element.href =
-                whatsappURL;
 
-            element.target =
-                "_blank";
-
-            element.rel =
-                "noopener noreferrer";
-
-            showElement(element);
-        });
-
-    /* -----------------------------------------------------
-       BOTÕES DATA-WHATSAPP
-    ----------------------------------------------------- */
-
-    document
-        .querySelectorAll(
-            "[data-whatsapp]"
-        )
-        .forEach(element => {
-
-            if (!whatsappURL) {
-                hideElement(element);
-                return;
-            }
-
-            element.href =
-                whatsappURL;
-
-            element.target =
-                "_blank";
-
-            element.rel =
-                "noopener noreferrer";
-
-            showElement(element);
-        });
-
-    /* -----------------------------------------------------
-       LINKS ANTIGOS #WHATSAPP
-    ----------------------------------------------------- */
+    /*
+     * =====================================================
+     * LINKS ANTIGOS #WHATSAPP
+     * =====================================================
+     */
 
     document
         .querySelectorAll(
             'a[href="#whatsapp"]'
         )
-        .forEach(link => {
+        .forEach(
+            link => {
 
-            if (!whatsappURL) {
-                return;
+                if (!whatsappURL) {
+                    return;
+                }
+
+                link.href =
+                    whatsappURL;
+
+                link.target =
+                    "_blank";
+
+                link.rel =
+                    "noopener noreferrer";
+
+                link.removeAttribute(
+                    "onclick"
+                );
             }
+        );
 
-            link.href =
-                whatsappURL;
 
-            link.target =
-                "_blank";
+    /*
+     * =====================================================
+     * DATA-WHATSAPP
+     * =====================================================
+     */
 
-            link.rel =
-                "noopener noreferrer";
-        });
+    document
+        .querySelectorAll(
+            "[data-whatsapp]"
+        )
+        .forEach(
+            element => {
 
-    /* -----------------------------------------------------
-       MENSAGENS PERSONALIZADAS
-    ----------------------------------------------------- */
+                if (!whatsappURL) {
+
+                    hideElement(
+                        element
+                    );
+
+                    return;
+                }
+
+                element.href =
+                    whatsappURL;
+
+                element.target =
+                    "_blank";
+
+                element.rel =
+                    "noopener noreferrer";
+
+                showElement(
+                    element
+                );
+            }
+        );
+
+
+    /*
+     * =====================================================
+     * MENSAGEM PERSONALIZADA
+     * =====================================================
+     */
 
     document
         .querySelectorAll(
             "[data-whatsapp-message]"
         )
-        .forEach(element => {
+        .forEach(
+            element => {
 
-            if (!whatsapp) {
-                hideElement(element);
-                return;
-            }
+                if (!whatsapp) {
 
-            const customMessage =
-                element.getAttribute(
-                    "data-whatsapp-message"
-                ) ||
-                defaultMessage;
+                    hideElement(
+                        element
+                    );
 
-            const customURL =
-                createWhatsAppURL(
-                    whatsapp,
-                    customMessage
+                    return;
+                }
+
+                const customMessage =
+                    element.getAttribute(
+                        "data-whatsapp-message"
+                    ) ||
+                    message;
+
+                const customURL =
+                    createWhatsAppURL(
+                        whatsapp,
+                        customMessage
+                    );
+
+                element.href =
+                    customURL;
+
+                element.target =
+                    "_blank";
+
+                element.rel =
+                    "noopener noreferrer";
+
+                showElement(
+                    element
                 );
-
-            element.href =
-                customURL;
-
-            element.target =
-                "_blank";
-
-            element.rel =
-                "noopener noreferrer";
-
-            showElement(element);
-        });
+            }
+        );
 }
 
+
 /* =========================================================
-   5. REGISTRO PROFISSIONAL
-========================================================= */
+   REGISTRO PROFISSIONAL
+   ========================================================= */
 
 function setupProfessionalRegistration() {
 
@@ -334,7 +442,11 @@ function setupProfessionalRegistration() {
         ).trim();
 
     if (!registration) {
-        hideElement(container);
+
+        hideElement(
+            container
+        );
+
         return;
     }
 
@@ -348,121 +460,15 @@ function setupProfessionalRegistration() {
             registration;
     }
 
-    showElement(container);
+    showElement(
+        container
+    );
 }
 
-/* =========================================================
-   6. RODAPÉ
-========================================================= */
-
-function setupFooter() {
-
-    const whatsapp =
-        String(
-            getConfigValue(
-                "site.whatsapp",
-                getConfigValue(
-                    "contact.whatsapp",
-                    ""
-                )
-            )
-        ).trim();
-
-    const address =
-        String(
-            getConfigValue(
-                "site.address",
-                ""
-            )
-        ).trim();
-
-    const registration =
-        String(
-            getConfigValue(
-                "site.registration",
-                "CBPC 2022-6172"
-            )
-        ).trim();
-
-    /* WhatsApp */
-
-    const footerWhatsapp =
-        getElement(
-            "footer-whatsapp"
-        );
-
-    if (footerWhatsapp) {
-
-        if (whatsapp) {
-
-            footerWhatsapp.href =
-                createWhatsAppURL(
-                    whatsapp,
-                    "Olá Katlen, vim pelo site e gostaria de saber mais sobre o atendimento."
-                );
-
-            footerWhatsapp.target =
-                "_blank";
-
-            footerWhatsapp.rel =
-                "noopener noreferrer";
-
-            showElement(
-                footerWhatsapp
-            );
-
-        } else {
-
-            hideElement(
-                footerWhatsapp
-            );
-        }
-    }
-
-    /* Endereço */
-
-    const footerAddress =
-        getElement(
-            "footer-address"
-        );
-
-    if (footerAddress) {
-
-        if (address) {
-
-            footerAddress.textContent =
-                address;
-
-            showElement(
-                footerAddress
-            );
-
-        } else {
-
-            hideElement(
-                footerAddress
-            );
-        }
-    }
-
-    /* Registro */
-
-    const footerRegistration =
-        getElement(
-            "footer-registration"
-        );
-
-    if (footerRegistration) {
-
-        footerRegistration.textContent =
-            registration ||
-            "Psicanalista Clínica";
-    }
-}
 
 /* =========================================================
-   7. SOBRE
-========================================================= */
+   SOBRE
+   ========================================================= */
 
 function setupAbout() {
 
@@ -490,6 +496,7 @@ function setupAbout() {
             )
         ).trim();
 
+
     const aboutEspecializacoes =
         getElement(
             "about-especializacoes"
@@ -514,6 +521,7 @@ function setupAbout() {
         }
     }
 
+
     const aboutExperiencia =
         getElement(
             "about-experiencia"
@@ -537,6 +545,7 @@ function setupAbout() {
             );
         }
     }
+
 
     const aboutNeuro =
         getElement(
@@ -563,19 +572,122 @@ function setupAbout() {
     }
 }
 
+
 /* =========================================================
-   8. CONTATO
-========================================================= */
+   RODAPÉ
+   ========================================================= */
+
+function setupFooter() {
+
+    const whatsapp =
+        getWhatsAppNumber();
+
+    const address =
+        String(
+            getConfigValue(
+                "site.address",
+                ""
+            )
+        ).trim();
+
+    const registration =
+        String(
+            getConfigValue(
+                "site.registration",
+                "CBPC 2022-6172"
+            )
+        ).trim();
+
+
+    const footerWhatsapp =
+        getElement(
+            "footer-whatsapp"
+        );
+
+    if (footerWhatsapp) {
+
+        if (whatsapp) {
+
+            const url =
+                createWhatsAppURL(
+                    whatsapp,
+                    "Olá Katlen, vim pelo site e gostaria de saber mais sobre o atendimento."
+                );
+
+            footerWhatsapp.href =
+                url;
+
+            footerWhatsapp.target =
+                "_blank";
+
+            footerWhatsapp.rel =
+                "noopener noreferrer";
+
+            showElement(
+                footerWhatsapp
+            );
+
+        } else {
+
+            hideElement(
+                footerWhatsapp
+            );
+        }
+    }
+
+
+    const footerAddress =
+        getElement(
+            "footer-address"
+        );
+
+    if (footerAddress) {
+
+        if (address) {
+
+            footerAddress.textContent =
+                address;
+
+            showElement(
+                footerAddress
+            );
+
+        } else {
+
+            hideElement(
+                footerAddress
+            );
+        }
+    }
+
+
+    const footerRegistration =
+        getElement(
+            "footer-registration"
+        );
+
+    if (footerRegistration) {
+
+        footerRegistration.textContent =
+            registration ||
+            "Psicanalista Clínica";
+    }
+}
+
+
+/* =========================================================
+   CONTATO
+   ========================================================= */
 
 function setupContactLinks() {
 
     const phone =
         String(
             getConfigValue(
-                "site.phone",
+                "contact.phone",
                 getConfigValue(
-                    "site.whatsapp",
-                    ""
+                    "site.phone",
+                    getWhatsAppNumber()
                 )
             )
         ).trim();
@@ -588,79 +700,82 @@ function setupContactLinks() {
             )
         ).trim();
 
-    /* Telefone */
 
     document
         .querySelectorAll(
             "[data-phone]"
         )
-        .forEach(element => {
+        .forEach(
+            element => {
 
-            if (!phone) {
+                if (!phone) {
 
-                hideElement(
-                    element
-                );
-
-                return;
-            }
-
-            element.textContent =
-                phone;
-
-            if (
-                element.tagName.toLowerCase() ===
-                "a"
-            ) {
-
-                const cleanPhone =
-                    phone.replace(
-                        /\D/g,
-                        ""
+                    hideElement(
+                        element
                     );
 
-                if (cleanPhone) {
-
-                    element.href =
-                        "tel:+" +
-                        cleanPhone;
+                    return;
                 }
+
+                element.textContent =
+                    phone;
+
+                if (
+                    element.tagName.toLowerCase() ===
+                    "a"
+                ) {
+
+                    const cleanPhone =
+                        phone.replace(
+                            /\D/g,
+                            ""
+                        );
+
+                    if (cleanPhone) {
+
+                        element.href =
+                            "tel:+" +
+                            cleanPhone;
+                    }
+                }
+
+                showElement(
+                    element
+                );
             }
+        );
 
-            showElement(
-                element
-            );
-        });
-
-    /* Endereço */
 
     document
         .querySelectorAll(
             "[data-address]"
         )
-        .forEach(element => {
+        .forEach(
+            element => {
 
-            if (!address) {
+                if (!address) {
 
-                hideElement(
+                    hideElement(
+                        element
+                    );
+
+                    return;
+                }
+
+                element.textContent =
+                    address;
+
+                showElement(
                     element
                 );
-
-                return;
             }
-
-            element.textContent =
-                address;
-
-            showElement(
-                element
-            );
-        });
+        );
 }
 
+
 /* =========================================================
-   9. REDES SOCIAIS
-========================================================= */
+   REDES SOCIAIS
+   ========================================================= */
 
 function setupSocialLinks() {
 
@@ -691,6 +806,7 @@ function setupSocialLinks() {
             )
     };
 
+
     Object.entries(
         socialMap
     ).forEach(
@@ -701,94 +817,44 @@ function setupSocialLinks() {
                     url || ""
                 ).trim();
 
-            /*
-             * Suporta data-social="instagram"
-             */
-
             document
                 .querySelectorAll(
                     `[data-social="${network}"]`
                 )
-                .forEach(link => {
+                .forEach(
+                    link => {
 
-                    if (!cleanURL) {
+                        if (cleanURL) {
 
-                        hideElement(
-                            link
-                        );
+                            link.href =
+                                cleanURL;
 
-                        return;
+                            link.target =
+                                "_blank";
+
+                            link.rel =
+                                "noopener noreferrer";
+
+                            showElement(
+                                link
+                            );
+
+                        } else {
+
+                            hideElement(
+                                link
+                            );
+                        }
                     }
-
-                    link.href =
-                        cleanURL;
-
-                    link.target =
-                        "_blank";
-
-                    link.rel =
-                        "noopener noreferrer";
-
-                    showElement(
-                        link
-                    );
-                });
-
-            /*
-             * Suporta IDs usados
-             * neste index.html.
-             */
-
-            const idMap = {
-                instagram:
-                    "instagram-link",
-
-                facebook:
-                    "facebook-link",
-
-                tiktok:
-                    "tiktok-link",
-
-                linkedin:
-                    "linkedin-link"
-            };
-
-            const link =
-                getElement(
-                    idMap[network]
                 );
-
-            if (link) {
-
-                if (!cleanURL) {
-
-                    hideElement(
-                        link
-                    );
-
-                } else {
-
-                    link.href =
-                        cleanURL;
-
-                    link.target =
-                        "_blank";
-
-                    link.rel =
-                        "noopener noreferrer";
-
-                    showElement(
-                        link
-                    );
-                }
-            }
         }
     );
 }
 
+
 /* =========================================================
-   10. FORMSPREE
-========================================================= */
+   FORMSPREE
+   ========================================================= */
 
 function setupFormspree() {
 
@@ -862,9 +928,10 @@ function setupFormspree() {
     );
 }
 
+
 /* =========================================================
-   11. MENU MOBILE
-========================================================= */
+   MENU MOBILE
+   ========================================================= */
 
 function setupMobileMenu() {
 
@@ -895,6 +962,7 @@ function setupMobileMenu() {
         "Abrir menu"
     );
 
+
     mobileMenu.addEventListener(
         "click",
         () => {
@@ -923,34 +991,35 @@ function setupMobileMenu() {
         }
     );
 
+
     nav
-        .querySelectorAll("a")
-        .forEach(link => {
+        .querySelectorAll(
+            "a"
+        )
+        .forEach(
+            link => {
 
-            link.addEventListener(
-                "click",
-                () => {
+                link.addEventListener(
+                    "click",
+                    () => {
 
-                    nav.classList.remove(
-                        "active"
-                    );
+                        nav.classList.remove(
+                            "active"
+                        );
 
-                    mobileMenu.classList.remove(
-                        "open"
-                    );
+                        mobileMenu.classList.remove(
+                            "open"
+                        );
 
-                    mobileMenu.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
+                        mobileMenu.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+                    }
+                );
+            }
+        );
 
-                    mobileMenu.setAttribute(
-                        "aria-label",
-                        "Abrir menu"
-                    );
-                }
-            );
-        });
 
     document.addEventListener(
         "keydown",
@@ -975,19 +1044,15 @@ function setupMobileMenu() {
                     "aria-expanded",
                     "false"
                 );
-
-                mobileMenu.setAttribute(
-                    "aria-label",
-                    "Abrir menu"
-                );
             }
         }
     );
 }
 
+
 /* =========================================================
-   12. NAVEGAÇÃO SUAVE
-========================================================= */
+   NAVEGAÇÃO SUAVE
+   ========================================================= */
 
 function setupSmoothNavigation() {
 
@@ -995,93 +1060,85 @@ function setupSmoothNavigation() {
         .querySelectorAll(
             'a[href^="#"]'
         )
-        .forEach(link => {
+        .forEach(
+            link => {
 
-            link.addEventListener(
-                "click",
-                event => {
+                link.addEventListener(
+                    "click",
+                    event => {
 
-                    const targetId =
-                        link.getAttribute(
-                            "href"
-                        );
+                        const targetId =
+                            link.getAttribute(
+                                "href"
+                            );
 
-                    if (
-                        !targetId ||
-                        targetId === "#"
-                    ) {
-                        return;
-                    }
+                        if (
+                            !targetId ||
+                            targetId === "#"
+                        ) {
+                            return;
+                        }
 
-                    if (
-                        link.target ===
-                        "_blank"
-                    ) {
-                        return;
-                    }
+                        if (
+                            link.target ===
+                            "_blank"
+                        ) {
+                            return;
+                        }
 
-                    /*
-                     * Nunca trata #whatsapp como
-                     * navegação interna.
-                     */
+                        const target =
+                            document.querySelector(
+                                targetId
+                            );
 
-                    if (
-                        targetId ===
-                        "#whatsapp"
-                    ) {
-                        return;
-                    }
+                        if (!target) {
+                            return;
+                        }
 
-                    const target =
-                        document.querySelector(
+                        event.preventDefault();
+
+                        const header =
+                            document.querySelector(
+                                ".site-header"
+                            );
+
+                        const headerHeight =
+                            header
+                                ? header.offsetHeight
+                                : 0;
+
+                        const targetPosition =
+                            target
+                                .getBoundingClientRect()
+                                .top +
+                            window.scrollY -
+                            headerHeight -
+                            12;
+
+                        window.scrollTo({
+
+                            top:
+                                targetPosition,
+
+                            behavior:
+                                "smooth"
+                        });
+
+                        history.pushState(
+                            null,
+                            "",
                             targetId
                         );
-
-                    if (!target) {
-                        return;
                     }
-
-                    event.preventDefault();
-
-                    const header =
-                        document.querySelector(
-                            ".site-header"
-                        );
-
-                    const headerHeight =
-                        header
-                            ? header.offsetHeight
-                            : 0;
-
-                    const targetPosition =
-                        target
-                            .getBoundingClientRect()
-                            .top +
-                        window.scrollY -
-                        headerHeight -
-                        12;
-
-                    window.scrollTo({
-                        top:
-                            targetPosition,
-
-                        behavior:
-                            "smooth"
-                    });
-
-                    history.pushState(
-                        null,
-                        "",
-                        targetId
-                    );
-                }
-            );
-        });
+                );
+            }
+        );
 }
 
+
 /* =========================================================
-   13. DEPOIMENTOS
-========================================================= */
+   DEPOIMENTOS
+   ========================================================= */
 
 function setupTestimonials() {
 
@@ -1098,9 +1155,10 @@ function setupTestimonials() {
         "true";
 }
 
+
 /* =========================================================
-   14. ANO AUTOMÁTICO
-========================================================= */
+   ANO
+   ========================================================= */
 
 function setupCurrentYear() {
 
@@ -1112,18 +1170,21 @@ function setupCurrentYear() {
         .querySelectorAll(
             "[data-current-year]"
         )
-        .forEach(element => {
+        .forEach(
+            element => {
 
-            element.textContent =
-                "© " +
-                year +
-                " Katlen Ariane. Todos os direitos reservados.";
-        });
+                element.textContent =
+                    "© " +
+                    year +
+                    " Katlen Ariane. Todos os direitos reservados.";
+            }
+        );
 }
 
+
 /* =========================================================
-   15. CAMPOS DINÂMICOS
-========================================================= */
+   CAMPOS DINÂMICOS
+   ========================================================= */
 
 function removeEmptyDynamicElements() {
 
@@ -1131,34 +1192,27 @@ function removeEmptyDynamicElements() {
         .querySelectorAll(
             "[data-dynamic]"
         )
-        .forEach(element => {
+        .forEach(
+            element => {
 
-            const text =
-                element.textContent
-                    .trim();
+                if (
+                    !element.textContent.trim()
+                ) {
 
-            if (!text) {
-
-                hideElement(
-                    element
-                );
+                    hideElement(
+                        element
+                    );
+                }
             }
-        });
+        );
 }
 
+
 /* =========================================================
-   16. APLICAR CONFIGURAÇÃO
-========================================================= */
+   CONFIGURAÇÃO V8 ADMIN
+   ========================================================= */
 
-function applyV8Configuration(config) {
-
-    V8_CONFIG =
-        config || {};
-
-    console.info(
-        "V8 Admin Universal conectado.",
-        V8_PROJECT_ID
-    );
+function applyV8Configuration() {
 
     setupProfessionalRegistration();
 
@@ -1177,9 +1231,10 @@ function applyV8Configuration(config) {
     removeEmptyDynamicElements();
 }
 
+
 /* =========================================================
-   17. EVENTO V8 ADMIN
-========================================================= */
+   LISTENER V8 ADMIN
+   ========================================================= */
 
 function setupV8AdminListener() {
 
@@ -1187,9 +1242,33 @@ function setupV8AdminListener() {
         "v8admin:ready",
         event => {
 
-            applyV8Configuration(
-                event.detail || {}
+            V8_CONFIG =
+                event.detail || {};
+
+            console.info(
+                "===================================="
             );
+
+            console.info(
+                "V8 Admin Universal conectado."
+            );
+
+            console.info(
+                "Projeto:",
+                V8_PROJECT_ID
+            );
+
+            console.info(
+                "Configuração:",
+                V8_CONFIG
+            );
+
+            console.info(
+                "===================================="
+            );
+
+            applyV8Configuration();
+
         },
         {
             once: true
@@ -1197,9 +1276,10 @@ function setupV8AdminListener() {
     );
 }
 
+
 /* =========================================================
-   18. INTERFACE
-========================================================= */
+   INTERFACE
+   ========================================================= */
 
 function initInterface() {
 
@@ -1224,9 +1304,10 @@ function initInterface() {
     );
 }
 
+
 /* =========================================================
-   19. INICIALIZAÇÃO
-========================================================= */
+   INICIALIZAÇÃO
+   ========================================================= */
 
 function initSite() {
 
@@ -1237,29 +1318,32 @@ function initSite() {
         );
 
         /*
-         * Primeiro registra o listener.
+         * IMPORTANTE:
+         * Primeiro registra o listener do V8.
          */
 
         setupV8AdminListener();
 
         /*
-         * Inicializa a interface.
+         * Depois inicializa a interface.
          */
 
         initInterface();
 
+
         /*
-         * Caso o loader já tenha
-         * disponibilizado a configuração.
+         * Caso o loader já tenha disponibilizado
+         * a configuração.
          */
 
         if (
             window.V8_ADMIN_CONFIG
         ) {
 
-            applyV8Configuration(
-                window.V8_ADMIN_CONFIG
-            );
+            V8_CONFIG =
+                window.V8_ADMIN_CONFIG;
+
+            applyV8Configuration();
         }
 
     } catch (error) {
@@ -1271,9 +1355,10 @@ function initSite() {
     }
 }
 
+
 /* =========================================================
-   20. DOM READY
-========================================================= */
+   DOM READY
+   ========================================================= */
 
 if (
     document.readyState ===
@@ -1293,9 +1378,10 @@ if (
     initSite();
 }
 
+
 /* =========================================================
-   21. PAGESHOW
-========================================================= */
+   PAGESHOW
+   ========================================================= */
 
 window.addEventListener(
     "pageshow",
@@ -1338,7 +1424,8 @@ window.addEventListener(
     }
 );
 
+
 /* =========================================================
-   FIM DO MAIN.JS
-========================================================= */
+   FIM
+   ========================================================= */
 ```
