@@ -136,7 +136,7 @@
        PSICANÁLISE
        ------------------------- */
 
-    .psycho-grid {
+    .psicanalise-grid {
         grid-template-columns: 1fr 1fr;
         gap: 45px;
     }
@@ -508,24 +508,26 @@
        SOBRE A PSICANÁLISE
        ===================================================== */
 
-    .psycho {
+    .psicanalise {
         padding: 75px 0;
     }
 
-    .psycho-grid {
-        display: flex;
-        flex-direction: column;
-
-        gap: 40px;
+    .psicanalise-grid {
+        grid-template-columns: 1fr;
+        gap: 42px;
     }
 
-    .psycho-copy h2 {
+    .psicanalise-quote {
+        min-height: 0;
+        padding: 38px 30px;
+    }
+
+    .psicanalise-copy {
+        padding: 0;
+    }
+
+    .psicanalise-copy h2 {
         font-size: 2.2rem;
-    }
-
-    .room-image {
-        width: 100%;
-        min-height: 350px;
     }
 
 
@@ -698,7 +700,7 @@
 
     .about-copy h2,
     .first-copy h2,
-    .psycho-copy h2,
+    .psicanalise-copy h2,
     .contact-intro h2 {
         font-size: 2rem;
     }
