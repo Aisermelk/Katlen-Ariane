@@ -1,3 +1,15 @@
+```css
+/* =========================================================
+   KATLEN ARIANE — PSICANALISTA CLÍNICA
+   STYLE.CSS — VERSÃO FINAL
+   RESPONSIVO INTEGRADO
+   ========================================================= */
+
+
+/* =========================================================
+   VARIÁVEIS
+   ========================================================= */
+
 :root {
     --bg: #faf7f3;
     --bg-soft: #f3eee8;
@@ -42,7 +54,9 @@
 }
 
 
-/* RESET */
+/* =========================================================
+   RESET
+   ========================================================= */
 
 *,
 *::before,
@@ -110,7 +124,9 @@ ol {
 }
 
 
-/* ESTRUTURA */
+/* =========================================================
+   ESTRUTURA
+   ========================================================= */
 
 .container {
     width: min(var(--container), calc(100% - 48px));
@@ -127,7 +143,9 @@ section[id] {
 }
 
 
-/* TIPOGRAFIA */
+/* =========================================================
+   TIPOGRAFIA
+   ========================================================= */
 
 .eyebrow {
     display: inline-flex;
@@ -189,7 +207,9 @@ p:last-child {
 }
 
 
-/* BOTÕES */
+/* =========================================================
+   BOTÕES
+   ========================================================= */
 
 .btn {
     display: inline-flex;
@@ -230,11 +250,14 @@ p:last-child {
 
 .btn-primary:hover {
     background: var(--purple-dark);
-    box-shadow: 0 16px 34px rgba(118, 98, 143, 0.28);
+
+    box-shadow:
+        0 16px 34px rgba(118, 98, 143, 0.28);
 }
 
 .btn-outline {
     border: 1px solid var(--border-strong);
+
     background: transparent;
     color: var(--ink);
 }
@@ -284,7 +307,9 @@ p:last-child {
 }
 
 
-/* HEADER */
+/* =========================================================
+   HEADER
+   ========================================================= */
 
 .site-header {
     position: fixed;
@@ -308,7 +333,8 @@ p:last-child {
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
 
-    box-shadow: 0 12px 35px rgba(48, 44, 43, 0.08);
+    box-shadow:
+        0 12px 35px rgba(48, 44, 43, 0.08);
 }
 
 .nav-inner {
@@ -321,7 +347,9 @@ p:last-child {
 }
 
 
-/* MARCA */
+/* =========================================================
+   MARCA
+   ========================================================= */
 
 .brand {
     display: inline-flex;
@@ -377,7 +405,9 @@ p:last-child {
 }
 
 
-/* MENU */
+/* =========================================================
+   MENU DESKTOP
+   ========================================================= */
 
 .nav-menu {
     flex: 1;
@@ -433,7 +463,9 @@ p:last-child {
 }
 
 
-/* CTA HEADER */
+/* =========================================================
+   CTA DO HEADER
+   ========================================================= */
 
 .header-cta {
     flex-shrink: 0;
@@ -455,11 +487,14 @@ p:last-child {
 
 .header-cta:hover {
     background: var(--purple-dark);
+
     transform: translateY(-1px);
 }
 
 
-/* MENU MOBILE */
+/* =========================================================
+   BOTÃO MOBILE
+   ========================================================= */
 
 .mobile-toggle {
     display: none;
@@ -468,12 +503,14 @@ p:last-child {
     justify-content: center;
     flex-direction: column;
 
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
 
     flex-shrink: 0;
 
     gap: 5px;
+
+    padding: 0;
 
     border-radius: 50%;
 
@@ -508,7 +545,9 @@ p:last-child {
 }
 
 
-/* HERO */
+/* =========================================================
+   HERO
+   ========================================================= */
 
 .hero {
     position: relative;
@@ -567,7 +606,9 @@ p:last-child {
 }
 
 
-/* PÚBLICO */
+/* =========================================================
+   PÚBLICO
+   ========================================================= */
 
 .target-audience {
     display: flex;
@@ -610,7 +651,9 @@ p:last-child {
 }
 
 
-/* HERO AÇÕES */
+/* =========================================================
+   HERO AÇÕES
+   ========================================================= */
 
 .hero-actions {
     display: flex;
@@ -630,7 +673,9 @@ p:last-child {
 }
 
 
-/* HERO IMAGEM */
+/* =========================================================
+   HERO — IMAGEM
+   ========================================================= */
 
 .hero-visual {
     position: relative;
@@ -662,6 +707,7 @@ p:last-child {
     content: "";
 
     position: absolute;
+
     inset: 0;
 
     background:
@@ -683,7 +729,9 @@ p:last-child {
 }
 
 
-/* ELEMENTOS DECORATIVOS DO HERO */
+/* =========================================================
+   HERO — DECORATIVOS CIRCULARES
+   ========================================================= */
 
 .hero-orb,
 .hero-stroke {
@@ -695,34 +743,44 @@ p:last-child {
 
     z-index: 5;
 
-    padding: 9px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    border-radius: 999px;
+    width: 105px;
+    height: 105px;
+
+    padding: 0;
+
+    border-radius: 50%;
 
     font-family: var(--font-display);
     font-size: 0.78rem;
+    font-weight: 500;
+
+    line-height: 1.2;
+
+    text-align: center;
 
     box-shadow: var(--shadow-sm);
 
-    transform: rotate(-5deg);
+    pointer-events: none;
 }
 
 .shape-tag-coral {
-    top: 16%;
-    left: -25px;
+    top: 15%;
+    left: -30px;
 
     background: var(--coral-light);
     color: #9d5545;
 }
 
 .shape-tag-yellow {
-    right: -15px;
-    bottom: 17%;
+    right: -20px;
+    bottom: 15%;
 
     background: var(--yellow-light);
     color: #806520;
-
-    transform: rotate(5deg);
 }
 
 .hero-bottom {
@@ -744,7 +802,9 @@ p:last-child {
 }
 
 
-/* SOBRE */
+/* =========================================================
+   SOBRE
+   ========================================================= */
 
 .about {
     background: var(--bg-white);
@@ -777,6 +837,7 @@ p:last-child {
     content: "";
 
     position: absolute;
+
     inset: 0;
 
     background:
@@ -844,7 +905,9 @@ p:last-child {
 }
 
 
-/* ATENDIMENTO */
+/* =========================================================
+   ATENDIMENTO
+   ========================================================= */
 
 .audiences {
     background: var(--bg);
@@ -886,7 +949,9 @@ p:last-child {
 }
 
 
-/* CARDS */
+/* =========================================================
+   CARDS DE ATENDIMENTO
+   ========================================================= */
 
 .audience-grid {
     display: grid;
@@ -922,6 +987,7 @@ p:last-child {
 
 .audience-card:hover {
     transform: translateY(-5px);
+
     box-shadow: var(--shadow-md);
 }
 
@@ -977,7 +1043,9 @@ p:last-child {
 }
 
 
-/* PSICANÁLISE */
+/* =========================================================
+   PSICANÁLISE
+   ========================================================= */
 
 .psicanalise {
     position: relative;
@@ -1073,7 +1141,9 @@ p:last-child {
 }
 
 
-/* NEUROCIÊNCIA */
+/* =========================================================
+   NEUROCIÊNCIA
+   ========================================================= */
 
 .neuro {
     background: var(--bg);
@@ -1134,6 +1204,7 @@ p:last-child {
 
 .neuro-copy {
     position: relative;
+
     z-index: 2;
 
     max-width: 650px;
@@ -1193,6 +1264,7 @@ p:last-child {
 
 .neuro-art span {
     position: relative;
+
     z-index: 3;
 
     color: #fff;
@@ -1232,7 +1304,9 @@ p:last-child {
 }
 
 
-/* ESPIRITUALIDADE */
+/* =========================================================
+   ESPIRITUALIDADE
+   ========================================================= */
 
 .spirituality {
     position: relative;
@@ -1285,7 +1359,9 @@ p:last-child {
 }
 
 
-/* DESTAQUE ESPIRITUALIDADE */
+/* =========================================================
+   DESTAQUE ESPIRITUALIDADE
+   ========================================================= */
 
 .spirituality-highlight {
     position: relative;
@@ -1315,7 +1391,9 @@ p:last-child {
 }
 
 
-/* IMAGEM ESPIRITUALIDADE */
+/* =========================================================
+   IMAGEM ESPIRITUALIDADE
+   ========================================================= */
 
 .spirituality-image {
     position: relative;
@@ -1354,7 +1432,9 @@ p:last-child {
 }
 
 
-/* CÍRCULOS DA ESPIRITUALIDADE */
+/* =========================================================
+   CÍRCULOS DA ESPIRITUALIDADE
+   ========================================================= */
 
 .spirituality-orb {
     position: absolute;
@@ -1397,7 +1477,9 @@ p:last-child {
 }
 
 
-/* PRIMEIRA CONSULTA */
+/* =========================================================
+   PRIMEIRA CONSULTA
+   ========================================================= */
 
 .first {
     background: var(--bg);
@@ -1478,7 +1560,9 @@ p:last-child {
 }
 
 
-/* DEPOIMENTOS */
+/* =========================================================
+   DEPOIMENTOS
+   ========================================================= */
 
 .testimonials {
     background: var(--bg-white);
@@ -1513,6 +1597,7 @@ p:last-child {
 
 .testimonial-card:hover {
     transform: translateY(-4px);
+
     box-shadow: var(--shadow-md);
 }
 
@@ -1580,7 +1665,9 @@ p:last-child {
 }
 
 
-/* CONTATO */
+/* =========================================================
+   CONTATO
+   ========================================================= */
 
 .contact {
     position: relative;
@@ -1670,6 +1757,7 @@ p:last-child {
 
 .contact-whatsapp:hover {
     background: #d8f3e2;
+
     transform: translateY(-2px);
 }
 
@@ -1682,7 +1770,9 @@ p:last-child {
 }
 
 
-/* FORMULÁRIO */
+/* =========================================================
+   FORMULÁRIO
+   ========================================================= */
 
 .contact-form {
     padding: 40px;
@@ -1738,6 +1828,7 @@ p:last-child {
 
 .contact-form textarea {
     resize: vertical;
+
     min-height: 130px;
 }
 
@@ -1784,7 +1875,9 @@ p:last-child {
 }
 
 
-/* PRIVACIDADE */
+/* =========================================================
+   PRIVACIDADE
+   ========================================================= */
 
 .privacy {
     padding: 80px 0;
@@ -1807,7 +1900,9 @@ p:last-child {
 }
 
 
-/* FOOTER */
+/* =========================================================
+   FOOTER
+   ========================================================= */
 
 .site-footer {
     padding: 75px 0 0;
@@ -1910,7 +2005,9 @@ p:last-child {
 }
 
 
-/* WHATSAPP FLUTUANTE */
+/* =========================================================
+   WHATSAPP FLUTUANTE
+   ========================================================= */
 
 .whatsapp-float {
     position: fixed;
@@ -1974,7 +2071,9 @@ p:last-child {
 }
 
 
-/* ACESSIBILIDADE */
+/* =========================================================
+   ACESSIBILIDADE
+   ========================================================= */
 
 :focus-visible {
     outline: 2px solid var(--purple);
@@ -1982,7 +2081,9 @@ p:last-child {
 }
 
 
-/* TABLETS */
+/* =========================================================
+   TABLETS
+   ========================================================= */
 
 @media (max-width: 1100px) {
 
@@ -2044,7 +2145,9 @@ p:last-child {
 }
 
 
-/* TABLETS / MOBILE */
+/* =========================================================
+   TABLETS / MOBILE
+   ========================================================= */
 
 @media (max-width: 820px) {
 
@@ -2061,7 +2164,9 @@ p:last-child {
     }
 
 
-    /* HEADER */
+    /* -----------------------------------------------------
+       HEADER MOBILE
+       ----------------------------------------------------- */
 
     .site-header {
         top: 12px;
@@ -2069,13 +2174,24 @@ p:last-child {
 
         width: calc(100% - 24px);
 
-        padding: 10px 14px;
+        padding: 9px 12px;
 
         border-radius: 20px;
     }
 
     .nav-inner {
         min-height: 54px;
+
+        gap: 10px;
+    }
+
+    .brand {
+        min-width: 0;
+    }
+
+    .brand-logo {
+        width: 40px;
+        height: 40px;
     }
 
     .brand-name {
@@ -2086,12 +2202,19 @@ p:last-child {
         font-size: 0.5rem;
     }
 
+
+    /* -----------------------------------------------------
+       MENU MOBILE
+       ----------------------------------------------------- */
+
     .nav-menu {
         position: absolute;
 
-        top: calc(100% + 10px);
+        top: calc(100% + 8px);
         left: 0;
         right: 0;
+
+        width: 100%;
 
         max-height: 0;
 
@@ -2100,16 +2223,18 @@ p:last-child {
         opacity: 0;
         visibility: hidden;
 
-        transform: translateY(-8px);
+        transform: translateY(-6px);
 
-        border-radius: 20px;
+        border: 1px solid rgba(48,44,43,0.08);
+        border-radius: 18px;
 
         background: rgba(255,255,255,0.98);
 
-        box-shadow: 0 18px 45px rgba(40,30,60,0.12);
+        box-shadow:
+            0 18px 45px rgba(48,44,43,0.12);
 
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
 
         transition:
             max-height 0.35s ease,
@@ -2119,7 +2244,7 @@ p:last-child {
     }
 
     .nav-menu.active {
-        max-height: 520px;
+        max-height: 500px;
 
         overflow-y: auto;
 
@@ -2134,9 +2259,11 @@ p:last-child {
         flex-direction: column;
         align-items: stretch;
 
+        justify-content: flex-start;
+
         gap: 0;
 
-        padding: 12px 18px 18px;
+        padding: 8px 14px 12px;
     }
 
     .nav-menu li {
@@ -2144,16 +2271,23 @@ p:last-child {
     }
 
     .nav-menu a {
-        display: block;
+        display: flex;
+        align-items: center;
 
         width: 100%;
 
-        padding: 13px 8px;
+        min-height: 44px;
 
-        border-bottom: 1px solid rgba(40,30,60,0.06);
+        padding: 11px 8px;
+
+        border-bottom: 1px solid rgba(48,44,43,0.07);
+
+        color: var(--ink-soft);
 
         font-size: 0.82rem;
-        letter-spacing: 0.4px;
+        font-weight: 600;
+
+        letter-spacing: 0.2px;
     }
 
     .nav-menu li:last-child a {
@@ -2165,7 +2299,9 @@ p:last-child {
     }
 
     .nav-menu a:hover {
-        padding-left: 14px;
+        padding-left: 12px;
+
+        color: var(--purple);
     }
 
     .header-cta {
@@ -2179,7 +2315,9 @@ p:last-child {
     }
 
 
-    /* HERO */
+    /* -----------------------------------------------------
+       HERO MOBILE
+       ----------------------------------------------------- */
 
     .hero {
         min-height: auto;
@@ -2200,6 +2338,7 @@ p:last-child {
 
     .hero-copy h1 {
         font-size: clamp(2.6rem, 8vw, 3.7rem);
+
         line-height: 1.08;
     }
 
@@ -2216,6 +2355,8 @@ p:last-child {
 
     .hero-visual {
         justify-content: center;
+
+        width: 100%;
     }
 
     .hero-image {
@@ -2224,16 +2365,28 @@ p:last-child {
         height: 500px;
     }
 
+
+    /* DECORATIVOS HERO */
+
+    .shape-tag {
+        width: 88px;
+        height: 88px;
+
+        font-size: 0.7rem;
+    }
+
     .shape-tag-coral {
-        left: calc(50% - 245px);
+        left: -18px;
     }
 
     .shape-tag-yellow {
-        right: calc(50% - 245px);
+        right: -12px;
     }
 
 
-    /* SOBRE */
+    /* -----------------------------------------------------
+       SOBRE
+       ----------------------------------------------------- */
 
     .about-grid,
     .spirituality-grid {
@@ -2265,7 +2418,9 @@ p:last-child {
     }
 
 
-    /* ATENDIMENTO */
+    /* -----------------------------------------------------
+       ATENDIMENTO
+       ----------------------------------------------------- */
 
     .section-heading {
         display: block;
@@ -2294,7 +2449,9 @@ p:last-child {
     }
 
 
-    /* PSICANÁLISE */
+    /* -----------------------------------------------------
+       PSICANÁLISE
+       ----------------------------------------------------- */
 
     .psicanalise-grid {
         grid-template-columns: 1fr;
@@ -2307,7 +2464,9 @@ p:last-child {
     }
 
 
-    /* NEURO */
+    /* -----------------------------------------------------
+       NEURO
+       ----------------------------------------------------- */
 
     .neuro {
         padding: 70px 0;
@@ -2333,7 +2492,9 @@ p:last-child {
     }
 
 
-    /* ESPIRITUALIDADE */
+    /* -----------------------------------------------------
+       ESPIRITUALIDADE
+       ----------------------------------------------------- */
 
     .spirituality-image {
         width: 100%;
@@ -2356,7 +2517,9 @@ p:last-child {
     }
 
 
-    /* PRIMEIRA CONSULTA */
+    /* -----------------------------------------------------
+       PRIMEIRA CONSULTA
+       ----------------------------------------------------- */
 
     .first-grid {
         display: flex;
@@ -2370,7 +2533,9 @@ p:last-child {
     }
 
 
-    /* DEPOIMENTOS */
+    /* -----------------------------------------------------
+       DEPOIMENTOS
+       ----------------------------------------------------- */
 
     .testimonial-grid {
         display: flex;
@@ -2396,7 +2561,9 @@ p:last-child {
     }
 
 
-    /* CONTATO */
+    /* -----------------------------------------------------
+       CONTATO
+       ----------------------------------------------------- */
 
     .contact-grid {
         display: flex;
@@ -2421,7 +2588,9 @@ p:last-child {
     }
 
 
-    /* FOOTER */
+    /* -----------------------------------------------------
+       FOOTER
+       ----------------------------------------------------- */
 
     .footer-grid {
         grid-template-columns: 1fr;
@@ -2434,7 +2603,9 @@ p:last-child {
     }
 
 
-    /* WHATSAPP */
+    /* -----------------------------------------------------
+       WHATSAPP
+       ----------------------------------------------------- */
 
     .whatsapp-float {
         right: 18px;
@@ -2442,6 +2613,8 @@ p:last-child {
 
         width: 58px;
         height: 58px;
+
+        min-height: 58px;
 
         padding: 0;
 
@@ -2453,15 +2626,17 @@ p:last-child {
     }
 
     .whatsapp-float::before {
-        margin: 0;
-
         width: 28px;
         height: 28px;
+
+        margin: 0;
     }
 }
 
 
-/* CELULARES */
+/* =========================================================
+   CELULARES
+   ========================================================= */
 
 @media (max-width: 540px) {
 
@@ -2482,9 +2657,14 @@ p:last-child {
 
         width: calc(100% - 16px);
 
-        padding: 10px 14px;
+        padding: 9px 11px;
 
-        border-radius: 19px;
+        border-radius: 18px;
+    }
+
+    .brand-logo {
+        width: 38px;
+        height: 38px;
     }
 
     .brand-name {
@@ -2493,7 +2673,13 @@ p:last-child {
 
     .brand-sub {
         font-size: 0.48rem;
+
         letter-spacing: 1.5px;
+    }
+
+    .mobile-toggle {
+        width: 38px;
+        height: 38px;
     }
 
 
@@ -2547,18 +2733,22 @@ p:last-child {
         height: 420px;
     }
 
-    .shape-tag {
-        padding: 7px 12px;
 
-        font-size: 0.72rem;
+    /* DECORATIVOS HERO */
+
+    .shape-tag {
+        width: 72px;
+        height: 72px;
+
+        font-size: 0.62rem;
     }
 
     .shape-tag-coral {
-        left: -5px;
+        left: -8px;
     }
 
     .shape-tag-yellow {
-        right: -5px;
+        right: -6px;
     }
 
 
@@ -2723,13 +2913,17 @@ p:last-child {
         width: 55px;
         height: 55px;
 
+        min-height: 55px;
+
         right: 15px;
         bottom: 15px;
     }
 }
 
 
-/* CELULARES PEQUENOS */
+/* =========================================================
+   CELULARES PEQUENOS
+   ========================================================= */
 
 @media (max-width: 380px) {
 
@@ -2741,6 +2935,11 @@ p:last-child {
         left: 6px;
 
         width: calc(100% - 12px);
+    }
+
+    .brand-logo {
+        width: 36px;
+        height: 36px;
     }
 
     .brand-name {
@@ -2767,6 +2966,27 @@ p:last-child {
         height: 360px;
     }
 
+
+    /* DECORATIVOS HERO */
+
+    .shape-tag {
+        width: 62px;
+        height: 62px;
+
+        font-size: 0.56rem;
+    }
+
+    .shape-tag-coral {
+        left: -5px;
+    }
+
+    .shape-tag-yellow {
+        right: -4px;
+    }
+
+
+    /* SOBRE */
+
     .about-image {
         min-height: 330px;
     }
@@ -2782,6 +3002,9 @@ p:last-child {
     .neuro-card {
         padding: 30px 20px;
     }
+
+
+    /* ESPIRITUALIDADE */
 
     .spirituality-image {
         min-height: 310px;
@@ -2805,13 +3028,21 @@ p:last-child {
         right: -7px;
     }
 
+
+    /* CONTATO */
+
     .contact-form {
         padding: 22px 17px;
     }
 
+
+    /* WHATSAPP */
+
     .whatsapp-float {
         width: 52px;
         height: 52px;
+
+        min-height: 52px;
 
         right: 12px;
         bottom: 12px;
@@ -2819,7 +3050,9 @@ p:last-child {
 }
 
 
-/* REDUÇÃO DE MOVIMENTO */
+/* =========================================================
+   REDUÇÃO DE MOVIMENTO
+   ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -2836,7 +3069,9 @@ p:last-child {
 }
 
 
-/* TOUCH */
+/* =========================================================
+   TOUCH
+   ========================================================= */
 
 @media (hover: none) and (pointer: coarse) {
 
@@ -2855,3 +3090,4 @@ p:last-child {
         touch-action: manipulation;
     }
 }
+```
