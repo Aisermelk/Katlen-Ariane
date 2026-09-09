@@ -620,12 +620,12 @@ p {
     color: var(--purple-dark);
 }
 
-.audience-women {
+.audience-people {
     background: var(--coral-light);
     color: #9d5c4c;
 }
 
-.audience-children {
+.audience-companies {
     background: var(--yellow-light);
     color: #806521;
 }
