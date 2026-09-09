@@ -945,7 +945,8 @@ p {
 .audience-grid {
     display: grid;
 
-    grid-template-columns: repeat(4, 1fr);
+    /* ALTERADO: agora são 3 cards */
+    grid-template-columns: repeat(3, 1fr);
 
     gap: 16px;
 }
@@ -1899,15 +1900,6 @@ p {
 
 /* =========================================================
    16. WHATSAPP FLUTUANTE
-   =========================================================
-   Compatível com:
-   
-   <a class="whatsapp-float" href="...">
-       <svg>...</svg>
-       <span>Quero conversar</span>
-   </a>
-   
-   O botão usa o ícone SVG do WhatsApp definido no index.
    ========================================================= */
 
 .whatsapp-float {
