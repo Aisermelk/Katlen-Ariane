@@ -1,7 +1,7 @@
 /* =========================================================
    KATLEN ARIANE — PSICANALISTA CLÍNICA
    STYLE.CSS PRINCIPAL
-   VERSÃO FINAL — RESPONSIVA + MENU MOBILE
+   VERSÃO FINAL — LIMPA + RESPONSIVA + CORREÇÕES DE BUG
    ========================================================= */
 
 
@@ -71,6 +71,9 @@ html {
 body {
     margin: 0;
     padding: 0;
+
+    width: 100%;
+    min-width: 0;
 
     background: var(--bg);
     color: var(--ink);
@@ -148,6 +151,7 @@ a {
     margin-bottom: 18px;
 
     color: var(--purple);
+
     font-size: 12px;
     font-weight: 700;
 
@@ -160,6 +164,8 @@ a {
 
     width: 28px;
     height: 1px;
+
+    flex: 0 0 auto;
 
     background: currentColor;
 }
@@ -223,7 +229,9 @@ p {
 .btn-primary {
     background: var(--purple);
     color: #fff;
-    box-shadow: 0 12px 30px rgba(118, 98, 143, .22);
+
+    box-shadow:
+        0 12px 30px rgba(118, 98, 143, .22);
 }
 
 .btn-primary:hover {
@@ -232,7 +240,9 @@ p {
 
 .btn-outline {
     border: 1px solid var(--border-strong);
+
     background: rgba(255, 255, 255, .55);
+
     color: var(--ink);
 }
 
@@ -266,14 +276,17 @@ p {
 
 
 /* =========================================================
-   HEADER — VERSÃO CORRIGIDA
+   HEADER
    ========================================================= */
 
 .site-header {
     position: fixed;
+
     top: 18px;
     left: 0;
+
     width: 100%;
+
     z-index: 1000;
 
     pointer-events: none;
@@ -283,6 +296,7 @@ p {
     position: relative;
 
     width: min(calc(100% - 36px), var(--container));
+
     min-height: 72px;
 
     margin-inline: auto;
@@ -290,15 +304,17 @@ p {
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
+
     gap: 20px;
 
     background: rgba(255, 255, 255, .94);
 
     border: 1px solid rgba(48, 44, 43, .09);
+
     border-radius: 20px;
 
-    box-shadow: 0 10px 35px rgba(48, 44, 43, .08);
+    box-shadow:
+        0 10px 35px rgba(48, 44, 43, .08);
 
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
@@ -314,9 +330,12 @@ p {
 .brand {
     display: flex;
     align-items: center;
+
     gap: 10px;
 
-    flex-shrink: 0;
+    flex: 0 0 auto;
+
+    min-width: 0;
 
     text-decoration: none;
 }
@@ -325,6 +344,8 @@ p {
     width: 43px;
     height: 43px;
 
+    flex: 0 0 auto;
+
     object-fit: contain;
 }
 
@@ -332,6 +353,8 @@ p {
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    min-width: 0;
 }
 
 .brand-name {
@@ -341,6 +364,7 @@ p {
 
     font-size: 18px;
     line-height: 1.05;
+
     white-space: nowrap;
 }
 
@@ -360,7 +384,7 @@ p {
 
 
 /* =========================================================
-   MENU DESKTOP
+   MENU
    ========================================================= */
 
 .nav-menu {
@@ -371,6 +395,8 @@ p {
     gap: 18px;
 
     margin-left: auto;
+
+    min-width: 0;
 }
 
 .nav-menu ul {
@@ -379,6 +405,8 @@ p {
     justify-content: center;
 
     gap: 17px;
+
+    min-width: 0;
 }
 
 .nav-menu li {
@@ -400,8 +428,7 @@ p {
 
     white-space: nowrap;
 
-    transition:
-        color .25s ease;
+    transition: color .25s ease;
 }
 
 .nav-menu a::after {
@@ -434,7 +461,7 @@ p {
 
 
 /* =========================================================
-   BOTÃO DO HEADER
+   BOTÃO HEADER
    ========================================================= */
 
 .header-cta {
@@ -442,7 +469,7 @@ p {
     align-items: center;
     justify-content: center;
 
-    flex-shrink: 0;
+    flex: 0 0 auto;
 
     min-height: 44px;
 
@@ -470,12 +497,13 @@ p {
 
     transform: translateY(-2px);
 
-    box-shadow: 0 8px 20px rgba(217, 143, 125, .22);
+    box-shadow:
+        0 8px 20px rgba(217, 143, 125, .22);
 }
 
 
 /* =========================================================
-   BOTÃO HAMBÚRGUER
+   HAMBÚRGUER
    ========================================================= */
 
 .mobile-toggle {
@@ -484,7 +512,7 @@ p {
     width: 44px;
     height: 44px;
 
-    flex-shrink: 0;
+    flex: 0 0 auto;
 
     align-items: center;
     justify-content: center;
@@ -517,11 +545,6 @@ p {
         opacity .2s ease;
 }
 
-
-/* =========================================================
-   HAMBÚRGUER → X
-   ========================================================= */
-
 .mobile-toggle.active span:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
 }
@@ -535,273 +558,6 @@ p {
 }
 
 
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (max-width: 1100px) {
-
-    .nav-inner {
-        width: min(calc(100% - 30px), var(--container));
-    }
-
-    .nav-menu {
-        gap: 12px;
-    }
-
-    .nav-menu ul {
-        gap: 13px;
-    }
-
-    .nav-menu a {
-        font-size: 11px;
-    }
-
-    .header-cta {
-        padding: 0 15px;
-
-        font-size: 11px;
-    }
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 820px) {
-
-    .site-header {
-        top: 12px;
-    }
-
-    .nav-inner {
-        width: calc(100% - 28px);
-
-        min-height: 66px;
-
-        padding: 9px 12px;
-
-        border-radius: 18px;
-    }
-
-    .brand-logo {
-        width: 40px;
-        height: 40px;
-    }
-
-    .brand-name {
-        font-size: 16px;
-    }
-
-    .brand-sub {
-        font-size: 8px;
-    }
-
-
-    /* esconder menu desktop */
-
-    .nav-menu {
-        position: absolute;
-
-        top: calc(100% + 9px);
-
-        left: 0;
-        right: 0;
-
-        display: none;
-
-        flex-direction: column;
-        align-items: stretch;
-
-        width: 100%;
-
-        margin: 0;
-
-        padding: 10px;
-
-        border: 1px solid rgba(48, 44, 43, .08);
-
-        border-radius: 18px;
-
-        background: rgba(255, 255, 255, .98);
-
-        box-shadow: 0 18px 45px rgba(48, 44, 43, .12);
-
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
-
-        opacity: 0;
-
-        transform: translateY(-8px);
-
-        transition:
-            opacity .25s ease,
-            transform .25s ease;
-    }
-
-    .nav-menu.active {
-        display: flex;
-
-        opacity: 1;
-
-        transform: translateY(0);
-    }
-
-
-    /* lista */
-
-    .nav-menu ul {
-        display: flex;
-
-        flex-direction: column;
-        align-items: stretch;
-
-        width: 100%;
-
-        gap: 0;
-    }
-
-    .nav-menu li {
-        width: 100%;
-
-        border-bottom: 1px solid rgba(48, 44, 43, .07);
-    }
-
-    .nav-menu li:last-child {
-        border-bottom: 0;
-    }
-
-
-    /* links */
-
-    .nav-menu a {
-        display: flex;
-
-        align-items: center;
-
-        width: 100%;
-
-        min-height: 43px;
-
-        padding: 10px 8px;
-
-        color: var(--ink);
-
-        font-size: 13px;
-        font-weight: 600;
-    }
-
-    .nav-menu a:hover {
-        color: var(--purple);
-    }
-
-    .nav-menu a::after {
-        display: none;
-    }
-
-
-    /* botão */
-
-    .header-cta {
-        width: 100%;
-
-        min-height: 46px;
-
-        margin-top: 10px;
-
-        font-size: 12px;
-    }
-
-
-    /* hambúrguer */
-
-    .mobile-toggle {
-        display: flex;
-    }
-}
-
-
-/* =========================================================
-   MOBILE PEQUENO
-   ========================================================= */
-
-@media (max-width: 520px) {
-
-    .site-header {
-        top: 10px;
-    }
-
-    .nav-inner {
-        width: calc(100% - 20px);
-
-        min-height: 62px;
-
-        padding: 8px 10px;
-
-        border-radius: 16px;
-    }
-
-    .brand {
-        gap: 8px;
-    }
-
-    .brand-logo {
-        width: 38px;
-        height: 38px;
-    }
-
-    .brand-name {
-        font-size: 15px;
-    }
-
-    .brand-sub {
-        font-size: 7px;
-    }
-
-    .mobile-toggle {
-        width: 42px;
-        height: 42px;
-    }
-
-    .nav-menu {
-        top: calc(100% + 8px);
-
-        padding: 9px;
-
-        border-radius: 16px;
-    }
-
-    .nav-menu a {
-        min-height: 41px;
-
-        font-size: 12px;
-    }
-
-    .header-cta {
-        min-height: 44px;
-    }
-}
-
-
-/* =========================================================
-   MOBILE MUITO PEQUENO
-   ========================================================= */
-
-@media (max-width: 360px) {
-
-    .brand-sub {
-        display: none;
-    }
-
-    .brand-name {
-        font-size: 15px;
-    }
-
-    .nav-menu a {
-        font-size: 12px;
-    }
-}
 /* =========================================================
    HERO
    ========================================================= */
@@ -819,8 +575,16 @@ p {
     overflow: hidden;
 
     background:
-        radial-gradient(circle at 10% 20%, rgba(217, 179, 91, .12), transparent 28%),
-        radial-gradient(circle at 88% 30%, rgba(118, 98, 143, .12), transparent 30%),
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(217, 179, 91, .12),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 88% 30%,
+            rgba(118, 98, 143, .12),
+            transparent 30%
+        ),
         var(--bg);
 }
 
@@ -832,11 +596,16 @@ p {
     align-items: center;
 
     gap: 80px;
+
+    min-width: 0;
 }
 
 .hero-copy {
     position: relative;
+
     z-index: 2;
+
+    min-width: 0;
 }
 
 .hero-copy h1 {
@@ -861,6 +630,7 @@ p {
 .target-audience {
     display: flex;
     flex-wrap: wrap;
+
     gap: 8px;
 
     margin-bottom: 32px;
@@ -898,6 +668,7 @@ p {
 .hero-actions {
     display: flex;
     flex-wrap: wrap;
+
     gap: 12px;
 
     margin-bottom: 25px;
@@ -905,6 +676,7 @@ p {
 
 .hero-caption {
     color: var(--muted);
+
     font-size: 12px;
 }
 
@@ -1013,6 +785,8 @@ p {
     align-items: center;
 
     gap: 100px;
+
+    min-width: 0;
 }
 
 .about-image {
@@ -1121,6 +895,8 @@ p {
 
 .about-copy {
     max-width: 650px;
+
+    min-width: 0;
 }
 
 .about-copy h2 {
@@ -1133,7 +909,7 @@ p {
 
 
 /* =========================================================
-   AUDIENCES
+   AUDIÊNCIAS
    ========================================================= */
 
 .audiences {
@@ -1177,6 +953,8 @@ p {
     grid-template-columns: repeat(3, 1fr);
 
     gap: 20px;
+
+    min-width: 0;
 }
 
 .audience-card {
@@ -1348,6 +1126,8 @@ p {
     position: relative;
 
     z-index: 2;
+
+    min-width: 0;
 }
 
 .neuro-copy .eyebrow {
@@ -1419,7 +1199,8 @@ p {
 
     background: var(--coral);
 
-    box-shadow: 0 0 0 20px rgba(217, 143, 125, .12);
+    box-shadow:
+        0 0 0 20px rgba(217, 143, 125, .12);
 }
 
 
@@ -1439,6 +1220,12 @@ p {
     align-items: start;
 
     gap: 90px;
+
+    min-width: 0;
+}
+
+.first-copy {
+    min-width: 0;
 }
 
 .first-copy h2 {
@@ -1453,6 +1240,8 @@ p {
     display: grid;
 
     gap: 14px;
+
+    min-width: 0;
 }
 
 .step {
@@ -1471,6 +1260,8 @@ p {
     border-radius: var(--radius-md);
 
     background: rgba(255, 255, 255, .58);
+
+    min-width: 0;
 }
 
 .step-number {
@@ -1518,6 +1309,8 @@ p {
     grid-template-columns: repeat(3, 1fr);
 
     gap: 20px;
+
+    min-width: 0;
 }
 
 .testimonial-card {
@@ -1534,6 +1327,8 @@ p {
     background: rgba(255, 255, 255, .72);
 
     box-shadow: var(--shadow-sm);
+
+    min-width: 0;
 }
 
 .testimonial-card.featured {
@@ -1581,6 +1376,8 @@ p {
     line-height: 1;
 
     opacity: .25;
+
+    pointer-events: none;
 }
 
 
@@ -1600,6 +1397,12 @@ p {
     align-items: center;
 
     gap: 70px;
+
+    min-width: 0;
+}
+
+.psicanalise-copy {
+    min-width: 0;
 }
 
 .psicanalise-quote {
@@ -1654,6 +1457,12 @@ p {
     align-items: center;
 
     gap: 70px;
+
+    min-width: 0;
+}
+
+.psycho-copy {
+    min-width: 0;
 }
 
 .psycho-copy h2 {
@@ -1708,6 +1517,8 @@ p {
     background: var(--coral-light);
 
     opacity: .8;
+
+    pointer-events: none;
 }
 
 .room-image img {
@@ -1748,10 +1559,9 @@ p {
     background: var(--bg-soft);
 
     /*
-       IMPORTANTE:
-       não usar overflow:hidden aqui,
-       pois as formas decorativas da imagem
-       precisam poder ultrapassar seus limites.
+       O SECTION NÃO ESCONDE AS FORMAS.
+       Isso permite que as formas decorativas
+       ultrapassem o limite da imagem.
     */
     overflow: visible;
 }
@@ -1764,13 +1574,18 @@ p {
     align-items: center;
 
     gap: 80px;
+
+    min-width: 0;
 }
 
 .spirituality-copy {
+    position: relative;
+
+    z-index: 2;
+
     max-width: 620px;
 
-    position: relative;
-    z-index: 2;
+    min-width: 0;
 }
 
 .spirituality-copy h2 {
@@ -1791,9 +1606,8 @@ p {
     min-height: 520px;
 
     /*
-       CORREÇÃO PRINCIPAL:
-       permite que as bolinhas apareçam
-       para fora da imagem.
+       FUNDAMENTAL:
+       o container não corta as formas.
     */
     overflow: visible !important;
 
@@ -1811,12 +1625,6 @@ p {
     z-index: 2;
 }
 
-/*
-   A imagem recebe o border-radius.
-   Assim podemos deixar o container
-   com overflow: visible sem perder
-   o formato orgânico da fotografia.
-*/
 .spirituality-image img {
     position: relative;
 
@@ -1841,11 +1649,11 @@ p {
     transform: scale(1.02);
 }
 
-/*
-   BOLINHA AMARELA
-   Fica propositalmente para fora
-   do canto superior direito.
-*/
+
+/* =========================================================
+   FORMA DECORATIVA SUPERIOR
+   ========================================================= */
+
 .spirituality-image::before {
     content: "";
 
@@ -1868,11 +1676,11 @@ p {
     pointer-events: none;
 }
 
-/*
-   BOLINHA ROXA
-   Fica propositalmente para fora
-   do canto inferior esquerdo.
-*/
+
+/* =========================================================
+   FORMA DECORATIVA INFERIOR
+   ========================================================= */
+
 .spirituality-image::after {
     content: "";
 
@@ -1958,6 +1766,12 @@ p {
     gap: 90px;
 
     z-index: 2;
+
+    min-width: 0;
+}
+
+.contact-intro {
+    min-width: 0;
 }
 
 .contact-intro h2 {
@@ -1991,6 +1805,9 @@ p {
    ========================================================= */
 
 .contact-form {
+    width: 100%;
+    min-width: 0;
+
     padding: 40px;
 
     border: 1px solid var(--border);
@@ -2007,6 +1824,7 @@ p {
 
 #main-form {
     width: 100%;
+    min-width: 0;
 }
 
 .form-row {
@@ -2017,12 +1835,17 @@ p {
     gap: 15px;
 
     margin-bottom: 15px;
+
+    min-width: 0;
 }
 
 .form-field {
     display: flex;
     flex-direction: column;
+
     gap: 7px;
+
+    min-width: 0;
 }
 
 .form-field label {
@@ -2036,6 +1859,7 @@ p {
 .form-field select,
 .form-field textarea {
     width: 100%;
+    max-width: 100%;
 
     min-height: 52px;
 
@@ -2074,12 +1898,17 @@ p {
 .form-consent {
     display: flex;
     align-items: flex-start;
+
     gap: 10px;
 
     margin: 15px 0 20px;
+
+    min-width: 0;
 }
 
 .form-consent input {
+    flex: 0 0 auto;
+
     margin-top: 5px;
 }
 
@@ -2096,11 +1925,17 @@ p {
    ========================================================= */
 
 .site-footer {
+    position: relative;
+
+    width: 100%;
+
     padding: 80px 0 25px;
 
     background: #2e2a29;
 
     color: rgba(255, 255, 255, .72);
+
+    overflow: hidden;
 }
 
 .footer-grid {
@@ -2111,17 +1946,24 @@ p {
     gap: 50px;
 
     padding-bottom: 55px;
+
+    min-width: 0;
 }
 
 .footer-brand {
     display: flex;
     align-items: flex-start;
+
     gap: 13px;
+
+    min-width: 0;
 }
 
 .footer-brand img {
     width: 45px;
     height: 45px;
+
+    flex: 0 0 auto;
 
     object-fit: contain;
 }
@@ -2136,6 +1978,8 @@ p {
     font-family: var(--font-display);
 
     font-size: 20px;
+
+    line-height: 1.2;
 }
 
 .footer-brand span {
@@ -2154,10 +1998,12 @@ p {
     color: rgba(255, 255, 255, .55);
 
     font-size: 13px;
+
+    line-height: 1.7;
 }
 
 .footer-title {
-    margin-bottom: 17px;
+    margin: 0 0 17px;
 
     color: #fff;
 
@@ -2172,14 +2018,21 @@ p {
     display: grid;
 
     gap: 9px;
+
+    min-width: 0;
 }
 
 .footer-links a {
+    display: inline-block;
+
+    max-width: max-content;
+
     color: rgba(255, 255, 255, .58);
 
     font-size: 13px;
 
-    transition: color var(--transition);
+    transition:
+        color var(--transition);
 }
 
 .footer-links a:hover {
@@ -2189,6 +2042,7 @@ p {
 .footer-social {
     display: flex;
     flex-wrap: wrap;
+
     gap: 8px;
 }
 
@@ -2201,6 +2055,8 @@ p {
     width: 40px;
     height: 40px;
 
+    flex: 0 0 auto;
+
     border: 1px solid rgba(255, 255, 255, .12);
 
     border-radius: 50%;
@@ -2209,7 +2065,11 @@ p {
 
     font-size: 12px;
 
-    transition: var(--transition);
+    transition:
+        border-color var(--transition),
+        background var(--transition),
+        color var(--transition),
+        transform var(--transition);
 }
 
 .footer-social a:hover {
@@ -2218,6 +2078,8 @@ p {
     background: var(--purple);
 
     color: #fff;
+
+    transform: translateY(-2px);
 }
 
 .footer-bottom {
@@ -2235,6 +2097,24 @@ p {
     color: rgba(255, 255, 255, .4);
 
     font-size: 11px;
+
+    min-width: 0;
+}
+
+.footer-bottom p {
+    margin: 0;
+
+    color: inherit;
+}
+
+.footer-bottom a {
+    color: inherit;
+
+    transition: color var(--transition);
+}
+
+.footer-bottom a:hover {
+    color: #fff;
 }
 
 
@@ -2267,7 +2147,8 @@ p {
 
     color: #fff;
 
-    box-shadow: 0 15px 35px rgba(37, 211, 102, .25);
+    box-shadow:
+        0 15px 35px rgba(37, 211, 102, .25);
 
     font-size: 13px;
     font-weight: 800;
@@ -2287,6 +2168,8 @@ p {
     width: 25px;
     height: 25px;
 
+    flex: 0 0 auto;
+
     fill: currentColor;
 }
 
@@ -2297,15 +2180,19 @@ p {
 
 :focus-visible {
     outline: 3px solid rgba(118, 98, 143, .45);
+
     outline-offset: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto !important;
+    }
+
     *,
     *::before,
     *::after {
-        scroll-behavior: auto !important;
-
         transition-duration: .01ms !important;
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
@@ -2314,17 +2201,31 @@ p {
 
 
 /* =========================================================
-   RESPONSIVO — 1100px
+   TABLET / NOTEBOOK
    ========================================================= */
 
 @media (max-width: 1100px) {
 
+    .nav-inner {
+        width: min(calc(100% - 30px), var(--container));
+    }
+
     .nav-menu {
-        gap: 18px;
+        gap: 12px;
     }
 
     .nav-menu ul {
-        gap: 18px;
+        gap: 13px;
+    }
+
+    .nav-menu a {
+        font-size: 11px;
+    }
+
+    .header-cta {
+        padding: 0 15px;
+
+        font-size: 11px;
     }
 
     .hero-grid {
@@ -2352,64 +2253,112 @@ p {
 
 
 /* =========================================================
-   RESPONSIVO — 820px
+   MOBILE — 820px
    ========================================================= */
 
 @media (max-width: 820px) {
 
     .container {
-        width: min(calc(100% - 64px), var(--container));
+        width: min(calc(100% - 56px), var(--container));
     }
 
     .section {
         padding: 85px 0;
     }
 
-    /* HEADER */
+
+    /* -----------------------------------------
+       HEADER
+       ----------------------------------------- */
 
     .site-header {
         top: 12px;
     }
 
     .nav-inner {
-        min-height: 68px;
+        width: calc(100% - 28px);
 
-        padding: 10px 14px;
+        min-height: 66px;
+
+        padding: 9px 12px;
+
+        border-radius: 18px;
+
+        gap: 10px;
+    }
+
+    .brand-logo {
+        width: 40px;
+        height: 40px;
+    }
+
+    .brand-name {
+        font-size: 16px;
+    }
+
+    .brand-sub {
+        font-size: 8px;
     }
 
     .mobile-toggle {
         display: flex;
     }
 
+    /*
+       O menu sai do fluxo e abre
+       abaixo do header.
+    */
+
     .nav-menu {
         position: absolute;
+
+        top: calc(100% + 9px);
 
         left: 0;
         right: 0;
 
-        top: calc(100% + 10px);
-
         display: none;
+
+        width: 100%;
 
         flex-direction: column;
         align-items: stretch;
 
-        padding: 18px;
+        margin: 0;
 
-        border: 1px solid var(--border);
+        padding: 10px;
 
-        border-radius: 20px;
+        border: 1px solid rgba(48, 44, 43, .08);
 
-        background: rgba(255, 255, 255, .96);
+        border-radius: 18px;
 
-        box-shadow: var(--shadow-md);
+        background: rgba(255, 255, 255, .98);
+
+        box-shadow:
+            0 18px 45px rgba(48, 44, 43, .12);
 
         backdrop-filter: blur(18px);
         -webkit-backdrop-filter: blur(18px);
+
+        opacity: 0;
+
+        transform: translateY(-8px);
+
+        pointer-events: none;
+
+        transition:
+            opacity .25s ease,
+            transform .25s ease;
     }
 
     .nav-menu.active {
         display: flex;
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+        pointer-events: auto;
     }
 
     .nav-menu ul {
@@ -2418,11 +2367,16 @@ p {
         flex-direction: column;
         align-items: stretch;
 
+        width: 100%;
+
         gap: 0;
     }
 
     .nav-menu li {
-        border-bottom: 1px solid rgba(48, 44, 43, .07);
+        width: 100%;
+
+        border-bottom:
+            1px solid rgba(48, 44, 43, .07);
     }
 
     .nav-menu li:last-child {
@@ -2430,9 +2384,24 @@ p {
     }
 
     .nav-menu a {
-        display: block;
+        display: flex;
 
-        padding: 13px 4px;
+        align-items: center;
+
+        width: 100%;
+
+        min-height: 43px;
+
+        padding: 10px 8px;
+
+        color: var(--ink);
+
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .nav-menu a:hover {
+        color: var(--purple);
     }
 
     .nav-menu a::after {
@@ -2442,10 +2411,17 @@ p {
     .header-cta {
         width: 100%;
 
-        margin-top: 12px;
+        min-height: 46px;
+
+        margin-top: 10px;
+
+        font-size: 12px;
     }
 
-    /* HERO */
+
+    /* -----------------------------------------
+       HERO
+       ----------------------------------------- */
 
     .hero {
         min-height: auto;
@@ -2497,7 +2473,10 @@ p {
         min-height: 450px;
     }
 
-    /* ABOUT */
+
+    /* -----------------------------------------
+       ABOUT
+       ----------------------------------------- */
 
     .about-grid {
         grid-template-columns: 1fr;
@@ -2517,7 +2496,10 @@ p {
         margin-inline: auto;
     }
 
-    /* SECTION HEADING */
+
+    /* -----------------------------------------
+       SECTION HEADING
+       ----------------------------------------- */
 
     .section-heading {
         grid-template-columns: 1fr;
@@ -2525,13 +2507,19 @@ p {
         gap: 15px;
     }
 
-    /* AUDIENCES */
+
+    /* -----------------------------------------
+       AUDIENCES
+       ----------------------------------------- */
 
     .audience-grid {
         grid-template-columns: 1fr;
     }
 
-    /* NEURO */
+
+    /* -----------------------------------------
+       NEURO
+       ----------------------------------------- */
 
     .neuro-card {
         grid-template-columns: 1fr;
@@ -2547,7 +2535,10 @@ p {
         min-height: 280px;
     }
 
-    /* FIRST */
+
+    /* -----------------------------------------
+       PRIMEIRA CONSULTA
+       ----------------------------------------- */
 
     .first-grid {
         grid-template-columns: 1fr;
@@ -2555,13 +2546,19 @@ p {
         gap: 45px;
     }
 
-    /* TESTIMONIALS */
+
+    /* -----------------------------------------
+       DEPOIMENTOS
+       ----------------------------------------- */
 
     .testimonial-grid {
         grid-template-columns: 1fr;
     }
 
-    /* PSICANÁLISE */
+
+    /* -----------------------------------------
+       PSICANÁLISE
+       ----------------------------------------- */
 
     .psicanalise-grid {
         grid-template-columns: 1fr;
@@ -2569,7 +2566,10 @@ p {
         gap: 40px;
     }
 
-    /* PSYCHO */
+
+    /* -----------------------------------------
+       PSYCHO
+       ----------------------------------------- */
 
     .psycho-grid {
         grid-template-columns: 1fr;
@@ -2577,7 +2577,10 @@ p {
         gap: 40px;
     }
 
-    /* ESPIRITUALIDADE */
+
+    /* -----------------------------------------
+       ESPIRITUALIDADE
+       ----------------------------------------- */
 
     .spirituality-grid {
         grid-template-columns: 1fr;
@@ -2603,9 +2606,6 @@ p {
 
         margin-inline: auto;
 
-        /*
-           NÃO esconder as bolinhas no mobile.
-        */
         overflow: visible !important;
     }
 
@@ -2615,7 +2615,10 @@ p {
         border-radius: 48% 52% 22px 22px;
     }
 
-    /* CONTACT */
+
+    /* -----------------------------------------
+       CONTATO
+       ----------------------------------------- */
 
     .contact-grid {
         grid-template-columns: 1fr;
@@ -2623,13 +2626,21 @@ p {
         gap: 45px;
     }
 
-    /* FOOTER */
+
+    /* -----------------------------------------
+       FOOTER
+       ----------------------------------------- */
 
     .footer-grid {
         grid-template-columns: repeat(2, 1fr);
+
+        gap: 40px 30px;
     }
 
-    /* WHATSAPP */
+
+    /* -----------------------------------------
+       WHATSAPP
+       ----------------------------------------- */
 
     .whatsapp-float {
         width: 56px;
@@ -2649,13 +2660,13 @@ p {
 
 
 /* =========================================================
-   RESPONSIVO — 520px
+   MOBILE — 520px
    ========================================================= */
 
 @media (max-width: 520px) {
 
     .container {
-        width: min(calc(100% - 56px), var(--container));
+        width: min(calc(100% - 40px), var(--container));
     }
 
     .section {
@@ -2666,22 +2677,69 @@ p {
         font-size: 40px;
     }
 
-    /* HEADER */
+
+    /* -----------------------------------------
+       HEADER
+       ----------------------------------------- */
+
+    .site-header {
+        top: 10px;
+    }
+
+    .nav-inner {
+        width: calc(100% - 20px);
+
+        min-height: 62px;
+
+        padding: 8px 10px;
+
+        border-radius: 16px;
+    }
+
+    .brand {
+        gap: 8px;
+    }
 
     .brand-logo {
-        width: 40px;
-        height: 40px;
+        width: 38px;
+        height: 38px;
     }
 
     .brand-name {
-        font-size: 16px;
+        font-size: 15px;
     }
 
     .brand-sub {
-        font-size: 9px;
+        font-size: 7px;
     }
 
-    /* HERO */
+    .mobile-toggle {
+        width: 42px;
+        height: 42px;
+    }
+
+    .nav-menu {
+        top: calc(100% + 8px);
+
+        padding: 9px;
+
+        border-radius: 16px;
+    }
+
+    .nav-menu a {
+        min-height: 41px;
+
+        font-size: 12px;
+    }
+
+    .header-cta {
+        min-height: 44px;
+    }
+
+
+    /* -----------------------------------------
+       HERO
+       ----------------------------------------- */
 
     .hero {
         padding-top: 135px;
@@ -2719,7 +2777,10 @@ p {
         top: 50px;
     }
 
-    /* ABOUT */
+
+    /* -----------------------------------------
+       ABOUT
+       ----------------------------------------- */
 
     .about-image {
         min-height: 430px;
@@ -2729,7 +2790,10 @@ p {
         min-height: 430px;
     }
 
-    /* AUDIENCE */
+
+    /* -----------------------------------------
+       AUDIÊNCIAS
+       ----------------------------------------- */
 
     .audience-card {
         min-height: 280px;
@@ -2737,7 +2801,10 @@ p {
         padding: 27px;
     }
 
-    /* NEURO */
+
+    /* -----------------------------------------
+       NEURO
+       ----------------------------------------- */
 
     .neuro-card {
         padding: 42px 28px;
@@ -2764,7 +2831,10 @@ p {
         height: 55px;
     }
 
-    /* STEPS */
+
+    /* -----------------------------------------
+       PRIMEIRA CONSULTA
+       ----------------------------------------- */
 
     .step {
         grid-template-columns: 42px 1fr;
@@ -2779,13 +2849,19 @@ p {
         height: 42px;
     }
 
-    /* PSICANÁLISE */
+
+    /* -----------------------------------------
+       PSICANÁLISE
+       ----------------------------------------- */
 
     .psicanalise-quote {
         padding: 35px 27px;
     }
 
-    /* ESPIRITUALIDADE */
+
+    /* -----------------------------------------
+       ESPIRITUALIDADE
+       ----------------------------------------- */
 
     .spirituality-copy {
         text-align: left;
@@ -2813,19 +2889,12 @@ p {
         border-radius: 38% 42% 18px 18px;
     }
 
-    /*
-       BOLINHAS MENORES NO CELULAR,
-       MAS AINDA VISÍVEIS FORA DA IMAGEM.
-    */
-
     .spirituality-image::before {
         width: 120px;
         height: 120px;
 
         top: -40px;
         right: -35px;
-
-        z-index: 10;
     }
 
     .spirituality-image::after {
@@ -2834,33 +2903,66 @@ p {
 
         left: -40px;
         bottom: -40px;
-
-        z-index: 10;
     }
 
-    /* FORM */
+
+    /* -----------------------------------------
+       FORMULÁRIO
+       ----------------------------------------- */
 
     .contact-form {
         padding: 28px 20px;
+
+        border-radius: 24px;
     }
 
     .form-row {
         grid-template-columns: 1fr;
     }
 
-    /* FOOTER */
+
+    /* -----------------------------------------
+       FOOTER
+       ----------------------------------------- */
+
+    .site-footer {
+        padding: 65px 0 22px;
+    }
 
     .footer-grid {
         grid-template-columns: 1fr;
+
+        gap: 34px;
+
+        padding-bottom: 40px;
+    }
+
+    .footer-description {
+        max-width: 100%;
+    }
+
+    .footer-links {
+        gap: 10px;
+    }
+
+    .footer-social {
+        gap: 10px;
     }
 
     .footer-bottom {
         flex-direction: column;
 
         align-items: flex-start;
+
+        gap: 8px;
+
+        padding-top: 20px;
     }
 
-    /* WHATSAPP */
+
+    /* -----------------------------------------
+       WHATSAPP
+       ----------------------------------------- */
 
     .whatsapp-float {
         right: 18px;
@@ -2871,17 +2973,39 @@ p {
 
         min-height: 52px;
     }
+
+    .whatsapp-float svg {
+        width: 23px;
+        height: 23px;
+    }
 }
 
 
 /* =========================================================
-   RESPONSIVO — 360px
+   MOBILE MUITO PEQUENO — 360px
    ========================================================= */
 
 @media (max-width: 360px) {
 
     .container {
-        width: min(calc(100% - 48px), var(--container));
+        width: min(calc(100% - 32px), var(--container));
+    }
+
+    .brand-sub {
+        display: none;
+    }
+
+    .brand-name {
+        font-size: 15px;
+    }
+
+    .mobile-toggle {
+        width: 40px;
+        height: 40px;
+    }
+
+    .nav-menu a {
+        font-size: 12px;
     }
 
     .hero-copy h1 {
@@ -2916,8 +3040,6 @@ p {
 
         top: -35px;
         right: -30px;
-
-        z-index: 10;
     }
 
     .spirituality-image::after {
@@ -2926,11 +3048,29 @@ p {
 
         left: -35px;
         bottom: -35px;
+    }
 
-        z-index: 10;
+    .contact-form {
+        padding: 24px 16px;
+    }
+
+    .step {
+        grid-template-columns: 38px 1fr;
+
+        gap: 11px;
+
+        padding: 15px;
+    }
+
+    .step-number {
+        width: 38px;
+        height: 38px;
     }
 
     .whatsapp-float {
+        right: 15px;
+        bottom: 15px;
+
         width: 50px;
         height: 50px;
 
@@ -2940,7 +3080,7 @@ p {
 
 
 /* =========================================================
-   SEGURANÇA FINAL — MOBILE
+   SEGURANÇA FINAL
    ========================================================= */
 
 @media (max-width: 820px) {
@@ -2954,8 +3094,10 @@ p {
     .psicanalise-grid,
     .psycho-grid,
     .spirituality-grid,
-    .contact-grid {
+    .contact-grid,
+    .footer-grid {
         width: 100%;
+        max-width: 100%;
     }
 
     .hero-copy,
@@ -2963,14 +3105,19 @@ p {
     .spirituality-copy,
     .contact-intro,
     .psicanalise-copy,
-    .psycho-copy {
+    .psycho-copy,
+    .footer-brand {
         min-width: 0;
     }
 
     h1,
     h2,
     h3,
-    p {
+    p,
+    a,
+    span,
+    strong,
+    cite {
         overflow-wrap: break-word;
     }
 
@@ -2986,5 +3133,32 @@ p {
     }
 }
 
-񎟧
-Esta versão mantém o restante do layout e deixa as duas bolinhas da **Espiritualidade** realmente ultrapassarem os limites da imagem, inclusive em telas de celular.
+
+/* =========================================================
+   SEGURANÇA EXTRA PARA ELEMENTOS ABSOLUTOS
+   ========================================================= */
+
+@media (max-width: 520px) {
+
+    .shape-tag-coral,
+    .shape-tag-yellow {
+        max-width: 42vw;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+        white-space: nowrap;
+    }
+
+    .about-image span,
+    .room-image span {
+        max-width: calc(100% - 50px);
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+        white-space: nowrap;
+    }
+}
