@@ -1,3 +1,4 @@
+```css
 /* =========================================================
    KATLEN ARIANE — PSICANALISTA CLÍNICA
    STYLE.CSS PRINCIPAL
@@ -2909,7 +2910,7 @@ textarea:focus-visible {
 
 
     /* =====================================================
-       WHATSAPP MOBILE
+       WHATSAPP MOBILE — SVG
        ===================================================== */
 
     .whatsapp-float {
@@ -2936,8 +2937,14 @@ textarea:focus-visible {
     }
 
     .whatsapp-float svg {
-        width: 29px;
-        height: 29px;
+        width: 30px;
+        height: 30px;
+
+        display: block;
+
+        flex-shrink: 0;
+
+        fill: currentColor;
     }
 
     .whatsapp-float:hover {
@@ -3213,7 +3220,7 @@ textarea:focus-visible {
 
 
     /* =====================================================
-       WHATSAPP
+       WHATSAPP SVG
        ===================================================== */
 
     .whatsapp-float {
@@ -3224,11 +3231,23 @@ textarea:focus-visible {
 
         right: 14px;
         bottom: 14px;
+
+        border-radius: 50%;
+
+        padding: 0;
+    }
+
+    .whatsapp-float span {
+        display: none;
     }
 
     .whatsapp-float svg {
-        width: 27px;
-        height: 27px;
+        width: 28px;
+        height: 28px;
+
+        display: block;
+
+        fill: currentColor;
     }
 }
 
@@ -3300,7 +3319,7 @@ textarea:focus-visible {
 
 
     /* =====================================================
-       WHATSAPP
+       WHATSAPP SVG
        ===================================================== */
 
     .whatsapp-float {
@@ -3311,10 +3330,23 @@ textarea:focus-visible {
 
         right: 12px;
         bottom: 12px;
+
+        border-radius: 50%;
+
+        padding: 0;
+    }
+
+    .whatsapp-float span {
+        display: none;
     }
 
     .whatsapp-float svg {
-        width: 25px;
-        height: 25px;
+        width: 26px;
+        height: 26px;
+
+        display: block;
+
+        fill: currentColor;
     }
 }
+```
