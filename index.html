@@ -903,11 +903,22 @@
                             “
                         </span>
 
-                        <p>
-                            Ari, e profissional maravilhosa! escuta ativa, atenta, com empatia, pode falar sem reservas ou medo de ser julgada. Faz você refletir com leveza e sendo brincalhona, ajudando a ter as próprias respostas mas com outro olhar.
-                        <p>
-                            Consegue avaliar não somente o que e relatado, mas como e relatado, nas entrelinhas, até você perceber onde pode mudar e melhorar no dia a dia.
-                        </p>
+                        <div class="testimonial-content">
+
+                            <p>
+                                Ari, e profissional maravilhosa! escuta ativa, atenta, com empatia, pode falar sem reservas ou medo de ser julgada. Faz você refletir com leveza e sendo brincalhona, ajudando a ter as próprias respostas mas com outro olhar.
+
+                                Consegue avaliar não somente o que e relatado, mas como e relatado, nas entrelinhas, até você perceber onde pode mudar e melhorar no dia a dia.
+                            </p>
+
+                        </div>
+
+                        <button
+                            class="testimonial-toggle"
+                            type="button"
+                            aria-expanded="false">
+                            Continue lendo
+                        </button>
 
                         <small>
                             Avaliações reais e autorizadas
@@ -923,10 +934,21 @@
                         <span class="quote-mark">
                             “
                         </span>
-                        
-                        <p>
-                            Profissional incrível, me sinto muito acolhida e a forma como trás a realidade é surreal... na primeira sessão já desvendamos coisas que mais de 10 anos com a psicóloga não tive esclarecimento... a condução natural, o espaço de fala e acolhimento é algo que nunca encontrei nas terapias convencionais... recomendo demais...
-                        </p>
+
+                        <div class="testimonial-content">
+
+                            <p>
+                                Profissional incrível, me sinto muito acolhida e a forma como trás a realidade é surreal... na primeira sessão já desvendamos coisas que mais de 10 anos com a psicóloga não tive esclarecimento... a condução natural, o espaço de fala e acolhimento é algo que nunca encontrei nas terapias convencionais... recomendo demais...
+                            </p>
+
+                        </div>
+
+                        <button
+                            class="testimonial-toggle"
+                            type="button"
+                            aria-expanded="false">
+                            Continue lendo
+                        </button>
 
                         <small>
                             Avaliações reais e autorizadas
@@ -943,9 +965,19 @@
                             “
                         </span>
 
-                        <p>
-                            
-                        </p>
+                        <div class="testimonial-content">
+
+                            <p>
+                            </p>
+
+                        </div>
+
+                        <button
+                            class="testimonial-toggle"
+                            type="button"
+                            aria-expanded="false">
+                            Continue lendo
+                        </button>
 
                         <small>
                             Avaliações reais e autorizadas
@@ -1427,6 +1459,40 @@
         src="js/v8-loader.js"
         data-project-id="be844101-c846-491b-bcf8-87626d91cffe"
         data-api-url="https://v8adminuniversal.aisermelk.workers.dev">
+    </script>
+
+
+    <!-- =====================================================
+         DEPOIMENTOS — CONTINUE LENDO
+    ====================================================== -->
+
+    <script>
+        document.querySelectorAll(".testimonial-toggle").forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                const card = button.closest(".testimonial-card");
+                const content = card.querySelector(".testimonial-content");
+                const paragraph = content.querySelector("p");
+
+                if (!paragraph || !paragraph.textContent.trim()) {
+                    return;
+                }
+
+                const expanded = card.classList.toggle("is-expanded");
+
+                button.setAttribute(
+                    "aria-expanded",
+                    expanded
+                );
+
+                button.textContent = expanded
+                    ? "Mostrar menos"
+                    : "Continue lendo";
+
+            });
+
+        });
     </script>
 
 
