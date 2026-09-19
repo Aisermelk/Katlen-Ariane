@@ -1,117 +1,120 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Oráculo - Puxe uma Carta | Katlen Ariane</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700&display=swap');
+<div class="topbar">
+  <div class="topbar-inner">
+    <span>✦ Converse no Whatsapp — tire suas dúvidas agora</span>
+    <a class="topbar-cta" href="https://wa.me/5551999999999" target="_blank">FALE AGORA</a>
+  </div>
+</div>
 
-:root{
-  --roxo:#4a2c6a;
-  --roxo-dark:#3a2154;
-  --roxo-light:#5d3a8a;
-  --lilas:#e8dff5;
-  --lilas-light:#f5eefb;
-  --verde:#4db6a0;
-  --verde-dark:#3fa38f;
-  --texto:#3a2a5a;
-  --texto-claro:#6b5d7e;
-  --max-w:1400px;
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="logo">KATLEN<span> ARIANE</span><small>TAROT & ORÁCULO</small></a>
+    <nav class="nav">
+      <a href="/#aprender">Aprenda</a>
+      <a href="/#loja">Loja</a>
+      <a href="/#curso">Curso</a>
+      <a href="/#sobre">Sobre</a>
+      <a href="/oraculo/" class="active">Puxe uma Carta</a>
+      <a href="/#conteudo">Conteúdo Gratuito</a>
+      <a class="btn-login" href="#">LOGIN</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="kicker">Oráculo gratuito</span>
+    <h1 class="hero-title">Puxe uma Carta e Receba sua <i>Mensagem de Hoje</i></h1>
+    <p class="hero-sub">Concentre-se na sua pergunta, respire fundo e escolha uma carta. O oráculo de Katlen vai trazer a orientação que você precisa agora.</p>
+  </div>
+</section>
+
+<section class="oraculo-wrap">
+  <div class="cards-grid" id="cardsGrid">
+    <!-- 12 cartas viradas -->
+    <button class="card-back">✦</button>
+    <button class="card-back">☾</button>
+    <button class="card-back">★</button>
+    <button class="card-back">☀</button>
+    <button class="card-back">♡</button>
+    <button class="card-back">☾</button>
+    <button class="card-back">✦</button>
+    <button class="card-back">★</button>
+    <button class="card-back">☀</button>
+    <button class="card-back">♡</button>
+    <button class="card-back">✦</button>
+    <button class="card-back">☾</button>
+  </div>
+
+  <div class="result" id="resultBox">
+    <h3 id="cardName">O Sol</h3>
+    <p id="cardMeaning">Hoje é um dia de clareza e vitalidade. O Sol ilumina caminhos que estavam escuros e traz a confiança para agir. Siga com leveza, sua intuição está afiada.</p>
+    <a class="btn-green" href="https://wa.me/5551999999999" target="_blank">QUERO UMA LEITURA COMPLETA →</a>
+    <div style="margin-top:18px"><button id="againBtn" style="font-size:12px;letter-spacing:.14em;color:#8b7a9f;text-decoration:underline">Puxar outra carta</button></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div><div class="font-lora" style="font-size:20px;font-weight:700;color:#fff">KATLEN ARIANE</div><p style="margin-top:16px;max-width:280px;font-size:13px;line-height:1.6;color:rgba(255,255,255,.6)">Leituras que acolhem, cursos que transformam.</p></div>
+    <div><h4>Aprenda</h4><a href="#">Significados</a><a href="#">Tiragens</a><a href="#">Blog</a></div>
+    <div><h4>Loja</h4><a href="#">Cursos</a><a href="#">E-books</a></div>
+    <div><h4>Contato</h4><a href="#">Whatsapp</a><a href="/oraculo/">Puxe uma Carta</a></div>
+  </div>
+  <div class="footer-inner"><div class="footer-bottom" style="grid-column:1/-1"><span>© 2026 KATLEN ARIANE</span><span>FEITO COM ✦ V8 DIGITAL</span></div></div>
+</footer>
+
+<script>
+// Oráculo simples - style + main no mesmo arquivo lógico mas separado em css/style.css
+const cartas = [
+  {nome:"O Louco", texto:"Um novo ciclo começa. Confie no salto, mesmo sem ver o chão todo. Leveza e coragem hoje."},
+  {nome:"A Sacerdotisa", texto:"Silêncio e intuição. Não force respostas hoje, escute o que vem de dentro."},
+  {nome:"A Imperatriz", texto:"Criação, cuidado e florescimento. É hora de nutrir seus projetos com amor."},
+  {nome:"O Sol", texto:"Hoje é um dia de clareza e vitalidade. O Sol ilumina caminhos que estavam escuros."},
+  {nome:"A Lua", texto:"Emoções à flor da pele. AcolhA suas sombras, nem tudo precisa ser resolvido agora."},
+  {nome:"A Estrela", texto:"Esperança renovada. Sua prece foi ouvida, continue com fé no seu caminho."},
+  {nome:"O Mago", texto:"Você tem todas as ferramentas. É hora de manifestar, comece com o que tem."},
+  {nome:"A Justiça", texto:"Equilíbrio e decisões. Olhe os fatos com honestidade, a resposta é justa."},
+  {nome:"Os Enamorados", texto:"Escolhas do coração. Alinhe o que você sente com o que você faz."},
+  {nome:"A Roda da Fortuna", texto:"Mudança de ciclo. O que estava travado destrava, permita-se girar."},
+  {nome:"A Força", texto:"Coragem mansa. Você não precisa brigar, precisa sustentar com amor."},
+  {nome:"O Mundo", texto:"Conclusão e celebração. Um ciclo se fecha com aprendizado e gratidão."},
+];
+
+const grid = document.getElementById('cardsGrid');
+const result = document.getElementById('resultBox');
+const nameEl = document.getElementById('cardName');
+const textEl = document.getElementById('cardMeaning');
+const again = document.getElementById('againBtn');
+
+function tirar(){
+  const c = cartas[Math.floor(Math.random()*cartas.length)];
+  nameEl.textContent = c.nome;
+  textEl.textContent = c.texto;
+  result.classList.add('show');
+  result.scrollIntoView({behavior:'smooth'});
+  grid.querySelectorAll('.card-back').forEach(b=>b.classList.add('revealed'));
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:Montserrat,sans-serif;color:var(--texto);background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-.font-lora{font-family:Lora,serif!important}
-.font-mont{font-family:Montserrat,sans-serif!important}
-a{color:inherit;text-decoration:none}
-button{cursor:pointer;border:0;background:none;font:inherit}
 
-/* TOP BAR */
-.topbar{position:sticky;top:0;z-index:60;width:100%;background:var(--roxo);color:#fff}
-.topbar-inner{max-width:var(--max-w);margin:auto;height:42px;display:flex;align-items:center;justify-content:center;gap:16px;padding:0 16px;font-size:13px}
-.topbar-inner span{font-weight:500;letter-spacing:0.12em;text-transform:uppercase}
-.topbar-cta{margin-left:8px;display:inline-flex;height:28px;align-items:center;border-radius:999px;background:#fff;padding:0 16px;font-size:11px;font-weight:700;letter-spacing:0.14em;color:var(--roxo);transition:.2s}
-.topbar-cta:hover{background:var(--lilas-light)}
+grid.addEventListener('click', (e)=>{
+  if(e.target.classList.contains('card-back')) tirar();
+});
 
-/* HEADER */
-.header{position:sticky;top:42px;z-index:50;width:100%;border-bottom:1px solid rgba(0,0,0,.06);background:rgba(255,255,255,.95);backdrop-filter:blur(10px)}
-.header-inner{max-width:var(--max-w);margin:auto;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 20px}
-.logo{font-family:Lora,serif;font-size:22px;font-weight:700;letter-spacing:-0.02em;color:var(--roxo);line-height:1}
-.logo span{font-weight:300}
-.logo small{display:block;margin-top:1px;font-family:Montserrat,sans-serif;font-size:9px;font-weight:600;letter-spacing:0.35em;color:#8b7a9f}
-.nav{display:flex;align-items:center;gap:28px}
-.nav a{font-size:11px;font-weight:600;letter-spacing:0.18em;color:#4a4a4a;transition:.2s;text-transform:uppercase}
-.nav a:hover{color:var(--roxo-light)}
-.btn-login{margin-left:8px;display:inline-flex;height:32px;align-items:center;border-radius:999px;border:1px solid var(--roxo);padding:0 20px;font-size:11px;font-weight:700;letter-spacing:0.14em;color:var(--roxo);transition:.2s}
-.btn-login:hover{background:var(--roxo);color:#fff}
-.mobile-btn{display:none;height:36px;width:36px;align-items:center;justify-content:center;border-radius:999px;border:1px solid rgba(0,0,0,.1)}
+again.addEventListener('click', ()=>{
+  result.classList.remove('show');
+  grid.querySelectorAll('.card-back').forEach(b=>b.classList.remove('revealed'));
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+</script>
 
-/* HERO */
-.hero{background:var(--lilas);overflow:hidden}
-.hero-grid{max-width:var(--max-w);margin:auto;min-height:640px;display:grid;grid-template-columns:55% 45%}
-.hero-left{padding:70px 24px 70px 40px;display:flex;flex-direction:column;justify-content:center}
-.kicker{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--roxo-light);margin-bottom:18px}
-.hero-title{font-family:Lora,serif;font-size:clamp(36px,5vw,56px);line-height:0.98;letter-spacing:-0.02em;font-weight:700;color:var(--texto)}
-.hero-title i{font-style:italic;font-weight:400;color:var(--roxo-light)}
-.hero-sub{margin-top:22px;font-size:16px;line-height:1.7;color:var(--texto-claro);max-width:520px}
-.btn-green{margin-top:30px;display:inline-flex;height:56px;align-items:center;justify-content:center;gap:10px;border-radius:999px;background:var(--verde);padding:0 36px;font-size:13px;font-weight:700;letter-spacing:0.14em;color:#fff;box-shadow:0 12px 32px rgba(77,182,160,.35);transition:.2s}
-.btn-green:hover{background:var(--verde-dark);transform:translateY(-1px)}
-.hero-proof{margin-top:22px;display:flex;align-items:center;gap:12px;font-size:11px;color:#8b7a9f}
-.hero-right{position:relative;display:flex;align-items:center;justify-content:center;padding:40px}
-.cards-wrap{position:relative;width:420px;height:520px}
-.card-float{position:absolute;width:110px;height:170px;background:#fff;border-radius:12px;box-shadow:0 18px 40px rgba(74,44,106,.18);display:flex;align-items:center;justify-content:center;font-family:Lora,serif;font-size:28px;color:var(--roxo);border:1px solid rgba(74,44,106,.08);animation:float 4s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0) rotate(var(--rot))}50%{transform:translateY(-14px) rotate(var(--rot))}}
-.person{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);width:260px;height:380px;background:linear-gradient(180deg,#fff 0%,#e8dff5 100%);border-radius:140px 140px 20px 20px;box-shadow:0 30px 60px rgba(74,44,106,.25);display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
-.person::after{content:"☕";font-size:64px;margin-bottom:40px}
-
-/* SECTIONS */
-.section{padding:80px 24px}
-.section-inner{max-width:1200px;margin:auto}
-.section-title{font-family:Lora,serif;font-size:34px;font-weight:700;text-align:center;color:var(--texto)}
-.section-sub{margin:14px auto 0;max-width:640px;text-align:center;font-size:14px;line-height:1.7;color:var(--texto-claro)}
-.grid-3{margin-top:50px;display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-.card{border-radius:16px;background:#fff;box-shadow:0 10px 30px rgba(74,44,106,.08);overflow:hidden;border:1px solid rgba(74,44,106,.06);transition:.3s}
-.card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(74,44,106,.14)}
-.card-img{height:200px;background:var(--lilas);display:flex;align-items:center;justify-content:center;font-size:42px}
-.card-body{padding:26px}
-.card-body h3{font-family:Lora,serif;font-size:20px;font-weight:700;color:var(--texto)}
-.card-body p{margin-top:10px;font-size:13px;line-height:1.6;color:var(--texto-claro)}
-.card-link{margin-top:16px;display:inline-flex;font-size:11px;font-weight:700;letter-spacing:0.14em;color:var(--roxo-light);text-transform:uppercase}
-
-/* Featured */
-.featured{background:#f9f6ff;border-top:1px solid rgba(74,44,106,.06);border-bottom:1px solid rgba(74,44,106,.06);padding:26px 0}
-.featured-inner{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap;padding:0 24px;font-size:11px;font-weight:700;letter-spacing:0.2em;color:#8b7a9f;text-transform:uppercase}
-
-/* Promo */
-.promo{background:#fff;padding:90px 24px}
-.promo-grid{max-width:1100px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.promo-card{background:var(--lilas-light);border-radius:20px;padding:28px;border:1px solid rgba(74,44,106,.08)}
-.price-row{margin-top:28px;display:flex;align-items:flex-end;gap:16px}
-.price{font-family:Lora,serif;font-size:44px;font-weight:700;color:var(--roxo)}
-.price-old{font-size:12px;letter-spacing:0.1em;text-decoration:line-through;color:#8b7a9f}
-
-/* Footer */
-.newsletter{background:var(--roxo);padding:56px 24px}
-.news-inner{max-width:1000px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.news-inner h3{font-family:Lora,serif;font-size:28px;color:#fff}
-.news-inner p{margin-top:6px;color:rgba(255,255,255,.7);font-size:14px}
-.news-form{display:flex;align-items:center;gap:8px;background:#fff;border-radius:999px;padding:8px;width:100%;max-width:380px}
-.news-form input{flex:1;background:transparent;border:0;outline:none;padding:0 16px;font-size:13px}
-.news-form button{height:40px;border-radius:999px;background:var(--verde);padding:0 22px;color:#fff;font-size:11px;font-weight:700;letter-spacing:0.1em}
-.footer{background:#2f2042;padding:56px 24px;color:rgba(255,255,255,.7)}
-.footer-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
-.footer-inner h4{font-size:11px;font-weight:700;letter-spacing:0.22em;color:#fff;text-transform:uppercase;margin-bottom:16px}
-.footer-inner a{display:block;font-size:13px;line-height:2.2;color:rgba(255,255,255,.6)}
-.footer-inner a:hover{color:#fff}
-.footer-bottom{margin-top:40px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;font-size:11px;letter-spacing:0.1em;color:rgba(255,255,255,.4)}
-
-@media(max-width:980px){
-  .nav{display:none}
-  .mobile-btn{display:flex}
-  .hero-grid{grid-template-columns:1fr}
-  .grid-3{grid-template-columns:1fr 1fr}
-  .promo-grid{grid-template-columns:1fr}
-  .footer-inner{grid-template-columns:1fr 1fr}
-  .news-inner{flex-direction:column;text-align:center}
-}
-@media(max-width:640px){
-  .grid-3{grid-template-columns:1fr}
-  .hero-left{padding:40px 20px}
-  .topbar-inner{font-size:11px}
-  .footer-inner{grid-template-columns:1fr}
-}
+</body>
+</html>
