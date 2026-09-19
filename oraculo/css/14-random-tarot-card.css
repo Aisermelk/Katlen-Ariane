@@ -1,0 +1,458 @@
+/**
+ * Random Tarot Card tool ([random-tarot-card]).
+ *
+ * Enqueued conditionally from includes/random-tarot-card.php â€” only on pages that
+ * use the shortcode. Lora is self-hosted below (../fonts/) rather than loaded from
+ * Google Fonts, because the live site has Google Fonts disabled (the googleapis
+ * <link> gets stripped). Self-hosting also keeps it GDPR-friendly and fast.
+ */
+
+.sntl-rtc {
+    /* Biddy brand palette (the "tender" direction) */
+    --rtc-mauve: #6E5379;
+    /* primary  */
+    --rtc-plum: #443150;
+    /* headlines / deep ground */
+    --rtc-teal: #5B8F86;
+    /* supplement green */
+    --rtc-moss: #9CB39A;
+    /* light green */
+    --rtc-rose: #C68B86;
+    /* highlight */
+    --rtc-gold: #BF9342;
+    /* button */
+    --rtc-linen: #F4ECE7;
+    /* light background / text on plum */
+    --rtc-cocoa: #211D24;
+    /* body text */
+    --rtc-snow: #FFFFFF;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+    padding: 48px 20px 56px;
+    color: var(--rtc-linen);
+    background: linear-gradient(135deg, var(--rtc-plum) 0%, var(--rtc-mauve) 55%, #5a4068 100%);
+}
+
+/* Candle-lit starfield */
+
+.sntl-rtc::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(2px 2px at 20% 30%, rgba(244, 236, 231, 0.45), transparent), radial-gradient(1px 1px at 60% 70%, rgba(244, 236, 231, 0.30), transparent), radial-gradient(1.5px 1.5px at 80% 22%, rgba(191, 147, 66, 0.40), transparent), radial-gradient(1px 1px at 35% 85%, rgba(244, 236, 231, 0.30), transparent), radial-gradient(2px 2px at 90% 55%, rgba(191, 147, 66, 0.30), transparent);
+}
+
+.sntl-rtc-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 640px;
+    text-align: center;
+}
+
+.sntl-rtc-heading {
+    font-family: "Lora", Georgia, 'Times New Roman', serif;
+    font-weight: 500;
+    font-size: 2.3rem;
+    line-height: 1.15;
+    letter-spacing: 1px;
+    color: var(--rtc-linen);
+    margin: 0 0 8px;
+}
+
+.sntl-rtc-subtitle {
+    font-family: "Lora", Georgia, serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: rgba(244, 236, 231, 0.78);
+    margin: 0 auto 36px;
+    max-width: 400px;
+}
+
+/* Card + 3D flip */
+
+.sntl-rtc-card-wrapper {
+    perspective: 1200px;
+    width: 280px;
+    height: 460px;
+    margin: 0 auto 30px;
+}
+
+.sntl-rtc-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.sntl-rtc-card.flipped {
+    transform: rotateY(180deg);
+}
+
+.sntl-rtc-face {
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    border: 3px solid var(--rtc-gold);
+    overflow: hidden;
+    backface-visibility: hidden;
+    box-shadow: 0 20px 55px rgba(33, 29, 36, 0.5);
+}
+
+.sntl-rtc-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, var(--rtc-mauve) 0%, var(--rtc-plum) 100%);
+}
+
+/* Talisman card back (sacred-geometry SVG). Recolors with the palette via
+ * currentColor, so style="light" / future palettes inherit automatically. */
+
+.sntl-rtc-back-svg {
+    width: 82%;
+    height: 82%;
+    color: var(--rtc-gold);
+    transform-origin: 50% 50%;
+}
+
+/* "Drawing a new card": the talisman spins with a glow pulse while the card is
+ * face-down during a re-draw, so it reads as shuffling up a fresh card. */
+
+@keyframes sntl-rtc-talisman-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes sntl-rtc-talisman-glow {
+    0%,
+    100% {
+        opacity: 0.82;
+        filter: none;
+    }
+    50% {
+        opacity: 1;
+        filter: drop-shadow(0 0 7px rgba(191, 147, 66, 0.85));
+    }
+}
+
+.sntl-rtc-card.is-drawing .sntl-rtc-back-svg {
+    animation: sntl-rtc-talisman-spin 0.85s linear infinite, sntl-rtc-talisman-glow 0.95s ease-in-out infinite;
+}
+
+.sntl-rtc-front {
+    display: flex;
+    flex-direction: column;
+    padding: 18px;
+    transform: rotateY(180deg);
+    background: linear-gradient(160deg, var(--rtc-snow) 0%, var(--rtc-linen) 100%);
+    color: var(--rtc-cocoa);
+}
+
+.sntl-rtc-art {
+    flex: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--rtc-plum);
+    border: 1px solid rgba(191, 147, 66, 0.35);
+}
+
+.sntl-rtc-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+/* Reversed draw: rotate the card art 180deg */
+
+.sntl-rtc-front.sntl-rtc-reversed .sntl-rtc-card-img {
+    transform: rotate(180deg);
+}
+
+.sntl-rtc-card-name {
+    font-family: "Lora", Georgia, serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    letter-spacing: 0.5px;
+    color: var(--rtc-plum);
+    margin-top: 12px;
+}
+
+.sntl-rtc-orientation {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--rtc-gold);
+    margin-top: 4px;
+}
+
+/* Deck promo, between the card and the meaning panel. Revealed with the first
+ * draw. It keeps its space in the flow while hidden so appearing does not shove
+ * the panel down; visibility (not just opacity) keeps the link out of the tab
+ * order and the accessibility tree until it is actually shown. */
+
+.sntl-rtc-shop {
+    margin: 0 0 24px;
+    font-size: 0.95rem;
+    color: rgba(244, 236, 231, 0.75);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.sntl-rtc-shop.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.sntl-rtc-shop a {
+    color: var(--rtc-gold);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    white-space: nowrap;
+}
+
+.sntl-rtc-shop a:hover {
+    color: var(--rtc-rose);
+}
+
+/* Meaning panel. The reading itself is left-aligned prose; the closing question
+ * and the CTA stay centred, as in the design. */
+
+.sntl-rtc-meaning {
+    min-height: 130px;
+    margin-bottom: 24px;
+    padding: 28px 30px;
+    border-radius: 16px;
+    border: 1px solid rgba(191, 147, 66, 0.30);
+    background: rgba(244, 236, 231, 0.08);
+    backdrop-filter: blur(8px);
+    text-align: left;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.sntl-rtc-meaning.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.sntl-rtc-meaning-body p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: rgba(244, 236, 231, 0.92);
+    margin: 0 0 1em;
+}
+
+.sntl-rtc-meaning-body p:last-child {
+    margin-bottom: 0;
+}
+
+/* Degraded body: the card's keywords, when there is no meaning to show. */
+
+.sntl-rtc-meaning-body .sntl-rtc-fallback {
+    font-style: italic;
+}
+
+/* Sits a clear step above the body copy, as in the design â€” at the body's own
+ * size the prompt stopped reading as a distinct closing beat. */
+
+.sntl-rtc-question {
+    font-family: "Lora", Georgia, serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.3rem;
+    line-height: 1.45;
+    text-align: center;
+    color: var(--rtc-linen);
+    margin: 28px 0 24px;
+}
+
+.sntl-rtc-link-wrap {
+    text-align: center;
+}
+
+.sntl-rtc-link {
+    display: inline-block;
+    padding: 14px 34px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--rtc-plum);
+    text-decoration: none;
+    background: var(--rtc-gold);
+    border: 1px solid var(--rtc-gold);
+    border-radius: 6px;
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sntl-rtc-link:hover {
+    transform: translateY(-2px);
+    background: #cfa256;
+    color: var(--rtc-plum);
+    box-shadow: 0 8px 20px rgba(191, 147, 66, 0.4);
+}
+
+/* Controls */
+
+.sntl-rtc-controls {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+
+.sntl-rtc-btn {
+    padding: 14px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--rtc-plum);
+    background: var(--rtc-gold);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sntl-rtc-btn:hover {
+    transform: translateY(-2px);
+    background: #cfa256;
+    box-shadow: 0 8px 20px rgba(191, 147, 66, 0.4);
+}
+
+.sntl-rtc-btn-secondary {
+    color: var(--rtc-linen);
+    background: transparent;
+    border: 1px solid var(--rtc-gold);
+}
+
+.sntl-rtc-btn-secondary:hover {
+    background: rgba(191, 147, 66, 0.16);
+    box-shadow: none;
+}
+
+.sntl-rtc-footer {
+    margin: 0;
+    font-size: 0.85rem;
+    color: rgba(244, 236, 231, 0.55);
+}
+
+.sntl-rtc-footer a {
+    color: var(--rtc-linen);
+    text-decoration: underline;
+}
+
+/* Mobile */
+
+@media all and (max-width: 500px) {
+    .sntl-rtc {
+        padding: 36px 16px 44px;
+    }
+    .sntl-rtc-heading {
+        font-size: 1.8rem;
+    }
+    .sntl-rtc-card-wrapper {
+        width: 240px;
+        height: 400px;
+    }
+    .sntl-rtc-meaning {
+        padding: 22px 20px;
+    }
+    .sntl-rtc-question {
+        font-size: 1.15rem;
+    }
+}
+
+/* Respect reduced-motion preference */
+
+@media (prefers-reduced-motion: reduce) {
+    .sntl-rtc-card,
+    .sntl-rtc-card-img,
+    .sntl-rtc-meaning,
+    .sntl-rtc-shop,
+    .sntl-rtc-link,
+    .sntl-rtc-btn {
+        transition: none;
+    }
+    .sntl-rtc-card.is-drawing .sntl-rtc-back-svg {
+        animation: none;
+    }
+}
+
+/* ---------------------------------------------------------------------------
+ * Light variant â€” [random-tarot-card style="light"]
+ * Warm Blush Linen ground; the card itself is unchanged. Base (no param) and
+ * style="dark" keep the moody-plum look above.
+ * ------------------------------------------------------------------------- */
+
+.sntl-rtc.sntl-rtc--light {
+    color: var(--rtc-cocoa);
+    background: linear-gradient(160deg, var(--rtc-snow) 0%, var(--rtc-linen) 100%);
+}
+
+/* Swap the starfield for a soft rose/gold candle-glow that reads on light */
+
+.sntl-rtc.sntl-rtc--light::before {
+    background-image: radial-gradient(620px 620px at 15% 8%, rgba(198, 139, 134, 0.12), transparent), radial-gradient(720px 720px at 85% 92%, rgba(191, 147, 66, 0.12), transparent);
+}
+
+.sntl-rtc--light .sntl-rtc-heading {
+    color: var(--rtc-plum);
+}
+
+.sntl-rtc--light .sntl-rtc-subtitle {
+    color: rgba(33, 29, 36, 0.62);
+}
+
+.sntl-rtc--light .sntl-rtc-meaning {
+    background: var(--rtc-snow);
+    border-color: rgba(191, 147, 66, 0.35);
+    box-shadow: 0 10px 30px rgba(33, 29, 36, 0.08);
+}
+
+/* Gold on linen is too low-contrast for text, so the promo goes plum on light. */
+
+.sntl-rtc--light .sntl-rtc-shop {
+    color: rgba(33, 29, 36, 0.70);
+}
+
+.sntl-rtc--light .sntl-rtc-shop a {
+    color: var(--rtc-plum);
+}
+
+.sntl-rtc--light .sntl-rtc-shop a:hover {
+    color: var(--rtc-mauve);
+}
+
+.sntl-rtc--light .sntl-rtc-meaning-body p {
+    color: rgba(33, 29, 36, 0.85);
+}
+
+.sntl-rtc--light .sntl-rtc-question {
+    color: var(--rtc-plum);
+}
+
+.sntl-rtc--light .sntl-rtc-btn-secondary {
+    color: var(--rtc-plum);
+}
+
+.sntl-rtc--light .sntl-rtc-footer {
+    color: rgba(33, 29, 36, 0.55);
+}
+
+.sntl-rtc--light .sntl-rtc-footer a {
+    color: var(--rtc-plum);
+}

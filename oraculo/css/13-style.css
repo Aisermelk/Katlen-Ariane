@@ -1,0 +1,2213 @@
+/* Self-hosted Lora (latin subset) â€” full family 400/500/600/700 + italics.
+ * URLs are relative to this file (css/ -> ../fonts/). */
+
+@font-face {
+    font-family: 'Lora';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(../fonts/lora-400.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Lora';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(../fonts/lora-500.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Lora';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(../fonts/lora-600.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Lora';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url(../fonts/lora-italic-400.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Lora';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(../fonts/lora-700.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Lora';
+    font-style: italic;
+    font-weight: 500;
+    font-display: swap;
+    src: url(../fonts/lora-italic-500.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Lora';
+    font-style: italic;
+    font-weight: 600;
+    font-display: swap;
+    src: url(../fonts/lora-italic-600.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Lora';
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: url(../fonts/lora-italic-700.woff2) format('woff2');
+}
+
+/* ============================================================
+   LORA HELPERS â€” TEMPORARY. Remove at the site-wide font review /
+   Divi upgrade (this block + the @font-face above are the removable
+   unit). Divi's global font settings are intentionally untouched.
+
+   Marketing: add a class in a module/row/section "CSS Class" field.
+   `bt-font-lora` is the main one (switches to Lora, keeps weights).
+   Add a modifier alongside it for a single element if needed, e.g.
+   class="bt-font-lora bt-lora-bold". Available: 400/500/600/700,
+   normal + italic.
+   ============================================================ */
+
+/* Switch an element and its text to Lora, keeping existing weights.
+   Icons (Divi / FontAwesome) are excluded so glyphs don't break. */
+
+.bt-font-lora,
+.bt-font-lora *:not([class*="et-pb-icon"]):not([class*="fa-"]):not(.fa) {
+    font-family: 'Lora', Georgia, 'Times New Roman', serif !important;
+}
+
+/* Weight / style modifiers â€” best on a single element (a heading or a
+   short text block); combine with bt-font-lora. */
+
+.bt-lora-normal {
+    font-weight: 400 !important;
+    font-style: normal !important;
+}
+
+.bt-lora-medium {
+    font-weight: 500 !important;
+    font-style: normal !important;
+}
+
+.bt-lora-semibold {
+    font-weight: 600 !important;
+    font-style: normal !important;
+}
+
+.bt-lora-bold {
+    font-weight: 700 !important;
+    font-style: normal !important;
+}
+
+.bt-lora-italic {
+    font-style: italic !important;
+}
+
+/* UTILITIES */
+
+/* Vertically center a column's content within its equalized height.
+   Requires the row's Design â†’ Sizing â†’ "Equalize Column Heights" = ON. */
+
+.et_pb_column.bt-valign-middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Companion: push content to the bottom instead of centering. */
+
+.et_pb_column.bt-valign-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+/* Lay a column's modules side-by-side with an adjustable gutter.
+   Add in Column â†’ Advanced â†’ CSS Class. */
+
+.et_pb_column.bt-flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* vertically centers image with text; flex-start to top-align */
+    gap: 24px;
+    /* â† the gutter; change to taste */
+}
+
+.et_pb_column.bt-flex-row>.et_pb_module {
+    margin-bottom: 0;
+}
+
+/* Put class "bt-bt-card-row" on each row of cards (Row â†’ Advanced â†’ CSS Class). */
+
+.bt-card-row>.et_pb_column {
+    display: grid;
+    grid-template-columns: 33% 1fr;
+    /* image ~33%, text takes the rest â€” tune the 33% */
+    column-gap: 24px;
+    align-items: center;
+}
+
+.bt-card-row>.et_pb_column>.et_pb_image {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    align-self: center;
+    margin-bottom: 0;
+}
+
+.bt-card-row>.et_pb_column>.et_pb_image img {
+    width: 100%;
+}
+
+/* both images to the same width */
+
+.bt-card-row>.et_pb_column>.et_pb_text {
+    grid-column: 2;
+}
+
+@media (max-width: 980px) {
+    .bt-card-row>.et_pb_column {
+        display: block;
+    }
+    .bt-card-row>.et_pb_column>.et_pb_image {
+        grid-column: auto;
+        grid-row: auto;
+        margin-bottom: 15px;
+    }
+    .bt-card-row>.et_pb_column>.et_pb_image img {
+        width: auto;
+    }
+    /* natural size when stacked */
+}
+
+/* Restore bottom spacing on the last stacked card (Divi zeroes it at â‰¤980px) */
+
+@media (max-width: 980px) {
+    .et_pb_row.bt-card-row>.et_pb_column:last-child {
+        margin-bottom: 30px;
+        /* match the gap Divi puts between the other cards */
+    }
+}
+
+@font-face {
+    font-family: Montserrat-bold;
+    src: url(https://biddytarot.com/wp-content/uploads/et-fonts/Montserrat-Bold.woff2);
+}
+
+@font-face {
+    font-family: Montserrat-Regular;
+    src: url(https://biddytarot.com/wp-content/uploads/et-fonts/Montserrat-regular.woff2);
+}
+
+/*Set Variables*/
+
+:root {
+    --primary: #582564;
+    --secondary: #66c9c3;
+    --accent: #862783;
+    --text-color: #515151;
+    --gold: #b79b62;
+    --darkgreen: #287c7e;
+    --white: #ffffff;
+}
+
+.mb10 {
+    margin-bottom: 10px;
+}
+
+/*Global Buttons*/
+
+.et_pb_button_module_wrapper .et_pb_button,
+.et_pb_button_module_wrapper .et_pb_button:hover {
+    padding: 15px 40px !important;
+    line-height: 1em !important;
+}
+
+@media (max-width: 500px) {
+    .et_pb_button_module_wrapper .et_pb_button,
+    .et_pb_button_module_wrapper .et_pb_button:hover {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.et_pb_button_module_wrapper .et_pb_button.long-btn,
+.et_pb_button_module_wrapper .et_pb_button.long-btn:hover {
+    max-width: 400px;
+    width: 100%;
+}
+
+.btn-purple {
+    background: var(--primary) !important;
+    border-color: var(--primary) !important;
+}
+
+.btn-darkgreen {
+    background: var(--darkgreen) !important;
+    border-color: var(--darkgreen) !important;
+}
+
+.btn-light-purple {
+    background: var(--accent) !important;
+    border-color: var(--accent) !important;
+}
+
+body .et_pb_button.btn-purple:hover {
+    background: var(--white) !important;
+    border-color: var(--primary) !important;
+    color: var(--primary) !important;
+}
+
+body .et_pb_button.btn-darkgreen:hover {
+    background: var(--white) !important;
+    border-color: var(--darkgreen) !important;
+    color: var(--darkgreen) !important;
+}
+
+::selection {
+    background-color: var(--accent);
+    color: var(--white);
+}
+
+body .et_pb_button.btn-light-purple:hover {
+    background: var(--white) !important;
+    border-color: var(--accent) !important;
+    color: var(--accent) !important;
+}
+
+.et_pb_row h1 {
+    font-size: clamp(30px, 4vw + 5px, 36px);
+}
+
+.et_pb_row h2 {
+    font-size: clamp(26px, 3vw + 4px, 32px);
+}
+
+.et_pb_row h3 {
+    font-size: clamp(20px, 2.5vw + 4px, 26px);
+}
+
+.et_pb_row h4 {
+    font-size: clamp(18px, 2vw + 4px, 24px);
+}
+
+.adthrive-footer-message {
+    margin-bottom: 100px;
+}
+
+/* fixing menu tiling on smaller desktop resolutions */
+
+@media (min-width: 981px) and (max-width: 1400px) {
+    #main-header .container {
+        width: 95% !important;
+    }
+    #top-menu li {
+        font-size: 14px;
+    }
+    #logo {
+        max-height: 50% !important;
+        margin-bottom: 0px;
+    }
+}
+
+/*Header navigation*/
+
+#main-header {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+@media (min-width: 981px) {
+    #main-header.scrolled-down {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.22);
+    }
+    .admin-bar #main-header.scrolled-down {
+        top: 32px;
+    }
+}
+
+@media (min-width: 981px) {
+    .et_header_style_left #et-top-navigation {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+}
+
+.et_header_style_left #et-top-navigation nav>ul>li:not(.cst-btn)>a {
+    padding-bottom: 33px !important;
+    padding-top: 33px !important;
+}
+
+#top-menu-nav a {
+    font-weight: 400 !important;
+    border-bottom: solid 2px transparent;
+    padding: 0 !important;
+}
+
+#top-menu-nav>ul>li>a:hover {
+    opacity: 1 !important;
+    transition: none;
+    color: var(--secondary);
+}
+
+#top-menu .cst-btn a {
+    border: solid 2px rgba(0, 0, 0, 0.4);
+    padding: 8px 20px !important;
+}
+
+#top-menu .cst-btn a:hover {
+    border: solid 2px var(--secondary);
+}
+
+@media (min-width: 1200px) {
+    #logo {
+        max-height: 100% !important;
+    }
+}
+
+#top-menu .menu-item-has-children>a:first-child:after,
+#et-secondary-nav .menu-item-has-children>a:first-child:after {
+    top: auto;
+    right: auto;
+}
+
+.nav li ul.sub-menu {
+    border-top: none;
+    padding: 0;
+    width: 220px;
+}
+
+#top-menu li ul.sub-menu li {
+    padding: 0px;
+}
+
+#top-menu li li a {
+    padding: 10px 20px !important;
+    width: 220px;
+    transition: none;
+    font-size: 14px !important;
+}
+
+#top-menu li ul.sub-menu li:not(:last-child) {
+    border-bottom: 1px solid #d9d9d963;
+    width: 100%;
+}
+
+#top-menu li ul.sub-menu a {
+    font-size: 12px !important;
+}
+
+#top-menu li ul.sub-menu li {
+    position: relative;
+}
+
+#top-menu li ul.sub-menu li ul.sub-menu {
+    position: absolute;
+    left: 100%;
+    top: 0;
+}
+
+@media (min-width: 981px) {
+    .et_header_style_left .et-fixed-header #et-top-navigation {
+        padding-top: 0px;
+    }
+}
+
+/*Mobile*/
+
+.mobile_menu_bar:before {
+    color: var(--primary) !important;
+}
+
+.et_mobile_menu {
+    border-top: 3px solid var(--primary);
+}
+
+.et_mobile_menu li a:hover {
+    opacity: 1 !important;
+}
+
+.et_mobile_menu .cst-btn a {
+    padding: 15px 20px !important;
+    transition: none !important;
+    font-weight: 600;
+    border-radius: 0px;
+    margin: 20px 10px;
+    background: transparent;
+    color: var(--primary);
+    font-size: 14px;
+    border: solid 2px #ddd;
+    text-align: center;
+}
+
+.et_mobile_menu .cst-btn a:hover {
+    border: solid 2px var(--secondary);
+    color: var(--secondary);
+    background: transparent;
+    opacity: 1;
+}
+
+.et_mobile_menu {
+    padding: 5% 0 0;
+}
+
+.et_mobile_menu a {
+    font-weight: 400;
+}
+
+/*Reusable CSS*/
+
+b,
+strong {
+    font-family: "Montserrat-bold";
+}
+
+.title-gold {
+    color: var(--gold);
+}
+
+.text-wrapper h1,
+.text-wrapper h2,
+.text-wrapper h3,
+.text-wrapper h4 {
+    margin-bottom: 15px;
+}
+
+.margin-top-15px {
+    margin-top: 15px;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+@media (min-width: 981px) {
+    .full-width-row.et_pb_row {
+        max-width: 100vw;
+        width: 100%;
+    }
+}
+
+@media (max-width: 980px) {
+    .column-reverse {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .column-reverse .et_pb_column.et-last-child {
+        margin-bottom: 30px !important;
+    }
+}
+
+.gold-text {
+    color: var(--gold) !important;
+    font-size: 20px;
+    margin: 20px 0 30px;
+    text-align: center;
+}
+
+.secondary-text {
+    color: var(--secondary);
+    font-size: 20px;
+    margin: 20px 0 30px;
+    text-align: center;
+}
+
+.primary-text {
+    color: var(--primary);
+    font-size: 20px;
+    margin: 20px 0 30px;
+    text-align: center;
+}
+
+.gold-text-regular {
+    color: var(--gold) !important;
+}
+
+.primary-text-regular {
+    color: var(--primary) !important;
+}
+
+.x-12 {
+    font-size: 18px;
+}
+
+.darkgreen-text-regular {
+    color: var(--darkgreen);
+}
+
+.lightpurple-text-regular {
+    color: var(--accent);
+}
+
+.lightgreen-text-regular {
+    color: var(--secondary);
+}
+
+.video-wplightbox-wrapper {
+    position: relative;
+    margin: 10px 0;
+}
+
+.video-wplightbox-wrapper img {
+    border-radius: 5px;
+}
+
+.video-wplightbox-wrapper:after {
+    content: url(https://biddytarot.com/wp-content/uploads/2025/09/play-vimeo-testimonial.svg);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.player-controls-vimeo:after {
+    content: "";
+    background: url(https://biddytarot.com/wp-content/uploads/2025/12/vimeo-player-controls.png);
+    position: absolute;
+    bottom: 12px;
+    transform: translate(-50%);
+    pointer-events: none;
+    width: 98%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: contain;
+    left: 50%;
+}
+
+.wp-lightbox-btn .et_pb_text_inner {
+    display: inline-block;
+    margin: auto;
+    font-size: 18px;
+    text-transform: uppercase;
+    background: var(--secondary);
+    padding: 12px 40px;
+    font-family: "Montserrat-600";
+    border: 2px solid transparent !important;
+}
+
+.wp-lightbox-btn .et_pb_text_inner:hover {
+    background-color: var(--white);
+    border: 2px solid var(--secondary) !important;
+}
+
+.wp-lightbox-btn .et_pb_text_inner a {
+    color: var(--white);
+}
+
+.wp-lightbox-btn .et_pb_text_inner:hover a {
+    color: var(--secondary);
+}
+
+.review-card-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.review-card-footer h4 {
+    color: var(--gold);
+    font-size: 16px;
+}
+
+.whitespace {
+    min-height: 30px;
+    display: block;
+}
+
+.brushscript {
+    font-family: "Brush Script MT";
+    font-weight: 700;
+}
+
+.fs42 {
+    font-size: 42px;
+    line-height: 48px;
+}
+
+.p-text-18 p {
+    font-size: 18px;
+    line-height: 1.5em;
+}
+
+.margin-top-20px {
+    margin-top: 20px;
+}
+
+ul.arrow-darkgreen {
+    padding-left: 0;
+    margin-left: 2.5em;
+}
+
+ul.arrow-darkgreen li {
+    text-indent: -2.2em;
+}
+
+ul.arrow-darkgreen li {
+    list-style: none;
+    margin-bottom: 1em;
+}
+
+ul.arrow-darkgreen li:before {
+    content: "\24";
+    margin-right: 10px;
+    vertical-align: middle;
+    line-height: 1em;
+    font-family: "ETmodules";
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--darkgreen);
+}
+
+.gold-icon-list ul li {
+    padding: 0 0 15px 10px !important;
+    position: relative !important;
+    list-style: none !important;
+}
+
+.gold-icon-list ul {
+    list-style: none !important;
+}
+
+.gold-icon-list ul li:before {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(/wp-content/uploads/2026/03/gold-icon-list.png) !important;
+    margin-bottom: -7px;
+    margin-left: -30px;
+}
+
+/*In-page custom menu*/
+
+.custom-menu ul li {
+    list-style: none;
+}
+
+.custom-menu ul li a {
+    opacity: 0.7;
+    color: var(--white);
+}
+
+.custom-menu.white-bg ul li a {
+    opacity: 0.7;
+    color: inherit;
+}
+
+.custom-menu ul li a:hover {
+    opacity: 1;
+}
+
+.custom-menu ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.custom-menu ul li:last-child {
+    margin-right: 0;
+}
+
+.custom-menu ul {
+    padding-bottom: 0;
+    padding-left: 0;
+}
+
+ul.li-green.fs-20 li {
+    text-indent: -1.3em;
+}
+
+ul.li-green.fs-18 li,
+ul.li-purple.fs-18 li {
+    text-indent: -1.5em;
+}
+
+ul.li-green li,
+ul.li-purple li,
+ul.li-gold li,
+ul.li-green-x li,
+ul.li-purple-x li,
+ul.li-gold-x li {
+    text-indent: -1.5em;
+}
+
+ul.li-green,
+ul.li-purple,
+ul.li-gold,
+ul.li-green-x,
+ul.li-purple-x,
+ul.li-gold-x {
+    padding-left: 0;
+    margin-left: 2.5em;
+}
+
+ul.li-green li,
+ul.li-purple li,
+ul.li-gold li,
+ul.li-green-x li,
+ul.li-purple-x li,
+ul.li-gold-x li {
+    list-style: none;
+    margin-bottom: 1em;
+}
+
+ul.li-green li:before,
+ul.li-purple li:before,
+ul.li-gold li:before,
+ul.li-green-x li:before,
+ul.li-purple-x li:before,
+ul.li-gold-x li:before {
+    margin-right: 10px;
+    vertical-align: middle;
+    line-height: 1em;
+}
+
+ul.li-green li:before {
+    content: url(https://biddytarot.com/wp-content/uploads/2025/09/list-arrow-green.svg);
+}
+
+ul.li-purple li:before {
+    content: url(https://biddytarot.com/wp-content/uploads/2025/10/list-arrow-purple.svg);
+}
+
+ul.li-gold li:before {
+    content: url(https://biddytarot.com/wp-content/uploads/2025/10/list-arrow-gold.svg);
+}
+
+ul.li-green-x li:before {
+    content: url(https://biddytarot.com/wp-content/uploads/styles/list-x-green.svg);
+}
+
+ul.li-purple-x li:before {
+    content: url(https://biddytarot.com/wp-content/uploads/styles/list-x-purple.svg);
+}
+
+ul.li-gold-x li:before {
+    content: url(https://biddytarot.com/wp-content/uploads/styles/list-x-gold.svg);
+}
+
+.center-blurb .et_pb_blurb_container {
+    vertical-align: middle;
+}
+
+.et_pb_row_1000 {
+    max-width: 1000px;
+}
+
+.et_pb_row_850 {
+    max-width: 850px;
+}
+
+.faqs-accordion .et_pb_toggle_open .et_pb_toggle_title:after {
+    font-size: 30px;
+    right: 2px;
+    color: var(--secondary);
+    font-family: ETmodules !important;
+    font-weight: 400 !important;
+    content: "\4f" !important;
+    position: absolute;
+    top: 0px;
+}
+
+.blurb-container-center .et_pb_blurb_container {
+    vertical-align: middle;
+}
+
+/*Homepage*/
+
+@media all and (min-width: 981px) {
+    .home-hero-image img {
+        min-width: 1100px;
+    }
+    .home-hero-img-col .home-hero-image,
+    .home-hero-image .et_pb_image_wrap,
+    .home-hero-image .et_pb_image_wrap img {
+        height: 100% !important;
+        width: 100% !important;
+        object-fit: cover !important;
+    }
+    .home-hero {
+        overflow: hidden;
+    }
+}
+
+.fade-blurb-row .et_pb_blurb {
+    transform: translateY(45%);
+    transition: opacity 0.65s cubic-bezier(0.05, 0.2, 0.1, 1), transform 0.65s cubic-bezier(0.05, 0.2, 0.1, 1);
+    z-index: 1;
+}
+
+.fade-blurb-row .et_pb_blurb:hover,
+.fade-blurb-row .et_pb_column:hover .et_pb_blurb {
+    transform: translateY(0%);
+}
+
+.fade-blurb-row .et_pb_column {
+    transition: 0.65s ease-out;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fade-blurb-row .et_pb_column:hover {
+    transform: translateY(-10px);
+}
+
+.fade-blurb-row .et_pb_blurb_description {
+    opacity: 0;
+    transform: translateY(0px);
+    transition: opacity 0.65s cubic-bezier(0.05, 0.2, 0.1, 1), transform 0.65s cubic-bezier(0.05, 0.2, 0.1, 1);
+    pointer-events: none;
+    position: absolute;
+}
+
+.fade-blurb-row .et_pb_column:hover .et_pb_blurb_description {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    position: relative;
+}
+
+.fade-blurb-row .et_pb_column:after {
+    content: "";
+    background: transparent;
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    transition: opacity 0.65s cubic-bezier(0.05, 0.2, 0.1, 1), transform 0.65s cubic-bezier(0.05, 0.2, 0.1, 1);
+    bottom: 0;
+    opacity: 0;
+}
+
+.fade-blurb-row .et_pb_column:hover:after {
+    content: "";
+    background: linear-gradient( to bottom, rgba(0, 0, 0, 0), var(--secondary) 100%);
+    width: 100%;
+    height: 50%;
+    opacity: 1;
+    position: absolute;
+    transition: opacity 0.65s cubic-bezier(0.05, 0.2, 0.1, 1), transform 0.65s cubic-bezier(0.05, 0.2, 0.1, 1);
+    bottom: 0;
+}
+
+.featured-row .et_pb_column {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.featured-row .et_pb_column .et_pb_image {
+    flex: 1 0 225px;
+    max-width: 225px;
+    padding: 10px;
+    max-height: 60px;
+    margin: 0;
+    opacity: 0.5;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.featured-row.colored-logos .et_pb_column .et_pb_image {
+    opacity: 1;
+}
+
+/*Blog grid*/
+
+.archive-block .et_pb_post {
+    margin-bottom: 15px;
+}
+
+.archive-block .et_pb_post:before {
+    content: "";
+    background: var(--primary);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    z-index: 9;
+    transition: 0.5s ease;
+}
+
+.archive-block .et_pb_post:hover:before {
+    content: "";
+    background: var(--primary);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 1;
+    top: 0;
+    z-index: 9;
+    transition: 0.5s ease;
+}
+
+.archive-block .et_pb_post .entry-title {
+    visibility: hidden;
+    opacity: 1;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 99;
+    width: 100%;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.archive-block .et_pb_post:hover .entry-title {
+    visibility: visible;
+    opacity: 1;
+    position: absolute;
+    z-index: 99;
+    width: 100%;
+    text-align: center;
+}
+
+.archive-block h4.entry-title a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 90%;
+}
+
+.archive-block .entry-featured-image-url img {
+    max-height: 250px;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+}
+
+/*Story list grid*/
+
+@media (min-width: 981px) {
+    .sntl-card-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    .sntl-card-item {
+        width: calc(33% - 20px);
+        margin: 0 !important;
+    }
+}
+
+.sntl-card-item {
+    display: block;
+    position: relative;
+    max-width: 400px;
+    min-height: 320px;
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 0px auto 20px;
+    box-shadow: 0 0 20px #88888833;
+    border-radius: 5px;
+    background-color: var(--white);
+}
+
+.sntl-card-item:hover {
+    box-shadow: 0 4px 10px var(--darkgreen);
+}
+
+.sntl-card-content {
+    padding: 30px;
+}
+
+.sntl-card-content p {
+    color: var(--primary);
+    line-height: 1.5em;
+}
+
+.sntl-card-image {
+    position: relative;
+}
+
+.sntl-card-image h4 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--white);
+    z-index: 3;
+    text-align: center;
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}
+
+.sntl-card-image img {
+    display: block;
+}
+
+.sntl-card-image:after {
+    content: "";
+    background: linear-gradient( 180deg, rgba(134, 39, 131, 0) 0%, rgba(134, 39, 131, 0.8) 100%);
+    position: absolute;
+    top: 50%;
+    bottom: 0;
+    text-align: center;
+    color: #f0f9fb;
+    width: 100%;
+    left: 0;
+    z-index: 2;
+}
+
+a.sntl-read-more {
+    margin-top: 10px;
+    display: block;
+    text-decoration: underline;
+}
+
+.sntl-card-category a {
+    color: var(--primary);
+}
+
+.sntl-card-category a:hover {
+    color: var(--secondary);
+}
+
+.sntl-card-category {
+    font-size: 14px;
+    line-height: 1.2em;
+    margin-top: 20px;
+    text-align: center;
+    font-family: "MONTSERRAT-BOLD";
+}
+
+.link-text.secondary a {
+    color: var(--accent);
+}
+
+.link-text.secondary a:hover {
+    color: var(--darkgreen) !important;
+}
+
+.sntl-card-excerpt p {
+    font-size: 14px;
+    color: var(--text-color) !important;
+    margin-top: 15px;
+}
+
+/*Learn Page*/
+
+.blurb-overlay-primary .et_pb_column {
+    justify-content: center;
+}
+
+.blurb-overlay-primary .et_pb_column:after {
+    content: "";
+    background: var(--primary);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.2s ease;
+    z-index: 0;
+}
+
+.blurb-overlay-primary .et_pb_column:hover {
+    align-items: center;
+}
+
+.blurb-overlay-primary .et_pb_column:hover .et_pb_module_header {
+    display: none;
+}
+
+.blurb-overlay-primary .et_pb_column:hover .et_pb_blurb_description {
+    color: var(--secondary);
+    margin-top: 20px;
+}
+
+.blurb-overlay-primary .et_pb_column:hover:after {
+    visibility: visible;
+    opacity: 1;
+}
+
+/*Gallery*/
+
+.gallery-row {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .gallery-row img {
+        max-width: 272px;
+        min-height: 408px;
+        object-fit: cover;
+        width: 100% !important;
+    }
+    .images-gallery {
+        display: flex;
+        gap: 20px;
+    }
+}
+
+.podcast-appearances-carousel .swiper-container img {
+    min-height: 215px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.custom-blurb-purple .et_pb_column {
+    position: relative;
+}
+
+.custom-blurb-purple .et_pb_column:after {
+    content: "";
+    width: 0;
+    position: absolute;
+    height: 5px;
+    background: var(--secondary);
+    bottom: 0;
+    left: 0;
+    transition: 0.4s ease;
+}
+
+.custom-blurb-purple .et_pb_column:hover:after {
+    width: 100%;
+}
+
+.custom-blurb-purple .et_pb_blurb_description:after {
+    content: "\3d";
+    font-family: "ETmodules";
+    font-size: 24px;
+    opacity: 0.7;
+    transition: 1s ease;
+    line-height: 1em;
+}
+
+.custom-blurb-purple .et_pb_blurb_description {
+    display: flex;
+    gap: 10px;
+}
+
+.custom-blurb-purple .et_pb_inner {
+    overflow: hidden;
+}
+
+.custom-blurb-purple .et_pb_column:hover .et_pb_blurb_description:after {
+    content: "\24";
+    opacity: 1;
+    transition: 1s ease;
+    border: none;
+}
+
+/* Hide header & footer when toggle is enabled */
+
+.hide-hf #main-header,
+.hide-hf .primary-footer-section {
+    display: none !important;
+}
+
+.hide-hf div#page-container {
+    padding-top: 0 !important;
+}
+
+/*The Collective*/
+
+.check-purple li,
+.check-green li,
+.check-gold li {
+    list-style: none;
+    margin-bottom: 1em;
+    text-indent: -1.7em;
+}
+
+.check-purple.fs-18 li,
+.check-green.fs-18 li,
+.check-gold.fs-18 li {
+    text-indent: -1.7em;
+}
+
+ul.check-purple,
+ul.check-green,
+ul.check-gold {
+    margin-left: 2em;
+}
+
+.check-purple li:before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-image: url(https://biddytarot.com/wp-content/uploads/2025/09/Icon-Check-Purple.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.check-green li:before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-image: url(https://biddytarot.com/wp-content/uploads/2025/09/Icon-Check-green.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.check-gold li:before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-image: url(https://biddytarot.com/wp-content/uploads/2025/09/Icon-Check-Gold.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.caret-purple li {
+    list-style: none;
+    margin-bottom: 1em;
+    text-indent: -1.3em;
+}
+
+ul.caret-purple {
+    margin-left: 2em;
+}
+
+.caret-purple li:before {
+    content: "\35";
+    font-family: ETmodules;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 40px;
+    font-weight: Bold;
+    color: var(--primary);
+}
+
+li.x-mark:before {
+    background-image: url(https://biddytarot.com/wp-content/themes/bt_18/img/bt/Icon-Cross.png);
+}
+
+@media (max-width: 500px) {
+    .collective-price {
+        flex-direction: column;
+        gap: 60px;
+    }
+    .collective-price:after {
+        top: 40%;
+        transform: translateY(-20%);
+    }
+}
+
+.collective-price {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+    width: 100%;
+    justify-content: space-evenly;
+    position: relative;
+}
+
+.collective-price:after {
+    content: "or";
+    position: absolute;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.price-amount-text {
+    font-size: 40px;
+    font-family: Montserrat-Bold;
+    margin: 10px 0;
+    color: var(--primary);
+    line-height: 1.2em;
+}
+
+.price-free-text {
+    color: var(--primary);
+    font-style: italic;
+    padding-top: 5px;
+}
+
+#collective .custom-menu a {
+    color: inherit !important;
+}
+
+.custom-fixed-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    transform: translateY(-100%);
+    transition: transform 0.25s linear;
+}
+
+.custom-fixed-menu.visible {
+    transform: translateY(0);
+}
+
+/*Gravity Forms*/
+
+input[type="date"],
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="url"],
+select,
+textarea {
+    background-color: rgba(0, 0, 0, 0.04) !important;
+    border-radius: 4px !important;
+    border: 2px solid transparent !important;
+    box-shadow: none !important;
+}
+
+.gform_button.button {
+    background: var(--secondary) !important;
+    text-transform: uppercase !important;
+    padding: 15px 40px !important;
+    border-radius: 0 !important;
+    border: solid 2px var(--secondary) !important;
+    color: var(--white);
+    cursor: pointer;
+}
+
+.gform_button.button:hover {
+    background: var(--white) !important;
+    color: var(--secondary) !important;
+}
+
+label.gfield_label.gform-field-label {
+    font-family: "Montserrat-Bold";
+    font-weight: 400;
+}
+
+/*Blog Page*/
+
+.under-green:before {
+    content: "";
+    position: absolute;
+    width: 90%;
+    height: 1px;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom: 3px solid var(--secondary);
+}
+
+.under-green {
+    position: relative;
+}
+
+.blog-menu-categories a {
+    color: var(--primary);
+}
+
+.blog-menu-categories a:hover {
+    color: var(--secondary);
+}
+
+@media (min-width: 981px) {
+    .archive-block.grid-type .et_pb_post {
+        margin-bottom: 15px;
+        width: 32%;
+        float: left;
+        margin-right: 2%;
+    }
+    .archive-block.grid-type .et_pb_post:nth-child(3n) {
+        margin-right: 0 !important;
+        clear: right;
+    }
+}
+
+@media (max-width: 980px) and (min-width: 768px) {
+    .archive-block.grid-type .et_pb_post {
+        margin-bottom: 15px;
+        width: 48%;
+        float: left;
+        margin-right: 4%;
+    }
+    .archive-block.grid-type .et_pb_post:nth-child(2n) {
+        margin-right: 0 !important;
+        clear: right;
+    }
+}
+
+.wp-pagenavi a {
+    text-decoration: none;
+    padding: 3px 15px;
+    margin: 2px;
+    color: #000 !important;
+    border: none !important;
+}
+
+.wp-pagenavi a:hover,
+.wp-pagenavi span.current {
+    color: var(--white) !important;
+    border: 1px solid;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: var(--secondary);
+}
+
+.wp-pagenavi a,
+.wp-pagenavi span {
+    border: none;
+}
+
+.wp-pagenavi {
+    padding-top: 30px;
+    font-size: 12px;
+}
+
+@media (min-width: 1600px) {
+    .featured-row.nowrap .et_pb_column {
+        flex-wrap: nowrap;
+    }
+}
+
+/*Courses*/
+
+ul.gold-marker li {
+    list-style: none;
+    margin-bottom: 1em;
+    position: relative;
+}
+
+ul.gold-marker li:last-child {
+    margin-bottom: 0 !important;
+}
+
+ul.gold-marker {
+    margin-left: 2em;
+}
+
+ul.gold-marker li::before {
+    content: "â€¢";
+    color: var(--gold);
+    font-size: 50px;
+    position: absolute;
+    top: -4px;
+    left: -25px;
+}
+
+ul.purple-marker li {
+    list-style: none;
+    margin-bottom: 1em;
+    position: relative;
+}
+
+ul.purple-marker {
+    margin-left: 2em;
+}
+
+ul.purple-marker li:last-child {
+    margin-bottom: 0 !important;
+}
+
+ul.purple-marker li::before {
+    content: "â€¢";
+    color: var(--primary);
+    font-size: 50px;
+    position: absolute;
+    top: -4px;
+    left: -25px;
+}
+
+.image-flex-container {
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .image-flex-container {
+        display: flex;
+        gap: 20px;
+        justify-content: space-evenly;
+        margin-bottom: 20px;
+    }
+}
+
+@media (min-width: 981px) {
+    .blurb_position_right .et_pb_blurb_content {
+        direction: rtl;
+    }
+    .blurb_position_right .et_pb_blurb_description,
+    .blurb_position_right .et_pb_module_header {
+        direction: ltr;
+    }
+    .blurb_position_right.et_pb_blurb_position_left .et_pb_blurb_container {
+        padding-left: 0;
+        padding-right: 20px;
+        vertical-align: middle;
+    }
+}
+
+.price-block {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-bottom: 30px;
+    margin-top: 40px;
+}
+
+.price-plan {
+    padding: 20px 20px;
+    color: var(--white);
+    font-family: "Montserrat-Bold";
+    font-size: 22px;
+}
+
+.price-block#one-time-payment {
+    border: solid 2px var(--darkgreen);
+}
+
+#one-time-payment .price-plan {
+    background: var(--darkgreen);
+}
+
+.price-block#pay-plan {
+    border: solid 2px var(--secondary);
+}
+
+#pay-plan .price-plan {
+    background: var(--secondary);
+}
+
+.price-details-text {
+    display: block;
+    margin: 40px;
+}
+
+.price-header {
+    font-size: 20px;
+    font-family: "Montserrat-Bold";
+    margin-bottom: 20px;
+}
+
+.price-details-text .price-amount-text.old-price {
+    font-family: "Montserrat-Medium";
+    text-decoration: line-through;
+}
+
+#one-time-payment .price-details-text .price-amount-text {
+    color: var(--darkgreen) !important;
+}
+
+#pay-plan .price-details-text .price-amount-text {
+    color: var(--secondary) !important;
+}
+
+#one-time-payment .price-button .et_pb_button {
+    background: var(--darkgreen);
+    border: solid 2px var(--darkgreen);
+}
+
+#one-time-payment .price-button .et_pb_button:hover {
+    color: var(--darkgreen) !important;
+    border: solid 2px var(--darkgreen) !important;
+    background: var(--white);
+}
+
+@media (min-width: 981px) {
+    .price-table {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        max-width: 800px;
+        margin: auto;
+    }
+    .price-table .price-block {
+        width: 50%;
+    }
+}
+
+.blurb-testimonial .et_pb_blurb_content {
+    max-width: 100% !important;
+}
+
+@media (min-width: 981px) {
+    .blurb-testimonial .et_pb_blurb_container {
+        padding: 15px;
+    }
+    .blurb-testimonial .et_pb_main_blurb_image img {
+        min-height: 300px;
+        object-fit: cover;
+    }
+}
+
+.round-blurb-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.round-blurb {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+@media (min-width: 1200px) {
+    .round-blurb-container {
+        flex-wrap: wrap;
+        gap: 0px;
+    }
+    .round-blurb {
+        flex: 1 0 450px;
+        max-width: 450px;
+        border-radius: 100%;
+        align-items: center;
+        padding: 8%;
+    }
+    #receive {
+        z-index: 2;
+        right: -25px;
+    }
+    #reflect {
+        z-index: 2;
+        left: -25px;
+    }
+    #respond {
+        z-index: 3;
+        top: -125px;
+    }
+}
+
+@media (max-width: 980px) {
+    .round-blurb-container {
+        flex-direction: column;
+    }
+    .round-blurb {
+        aspect-ratio: initial;
+    }
+}
+
+/*Tarot Card Meanings*/
+
+.blurb-overlay h3 {
+    font-size: 20px !important;
+}
+
+@media (min-width: 1320px) {
+    #card-meanings #major-arcana.et_pb_blurb h3.et_pb_module_header {
+        font-size: 24px !important;
+    }
+    #card-meanings .et_pb_blurb_description {
+        font-size: 24px;
+    }
+}
+
+.blurb-overlay#card-meanings .et_pb_column:after {
+    content: "";
+    background: var(--primary);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.5s ease;
+}
+
+.blurb-overlay#card-meanings .et_pb_column {
+    box-shadow: 12px 12px 16px 0 rgb(0 0 0 / 25%), -8px -8px 12px 0 rgb(255 255 255 / 30%) !important;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.blurb-overlay#card-meanings .et_pb_column:hover:after {
+    opacity: 0.9;
+    visibility: visible;
+}
+
+.blurb-overlay#card-meanings .et_pb_column:hover .et_pb_blurb {
+    background: transparent;
+}
+
+.blurb-overlay#card-meanings .et_pb_column:hover {
+    display: flex;
+    align-items: center;
+    padding-bottom: 0;
+}
+
+/*Tarot Card Meanings Custom Posts Grid*/
+
+.sntl-tarot-container.tarot-cards {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 15px;
+    row-gap: 50px;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.tarot-cards .sntl-tarot-item {
+    width: 19%;
+    min-height: 315px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border-top: solid 1px #ddd;
+}
+
+.tarot-cards .sntl-tarot-overlay {
+    position: absolute;
+    inset: 0;
+    background: #fffffff2;
+    color: inherit;
+    opacity: 0;
+    visibility: hidden;
+    text-align: center;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    padding: 20px 10px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sntl-tarot-overlay a {
+    position: absolute;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.tarot-cards .sntl-tarot-item:hover .sntl-tarot-overlay {
+    opacity: 1;
+    visibility: visible;
+    border: 4px var(--gold) solid;
+    border-radius: 14px;
+}
+
+.sntl-tarot-item-head:last-child {
+    margin-top: 20px;
+}
+
+.tarot-cards .sntl-tarot-title {
+    font-size: 16px !important;
+    padding-bottom: 0;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-top: 2px solid;
+    padding-top: 10px;
+}
+
+.tarot-cards .sntl-tarot-overlay p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+
+@media (max-width: 980px) {
+    .tarot-cards .sntl-tarot-item {
+        min-width: 31.5%;
+        aspect-ratio: 2 / 3;
+        border: solid 1px #ddd;
+    }
+}
+
+@media (max-width: 768px) {
+    .tarot-cards .sntl-tarot-item {
+        width: 48%;
+    }
+}
+
+@media (max-width: 480px) {
+    .tarot-cards .sntl-tarot-item {
+        width: 100%;
+    }
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.violet-bld b,
+.violet-bld strong,
+.violet-bld b a,
+.violet-bld strong a {
+    color: var(--primary) !important;
+    font-size: 20px;
+}
+
+.single-promotions footer#main-footer,
+.single-promotions .adthrive-sticky.adthrive-footer {
+    display: none;
+}
+
+@media (max-width: 1200px) {
+    .et-db #et-boc .et_pb_section.no-bg-image-tablet.et_pb_with_background.et_section_regular {
+        background-image: none !important;
+    }
+}
+
+.icon-check-violet ul {
+    padding-top: 15px;
+    list-style: none;
+}
+
+.icon-check-violet ul li {
+    padding-bottom: 15px;
+}
+
+.icon-check-violet ul li::before {
+    content: "";
+    background-image: url(https://biddytarot.com/wp-content/uploads/2025/09/Icon-Check-Purple.png);
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: -15px;
+    margin-right: 15px;
+    margin-bottom: -7px;
+    background-position: center;
+}
+
+.banner-list img {
+    width: 100%;
+}
+
+.banner-list .entry-title {
+    margin-top: 20px;
+}
+
+.hr-dot hr {
+    border-top: 5px;
+    border-bottom: 0;
+    border-style: dotted;
+    width: 50%;
+    color: var(--gold);
+}
+
+.txt-spacing h1,
+.txt-spacing h2,
+.txt-spacing h3,
+.txt-spacing h4,
+.txt-spacing h5,
+.txt-spacing h6 {
+    margin-bottom: 0.4em;
+}
+
+.circle-green li {
+    list-style: none;
+    margin-bottom: 1em;
+    text-indent: -1.3em;
+    position: relative;
+}
+
+ul.circle-green {
+    margin-left: 2em;
+}
+
+ul.circle-green li:last-child {
+    margin-bottom: 0 !important;
+}
+
+.circle-green li:before {
+    content: "";
+    background: var(--secondary);
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    border-radius: 100%;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.accent-text {
+    color: var(--accent);
+}
+
+.text-gold {
+    color: var(--gold);
+}
+
+/*Single story shortcode*/
+
+.bt-story-thumbnail img {
+    max-height: 250px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.bt-story-thumbnail {
+    z-index: 2;
+    position: relative;
+}
+
+.bt-story-body {
+    padding: 30px;
+    background: #f0f9fb;
+    top: -20px;
+    position: relative;
+    z-index: 1;
+}
+
+.bt-story-lead {
+    color: var(--darkgreen);
+    font-size: 16px;
+    line-height: 1.2em;
+    font-family: "Montserrat-600";
+    margin-bottom: 10px;
+}
+
+.bt-story-excerpt {
+    font-size: 14px;
+    line-height: 1.5em;
+}
+
+.bt-story-title {
+    margin-top: 10px !important;
+}
+
+/* Testimonial Card */
+
+.testimonial-card {
+    position: relative;
+}
+
+/* avatar wrapper */
+
+.testimonial-card .testimonial-avatar {
+    position: absolute;
+    top: -30px;
+    z-index: 2;
+}
+
+/* image size */
+
+.testimonial-card .testimonial-avatar img {
+    border-radius: 50%;
+    max-width: 125px;
+}
+
+/* LEFT CARD */
+
+.testimonial-card.testimonial-left .testimonial-avatar {
+    left: -30px;
+    right: auto;
+}
+
+/* RIGHT CARD */
+
+.testimonial-card.testimonial-right .testimonial-avatar {
+    right: -30px;
+    left: auto;
+}
+
+/* text spacing */
+
+.testimonial-card .et_pb_text {
+    padding-top: 60px;
+}
+
+/* TABLET */
+
+@media (max-width: 980px) {
+    .testimonial-card .testimonial-avatar {
+        top: -25px;
+    }
+    .testimonial-card .testimonial-avatar img {
+        max-width: 110px;
+    }
+    .testimonial-card.testimonial-left .testimonial-avatar {
+        left: -25px;
+        right: auto;
+    }
+    .testimonial-card.testimonial-right .testimonial-avatar {
+        right: -25px;
+        left: auto;
+    }
+    .testimonial-card .et_pb_text {
+        padding-top: 55px;
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 767px) {
+    .testimonial-card .testimonial-avatar {
+        position: static;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    .testimonial-card .testimonial-avatar img {
+        max-width: 100px;
+        margin: 0 auto;
+        display: block;
+    }
+    .testimonial-card .et_pb_text {
+        padding-top: 0;
+    }
+}
+
+/*End of Testimonial Card */
+
+/* Tarot Tabs Styling */
+
+ul.sntl-tarot-tab-buttons {
+    list-style: none;
+    padding: 0;
+}
+
+.sntl-tarot-tabs {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.sntl-tarot-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.sntl-tarot-tab-buttons {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sntl-tarot-tab-buttons li {
+    list-style: none;
+    background: #f1f1f1;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 0 5px;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #000;
+    transition: background 0.3s, color 0.3s;
+}
+
+.sntl-tarot-tab-buttons li:hover {
+    background: #e0e0e0;
+}
+
+.sntl-tarot-tab-buttons li.active {
+    background: var(--secondary);
+    color: white;
+}
+
+.sntl-tarot-search-container {
+    position: relative;
+}
+
+.sntl-tarot-search-container input {
+    padding: 12px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    min-width: 250px;
+}
+
+.sntl-tarot-search-container input:focus {
+    border: solid 2px var(--secondary) !important;
+}
+
+.tarot-tab-panel {
+    display: none;
+}
+
+.tarot-tab-panel.active {
+    display: block;
+}
+
+@media (max-width: 600px) {
+    ul.sntl-tarot-tab-buttons {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        text-align: center;
+    }
+    .sntl-tarot-search-container {
+        position: relative;
+        width: 100%;
+        padding-left: 5px;
+        padding-right: 5px;
+        text-align: center;
+    }
+    .sntl-tarot-search-container input {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.sntl-tarot-search-container.min-maj-cards {
+    position: relative;
+    text-align: center;
+    max-width: 250px;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.sntl-tarot-search-container.min-maj-cards .sntl-search-icon,
+.sntl-tarot-search-container .sntl-search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    line-height: 1;
+}
+
+#et-top-navigation {
+    padding-left: 0 !important;
+}
+
+@media (max-width: 980px) {
+    .et_header_style_left form.et-search-form {
+        background: #fff !important;
+        width: 100% !important;
+        max-width: 780px !important;
+    }
+}
+
+@media (min-width: 981px) {
+    #et_top_search {
+        margin-top: 30px;
+    }
+}
