@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
 
@@ -8,38 +9,39 @@
         content="width=device-width, initial-scale=1.0"
     >
 
+    <title>Katlen Ariane | Tarot, Baralho Cigano e Tarot dos Orixás</title>
+
     <meta
         name="description"
-        content="Consultas de Tarot, Baralho Cigano e Tarot dos Orixás com Katlen Ariane. Um espaço de acolhimento, reflexão e orientação para compreender melhor o seu momento."
+        content="Consultas de Tarot, Baralho Cigano e Tarot dos Orixás com Katlen Ariane. Um espaço para olhar para suas questões, sentimentos e possibilidades com mais clareza."
     >
 
     <meta
         name="theme-color"
-        content="#4a2c6a"
+        content="#5B2A72"
     >
 
     <meta
-        name="robots"
-        content="index, follow"
+        property="og:title"
+        content="Katlen Ariane | Tarot, Baralho Cigano e Tarot dos Orixás"
     >
 
-    <title>
-        Katlen Ariane | Tarot, Baralho Cigano e Tarot dos Orixás
-    </title>
-
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
+    <meta
+        property="og:description"
+        content="Consultas de Tarot, Baralho Cigano e Tarot dos Orixás."
     >
 
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
+    <meta
+        property="og:type"
+        content="website"
     >
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link
-        href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
         rel="stylesheet"
     >
 
@@ -48,87 +50,87 @@
         href="css/style.css"
     >
 
-    <!-- V8 Loader — NÃO ALTERAR -->
+    <!-- V8 LOADER — NÃO ALTERAR -->
     <script
         src="js/v8-loader.js"
         data-project-id="be844101-c846-491b-bcf8-87626d91cffe"
-        data-api-url="https://v8adminuniversal.aisermelk.workers.dev"
-    ></script>
+        data-api-url="https://v8adminuniversal.aisermelk.workers.dev">
+    </script>
+
 </head>
 
 <body>
 
-    <!-- =========================================================
-         BARRA SUPERIOR
-    ========================================================== -->
+    <!-- =====================================================
+         TOP BAR
+    ====================================================== -->
 
     <div class="topbar">
+
         <div class="container topbar-inner">
 
             <span>
-                Um espaço para olhar para o seu momento com mais consciência.
+                Um espaço para olhar para o seu momento com mais clareza.
             </span>
 
             <a
-                href="#consultas"
-                class="topbar-link"
-            >
-                Conheça as consultas
+                href="#agendar"
+                class="topbar-link">
+                Agendar consulta
             </a>
 
         </div>
+
     </div>
 
 
-    <!-- =========================================================
+    <!-- =====================================================
          HEADER
-    ========================================================== -->
+    ====================================================== -->
 
-    <header class="site-header">
+    <header
+        class="site-header"
+        id="siteHeader">
 
         <div class="container header-inner">
 
             <a
                 href="#inicio"
                 class="brand"
-                aria-label="Katlen Ariane - Início"
-            >
+                aria-label="Katlen Ariane - início">
 
-                <div class="brand-mark">
-                    KA
-                </div>
+                <span class="brand-symbol">✦</span>
 
-                <div class="brand-text">
-                    <strong>
-                        Katlen Ariane
-                    </strong>
+                <span class="brand-text">
 
-                    <span>
-                        Tarot & Oráculos
-                    </span>
-                </div>
+                    <strong>Katlen Ariane</strong>
+
+                    <small>
+                        TAROT & ORÁCULO
+                    </small>
+
+                </span>
 
             </a>
 
 
             <button
                 class="menu-toggle"
-                type="button"
+                id="menuToggle"
                 aria-label="Abrir menu"
-                aria-expanded="false"
-                aria-controls="main-navigation"
-            >
+                aria-expanded="false">
+
                 <span></span>
                 <span></span>
                 <span></span>
+
             </button>
 
 
             <nav
-                id="main-navigation"
                 class="main-nav"
-                aria-label="Navegação principal"
-            >
+                id="mainNav"
+                aria-label="Navegação principal">
 
                 <a href="#inicio">
                     Início
@@ -154,7 +156,7 @@
                     Sobre
                 </a>
 
-                <a href="oraculo/">
+                <a href="/oraculo/">
                     Oráculo
                 </a>
 
@@ -164,12 +166,10 @@
 
                 <a
                     href="#agendar"
-                    class="nav-cta"
-                    data-v8="contact.whatsapp"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
+                    class="nav-cta">
+
                     Agendar consulta
+
                 </a>
 
             </nav>
@@ -179,59 +179,72 @@
     </header>
 
 
-    <main>
+    <main id="inicio">
 
 
-        <!-- =====================================================
+        <!-- =================================================
              HERO
-        ====================================================== -->
+        ================================================== -->
 
-        <section
-            id="inicio"
-            class="hero"
-        >
+        <section class="hero">
 
-            <div class="hero-decoration hero-decoration-one"></div>
-            <div class="hero-decoration hero-decoration-two"></div>
+            <div class="hero-background"></div>
 
             <div class="container hero-grid">
 
+
                 <div class="hero-content">
 
-                    <span class="eyebrow">
-                        CONSULTAS DE TAROT & ORÁCULOS
-                    </span>
+                    <div class="eyebrow">
+
+                        <span></span>
+
+                        TAROT • BARALHO CIGANO • TAROT DOS ORIXÁS
+
+                    </div>
+
 
                     <h1>
-                        Uma resposta pode começar com uma pergunta.
+
+                        Encontre novas perspectivas
+                        para as questões que fazem
+                        parte do seu momento.
+
                     </h1>
 
-                    <p class="hero-text">
-                        Um espaço acolhedor para você olhar para o seu momento,
-                        compreender questões importantes e explorar novas
-                        perspectivas através das cartas.
+
+                    <p class="hero-description">
+
+                        Uma consulta pode ser um espaço para
+                        olhar para suas perguntas, sentimentos
+                        e possibilidades com mais clareza.
+
                     </p>
+
 
                     <div class="hero-actions">
 
                         <a
                             href="#agendar"
-                            class="btn btn-primary"
-                            data-v8="contact.whatsapp"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
+                            class="btn btn-primary">
+
                             Agendar minha consulta
+
+                            <span>→</span>
+
                         </a>
+
 
                         <a
                             href="#consultas"
-                            class="btn btn-secondary"
-                        >
+                            class="btn btn-link">
+
                             Conhecer as consultas
+
                         </a>
 
                     </div>
+
 
                     <div class="hero-note">
 
@@ -240,53 +253,94 @@
                         </span>
 
                         <span>
-                            Tarot, Baralho Cigano e Tarot dos Orixás
+                            Escolha a leitura que melhor conversa
+                            com o seu momento.
                         </span>
 
                     </div>
 
                 </div>
 
+
+                <!-- VISUAL DO BANNER -->
 
                 <div class="hero-visual">
 
-                    <div class="hero-card hero-card-back">
-                        <span>✦</span>
+                    <div class="hero-orbit orbit-one"></div>
+
+                    <div class="hero-orbit orbit-two"></div>
+
+
+                    <div class="hero-flower flower-one">
+                        ✿
                     </div>
+
+                    <div class="hero-flower flower-two">
+                        ✽
+                    </div>
+
+
+                    <div class="hero-card hero-card-back">
+
+                        <div class="card-pattern">
+
+                            <span>✦</span>
+                            <span>✧</span>
+                            <span>✦</span>
+                            <span>✧</span>
+
+                        </div>
+
+                    </div>
+
 
                     <div class="hero-card hero-card-main">
 
-                        <div class="card-symbol">
-                            ✦
+                        <div class="tarot-frame">
+
+                            <div class="tarot-top">
+                                ✦
+                            </div>
+
+                            <div class="tarot-symbol">
+                                ☾
+                            </div>
+
+                            <div class="tarot-title">
+                                THE
+                                <strong>MOON</strong>
+                            </div>
+
+                            <div class="tarot-bottom">
+                                ✧
+                            </div>
+
                         </div>
 
-                        <span class="card-small-title">
-                            KATLEN ARIANE
-                        </span>
-
-                        <h2>
-                            Seu momento.<br>
-                            Sua pergunta.
-                        </h2>
-
-                        <div class="card-line"></div>
-
-                        <span class="card-small-text">
-                            TAROT & ORÁCULOS
-                        </span>
-
                     </div>
 
-                    <div class="floating-symbol symbol-one">
-                        ✧
-                    </div>
 
-                    <div class="floating-symbol symbol-two">
+                    <div class="hero-decor decor-star">
                         ✦
                     </div>
 
-                    <div class="floating-symbol symbol-three">
-                        ◇
+                    <div class="hero-decor decor-star-two">
+                        ✧
+                    </div>
+
+
+                    <div class="hero-badge">
+
+                        <span>✦</span>
+
+                        <strong>
+                            TAROT
+                        </strong>
+
+                        <small>
+                            uma leitura para o seu momento
+                        </small>
+
                     </div>
 
                 </div>
@@ -296,81 +350,112 @@
         </section>
 
 
-        <!-- =====================================================
-             INTRODUÇÃO
-        ====================================================== -->
+        <!-- =================================================
+             SERVICES STRIP
+        ================================================== -->
 
-        <section class="intro-section">
+        <section class="service-strip">
 
-            <div class="container intro-content">
+            <div class="container">
 
-                <span class="eyebrow">
-                    UM MOMENTO PARA VOCÊ
-                </span>
+                <div class="service-strip-inner">
 
-                <h2>
-                    Às vezes, o que precisamos é de um novo olhar.
-                </h2>
+                    <span>
+                        Tarot
+                    </span>
 
-                <p>
-                    Existem momentos em que temos perguntas, sentimentos
-                    ou decisões que precisam ser melhor compreendidos.
-                    A consulta pode ser um espaço para parar, refletir
-                    e observar o que as cartas podem revelar sobre
-                    o seu momento atual.
-                </p>
+                    <i>✦</i>
+
+                    <span>
+                        Baralho Cigano
+                    </span>
+
+                    <i>✦</i>
+
+                    <span>
+                        Tarot dos Orixás
+                    </span>
+
+                </div>
 
             </div>
 
         </section>
 
 
-        <!-- =====================================================
-             CONSULTAS
-        ====================================================== -->
+        <!-- =================================================
+             INTRO
+        ================================================== -->
 
-        <section
-            id="consultas"
-            class="section consultations-section"
-        >
+        <section class="intro-section">
 
-            <div class="container">
+            <div class="container intro-grid">
 
-                <div class="section-heading">
+                <div class="section-label">
 
-                    <span class="eyebrow">
-                        CONSULTAS
-                    </span>
+                    <span>CONSULTAS</span>
+
+                    <i>✦</i>
+
+                </div>
+
+
+                <div class="intro-content">
 
                     <h2>
-                        Escolha a leitura que conversa com o seu momento.
+
+                        Qual leitura conversa
+                        com o seu momento?
+
                     </h2>
 
+
                     <p>
-                        Conheça as possibilidades de consulta e escolha
-                        aquela que mais combina com a questão que você
-                        deseja compreender.
+
+                        Cada consulta oferece uma maneira diferente
+                        de olhar para suas questões. Escolha a leitura
+                        que mais se aproxima do que você deseja
+                        compreender neste momento.
+
                     </p>
 
                 </div>
 
+            </div>
 
-                <div class="consultations-grid">
+        </section>
+
+
+        <!-- =================================================
+             CONSULTAS
+        ================================================== -->
+
+        <section
+            class="consultations"
+            id="consultas">
+
+            <div class="container">
+
+
+                <div class="consultation-grid">
 
 
                     <!-- TAROT -->
 
                     <article
-                        id="tarot"
-                        class="consultation-card featured"
-                    >
+                        class="consultation-card"
+                        id="tarot">
+
+                        <div class="consultation-number">
+                            01
+                        </div>
 
                         <div class="consultation-icon">
                             ✦
                         </div>
 
-                        <span class="card-label">
-                            CONSULTA
+                        <span class="consultation-category">
+                            TAROT
                         </span>
 
                         <h3>
@@ -378,20 +463,22 @@
                         </h3>
 
                         <p>
-                            Uma leitura para observar o seu momento,
-                            suas questões e as possibilidades que se
-                            apresentam através das cartas.
+
+                            Uma leitura simbólica para explorar
+                            questões, sentimentos, possibilidades
+                            e diferentes perspectivas sobre o seu
+                            momento atual.
+
                         </p>
 
                         <a
                             href="#agendar"
-                            class="card-link"
-                            data-v8="contact.whatsapp"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Quero consultar o Tarot
+                            class="card-link">
+
+                            Quero conhecer o Tarot
+
                             <span>→</span>
+
                         </a>
 
                     </article>
@@ -400,16 +487,19 @@
                     <!-- BARALHO CIGANO -->
 
                     <article
-                        id="baralho-cigano"
-                        class="consultation-card"
-                    >
+                        class="consultation-card featured"
+                        id="baralho-cigano">
 
-                        <div class="consultation-icon">
-                            ◇
+                        <div class="consultation-number">
+                            02
                         </div>
 
-                        <span class="card-label">
-                            CONSULTA
+                        <div class="consultation-icon">
+                            ❈
+                        </div>
+
+                        <span class="consultation-category">
+                            BARALHO CIGANO
                         </span>
 
                         <h3>
@@ -417,20 +507,21 @@
                         </h3>
 
                         <p>
-                            Uma leitura através dos símbolos e cartas
-                            do Baralho Cigano para explorar questões
-                            relacionadas ao seu momento.
+
+                            Uma leitura para observar situações,
+                            relações e questões que fazem parte
+                            da sua vida sob uma nova perspectiva.
+
                         </p>
 
                         <a
                             href="#agendar"
-                            class="card-link"
-                            data-v8="contact.whatsapp"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Quero consultar o Baralho
+                            class="card-link">
+
+                            Quero conhecer o Baralho
+
                             <span>→</span>
+
                         </a>
 
                     </article>
@@ -439,16 +530,19 @@
                     <!-- TAROT DOS ORIXÁS -->
 
                     <article
-                        id="tarot-orixas"
                         class="consultation-card"
-                    >
+                        id="tarot-orixas">
 
-                        <div class="consultation-icon">
-                            ✧
+                        <div class="consultation-number">
+                            03
                         </div>
 
-                        <span class="card-label">
-                            CONSULTA
+                        <div class="consultation-icon">
+                            ◈
+                        </div>
+
+                        <span class="consultation-category">
+                            TAROT DOS ORIXÁS
                         </span>
 
                         <h3>
@@ -456,74 +550,25 @@
                         </h3>
 
                         <p>
-                            Uma leitura voltada à compreensão do seu
-                            momento através da simbologia e da linguagem
-                            própria do Tarot dos Orixás.
+
+                            Uma experiência de leitura voltada
+                            para reflexão e interpretação a partir
+                            dos símbolos presentes nas cartas.
+
                         </p>
 
                         <a
                             href="#agendar"
-                            class="card-link"
-                            data-v8="contact.whatsapp"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Quero consultar
+                            class="card-link">
+
+                            Quero conhecer esta leitura
+
                             <span>→</span>
+
                         </a>
 
                     </article>
 
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             QUAL CONSULTA ESCOLHER
-        ====================================================== -->
-
-        <section class="choice-section">
-
-            <div class="container">
-
-                <div class="choice-box">
-
-                    <div class="choice-content">
-
-                        <span class="eyebrow">
-                            NÃO SABE QUAL ESCOLHER?
-                        </span>
-
-                        <h2>
-                            Você não precisa decidir tudo sozinho.
-                        </h2>
-
-                        <p>
-                            Se você sabe que deseja fazer uma consulta,
-                            mas não sabe qual leitura escolher, pode
-                            explicar o que gostaria de compreender.
-                            A partir disso, podemos conversar sobre
-                            qual opção faz mais sentido para você.
-                        </p>
-
-                    </div>
-
-                    <div class="choice-action">
-
-                        <a
-                            href="#agendar"
-                            class="btn btn-light"
-                            data-v8="contact.whatsapp"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Quero conversar sobre minha consulta
-                        </a>
-
-                    </div>
 
                 </div>
 
@@ -532,209 +577,274 @@
         </section>
 
 
-        <!-- =====================================================
-             COMO FUNCIONA
-        ====================================================== -->
+        <!-- =================================================
+             CHOOSE
+        ================================================== -->
 
-        <section
-            id="como-funciona"
-            class="section how-section"
-        >
+        <section class="choose-section">
 
-            <div class="container">
+            <div class="container choose-grid">
 
-                <div class="section-heading">
 
-                    <span class="eyebrow">
-                        COMO FUNCIONA
+                <div class="choose-decoration">
+
+                    <div class="choose-circle">
+
+                        <span>✦</span>
+
+                        <strong>
+                            SUA
+                        </strong>
+
+                        <small>
+                            QUESTÃO
+                        </small>
+
+                        <span>✧</span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="choose-content">
+
+                    <span class="eyebrow purple">
+
+                        NÃO SABE QUAL ESCOLHER?
+
                     </span>
 
-                    <h2>
-                        Um processo simples para você chegar à sua consulta.
-                    </h2>
-
-                    <p>
-                        Depois de escolher a leitura, o próximo passo
-                        é conversar e realizar o agendamento.
-                    </p>
-
-                </div>
-
-
-                <div class="steps-grid">
-
-                    <div class="step">
-
-                        <span class="step-number">
-                            01
-                        </span>
-
-                        <h3>
-                            Escolha a consulta
-                        </h3>
-
-                        <p>
-                            Conheça as opções de leitura e escolha
-                            aquela que mais se aproxima do que você
-                            deseja compreender.
-                        </p>
-
-                    </div>
-
-
-                    <div class="step">
-
-                        <span class="step-number">
-                            02
-                        </span>
-
-                        <h3>
-                            Faça o agendamento
-                        </h3>
-
-                        <p>
-                            Entre em contato para conversar sobre
-                            a consulta e combinar os detalhes.
-                        </p>
-
-                    </div>
-
-
-                    <div class="step">
-
-                        <span class="step-number">
-                            03
-                        </span>
-
-                        <h3>
-                            Apresente sua questão
-                        </h3>
-
-                        <p>
-                            Você poderá trazer a questão ou situação
-                            que deseja olhar durante a consulta.
-                        </p>
-
-                    </div>
-
-
-                    <div class="step">
-
-                        <span class="step-number">
-                            04
-                        </span>
-
-                        <h3>
-                            Viva a sua leitura
-                        </h3>
-
-                        <p>
-                            Um momento dedicado à interpretação das
-                            cartas e à reflexão sobre o seu momento.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             TEMAS
-        ====================================================== -->
-
-        <section class="topics-section">
-
-            <div class="container topics-grid">
-
-                <div class="topics-content">
-
-                    <span class="eyebrow">
-                        SUA QUESTÃO IMPORTA
-                    </span>
 
                     <h2>
-                        Leve para a consulta aquilo que está ocupando seus pensamentos.
+
+                        Não precisa decidir
+                        tudo sozinho.
+
                     </h2>
 
+
                     <p>
-                        A leitura pode partir de uma pergunta específica
-                        ou de uma situação que você deseja compreender
-                        melhor.
+
+                        Se você ainda não sabe qual tipo de consulta
+                        escolher, entre em contato. Podemos conversar
+                        sobre o que você busca e encontrar a leitura
+                        que faça mais sentido para o seu momento.
+
                     </p>
+
 
                     <a
                         href="#agendar"
-                        class="btn btn-primary"
-                        data-v8="contact.whatsapp"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Quero agendar
+                        class="btn btn-primary">
+
+                        Quero conversar
+
+                        <span>→</span>
+
                     </a>
 
                 </div>
 
+            </div>
 
-                <div class="topics-list">
+        </section>
+
+
+        <!-- =================================================
+             HOW IT WORKS
+        ================================================== -->
+
+        <section class="process-section">
+
+            <div class="container">
+
+
+                <div class="section-heading centered">
+
+                    <span class="eyebrow purple">
+                        COMO FUNCIONA
+                    </span>
+
+                    <h2>
+                        Simples, acolhedor e direto.
+                    </h2>
+
+                    <p>
+                        O processo começa pela sua questão.
+                    </p>
+
+                </div>
+
+
+                <div class="process-grid">
+
+
+                    <div class="process-item">
+
+                        <span class="process-number">
+                            01
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Escolha a consulta
+                            </h3>
+
+                            <p>
+                                Conheça as opções disponíveis
+                                e escolha a que mais combina
+                                com o que você busca.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="process-item">
+
+                        <span class="process-number">
+                            02
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Agende
+                            </h3>
+
+                            <p>
+                                Entre em contato para verificar
+                                as possibilidades de atendimento
+                                e combinar sua consulta.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="process-item">
+
+                        <span class="process-number">
+                            03
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Traga sua questão
+                            </h3>
+
+                            <p>
+                                Você pode chegar com uma pergunta,
+                                uma situação ou simplesmente com
+                                algo que deseja compreender melhor.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="process-item">
+
+                        <span class="process-number">
+                            04
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Faça sua consulta
+                            </h3>
+
+                            <p>
+                                Um momento dedicado à leitura,
+                                interpretação e reflexão sobre
+                                as cartas.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             QUESTIONS
+        ================================================== -->
+
+        <section class="questions-section">
+
+            <div class="container">
+
+
+                <div class="questions-header">
+
+                    <div>
+
+                        <span class="eyebrow purple">
+                            TALVEZ VOCÊ ESTEJA PENSANDO...
+                        </span>
+
+                        <h2>
+                            Qual questão você gostaria
+                            de olhar com mais atenção?
+                        </h2>
+
+                    </div>
+
+
+                    <p>
+
+                        As cartas podem servir como um recurso
+                        simbólico para refletir sobre diferentes
+                        aspectos da sua vida.
+
+                    </p>
+
+                </div>
+
+
+                <div class="topics-grid">
 
                     <div class="topic">
-                        <span>✦</span>
-                        <strong>
-                            Amor e relacionamentos
-                        </strong>
+                        <span>♡</span>
+                        Amor e relacionamentos
                     </div>
 
                     <div class="topic">
                         <span>✦</span>
-                        <strong>
-                            Decisões e escolhas
-                        </strong>
+                        Decisões
                     </div>
 
                     <div class="topic">
-                        <span>✦</span>
-                        <strong>
-                            Vida profissional
-                        </strong>
+                        <span>◈</span>
+                        Trabalho e caminhos
                     </div>
 
                     <div class="topic">
-                        <span>✦</span>
-                        <strong>
-                            Momento atual
-                        </strong>
+                        <span>☾</span>
+                        Momento atual
                     </div>
 
                     <div class="topic">
-                        <span>✦</span>
-                        <strong>
-                            Caminhos e possibilidades
-                        </strong>
+                        <span>✧</span>
+                        Questões pessoais
                     </div>
 
                     <div class="topic">
-                        <span>✦</span>
-                        <strong>
-                            Questões pessoais
-                        </strong>
-                    </div>
-
-                    <div class="topic">
-                        <span>✦</span>
-                        <strong>
-                            Autoconhecimento
-                        </strong>
-                    </div>
-
-                    <div class="topic">
-                        <span>✦</span>
-                        <strong>
-                            Outras questões
-                        </strong>
+                        <span>❈</span>
+                        Autoconhecimento
                     </div>
 
                 </div>
@@ -744,31 +854,35 @@
         </section>
 
 
-        <!-- =====================================================
-             SOBRE KATLEN
-        ====================================================== -->
+        <!-- =================================================
+             ABOUT
+        ================================================== -->
 
         <section
-            id="sobre"
-            class="section about-section"
-        >
+            class="about-section"
+            id="sobre">
 
             <div class="container about-grid">
 
+
                 <div class="about-visual">
 
-                    <div class="about-image-placeholder">
+                    <div class="about-frame">
 
                         <div class="about-symbol">
-                            KA
+                            ✦
                         </div>
 
                         <span>
-                            KATLEN ARIANE
+                            KATLEN
                         </span>
 
+                        <strong>
+                            ARIANE
+                        </strong>
+
                         <small>
-                            TAROT & ORÁCULOS
+                            TAROT & ORÁCULO
                         </small>
 
                     </div>
@@ -778,48 +892,46 @@
 
                 <div class="about-content">
 
-                    <span class="eyebrow">
+                    <span class="eyebrow purple">
                         SOBRE KATLEN ARIANE
                     </span>
 
+
                     <h2>
-                        Um espaço de acolhimento, escuta e reflexão.
+                        Um espaço para olhar
+                        para o seu momento.
                     </h2>
 
-                    <p>
-                        A consulta é um momento reservado para você,
-                        suas perguntas e aquilo que deseja compreender
-                        melhor.
-                    </p>
 
                     <p>
-                        Através das cartas e de sua simbologia, a leitura
-                        busca criar um espaço de reflexão sobre o momento
-                        vivido e sobre as possibilidades que podem ser
-                        observadas a partir da sua questão.
+
+                        A consulta é um momento dedicado à sua
+                        questão. Através das cartas e de seus
+                        símbolos, a leitura cria espaço para observar
+                        situações, sentimentos e possibilidades
+                        por outros ângulos.
+
                     </p>
 
-                    <div class="about-highlight">
 
-                        <span>
-                            ✦
-                        </span>
+                    <p>
 
-                        <p>
-                            Cada consulta começa com aquilo que você
-                            deseja olhar.
-                        </p>
+                        Mais do que buscar respostas prontas,
+                        a proposta é oferecer uma experiência de
+                        reflexão e interpretação que possa fazer
+                        sentido para aquilo que você está vivendo.
 
-                    </div>
+                    </p>
+
 
                     <a
                         href="#agendar"
-                        class="btn btn-primary"
-                        data-v8="contact.whatsapp"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Conversar com Katlen
+                        class="text-link">
+
+                        Conhecer as consultas
+
+                        <span>→</span>
+
                     </a>
 
                 </div>
@@ -829,88 +941,84 @@
         </section>
 
 
-        <!-- =====================================================
-             DEPOIMENTOS
-        ====================================================== -->
+        <!-- =================================================
+             TESTIMONIALS
+        ================================================== -->
 
-        <section
-            id="depoimentos"
-            class="section testimonials-section"
-        >
+        <section class="testimonials-section">
 
             <div class="container">
 
-                <div class="section-heading">
 
-                    <span class="eyebrow">
+                <div class="section-heading centered">
+
+                    <span class="eyebrow purple">
                         EXPERIÊNCIAS
                     </span>
 
                     <h2>
-                        O que pessoas que já passaram pela consulta dizem.
+                        O que dizem sobre as consultas
                     </h2>
-
-                    <p>
-                        Experiências reais de quem encontrou neste espaço
-                        um momento para olhar para si.
-                    </p>
 
                 </div>
 
 
                 <div class="testimonials-grid">
 
-                    <article class="testimonial-card">
 
-                        <div class="testimonial-stars">
-                            ★ ★ ★ ★ ★
+                    <article class="testimonial">
+
+                        <div class="quote">
+                            “
                         </div>
 
-                        <blockquote>
-                            “Seu depoimento real pode aparecer aqui.”
-                        </blockquote>
+                        <p>
+                            Espaço reservado para o depoimento
+                            real de uma cliente.
+                        </p>
 
-                        <span class="testimonial-author">
-                            Depoimento de cliente
+                        <span>
+                            Cliente
                         </span>
 
                     </article>
 
 
-                    <article class="testimonial-card">
+                    <article class="testimonial">
 
-                        <div class="testimonial-stars">
-                            ★ ★ ★ ★ ★
+                        <div class="quote">
+                            “
                         </div>
 
-                        <blockquote>
-                            “Este espaço será preenchido com um depoimento
-                            real das suas clientes.”
-                        </blockquote>
+                        <p>
+                            Espaço reservado para o depoimento
+                            real de uma cliente.
+                        </p>
 
-                        <span class="testimonial-author">
-                            Depoimento de cliente
+                        <span>
+                            Cliente
                         </span>
 
                     </article>
 
 
-                    <article class="testimonial-card">
+                    <article class="testimonial">
 
-                        <div class="testimonial-stars">
-                            ★ ★ ★ ★ ★
+                        <div class="quote">
+                            “
                         </div>
 
-                        <blockquote>
-                            “Compartilhe aqui uma experiência verdadeira
-                            de uma pessoa que realizou uma consulta.”
-                        </blockquote>
+                        <p>
+                            Espaço reservado para o depoimento
+                            real de uma cliente.
+                        </p>
 
-                        <span class="testimonial-author">
-                            Depoimento de cliente
+                        <span>
+                            Cliente
                         </span>
 
                     </article>
+
 
                 </div>
 
@@ -919,98 +1027,95 @@
         </section>
 
 
-        <!-- =====================================================
-             ORÁCULO
-        ====================================================== -->
+        <!-- =================================================
+             ORACLE
+        ================================================== -->
 
-        <section
-            id="oraculo"
-            class="oracle-section"
-        >
+        <section class="oracle-section">
 
-            <div class="container oracle-grid">
-
-                <div class="oracle-visual">
-
-                    <div class="oracle-card">
-
-                        <span class="oracle-card-symbol">
-                            ✦
-                        </span>
-
-                        <span class="oracle-card-title">
-                            ORÁCULO
-                        </span>
-
-                        <strong>
-                            Uma carta.<br>
-                            Uma pergunta.<br>
-                            Um novo olhar.
-                        </strong>
-
-                    </div>
-
-                </div>
+            <div class="container oracle-inner">
 
 
                 <div class="oracle-content">
 
                     <span class="eyebrow">
-                        EXPERIÊNCIA ONLINE
+                        UMA EXPERIÊNCIA COMPLEMENTAR
                     </span>
 
+
                     <h2>
-                        Antes da sua consulta, experimente o Oráculo Katlen Ariane.
+                        Quer experimentar o Oráculo?
                     </h2>
 
-                    <p>
-                        Uma experiência complementar para tirar uma carta
-                        e refletir sobre uma questão ou intenção que esteja
-                        presente no seu momento.
-                    </p>
 
                     <p>
-                        O Oráculo não substitui uma consulta. Ele é uma
-                        porta de entrada para essa experiência de reflexão.
+
+                        Antes ou depois da sua consulta,
+                        você também pode conhecer o Oráculo
+                        Katlen Ariane e tirar uma carta online.
+
                     </p>
+
 
                     <a
-                        href="oraculo/"
-                        class="btn btn-light"
-                    >
-                        Puxar uma carta
+                        href="/oraculo/"
+                        class="btn btn-light">
+
+                        Conhecer o Oráculo
+
+                        <span>→</span>
+
                     </a>
 
                 </div>
+
+
+                <div class="oracle-visual">
+
+                    <div class="oracle-card oracle-card-one">
+                        ✦
+                    </div>
+
+                    <div class="oracle-card oracle-card-two">
+                        ☾
+                    </div>
+
+                    <div class="oracle-card oracle-card-three">
+                        ✧
+                    </div>
+
+                </div>
+
 
             </div>
 
         </section>
 
 
-        <!-- =====================================================
+        <!-- =================================================
              FAQ
-        ====================================================== -->
+        ================================================== -->
 
         <section
-            id="faq"
-            class="section faq-section"
-        >
+            class="faq-section"
+            id="faq">
 
-            <div class="container faq-container">
+            <div class="container faq-grid">
 
-                <div class="section-heading">
 
-                    <span class="eyebrow">
-                        DÚVIDAS FREQUENTES
+                <div class="faq-intro">
+
+                    <span class="eyebrow purple">
+                        DÚVIDAS
                     </span>
 
                     <h2>
-                        Antes de agendar sua consulta.
+                        Perguntas frequentes
                     </h2>
 
                     <p>
-                        Algumas respostas para as dúvidas mais comuns.
+                        Algumas respostas para ajudar
+                        você antes de agendar.
                     </p>
 
                 </div>
@@ -1019,147 +1124,137 @@
                 <div class="faq-list">
 
 
-                    <details class="faq-item">
+                    <details>
 
                         <summary>
-                            Como funciona uma consulta?
-                            <span>+</span>
-                        </summary>
 
-                        <div class="faq-answer">
-
-                            <p>
-                                A consulta começa a partir da questão ou
-                                situação que você deseja compreender.
-                                As cartas são utilizadas como instrumento
-                                de leitura e reflexão durante o atendimento.
-                            </p>
-
-                        </div>
-
-                    </details>
-
-
-                    <details class="faq-item">
-
-                        <summary>
                             Qual consulta devo escolher?
+
                             <span>+</span>
+
                         </summary>
 
-                        <div class="faq-answer">
+                        <p>
 
-                            <p>
-                                Você pode escolher entre Tarot, Baralho
-                                Cigano e Tarot dos Orixás. Se estiver
-                                em dúvida, entre em contato e explique
-                                o que gostaria de compreender para
-                                conversarmos sobre a opção mais adequada.
-                            </p>
+                            Cada leitura possui uma proposta
+                            diferente. Se você estiver em dúvida,
+                            entre em contato para conversar sobre
+                            o que deseja compreender e escolher
+                            a opção mais adequada.
 
-                        </div>
+                        </p>
 
                     </details>
 
 
-                    <details class="faq-item">
+                    <details>
 
                         <summary>
-                            Preciso ter uma pergunta específica?
+
+                            Posso chegar com uma pergunta específica?
+
                             <span>+</span>
+
                         </summary>
 
-                        <div class="faq-answer">
+                        <p>
 
-                            <p>
-                                Não necessariamente. Você pode chegar
-                                com uma questão específica ou simplesmente
-                                apresentar a situação que gostaria de olhar
-                                com mais atenção.
-                            </p>
+                            Sim. Você pode chegar com uma questão
+                            específica ou com uma situação que
+                            gostaria de observar por outras
+                            perspectivas.
 
-                        </div>
+                        </p>
 
                     </details>
 
 
-                    <details class="faq-item">
+                    <details>
 
                         <summary>
+
                             Como faço para agendar?
+
                             <span>+</span>
+
                         </summary>
 
-                        <div class="faq-answer">
+                        <p>
 
-                            <p>
-                                Clique em um dos botões de agendamento
-                                disponíveis nesta página para entrar
-                                em contato e conversar sobre a consulta.
-                            </p>
+                            Clique em “Agendar minha consulta”
+                            e entre em contato para verificar
+                            as informações e possibilidades
+                            de atendimento.
 
-                        </div>
+                        </p>
 
                     </details>
 
 
-                    <details class="faq-item">
+                    <details>
 
                         <summary>
+
                             Quanto tempo dura a consulta?
+
                             <span>+</span>
+
                         </summary>
 
-                        <div class="faq-answer">
+                        <p>
 
-                            <p>
-                                A duração da consulta deve ser confirmada
-                                no momento do agendamento.
-                            </p>
+                            As informações sobre duração podem
+                            ser confirmadas diretamente no momento
+                            do agendamento.
 
-                        </div>
+                        </p>
 
                     </details>
 
 
-                    <details class="faq-item">
+                    <details>
 
                         <summary>
+
                             A consulta é online ou presencial?
+
                             <span>+</span>
+
                         </summary>
 
-                        <div class="faq-answer">
+                        <p>
 
-                            <p>
-                                Consulte a disponibilidade e o formato
-                                de atendimento diretamente no momento
-                                do agendamento.
-                            </p>
+                            Consulte as modalidades disponíveis
+                            diretamente com Katlen no momento
+                            do agendamento.
 
-                        </div>
+                        </p>
 
                     </details>
 
 
-                    <details class="faq-item">
+                    <details>
 
                         <summary>
-                            Como funciona o pagamento?
+
+                            A leitura prevê o futuro?
+
                             <span>+</span>
+
                         </summary>
 
-                        <div class="faq-answer">
+                        <p>
 
-                            <p>
-                                As condições de pagamento devem ser
-                                confirmadas diretamente no momento
-                                do agendamento.
-                            </p>
+                            A leitura trabalha com símbolos,
+                            interpretações e perspectivas sobre
+                            questões apresentadas no momento.
+                            Não deve ser entendida como garantia
+                            de acontecimentos futuros.
 
-                        </div>
+                        </p>
 
                     </details>
+
 
                 </div>
 
@@ -1168,41 +1263,59 @@
         </section>
 
 
-        <!-- =====================================================
-             CTA FINAL
-        ====================================================== -->
+        <!-- =================================================
+             FINAL CTA
+        ================================================== -->
 
         <section
-            id="agendar"
             class="final-cta"
-        >
+            id="agendar">
 
-            <div class="final-cta-decoration"></div>
+            <div class="final-cta-pattern"></div>
 
-            <div class="container final-cta-content">
+            <div class="container final-cta-inner">
 
-                <span class="eyebrow">
-                    SUA PERGUNTA PODE SER O PRIMEIRO PASSO
+
+                <span class="final-star">
+                    ✦
                 </span>
 
+
+                <span class="eyebrow">
+                    SUA QUESTÃO COMEÇA AQUI
+                </span>
+
+
                 <h2>
-                    Qual questão você gostaria de compreender melhor?
+                    Qual questão você gostaria
+                    de compreender melhor?
                 </h2>
 
+
                 <p>
-                    Agende sua consulta e reserve um momento para olhar
-                    para o seu caminho com mais atenção.
+
+                    Agende sua consulta e reserve um momento
+                    para olhar para aquilo que está presente
+                    na sua vida agora.
+
                 </p>
+
 
                 <a
                     href="#"
-                    class="btn btn-light btn-large"
                     data-v8="contact.whatsapp"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
+                    class="btn btn-white">
+
                     Agendar minha consulta
+
+                    <span>→</span>
+
                 </a>
+
+
+                <small>
+                    Atendimento mediante agendamento.
+                </small>
 
             </div>
 
@@ -1212,40 +1325,45 @@
     </main>
 
 
-    <!-- =========================================================
+    <!-- =====================================================
          FOOTER
-    ========================================================== -->
+    ====================================================== -->
 
     <footer class="site-footer">
 
-        <div class="container footer-grid">
+        <div class="container footer-main">
 
 
             <div class="footer-brand">
 
-                <div class="brand footer-brand-inner">
+                <a
+                    href="#inicio"
+                    class="brand footer-logo">
 
-                    <div class="brand-mark">
-                        KA
-                    </div>
+                    <span class="brand-symbol">
+                        ✦
+                    </span>
 
-                    <div class="brand-text">
+                    <span class="brand-text">
 
                         <strong>
                             Katlen Ariane
                         </strong>
 
-                        <span>
-                            Tarot & Oráculos
-                        </span>
+                        <small>
+                            TAROT & ORÁCULO
+                        </small>
 
-                    </div>
+                    </span>
 
-                </div>
+                </a>
+
 
                 <p>
-                    Um espaço para consultas, reflexão e novas
-                    perspectivas através das cartas.
+
+                    Tarot, Baralho Cigano e Tarot dos Orixás
+                    para momentos de reflexão e novas perspectivas.
+
                 </p>
 
             </div>
@@ -1286,7 +1404,7 @@
                     Sobre
                 </a>
 
-                <a href="oraculo/">
+                <a href="/oraculo/">
                     Oráculo
                 </a>
 
@@ -1305,195 +1423,268 @@
 
                 <a
                     href="#"
-                    data-v8="contact.whatsapp"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
+                    data-v8="contact.whatsapp">
+
                     WhatsApp
+
                 </a>
 
                 <a
                     href="#"
-                    data-v8="contact.instagram"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Instagram
-                </a>
+                    data-v8="contact.instagram">
 
-                <a
-                    href="#agendar"
-                >
-                    Agendar consulta
+                    Instagram
+
                 </a>
 
             </div>
+
 
         </div>
 
 
         <div class="container footer-bottom">
 
-            <p>
-                © <span id="current-year"></span>
-                Katlen Ariane. Todos os direitos reservados.
-            </p>
+            <span>
+                © <span id="currentYear"></span> Katlen Ariane.
+                Todos os direitos reservados.
+            </span>
 
-            <p>
-                Tarot & Oráculos
-            </p>
+            <span>
+                Tarot & Oráculo
+            </span>
 
         </div>
 
     </footer>
 
 
-    <!-- =========================================================
-         JAVASCRIPT DA PÁGINA
-         NÃO SUBSTITUI O V8 LOADER
-    ========================================================== -->
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
 
     <script>
+
         document.addEventListener("DOMContentLoaded", function () {
 
-            /* Ano automático */
-            const year = document.getElementById("current-year");
 
-            if (year) {
-                year.textContent = new Date().getFullYear();
-            }
+            /* =================================================
+               MOBILE MENU
+            ================================================== */
 
+            const menuToggle =
+                document.getElementById("menuToggle");
 
-            /* Menu mobile */
-            const menuToggle = document.querySelector(".menu-toggle");
-            const navigation = document.querySelector(".main-nav");
-
-            if (menuToggle && navigation) {
-
-                menuToggle.addEventListener("click", function () {
-
-                    const isOpen =
-                        menuToggle.getAttribute("aria-expanded") === "true";
-
-                    menuToggle.setAttribute(
-                        "aria-expanded",
-                        String(!isOpen)
-                    );
-
-                    navigation.classList.toggle("is-open");
-
-                    document.body.classList.toggle(
-                        "menu-open",
-                        !isOpen
-                    );
-
-                });
+            const mainNav =
+                document.getElementById("mainNav");
 
 
-                /* Fecha menu ao clicar em um link */
-                navigation
-                    .querySelectorAll("a")
-                    .forEach(function (link) {
+            if (menuToggle && mainNav) {
 
-                        link.addEventListener("click", function () {
+                menuToggle.addEventListener(
+                    "click",
+                    function () {
 
-                            menuToggle.setAttribute(
-                                "aria-expanded",
-                                "false"
-                            );
+                        const isOpen =
+                            mainNav.classList.toggle("active");
 
-                            navigation.classList.remove("is-open");
+                        menuToggle.classList.toggle(
+                            "active",
+                            isOpen
+                        );
 
-                            document.body.classList.remove(
-                                "menu-open"
-                            );
+                        menuToggle.setAttribute(
+                            "aria-expanded",
+                            isOpen
+                        );
 
-                        });
-
-                    });
-
-            }
-
-
-            /* Scroll suave para âncoras internas */
-            document
-                .querySelectorAll('a[href^="#"]')
-                .forEach(function (link) {
-
-                    link.addEventListener("click", function (event) {
-
-                        const targetId =
-                            this.getAttribute("href");
-
-                        if (
-                            !targetId ||
-                            targetId === "#"
-                        ) {
-                            return;
-                        }
-
-                        const target =
-                            document.querySelector(targetId);
-
-                        if (!target) {
-                            return;
-                        }
-
-                        event.preventDefault();
-
-                        const header =
-                            document.querySelector(".site-header");
-
-                        const offset =
-                            header
-                                ? header.offsetHeight + 15
-                                : 15;
-
-                        const position =
-                            target.getBoundingClientRect().top +
-                            window.scrollY -
-                            offset;
-
-                        window.scrollTo({
-                            top: position,
-                            behavior: "smooth"
-                        });
-
-                    });
-
-                });
-
-
-            /* Header ao rolar */
-            const header =
-                document.querySelector(".site-header");
-
-            if (header) {
-
-                function updateHeader() {
-
-                    if (window.scrollY > 20) {
-                        header.classList.add("scrolled");
-                    } else {
-                        header.classList.remove("scrolled");
-                    }
-
-                }
-
-                updateHeader();
-
-                window.addEventListener(
-                    "scroll",
-                    updateHeader,
-                    {
-                        passive: true
                     }
                 );
 
+
+                mainNav
+                    .querySelectorAll("a")
+                    .forEach(function (link) {
+
+                        link.addEventListener(
+                            "click",
+                            function () {
+
+                                mainNav.classList.remove(
+                                    "active"
+                                );
+
+                                menuToggle.classList.remove(
+                                    "active"
+                                );
+
+                                menuToggle.setAttribute(
+                                    "aria-expanded",
+                                    "false"
+                                );
+
+                            }
+                        );
+
+                    });
+
             }
 
+
+            /* =================================================
+               HEADER SCROLL
+            ================================================== */
+
+            const header =
+                document.getElementById("siteHeader");
+
+
+            function updateHeader() {
+
+                if (!header) return;
+
+                if (window.scrollY > 40) {
+
+                    header.classList.add("scrolled");
+
+                } else {
+
+                    header.classList.remove("scrolled");
+
+                }
+
+            }
+
+
+            window.addEventListener(
+                "scroll",
+                updateHeader,
+                {
+                    passive: true
+                }
+            );
+
+
+            updateHeader();
+
+
+            /* =================================================
+               SMOOTH SCROLL
+            ================================================== */
+
+            document
+                .querySelectorAll('a[href^="#"]')
+                .forEach(function (anchor) {
+
+                    anchor.addEventListener(
+                        "click",
+                        function (event) {
+
+                            const targetId =
+                                this.getAttribute("href");
+
+                            if (
+                                !targetId ||
+                                targetId === "#"
+                            ) {
+                                return;
+                            }
+
+
+                            const target =
+                                document.querySelector(targetId);
+
+
+                            if (target) {
+
+                                event.preventDefault();
+
+
+                                const headerHeight =
+                                    header
+                                        ? header.offsetHeight
+                                        : 0;
+
+
+                                const targetPosition =
+                                    target.getBoundingClientRect()
+                                        .top +
+                                    window.scrollY -
+                                    headerHeight -
+                                    20;
+
+
+                                window.scrollTo({
+
+                                    top: targetPosition,
+
+                                    behavior: "smooth"
+
+                                });
+
+                            }
+
+                        }
+                    );
+
+                });
+
+
+            /* =================================================
+               CURRENT YEAR
+            ================================================== */
+
+            const year =
+                document.getElementById("currentYear");
+
+
+            if (year) {
+
+                year.textContent =
+                    new Date().getFullYear();
+
+            }
+
+
+            /* =================================================
+               FAQ
+            ================================================== */
+
+            const faqItems =
+                document.querySelectorAll(
+                    ".faq-list details"
+                );
+
+
+            faqItems.forEach(function (item) {
+
+                item.addEventListener(
+                    "toggle",
+                    function () {
+
+                        if (!item.open) return;
+
+                        faqItems.forEach(function (other) {
+
+                            if (other !== item) {
+
+                                other.removeAttribute(
+                                    "open"
+                                );
+
+                            }
+
+                        });
+
+                    }
+                );
+
+            });
+
         });
+
     </script>
 
 </body>
+
 </html>
