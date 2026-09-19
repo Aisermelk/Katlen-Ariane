@@ -3,118 +3,219 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Oráculo - Puxe uma Carta | Katlen Ariane</title>
+<title>Katlen Ariane | Tarot & Oráculo - Landing de Vendas</title>
+<meta name="description" content="Aprenda a ler tarot com confiança. Cursos, loja e conteúdo gratuito por Katlen Ariane.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+<!-- TOP BAR ROXA -->
 <div class="topbar">
   <div class="topbar-inner">
     <span>✦ Converse no Whatsapp — tire suas dúvidas agora</span>
-    <a class="topbar-cta" href="https://wa.me/5551999999999" target="_blank">FALE AGORA</a>
+    <a class="topbar-cta" href="https://wa.me/5551999999999" target="_blank" data-v8="contact.whatsapp">FALE AGORA</a>
   </div>
 </div>
 
+<!-- HEADER BRANCO -->
 <header class="header">
   <div class="header-inner">
-    <a href="/" class="logo">KATLEN<span> ARIANE</span><small>TAROT & ORÁCULO</small></a>
+    <a href="/" class="logo">
+      KATLEN<span> ARIANE</span>
+      <small>TAROT & ORÁCULO</small>
+    </a>
     <nav class="nav">
-      <a href="/#aprender">Aprenda</a>
-      <a href="/#loja">Loja</a>
-      <a href="/#curso">Curso</a>
-      <a href="/#sobre">Sobre</a>
-      <a href="/oraculo/" class="active">Puxe uma Carta</a>
-      <a href="/#conteudo">Conteúdo Gratuito</a>
-      <a class="btn-login" href="#">LOGIN</a>
+      <a href="#aprender">Aprenda</a>
+      <a href="#loja">Loja</a>
+      <a href="#curso">Curso</a>
+      <a href="#sobre">Sobre</a>
+      <a href="/oraculo/">Puxe uma carta</a>
+      <a href="#conteudo">Conteúdo Gratuito</a>
+      <a class="btn-login" href="#login">LOGIN</a>
     </nav>
+    <button class="mobile-btn" aria-label="Menu">☰</button>
   </div>
 </header>
 
-<section class="hero">
-  <div class="hero-inner">
-    <span class="kicker">Oráculo gratuito</span>
-    <h1 class="hero-title">Puxe uma Carta e Receba sua <i>Mensagem de Hoje</i></h1>
-    <p class="hero-sub">Concentre-se na sua pergunta, respire fundo e escolha uma carta. O oráculo de Katlen vai trazer a orientação que você precisa agora.</p>
+<!-- HERO DIVIDIDO FUNDO LILÁS -->
+<section class="hero" id="aprender">
+  <div class="hero-grid">
+    <div class="hero-left">
+      <div class="kicker">Conteúdo gratuito: acesso imediato • 11 anos de experiência</div>
+      <h1 class="hero-title">
+        Aprenda Como Ler Tarot com <i>Confiança</i> e Encontre Novos Caminhos...
+      </h1>
+      <p class="hero-sub">
+        E por que <strong>agora é o melhor momento</strong> para dar esse passo. 
+        Método Katlen une psicanálise, neurociência e espiritualidade para você ler sem decorar.
+      </p>
+      <a class="btn-green" href="#curso" data-v8="contact.whatsapp">FALE COMIGO →</a>
+      <div class="hero-proof">
+        <span>★ 4.9/5</span>
+        <span>•</span>
+        <span>+4.000 pessoas atendidas</span>
+        <span>•</span>
+        <span>347 alunas ativas</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="cards-wrap">
+        <!-- Cartas flutuando - estilo Biddy -->
+        <div class="card-float" style="--rot:-12deg;left:10px;top:30px;animation-delay:0s">☾</div>
+        <div class="card-float" style="--rot:8deg;left:280px;top:20px;animation-delay:.6s">★</div>
+        <div class="card-float" style="--rot:-6deg;left:20px;top:280px;animation-delay:1.2s">☀</div>
+        <div class="card-float" style="--rot:14deg;right:10px;top:300px;animation-delay:.3s">✦</div>
+        <div class="card-float" style="--rot:-4deg;left:140px;top:10px;animation-delay:.9s">♡</div>
+        <div class="person" title="Katlen Ariane"></div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="oraculo-wrap">
-  <div class="cards-grid" id="cardsGrid">
-    <!-- 12 cartas viradas -->
-    <button class="card-back">✦</button>
-    <button class="card-back">☾</button>
-    <button class="card-back">★</button>
-    <button class="card-back">☀</button>
-    <button class="card-back">♡</button>
-    <button class="card-back">☾</button>
-    <button class="card-back">✦</button>
-    <button class="card-back">★</button>
-    <button class="card-back">☀</button>
-    <button class="card-back">♡</button>
-    <button class="card-back">✦</button>
-    <button class="card-back">☾</button>
-  </div>
-
-  <div class="result" id="resultBox">
-    <h3 id="cardName">O Sol</h3>
-    <p id="cardMeaning">Hoje é um dia de clareza e vitalidade. O Sol ilumina caminhos que estavam escuros e traz a confiança para agir. Siga com leveza, sua intuição está afiada.</p>
-    <a class="btn-green" href="https://wa.me/5551999999999" target="_blank">QUERO UMA LEITURA COMPLETA →</a>
-    <div style="margin-top:18px"><button id="againBtn" style="font-size:12px;letter-spacing:.14em;color:#8b7a9f;text-decoration:underline">Puxar outra carta</button></div>
+<!-- 3 WAYS - IGUAL BIDDY -->
+<section class="section">
+  <div class="section-inner">
+    <h2 class="section-title font-lora">Comece sua Jornada no Tarot</h2>
+    <p class="section-sub">Oi, eu sou a Katlen e minha missão é trazer o tarot pro dia a dia de forma acolhedora, te ajudando a confiar na sua intuição e acessar seu poder interior.</p>
+    
+    <div class="grid-3">
+      <article class="card">
+        <div class="card-img">📚</div>
+        <div class="card-body">
+          <h3>Aprenda o Tarot Básico</h3>
+          <p>O que é tarot, como funciona e como expandir seu conhecimento sem medo de errar.</p>
+          <a class="card-link" href="#aprender">Começar agora →</a>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-img">🔮</div>
+        <div class="card-body">
+          <h3>Leia com Confiança</h3>
+          <p>Minhas dicas para ler tarot com segurança e próximos passos da sua jornada.</p>
+          <a class="card-link" href="/oraculo/">Puxar uma carta →</a>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-img">🌙</div>
+        <div class="card-body">
+          <h3>Crie seu Caminho</h3>
+          <p>Como transformar seu amor pelo tarot em atendimentos que acolhem e sustentam sua vida.</p>
+          <a class="card-link" href="#curso">Conhecer curso →</a>
+        </div>
+      </article>
+    </div>
   </div>
 </section>
 
-<footer class="footer">
+<!-- AS FEATURED IN -->
+<div class="featured">
+  <div class="featured-inner">
+    <span>Como visto em</span>
+    <span>✦ Terapia & Espiritualidade</span>
+    <span>✦ Revista Zen</span>
+    <span>✦ Portal Holístico</span>
+    <span>✦ Rádio Floripa</span>
+  </div>
+</div>
+
+<!-- PROMOÇÃO / VENDA -->
+<section class="promo" id="curso">
+  <div class="promo-grid">
+    <div>
+      <div class="promo-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <span style="font-size:11px;font-weight:700;letter-spacing:0.18em;color:#4a2c6a">CURSO MAIS VENDIDO</span>
+          <span style="font-size:11px;background:#fff3cd;padding:4px 10px;border-radius:999px;font-weight:700;color:#8a6a00">-60% HOJE</span>
+        </div>
+        <h3 class="font-lora" style="font-size:24px;font-weight:700;color:#3a2a5a">Tarot Essencial: da Intuição à Leitura</h3>
+        <p style="margin-top:12px;font-size:13px;line-height:1.6;color:#6b5d7e">8 módulos, workbook de 78 cartas, grupo VIP no WhatsApp, certificado + bônus de tiragens para amor e trabalho.</p>
+        <ul style="margin-top:18px;list-style:none;display:grid;gap:8px">
+          <li style="font-size:12px;display:flex;gap:8px"><span style="color:#4db6a0">✓</span> 8 módulos gravados</li>
+          <li style="font-size:12px;display:flex;gap:8px"><span style="color:#4db6a0">✓</span> Workbook de 78 cartas</li>
+          <li style="font-size:12px;display:flex;gap:8px"><span style="color:#4db6a0">✓</span> Grupo VIP no WhatsApp</li>
+          <li style="font-size:12px;display:flex;gap:8px"><span style="color:#4db6a0">✓</span> Certificado + Bônus</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div style="display:inline-flex;gap:8px;background:#e8f6f3;padding:6px 14px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:0.18em;color:#2a7a6a">
+        <span style="width:8px;height:8px;background:#4db6a0;border-radius:50%;display:inline-block"></span> PROMOÇÃO LIMITADA — 48H
+      </div>
+      <h2 class="font-lora" style="margin-top:22px;font-size:42px;line-height:.98;color:#3a2a5a">Torne-se a leitora que você <i style="color:#5d3a8a;font-weight:400">sempre quis ser.</i></h2>
+      <p style="margin-top:18px;font-size:15px;line-height:1.7;color:#6b5d7e">Método Katlen: intuição + estrutura. Você aprende a contar a história das cartas sem decorar, com segurança para ler para si e para outras mulheres.</p>
+      
+      <div class="price-row">
+        <div>
+          <div class="price-old">DE R$ 497</div>
+          <div style="display:flex;align-items:baseline;gap:10px"><span class="price">R$ 197</span><span style="font-size:13px;color:#6b5d7e">ou 12x de R$ 19,70</span></div>
+        </div>
+      </div>
+      <a class="btn-green" style="background:#4a2c6a;width:100%;justify-content:center;margin-top:28px" href="https://wa.me/5551999999999" data-v8="contact.whatsapp">QUERO MINHA VAGA COM DESCONTO →</a>
+      <div style="margin-top:14px;display:flex;gap:12px;font-size:11px;color:#8b7a9f"><span>✓ 7 dias de garantia</span><span>✓ Acesso imediato</span><span>✓ Suporte da Katlen</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter" id="conteudo">
+  <div class="news-inner">
+    <div>
+      <h3>Receba uma carta gratuita toda segunda</h3>
+      <p>Conteúdo exclusivo + tiragens e promoções antes de todo mundo.</p>
+    </div>
+    <form class="news-form" data-v8-form>
+      <input name="email" type="email" placeholder="seu e-mail aqui" required>
+      <button type="submit">ENVIAR</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" id="loja">
   <div class="footer-inner">
-    <div><div class="font-lora" style="font-size:20px;font-weight:700;color:#fff">KATLEN ARIANE</div><p style="margin-top:16px;max-width:280px;font-size:13px;line-height:1.6;color:rgba(255,255,255,.6)">Leituras que acolhem, cursos que transformam.</p></div>
-    <div><h4>Aprenda</h4><a href="#">Significados</a><a href="#">Tiragens</a><a href="#">Blog</a></div>
-    <div><h4>Loja</h4><a href="#">Cursos</a><a href="#">E-books</a></div>
-    <div><h4>Contato</h4><a href="#">Whatsapp</a><a href="/oraculo/">Puxe uma Carta</a></div>
+    <div>
+      <div class="font-lora" style="font-size:20px;font-weight:700;color:#fff">KATLEN ARIANE</div>
+      <div style="font-size:10px;letter-spacing:0.32em;color:rgba(255,255,255,.5);margin-top:4px">TAROT & ORÁCULO</div>
+      <p style="margin-top:18px;max-width:280px;font-size:13px;line-height:1.6;color:rgba(255,255,255,.6)">Leituras que acolhem, cursos que transformam. Uma casa lilás para você voltar a si.</p>
+    </div>
+    <div><h4>Aprenda</h4><a href="#">Significados</a><a href="#">Tiragens</a><a href="#">Blog</a><a href="#">Glossário</a></div>
+    <div><h4>Loja</h4><a href="#">Cursos</a><a href="#">E-books</a><a href="#">Baralhos</a><a href="#">Presentes</a></div>
+    <div><h4>Contato</h4><a href="#">Whatsapp</a><a href="#">Instagram</a><a href="#">Conteúdo Gratuito</a><a href="/oraculo/">Puxe uma Carta</a></div>
   </div>
-  <div class="footer-inner"><div class="footer-bottom" style="grid-column:1/-1"><span>© 2026 KATLEN ARIANE</span><span>FEITO COM ✦ V8 DIGITAL</span></div></div>
+  <div class="footer-inner">
+    <div class="footer-bottom" style="grid-column:1/-1">
+      <span>© 2026 KATLEN ARIANE — TODOS OS DIREITOS RESERVADOS</span>
+      <span>FEITO COM ✦ V8 DIGITAL</span>
+    </div>
+  </div>
 </footer>
 
 <script>
-// Oráculo simples - style + main no mesmo arquivo lógico mas separado em css/style.css
-const cartas = [
-  {nome:"O Louco", texto:"Um novo ciclo começa. Confie no salto, mesmo sem ver o chão todo. Leveza e coragem hoje."},
-  {nome:"A Sacerdotisa", texto:"Silêncio e intuição. Não force respostas hoje, escute o que vem de dentro."},
-  {nome:"A Imperatriz", texto:"Criação, cuidado e florescimento. É hora de nutrir seus projetos com amor."},
-  {nome:"O Sol", texto:"Hoje é um dia de clareza e vitalidade. O Sol ilumina caminhos que estavam escuros."},
-  {nome:"A Lua", texto:"Emoções à flor da pele. AcolhA suas sombras, nem tudo precisa ser resolvido agora."},
-  {nome:"A Estrela", texto:"Esperança renovada. Sua prece foi ouvida, continue com fé no seu caminho."},
-  {nome:"O Mago", texto:"Você tem todas as ferramentas. É hora de manifestar, comece com o que tem."},
-  {nome:"A Justiça", texto:"Equilíbrio e decisões. Olhe os fatos com honestidade, a resposta é justa."},
-  {nome:"Os Enamorados", texto:"Escolhas do coração. Alinhe o que você sente com o que você faz."},
-  {nome:"A Roda da Fortuna", texto:"Mudança de ciclo. O que estava travado destrava, permita-se girar."},
-  {nome:"A Força", texto:"Coragem mansa. Você não precisa brigar, precisa sustentar com amor."},
-  {nome:"O Mundo", texto:"Conclusão e celebração. Um ciclo se fecha com aprendizado e gratidão."},
-];
-
-const grid = document.getElementById('cardsGrid');
-const result = document.getElementById('resultBox');
-const nameEl = document.getElementById('cardName');
-const textEl = document.getElementById('cardMeaning');
-const again = document.getElementById('againBtn');
-
-function tirar(){
-  const c = cartas[Math.floor(Math.random()*cartas.length)];
-  nameEl.textContent = c.nome;
-  textEl.textContent = c.texto;
-  result.classList.add('show');
-  result.scrollIntoView({behavior:'smooth'});
-  grid.querySelectorAll('.card-back').forEach(b=>b.classList.add('revealed'));
-}
-
-grid.addEventListener('click', (e)=>{
-  if(e.target.classList.contains('card-back')) tirar();
-});
-
-again.addEventListener('click', ()=>{
-  result.classList.remove('show');
-  grid.querySelectorAll('.card-back').forEach(b=>b.classList.remove('revealed'));
-  window.scrollTo({top:0, behavior:'smooth'});
+// main.js - menu mobile (main junto com style)
+document.addEventListener('DOMContentLoaded', ()=>{
+  const btn = document.querySelector('.mobile-btn');
+  const nav = document.querySelector('.nav');
+  if(btn && nav){
+    btn.addEventListener('click', ()=>{
+      const isFlex = nav.style.display === 'flex';
+      if(isFlex){ nav.style.display=''; nav.removeAttribute('style'); nav.classList.remove('mobile-open'); }
+      else {
+        nav.style.display='flex';
+        nav.style.position='absolute';
+        nav.style.top='114px';
+        nav.style.left='0';
+        nav.style.right='0';
+        nav.style.background='#fff';
+        nav.style.flexDirection='column';
+        nav.style.padding='20px';
+        nav.style.boxShadow='0 20px 40px rgba(0,0,0,.1)';
+        nav.style.zIndex='100';
+      }
+    });
+  }
 });
 </script>
-
+<script src="../js/v8-loader.js" data-project-id="SEU_PROJECT_ID" data-api-url="https://v8adminuniversal.aisermelk.workers.dev"></script>
 </body>
 </html>
