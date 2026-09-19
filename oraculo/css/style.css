@@ -1,14 +1,14 @@
 :root {
-  --bg: #f8f6f1;
-  --bg-soft: #f1eee7;
+  --bg: #ffffff;
+  --bg-soft: #f6f1f8;
   --white: #ffffff;
-  --ink: #302b27;
-  --muted: #706962;
-  --brown: #8a6048;
-  --brown-dark: #674533;
-  --gold: #b58b5d;
-  --line: #ddd7ce;
-  --dark: #292421;
+  --ink: #2b1f31;
+  --muted: #515151;
+  --brown: #582564;
+  --brown-dark: #401b4a;
+  --gold: #b79b62;
+  --line: #e3d9e8;
+  --dark: #2b1233;
 
   --container: 1200px;
   --narrow: 1050px;
@@ -94,7 +94,7 @@ textarea {
 }
 
 .katlen-topbar a:hover {
-  color: #d9b894;
+  color: #d9c199;
 }
 
 
@@ -107,9 +107,9 @@ textarea {
   top: 0;
   z-index: 1000;
 
-  background: rgba(248, 246, 241, .97);
+  background: rgba(255, 255, 255, .97);
 
-  border-bottom: 1px solid rgba(48, 43, 39, .12);
+  border-bottom: 1px solid rgba(43, 31, 49, .12);
 }
 
 .katlen-nav-inner {
@@ -152,7 +152,7 @@ textarea {
 .katlen-menu a {
   position: relative;
 
-  color: #4b4540;
+  color: #4a3f52;
 
   font-size: 12px;
   font-weight: 600;
@@ -236,9 +236,9 @@ textarea {
   background:
     linear-gradient(
       90deg,
-      rgba(37, 30, 27, .78) 0%,
-      rgba(37, 30, 27, .55) 45%,
-      rgba(37, 30, 27, .18) 100%
+      rgba(43, 18, 51, .78) 0%,
+      rgba(43, 18, 51, .55) 45%,
+      rgba(43, 18, 51, .18) 100%
     ),
     url("../assets/Biddy-Gradient.jpg")
     center center / cover no-repeat;
@@ -256,7 +256,7 @@ textarea {
 .katlen-kicker {
   margin-bottom: 22px;
 
-  color: #e1c7a9;
+  color: #dcc190;
 
   font-size: 12px;
   font-weight: 600;
@@ -337,8 +337,8 @@ textarea {
 }
 
 .katlen-btn.dark:hover {
-  background: #403732;
-  border-color: #403732;
+  background: #341440;
+  border-color: #341440;
 }
 
 
@@ -461,7 +461,7 @@ textarea {
 .katlen-card:hover {
   transform: translateY(-4px);
 
-  box-shadow: 0 18px 45px rgba(40, 30, 20, .10);
+  box-shadow: 0 18px 45px rgba(43, 18, 51, .10);
 }
 
 .katlen-card img {
@@ -505,8 +505,8 @@ textarea {
   background:
     linear-gradient(
       135deg,
-      #e9e1d7,
-      #f3eee7
+      #f2e8f4,
+      #f8f3fa
     );
 
   text-align: center;
@@ -623,7 +623,7 @@ textarea {
 .katlen-testimonial p {
   margin: 0 0 22px;
 
-  color: #514943;
+  color: #4d3f55;
 
   font-family: "Lora", Georgia, serif;
   font-size: 17px;
@@ -663,7 +663,7 @@ textarea {
 }
 
 .katlen-contact .katlen-eyebrow {
-  color: #d0a77d;
+  color: #c9a86a;
 }
 
 .katlen-contact > .katlen-container > .katlen-btn {
@@ -705,7 +705,7 @@ textarea {
 
 .katlen-form input:focus,
 .katlen-form textarea:focus {
-  border-color: #c49b74;
+  border-color: #b79b62;
 
   background: rgba(255, 255, 255, .08);
 }
@@ -741,9 +741,9 @@ textarea {
 .katlen-footer {
   padding: 70px 24px 25px;
 
-  background: #211d1a;
+  background: #1c1220;
 
-  color: #bcb5af;
+  color: #bfb3c4;
 }
 
 .katlen-footer-grid {
@@ -772,7 +772,7 @@ textarea {
 
   margin: 0;
 
-  color: #9e9791;
+  color: #9b8ea0;
 
   font-size: 13px;
   line-height: 1.8;
@@ -790,7 +790,7 @@ textarea {
 .katlen-footer a {
   display: block;
 
-  color: #aaa39d;
+  color: #a89bb0;
 
   font-size: 13px;
   line-height: 2.1;
@@ -818,7 +818,7 @@ textarea {
 
   border-top: 1px solid rgba(255, 255, 255, .12);
 
-  color: #77716c;
+  color: #756a7c;
 
   font-size: 11px;
 }
