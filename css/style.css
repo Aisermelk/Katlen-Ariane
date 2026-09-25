@@ -853,24 +853,6 @@ p {
     box-shadow: var(--shadow-md);
 }
 
-.about-image::before {
-    content: "";
-
-    position: absolute;
-
-    width: 230px;
-    height: 230px;
-
-    top: 60px;
-    right: -70px;
-
-    border-radius: 50%;
-
-    background: var(--yellow);
-
-    opacity: .7;
-}
-
 .about-image::after {
     content: "";
 
