@@ -349,13 +349,18 @@ function setupPaymentPopup() {
                     ×
                 </button>
 
-                <span class="payment-popup-ornament">
+               <span class="payment-popup-ornament">
                     ✦
-                </span>
-
-                <span class="payment-popup-label">
-                    CONSULTA ESPECIAL
-                </span>
+               </span>
+               
+               <h2 class="payment-popup-title">
+               CONSELHO DA CIGANA
+               </h2>
+               
+               <p class="payment-popup-text">
+               Para quem busca clareza sobre
+               <strong>"AMOR | DINHEIRO | ESPIRITUALIDADE"</strong>
+               </p>
 
                 <h2 id="payment-popup-title">
                     Receba agora um conselho da cigana
