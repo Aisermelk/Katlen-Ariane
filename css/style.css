@@ -4153,18 +4153,31 @@ body::before {
    AJUSTES FINAIS — ALINHAMENTO E PALETA
    ========================================================= */
 
-/* Mantém o conteúdo do Hero alinhado com o mesmo eixo dos demais containers. */
+/* Mantém o conteúdo do Hero exatamente no mesmo eixo do restante do site. */
 .hero-grid {
-    width: auto;
-    margin-inline: 0;
+    width: min(
+        calc(100% - 48px),
+        var(--container)
+    );
+    margin-inline: auto;
 }
 
-/* A imagem Sobre ocupa integralmente a coluna esquerda, mantendo 9:16. */
+/*
+   Sobre: a imagem acompanha a altura total do bloco de texto da direita.
+   Não fica presa a uma altura fixa nem a uma proporção que crie espaço sobrando.
+*/
+.about-grid {
+    align-items: stretch;
+}
+
 .about-image {
     width: 100%;
     max-width: none;
-    aspect-ratio: 9 / 16;
+    height: 100%;
+    min-height: 100%;
+    aspect-ratio: auto;
     margin-inline: 0;
+    align-self: stretch;
 }
 
 /* Todos os depoimentos recebem a mesma superfície verde espiritual. */
@@ -4249,13 +4262,24 @@ body::before {
 
 @media (max-width: 820px) {
     .hero-grid {
-        width: auto;
-        margin-inline: 0;
+        width: min(
+            calc(100% - 32px),
+            var(--container)
+        );
+        margin-inline: auto;
+    }
+
+    .about-grid {
+        align-items: stretch;
     }
 
     .about-image {
         width: 100%;
         max-width: none;
+        height: auto;
+        min-height: 0;
+        aspect-ratio: 9 / 16;
         margin-inline: 0;
+        align-self: auto;
     }
 }
