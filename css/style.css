@@ -10,34 +10,34 @@
    ========================================================= */
 
 :root {
-    --bg: #F3EEE3;
-    --bg-soft: #E9E2D2;
-    --bg-white: #F8F4EA;
+    --bg: #FFFFFF;
+    --bg-soft: #FFFFFF;
+    --bg-white: #FFFFFF;
 
-    --ink: #2D2B20;
-    --ink-soft: #575544;
-    --muted: #77745F;
+    --ink: #17120F;
+    --ink-soft: #514743;
+    --muted: #7A6B63;
 
-    --purple: #3E4632;
-    --purple-dark: #293021;
-    --purple-light: #E2E0D2;
+    --purple: #8B1118;
+    --purple-dark: #5C080D;
+    --purple-light: #F4E7E3;
 
-    --coral: #B38A3A;
-    --coral-light: #EFE3C8;
+    --coral: #A3161F;
+    --coral-light: #F8E7E6;
 
-    --yellow: #C7A45A;
-    --yellow-light: #F2E7CC;
+    --yellow: #C7922F;
+    --yellow-light: #F8EFD9;
 
     --green: #25D366;
     --green-dark: #1da851;
     --green-soft: #e9f8ee;
 
-    --border: rgba(45, 43, 32, .14);
-    --border-strong: rgba(45, 43, 32, .22);
+    --border: rgba(23, 18, 15, .12);
+    --border-strong: rgba(23, 18, 15, .18);
 
-    --shadow-sm: 0 8px 24px rgba(45, 43, 32, .07);
-    --shadow-md: 0 18px 45px rgba(45, 43, 32, .11);
-    --shadow-lg: 0 30px 70px rgba(45, 43, 32, .15);
+    --shadow-sm: 0 8px 24px rgba(23, 18, 15, .06);
+    --shadow-md: 0 18px 45px rgba(23, 18, 15, .09);
+    --shadow-lg: 0 30px 70px rgba(23, 18, 15, .12);
 
     --font-body: "DM Sans", sans-serif;
     --font-display: "Fraunces", serif;
@@ -3648,262 +3648,503 @@ body::before {
 }
 
 /* =========================================================
-   25. PALETA DOURADA / VERDE — ATUALIZAÇÃO VISUAL
+   25. DIREÇÃO VISUAL — OURO, ÁGUAS E ESPIRITUALIDADE
    ========================================================= */
 
+:root {
+    --bg: #F5F0E5;
+    --bg-soft: #E9E0CF;
+    --bg-white: #FFFDF8;
+    --ink: #241D14;
+    --ink-soft: #554A3B;
+    --muted: #786D5B;
+
+    --purple: #B18A3A;
+    --purple-dark: #6F5320;
+    --purple-light: #EFE2BF;
+
+    --coral: #C29A45;
+    --coral-light: #F1E5C8;
+
+    --yellow: #D7B45D;
+    --yellow-light: #F5EBCF;
+
+    --spirit-green: #20372C;
+    --spirit-green-2: #304638;
+    --spirit-green-soft: #DCE2D5;
+
+    --border: rgba(54, 43, 25, .16);
+    --border-strong: rgba(54, 43, 25, .24);
+
+    --shadow-sm: 0 8px 24px rgba(54, 43, 25, .08);
+    --shadow-md: 0 18px 45px rgba(54, 43, 25, .13);
+    --shadow-lg: 0 30px 70px rgba(54, 43, 25, .18);
+}
+
 body {
-    background: var(--bg);
+    background:
+        radial-gradient(circle at 18% 12%, rgba(215,180,93,.12), transparent 24%),
+        radial-gradient(circle at 82% 72%, rgba(32,55,44,.06), transparent 28%),
+        var(--bg);
 }
 
-.site-header .nav-inner {
-    background: rgba(248, 244, 234, .90);
-    border-color: rgba(179, 138, 58, .20);
+body::before {
+    opacity: .28;
+    background-image:
+        radial-gradient(circle at 15% 20%, rgba(177,138,58,.18) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 78% 65%, rgba(32,55,44,.10) 0 1px, transparent 1.5px),
+        linear-gradient(135deg, transparent 49.5%, rgba(177,138,58,.07) 50%, transparent 50.5%);
 }
 
-.header-cta {
-    background: var(--coral);
+.site-header {
+    top: 16px;
 }
 
-.header-cta:hover {
-    background: #946F2D;
+.nav-inner {
+    background: rgba(250,246,236,.88);
+    border-color: rgba(177,138,58,.25);
+    box-shadow: 0 12px 32px rgba(54,43,25,.11);
 }
 
-/* Hero: a fotografia passa a ser um banner de fundo, com o conteúdo sobreposto. */
+.nav-menu a:hover,
+.brand-name {
+    color: var(--spirit-green);
+}
+
+.nav-menu a::after {
+    background: var(--yellow);
+}
+
+.header-cta,
+.btn-primary {
+    background: linear-gradient(135deg, #B58B3C, #D4B05A);
+    color: #fff;
+    box-shadow: 0 10px 25px rgba(177,138,58,.22);
+}
+
+.header-cta:hover,
+.btn-primary:hover {
+    background: linear-gradient(135deg, #8F6B29, #C29A45);
+}
+
+/* Hero: fotografia como banner integral, sem círculo. */
 .hero {
-    min-height: 820px;
-    padding: 175px 0 125px;
-    background: var(--purple-dark);
+    min-height: 850px;
+    padding: 170px 0 110px;
+    background: var(--spirit-green);
     isolation: isolate;
 }
 
-.hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -2;
-    background-image: url("../assets/katlen-hero.png");
-    background-size: cover;
-    background-position: center 38%;
-    transform: scale(1.015);
-}
-
-.hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background:
-        linear-gradient(90deg,
-            rgba(248, 244, 234, .97) 0%,
-            rgba(248, 244, 234, .88) 34%,
-            rgba(248, 244, 234, .45) 56%,
-            rgba(41, 48, 33, .18) 100%),
-        linear-gradient(180deg,
-            rgba(248, 244, 234, .18),
-            rgba(41, 48, 33, .16));
-    pointer-events: none;
-}
-
 .hero-grid {
+    position: static;
     display: block;
-}
-
-.hero-copy {
-    max-width: 690px;
-    padding: 48px 0 40px;
-}
-
-.hero-copy h1 {
-    max-width: 690px;
-    color: var(--ink);
-    text-shadow: 0 1px 0 rgba(255,255,255,.28);
-}
-
-.hero-copy h1 em {
-    color: var(--coral);
-}
-
-.hero-copy > p {
-    max-width: 560px;
-    color: #4B4A3A;
-}
-
-.hero-copy .eyebrow {
-    color: var(--purple);
-}
-
-.hero-actions .btn-primary {
-    background: var(--coral);
-    box-shadow: 0 10px 24px rgba(83, 62, 27, .20);
-}
-
-.hero-actions .btn-primary:hover {
-    background: #946F2D;
-}
-
-.hero-actions .under-link {
-    color: var(--purple-dark);
-}
-
-.hero-actions .under-link::after {
-    background: var(--coral);
+    width: 100%;
 }
 
 .hero-visual {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    min-height: 0;
+    display: block;
+    pointer-events: none;
+}
+
+.hero-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    background: var(--spirit-green);
+    box-shadow: none;
+}
+
+.hero-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg, rgba(22,39,31,.88) 0%, rgba(22,39,31,.68) 34%, rgba(22,39,31,.22) 62%, rgba(22,39,31,.10) 100%),
+        linear-gradient(180deg, rgba(18,31,25,.20), rgba(18,31,25,.16));
+}
+
+.hero-image img {
+    object-fit: cover;
+    object-position: 62% center;
+    filter: saturate(.88) contrast(.98) sepia(.08);
+}
+
+.hero-visual::before {
+    inset: 22px;
+    border: 1px solid rgba(215,180,93,.42);
+    border-radius: 28px;
+    z-index: 3;
+}
+
+.hero-visual::after {
+    content: "✦  ○  ✦";
+    top: 28px;
+    left: auto;
+    right: 42px;
+    transform: none;
+    color: rgba(242,219,159,.92);
+    font-size: 15px;
+    letter-spacing: 8px;
+    z-index: 4;
+}
+
+.hero-copy {
+    max-width: 650px;
+    padding: 36px 0 28px;
+    color: #fff;
+}
+
+.hero-copy h1,
+.hero-copy > p,
+.hero-caption {
+    color: #fff;
+}
+
+.hero-copy h1 {
+    max-width: 620px;
+    font-size: clamp(54px, 6.2vw, 82px);
+    text-shadow: 0 3px 24px rgba(0,0,0,.18);
+}
+
+.hero-copy h1 em {
+    color: #E2C878;
+}
+
+.hero-copy > p {
+    max-width: 570px;
+    color: rgba(255,252,242,.90);
+}
+
+.hero-copy .eyebrow {
+    color: #E1C477;
+}
+
+.hero-copy .eyebrow::before {
+    background: currentColor;
+}
+
+.hero-spiritual-signature {
+    display: inline-flex;
+    align-items: center;
+    margin: 2px 0 22px;
+    padding: 8px 14px;
+    border: 1px solid rgba(226,200,120,.48);
+    border-radius: 999px;
+    background: rgba(31,54,43,.48);
+    color: #F0D895;
+    font-family: var(--font-display);
+    font-size: 13px;
+    letter-spacing: .05em;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.04);
+}
+
+.target-audience span {
+    border: 1px solid rgba(229,205,137,.34);
+    background: rgba(31,54,43,.48);
+    color: #F6E5B8;
+    backdrop-filter: blur(8px);
+}
+
+.hero-actions .under-link {
+    color: #F5E5B9;
+}
+
+.hero-actions .under-link::after {
+    background: #D7B45D;
+}
+
+.hero-caption:empty {
     display: none;
 }
 
 .hero-orb,
 .hero-stroke,
-.hero-bottom {
+.shape-tag {
     display: none;
 }
 
-.target-audience span {
-    border: 1px solid rgba(179, 138, 58, .18);
-}
-
-.audience-people {
-    background: rgba(62, 70, 50, .12);
-    color: var(--purple-dark);
-}
-
-.audience-family,
-.audience-companies {
-    background: rgba(179, 138, 58, .14);
-    color: #72551F;
-}
-
-/* Superfícies do restante do site. */
-.about,
-.privacy {
+.hero-bottom {
+    z-index: 1;
+    height: 130px;
+    bottom: -85px;
     background: var(--bg);
+    opacity: .96;
 }
 
-.contact,
-.section:nth-of-type(even) {
-    background: var(--bg-soft);
+/* Sobre: retrato vertical 9:16. */
+.about {
+    background:
+        linear-gradient(180deg, rgba(233,224,207,.76), rgba(245,240,229,.96));
+}
+
+.about-grid {
+    grid-template-columns: minmax(250px, .72fr) 1.28fr;
+    gap: 88px;
+    align-items: center;
+}
+
+.about-image {
+    width: min(100%, 390px);
+    aspect-ratio: 9 / 16;
+    min-height: 0;
+    margin-inline: auto;
+    border-radius: 22px;
+    background: var(--spirit-green);
+    box-shadow: 0 24px 60px rgba(54,43,25,.18);
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.about-image::after {
+    background: var(--yellow);
+    opacity: .12;
+}
+
+.about-copy h2,
+.section-heading h2,
+.first-copy h2,
+.contact-intro h2 {
+    color: var(--spirit-green);
+}
+
+.about-copy h2::after,
+.section-heading h2::after,
+.first-copy h2::after,
+.contact-intro h2::after {
+    content: "";
+    display: block;
+    width: 70px;
+    height: 2px;
+    margin-top: 18px;
+    background: linear-gradient(90deg, var(--yellow), transparent);
+}
+
+/* Seções espirituais ganham fundo de verde profundo e ouro. */
+.spirituality {
+    background:
+        radial-gradient(circle at 82% 24%, rgba(215,180,93,.12), transparent 26%),
+        var(--spirit-green);
+    color: #F7EFD9;
+}
+
+.spirituality h2,
+.spirituality p,
+.spirituality small,
+.spirituality .eyebrow {
+    color: #F5EBD0;
+}
+
+.spirituality .eyebrow {
+    color: #D9B967;
+}
+
+.spirituality .spirituality-highlight {
+    background: rgba(215,180,93,.26);
+}
+
+.spirituality .spirituality-highlight span {
+    background: var(--yellow);
+    box-shadow: 0 0 0 6px rgba(215,180,93,.12);
+}
+
+.neuro {
+    background: #D9D8C5;
+}
+
+.neuro-card {
+    background: linear-gradient(145deg, var(--spirit-green), #294437);
+    border-color: rgba(215,180,93,.32);
+}
+
+.psicanalise-quote {
+    border-color: rgba(177,138,58,.28);
+    background: rgba(255,253,248,.82);
+}
+
+.audiences,
+.first,
+.testimonials,
+.privacy {
+    background: #F5F0E5;
+}
+
+.audience-card {
+    border: 1px solid rgba(177,138,58,.20);
+    background: #FFFDF8;
+    box-shadow: 0 12px 30px rgba(54,43,25,.07);
+}
+
+.audience-card.family,
+.audience-card.women,
+.audience-card.children,
+.audience-card.teens {
+    background: linear-gradient(145deg, #FFF9EC, #EAE1CF);
+}
+
+.audience-card h3,
+.step h3 {
+    color: var(--spirit-green);
+}
+
+.step > span {
+    background: var(--purple-light);
+    color: var(--purple-dark);
+    border: 1px solid rgba(177,138,58,.26);
+}
+
+.testimonial-card {
+    background: #FFFDF8;
+    border: 1px solid rgba(177,138,58,.16);
+}
+
+.testimonial-card.featured {
+    background: var(--spirit-green);
+}
+
+.quote-mark {
+    color: var(--yellow);
+}
+
+/* Formulário: superfície verde-oliva para não desaparecer no fundo claro. */
+.contact {
+    background:
+        radial-gradient(circle at 10% 20%, rgba(215,180,93,.12), transparent 24%),
+        #E5DDCB;
+}
+
+.contact-shape.contact-purple,
+.contact-shape.contact-coral {
+    background: rgba(177,138,58,.10);
 }
 
 .contact-form {
-    background: rgba(226, 224, 210, .96);
-    border-color: rgba(179, 138, 58, .26);
-    box-shadow: 0 22px 55px rgba(45, 43, 32, .13);
+    padding: 42px;
+    border: 1px solid rgba(215,180,93,.34);
+    border-radius: 28px;
+    background: linear-gradient(145deg, rgba(32,55,44,.98), rgba(45,68,55,.96));
+    box-shadow: 0 24px 60px rgba(32,55,44,.22);
+    backdrop-filter: blur(15px);
 }
 
 .contact-form::before {
-    border-color: rgba(179, 138, 58, .34);
+    inset: 10px;
+    border-color: rgba(215,180,93,.30);
 }
 
 #main-form input,
 #main-form select,
 #main-form textarea {
-    background: rgba(248, 244, 234, .92);
-    border-color: rgba(62, 70, 50, .18);
+    border-color: rgba(215,180,93,.22);
+    background: rgba(255,252,243,.97);
+    color: var(--ink);
+}
+
+#main-form input::placeholder,
+#main-form textarea::placeholder,
+#main-form select {
+    color: #766A57;
 }
 
 #main-form input:focus,
 #main-form select:focus,
 #main-form textarea:focus {
-    border-color: var(--coral);
-    background: #F8F4EA;
-    box-shadow: 0 0 0 4px rgba(179, 138, 58, .13);
+    border-color: var(--yellow);
+    background: #fffdf8;
+    box-shadow: 0 0 0 4px rgba(215,180,93,.14);
 }
 
-.consent input {
-    accent-color: var(--coral);
+.consent span {
+    color: rgba(248,239,216,.78);
+}
+
+.privacy-link {
+    color: #E0C477;
+}
+
+.contact-intro .eyebrow {
+    color: #A47A2D;
 }
 
 .contact-whatsapp {
-    background: var(--purple);
-    color: #F8F4EA;
+    border-color: rgba(177,138,58,.35);
+    color: var(--spirit-green);
 }
 
-.contact-whatsapp:hover {
-    background: var(--purple-dark);
+.site-footer {
+    background: #17281F;
+    border-top: 1px solid rgba(215,180,93,.25);
 }
 
-.eyebrow,
-.privacy-link,
-.footer-title,
-.footer a:hover {
-    color: var(--coral);
+.site-footer::before {
+    color: var(--yellow);
 }
 
-.shape-tag-yellow {
-    background: var(--coral);
-}
-
-.shape-tag-coral {
-    background: var(--purple);
-}
-
-/* Mantém o verde vivo somente onde ele comunica WhatsApp. */
 .whatsapp-float {
-    background: var(--green);
+    background: linear-gradient(135deg, #B18A3A, #D7B45D);
+    box-shadow: 0 14px 34px rgba(177,138,58,.30);
 }
 
 .whatsapp-float:hover {
-    background: var(--green-dark);
+    background: linear-gradient(135deg, #8D6A2C, #C29A45);
+    box-shadow: 0 18px 40px rgba(177,138,58,.38);
+}
+
+.section::after {
+    content: "✦";
+    color: rgba(177,138,58,.62);
 }
 
 @media (max-width: 820px) {
     .hero {
-        min-height: 760px;
-        padding: 145px 0 85px;
-        background-position: 64% center;
+        min-height: 820px;
+        padding: 145px 0 95px;
     }
 
-    .hero::after {
+    .hero-copy {
+        max-width: 100%;
+        padding: 30px 0 20px;
+    }
+
+    .hero-image img {
+        object-position: 62% center;
+    }
+
+    .hero-image::after {
         background:
-            linear-gradient(180deg,
-                rgba(248, 244, 234, .93) 0%,
-                rgba(248, 244, 234, .78) 48%,
-                rgba(248, 244, 234, .38) 100%),
-            linear-gradient(90deg,
-                rgba(248, 244, 234, .32),
-                rgba(41, 48, 33, .12));
+            linear-gradient(90deg, rgba(22,39,31,.90) 0%, rgba(22,39,31,.72) 50%, rgba(22,39,31,.34) 100%),
+            linear-gradient(180deg, rgba(18,31,25,.22), rgba(18,31,25,.18));
     }
 
-    .hero-copy {
-        max-width: 620px;
-        margin-inline: auto;
-        padding: 28px 0;
-        text-align: left;
+    .hero-visual::before {
+        inset: 14px;
+        border-radius: 20px;
     }
 
-    .hero-copy .eyebrow {
-        justify-content: flex-start;
+    .hero-spiritual-signature {
+        font-size: 11px;
     }
 
-    .hero-copy h1 {
-        max-width: 620px;
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 55px;
     }
 
-    .hero-copy > p {
-        margin-inline: 0;
+    .about-image {
+        width: min(100%, 300px);
     }
 
-    .target-audience {
-        justify-content: flex-start;
-    }
-
-    .hero-actions {
-        justify-content: flex-start;
-    }
-}
-
-@media (max-width: 520px) {
-    .hero {
-        min-height: 730px;
-        background-position: 68% center;
-    }
-
-    .hero-copy {
-        padding-top: 18px;
-    }
-
-    .hero-copy h1 {
-        font-size: clamp(42px, 12vw, 58px);
+    .contact-form {
+        padding: 30px 22px;
     }
 }
