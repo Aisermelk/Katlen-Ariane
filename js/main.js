@@ -305,98 +305,58 @@ function setupPaymentPopup() {
             "payment-popup"
         );
 
+   popup.innerHTML = `
 
-    /*
-     * Caso não esteja no HTML,
-     * cria o popup automaticamente.
-     */
+    <div
+        class="payment-popup-overlay"
+        data-popup-close>
+    </div>
 
-    if (!popup) {
+    <div
+        class="payment-popup-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="payment-popup-title">
 
-        popup =
-            document.createElement("div");
+        <button
+            class="payment-popup-close"
+            type="button"
+            data-popup-close
+            aria-label="Fechar">
+            ×
+        </button>
 
-        popup.id =
-            "payment-popup";
+        <span class="payment-popup-ornament">
+            ✦
+        </span>
 
-        popup.className =
-            "payment-popup";
+        <h2
+            id="payment-popup-title"
+            class="payment-popup-title">
+            CONSELHO DA CIGANA
+        </h2>
 
-        popup.setAttribute(
-            "aria-hidden",
-            "true"
-        );
+        <p class="payment-popup-text">
+            Para quem busca clareza sobre
+            <strong>"AMOR | DINHEIRO | ESPIRITUALIDADE"</strong>
+        </p>
 
+        <p class="payment-popup-price">
+            R$ 7,00
+        </p>
 
-        popup.innerHTML = `
+        <a
+            href="#"
+            class="payment-popup-button"
+            id="payment-popup-payment-link"
+            target="_blank"
+            rel="noopener noreferrer">
+            Pagar R$ 7,00
+        </a>
 
-            <div
-                class="payment-popup-overlay"
-                data-popup-close>
-            </div>
-
-            <div
-                class="payment-popup-card"
-                role="dialog"
-                aria-modal="true"
-                aria-labelledby="payment-popup-title">
-
-                <button
-                    class="payment-popup-close"
-                    type="button"
-                    data-popup-close
-                    aria-label="Fechar">
-                    ×
-                </button>
-
-               <span class="payment-popup-ornament">
-                    ✦
-               </span>
-               
-               <h2 class="payment-popup-title">
-               CONSELHO DA CIGANA
-               </h2>
-               
-               <p class="payment-popup-text">
-               Para quem busca clareza sobre
-               <strong>"AMOR | DINHEIRO | ESPIRITUALIDADE"</strong>
-               </p>
-
-                <h2 id="payment-popup-title">
-                    Receba agora um conselho da cigana
-                </h2>
-
-                <p class="payment-popup-price">
-                    R$ 7,00
-                </p>
-
-                <p class="payment-popup-text">
-                    Uma orientação através da cartomancia
-                    para iluminar seus caminhos e trazer
-                    uma nova perspectiva.
-                </p>
-
-                <a
-                    href="#"
-                    class="payment-popup-button"
-                    id="payment-popup-payment-link"
-                    target="_blank"
-                    rel="noopener noreferrer">
-
-                    Pagar R$ 7,00
-
-                </a>
-
-            </div>
-        `;
-
-
-        document.body.appendChild(
-            popup
-        );
-    }
-
-
+    </div>
+`;
+    
     /*
      * Localiza o botão de pagamento.
      */
