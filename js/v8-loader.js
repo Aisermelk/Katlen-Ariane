@@ -15,8 +15,10 @@
  *   5. Injeta os Scripts customizados (head / body / footer) do painel
  *   6. Preenche a galeria de imagens (Mídia) e o embed do Google Maps
  *      (Localização), se ativados no painel
- *   7. Se existir um formulário com data-v8-form, aponta ele pro Formspree
- *      certo E também salva uma cópia do lead no painel (aba Leads do projeto)
+ *   7. Se existir um formulário com data-v8-form, salva o lead no painel e
+ *      encaminha os dados diretamente para o WhatsApp configurado no projeto
+ *   8. Dispara eventos de conversão de WhatsApp nas ferramentas de tracking
+ *      configuradas no projeto (Meta Pixel, GA4 e GTM)
  *
  * ================================================================
  * CONVENÇÃO data-v8 — preenche texto/link automaticamente
@@ -73,6 +75,9 @@
  * ================================================================
  * FORMULÁRIO
  * ================================================================
+ *
+ *   O formulário é enviado para o WhatsApp configurado no projeto.
+ *   Não depende mais de Formspree.
  *
  *   <form data-v8-form>
  *     <input name="name">
@@ -301,31 +306,115 @@
   }
 
   // --------------------------------------------------------------
-  // FORMULÁRIO + LEADS
+  // EVENTOS DE CONVERSÃO
   // --------------------------------------------------------------
 
-  function wireForm(projectId, formspreeUrl) {
+  function trackConversion(eventName, params = {}) {
+    const payload = {
+      ...params,
+      event_name: eventName,
+    };
+
+    // Meta Pixel — evento customizado.
+    if (typeof window.fbq === "function") {
+      window.fbq("trackCustom", eventName, params);
+    }
+
+    // Google Analytics 4 — evento com o mesmo nome lógico.
+    if (typeof window.gtag === "function") {
+      window.gtag("event", eventName, params);
+    }
+
+    // Google Tag Manager — permite criar/usar a tag a partir do dataLayer.
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      ...payload,
+      event: eventName,
+    });
+
+    // Evento local para integrações do próprio site, se necessário.
+    document.dispatchEvent(
+      new CustomEvent("v8:conversion", {
+        detail: { name: eventName, params },
+      })
+    );
+  }
+
+  function wireWhatsappTracking() {
+    document
+      .querySelectorAll('[data-v8="contact.whatsapp"]')
+      .forEach((link) => {
+        if (link.dataset.v8WhatsappTracked === "true") return;
+
+        link.dataset.v8WhatsappTracked = "true";
+
+        link.addEventListener("click", () => {
+          trackConversion("whatsapp_click", {
+            method: "whatsapp",
+            location: link.id || link.className || "link",
+          });
+        });
+      });
+  }
+
+  // --------------------------------------------------------------
+  // FORMULÁRIO + LEADS + WHATSAPP
+  // --------------------------------------------------------------
+
+  function wireForm(projectId, config) {
     const form = document.querySelector("[data-v8-form]");
     if (!form) return;
 
-    if (formspreeUrl) form.action = formspreeUrl;
+    const whatsapp = getByPath(config, "contact.whatsapp");
 
-    form.addEventListener("submit", async () => {
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
       const data = Object.fromEntries(new FormData(form).entries());
+      const phone = String(whatsapp || "").replace(/\D/g, "");
 
-      // salva cópia do lead no painel (não bloqueia o envio ao Formspree)
+      if (!phone) {
+        console.warn("V8 Loader: WhatsApp não configurado para este projeto.");
+        return;
+      }
+
+      const leadMessage = [
+        "Olá! Vim pelo site e gostaria de entrar em contato.",
+        "",
+        `Nome: ${data.nome || data.name || "Não informado"}`,
+        `WhatsApp: ${data.whatsapp || "Não informado"}`,
+        `E-mail: ${data.email || "Não informado"}`,
+        `Atendimento: ${data.busca_atendimento || "Não informado"}`,
+        `Mensagem: ${data.mensagem || data.message || "Não informada"}`,
+      ].join("\n");
+
+      // Salva uma cópia do lead no painel V8 sem bloquear o WhatsApp.
       fetch(`${API_URL}/api/public/leads/${encodeURIComponent(projectId)}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: data.name || data.nome || "",
+          name: data.nome || data.name || "",
           email: data.email || "",
-          message: data.message || data.mensagem || "",
+          message: leadMessage,
         }),
       }).catch(() => {});
 
-      // o envio pro Formspree em si segue o comportamento normal do <form>
-      // (não fazemos preventDefault — deixa o Formspree cuidar do resto)
+      // Conversão específica de formulário + abertura do WhatsApp.
+      trackConversion("whatsapp_form_submit", {
+        method: "whatsapp",
+        form: form.id || "v8-form",
+        atendimento: data.busca_atendimento || "",
+      });
+
+      const whatsappUrl =
+        `https://wa.me/${phone}?text=${encodeURIComponent(leadMessage)}`;
+
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
     });
   }
 
@@ -351,7 +440,8 @@
       injectCustomScripts(config.scripts);
       applyMedia(config.media);
       applyLocation(config.location);
-      wireForm(PROJECT_ID, config.formspree);
+      wireWhatsappTracking();
+      wireForm(PROJECT_ID, config);
 
       // Sinaliza que todo o preenchimento síncrono já foi aplicado ao DOM —
       // útil para outros scripts do site que precisem rodar só depois disso
