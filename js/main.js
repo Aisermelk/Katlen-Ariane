@@ -372,6 +372,100 @@ function initSite() {
     }
 }
 
+/* =========================================================
+   POPUP — CONSULTA R$ 7,00
+   ========================================================= */
+
+/*
+ * COLE AQUI O SEU LINK DE PAGAMENTO
+ *
+ * Exemplo:
+ * const PAYMENT_LINK = "https://seu-link-de-pagamento.com";
+ */
+const PAYMENT_LINK = https://link.infinitepay.io/katlenarianeso/VC03-pIDe3ZIZXc-7,00;
+
+
+function setupPaymentPopup() {
+
+    const popup =
+        document.getElementById("payment-popup");
+
+    const paymentLink =
+        document.getElementById(
+            "payment-popup-payment-link"
+        );
+
+    if (!popup || !paymentLink) {
+        return;
+    }
+
+    /* Aplica o link de pagamento */
+    paymentLink.href = PAYMENT_LINK;
+
+    /* Abre o popup */
+    const openPopup = () => {
+
+        popup.classList.add("is-open");
+
+        popup.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+        document.body.classList.add(
+            "popup-open"
+        );
+    };
+
+    /* Fecha o popup */
+    const closePopup = () => {
+
+        popup.classList.remove("is-open");
+
+        popup.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+        document.body.classList.remove(
+            "popup-open"
+        );
+    };
+
+    /* Botões e área externa */
+    popup
+        .querySelectorAll("[data-popup-close]")
+        .forEach(element => {
+
+            element.addEventListener(
+                "click",
+                closePopup
+            );
+        });
+
+    /* ESC fecha */
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Escape" &&
+                popup.classList.contains("is-open")
+            ) {
+                closePopup();
+            }
+        }
+    );
+
+    /*
+     * Abre automaticamente ao entrar no site.
+     * Pequeno atraso para não aparecer de forma brusca.
+     */
+    setTimeout(
+        openPopup,
+        900
+    );
+}
 
 /* =========================================================
    DOM READY
