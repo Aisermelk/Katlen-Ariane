@@ -573,7 +573,7 @@ p {
     font-size: clamp(
         54px,
         6.3vw,
-        64px
+        72px
     );
 
     line-height: .98;
