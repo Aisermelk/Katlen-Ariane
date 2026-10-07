@@ -1,10 +1,12 @@
 /* =========================================================
    KATLEN ARIANE — MAIN.JS
-   Interface do site + Popup de pagamento
+   Interface do site (menu, navegação, ano do rodapé).
+   A integração com o V8 Admin Universal é feita pelo
+   js/v8-loader.js — este arquivo não busca nem aplica
+   nenhuma configuração vinda do painel.
    ========================================================= */
 
 "use strict";
-
 
 /* =========================================================
    UTILITÁRIOS
@@ -32,10 +34,14 @@ function hideElement(element) {
 function setupMobileMenu() {
 
     const mobileMenu =
-        getElement("mobile-menu");
+        getElement(
+            "mobile-menu"
+        );
 
     const nav =
-        document.querySelector(".nav-menu");
+        document.querySelector(
+            ".nav-menu"
+        );
 
     if (
         !mobileMenu ||
@@ -60,7 +66,9 @@ function setupMobileMenu() {
         () => {
 
             const isOpen =
-                nav.classList.toggle("active");
+                nav.classList.toggle(
+                    "active"
+                );
 
             mobileMenu.classList.toggle(
                 "open",
@@ -83,7 +91,9 @@ function setupMobileMenu() {
 
 
     nav
-        .querySelectorAll("a")
+        .querySelectorAll(
+            "a"
+        )
         .forEach(
             link => {
 
@@ -115,7 +125,9 @@ function setupMobileMenu() {
 
             if (
                 event.key === "Escape" &&
-                nav.classList.contains("active")
+                nav.classList.contains(
+                    "active"
+                )
             ) {
 
                 nav.classList.remove(
@@ -143,7 +155,9 @@ function setupMobileMenu() {
 function setupSmoothNavigation() {
 
     document
-        .querySelectorAll('a[href^="#"]')
+        .querySelectorAll(
+            'a[href^="#"]'
+        )
         .forEach(
             link => {
 
@@ -152,7 +166,9 @@ function setupSmoothNavigation() {
                     event => {
 
                         const targetId =
-                            link.getAttribute("href");
+                            link.getAttribute(
+                                "href"
+                            );
 
                         if (
                             !targetId ||
@@ -162,7 +178,8 @@ function setupSmoothNavigation() {
                         }
 
                         if (
-                            link.target === "_blank"
+                            link.target ===
+                            "_blank"
                         ) {
                             return;
                         }
@@ -197,8 +214,12 @@ function setupSmoothNavigation() {
                             12;
 
                         window.scrollTo({
-                            top: targetPosition,
-                            behavior: "smooth"
+
+                            top:
+                                targetPosition,
+
+                            behavior:
+                                "smooth"
                         });
 
                         history.pushState(
@@ -220,13 +241,16 @@ function setupSmoothNavigation() {
 function setupTestimonials() {
 
     const section =
-        getElement("depoimentos");
+        getElement(
+            "depoimentos"
+        );
 
     if (!section) {
         return;
     }
 
-    section.dataset.ready = "true";
+    section.dataset.ready =
+        "true";
 }
 
 
@@ -237,7 +261,8 @@ function setupTestimonials() {
 function setupCurrentYear() {
 
     const year =
-        new Date().getFullYear();
+        new Date()
+            .getFullYear();
 
     document
         .querySelectorAll(
@@ -257,6 +282,8 @@ function setupCurrentYear() {
 
 /* =========================================================
    CAMPOS DINÂMICOS
+   (esconde qualquer [data-dynamic] que o v8-loader.js
+   não tenha preenchido, evitando espaços vazios no layout)
    ========================================================= */
 
 function removeEmptyDynamicElements() {
@@ -272,172 +299,101 @@ function removeEmptyDynamicElements() {
                     !element.textContent.trim()
                 ) {
 
-                    hideElement(element);
+                    hideElement(
+                        element
+                    );
                 }
             }
         );
 }
 
 
+
+
 /* =========================================================
-   POPUP DE PAGAMENTO — R$ 7,00
+   OFERTA — 3 PERGUNTAS
+   Usa o Catálogo + checkout do V8 Loader.
    ========================================================= */
 
-/*
- * ========================================================
- * COLOQUE SEU LINK DE PAGAMENTO AQUI
- * ========================================================
- */
+function setupQuickQuestionsPopup() {
 
-const PAYMENT_LINK =
-    "COLE_AQUI_SEU_LINK_DE_PAGAMENTO";
+    const popup =
+        getElement("quickQuestionsPopup");
 
+    const closeButton =
+        getElement("quickQuestionsClose");
 
-function setupPaymentPopup() {
+    const trigger =
+        getElement("quickQuestionsTrigger");
 
-    /*
-     * Se o popup já estiver no HTML,
-     * utiliza o popup existente.
-     */
+    const payButton =
+        getElement("quickQuestionsPay");
 
-    let popup =
-        document.getElementById(
-            "payment-popup"
-        );
+    const status =
+        getElement("quickQuestionsStatus");
 
-   popup.innerHTML = `
+    const price =
+        getElement("quickQuestionsPrice");
 
-    <div
-        class="payment-popup-overlay"
-        data-popup-close>
-    </div>
-
-    <div
-        class="payment-popup-card"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="payment-popup-title">
-
-        <button
-            class="payment-popup-close"
-            type="button"
-            data-popup-close
-            aria-label="Fechar">
-            ×
-        </button>
-
-        <span class="payment-popup-ornament">
-            ✦
-        </span>
-
-        <h2
-            id="payment-popup-title"
-            class="payment-popup-title">
-            CONSELHO DA CIGANA
-        </h2>
-
-        <p class="payment-popup-text">
-            Para quem busca clareza sobre
-            <strong>"AMOR | DINHEIRO | ESPIRITUALIDADE"</strong>
-        </p>
-
-        <p class="payment-popup-price">
-            R$ 7,00
-        </p>
-
-        <a
-            href="#"
-            class="payment-popup-button"
-            id="payment-popup-payment-link"
-            target="_blank"
-            rel="noopener noreferrer">
-            Pagar R$ 7,00
-        </a>
-
-    </div>
-`;
-    
-    /*
-     * Localiza o botão de pagamento.
-     */
-
-    const paymentButton =
-        document.getElementById(
-            "payment-popup-payment-link"
-        );
-
-
-    if (paymentButton) {
-
-        paymentButton.href =
-            PAYMENT_LINK;
+    if (
+        !popup ||
+        !closeButton ||
+        !trigger ||
+        !payButton
+    ) {
+        return;
     }
 
-
-    /*
-     * Abre o popup.
-     */
+    let previousFocus = null;
 
     function openPopup() {
 
-        popup.classList.add(
-            "is-open"
-        );
+        previousFocus =
+            document.activeElement;
 
-        popup.setAttribute(
-            "aria-hidden",
-            "false"
-        );
+        popup.classList.add("is-open");
+        popup.setAttribute("aria-hidden", "false");
+        document.body.classList.add("quick-questions-open");
 
-        document.body.classList.add(
-            "popup-open"
+        window.setTimeout(
+            () => closeButton.focus(),
+            50
         );
     }
-
-
-    /*
-     * Fecha o popup.
-     */
 
     function closePopup() {
 
-        popup.classList.remove(
-            "is-open"
-        );
+        popup.classList.remove("is-open");
+        popup.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("quick-questions-open");
 
-        popup.setAttribute(
-            "aria-hidden",
-            "true"
-        );
-
-        document.body.classList.remove(
-            "popup-open"
-        );
+        if (
+            previousFocus &&
+            typeof previousFocus.focus === "function"
+        ) {
+            previousFocus.focus();
+        }
     }
 
+    trigger.addEventListener(
+        "click",
+        openPopup
+    );
 
-    /*
-     * Botão X e fundo escuro.
-     */
+    closeButton.addEventListener(
+        "click",
+        closePopup
+    );
 
-    popup
-        .querySelectorAll(
-            "[data-popup-close]"
-        )
-        .forEach(
-            element => {
+    popup.addEventListener(
+        "click",
+        event => {
 
-                element.addEventListener(
-                    "click",
-                    closePopup
-                );
+            if (event.target === popup) {
+                closePopup();
             }
-        );
-
-
-    /*
-     * Tecla ESC fecha o popup.
-     */
+        }
+    );
 
     document.addEventListener(
         "keydown",
@@ -447,21 +403,182 @@ function setupPaymentPopup() {
                 event.key === "Escape" &&
                 popup.classList.contains("is-open")
             ) {
-
                 closePopup();
             }
         }
     );
 
+    /*
+     * O V8 Loader já possui o checkout.
+     * Aqui apenas localizamos o item do Catálogo e
+     * colocamos seu ID no botão data-v8-pay.
+     */
+    function connectPaymentItem() {
+
+        const catalog =
+            window.V8 &&
+            window.V8.catalog;
+
+        const products =
+            catalog &&
+            Array.isArray(catalog.products)
+                ? catalog.products
+                : [];
+
+        const item =
+            products.find(product => {
+
+                const name =
+                    String(
+                        product &&
+                        product.name
+                            ? product.name
+                            : ""
+                    )
+                        .normalize("NFD")
+                        .replace(/[\u0300-\u036f]/g, "")
+                        .toLowerCase();
+
+                return (
+                    name.includes("3 perguntas") ||
+                    name.includes("tres perguntas")
+                );
+            });
+
+        if (!item || !item.id) {
+
+            payButton.disabled = true;
+
+            if (status) {
+                status.textContent =
+                    "Pagamento ainda não configurado.";
+            }
+
+            return;
+        }
+
+        payButton.setAttribute(
+            "data-v8-pay",
+            item.id
+        );
+
+        /*
+         * Depois de pagar, o cliente volta para a página de
+         * agradecimento (obrigado.html), onde envia as perguntas
+         * pelo WhatsApp.
+         */
+        payButton.setAttribute(
+            "data-redirect",
+            new URL("obrigado", window.location.href).href
+        );
+
+        const itemPrice =
+            Number(item.price);
+
+        if (
+            Number.isFinite(itemPrice) &&
+            itemPrice > 0
+        ) {
+
+            const money =
+                new Intl.NumberFormat(
+                    "pt-BR",
+                    {
+                        style: "currency",
+                        currency: "BRL"
+                    }
+                ).format(itemPrice);
+
+            if (price) {
+                price.textContent = money;
+            }
+
+            payButton.textContent =
+                "Pagar agora por " + money;
+        }
+
+        if (status) {
+            status.textContent = "";
+        }
+
+        payButton.disabled = false;
+    }
+
+    if (
+        window.V8 &&
+        window.V8.ready
+    ) {
+
+        window.V8.ready.then(
+            connectPaymentItem
+        );
+    }
+
+    document.addEventListener(
+        "v8:catalog",
+        connectPaymentItem
+    );
+
+    document.addEventListener(
+        "v8:pay-started",
+        () => {
+
+            if (status) {
+                status.textContent =
+                    "Abrindo pagamento seguro...";
+            }
+        }
+    );
+
+    document.addEventListener(
+        "v8:pay-error",
+        event => {
+
+            if (status) {
+                status.textContent =
+                    event.detail &&
+                    event.detail.error &&
+                    event.detail.error.message
+                        ? event.detail.error.message
+                        : "Não foi possível iniciar o pagamento.";
+            }
+        }
+    );
 
     /*
-     * Abre automaticamente.
+     * Abre automaticamente uma única vez por sessão.
+     * O visitante pode fechar e reabrir pelo botão fixo.
      */
+    try {
 
-    setTimeout(
-        openPopup,
-        900
-    );
+        if (
+            sessionStorage.getItem(
+                "v8_quick_questions_seen"
+            ) !== "1"
+        ) {
+
+            window.setTimeout(
+                () => {
+
+                    sessionStorage.setItem(
+                        "v8_quick_questions_seen",
+                        "1"
+                    );
+
+                    openPopup();
+
+                },
+                5000
+            );
+        }
+
+    } catch (error) {
+
+        window.setTimeout(
+            openPopup,
+            5000
+        );
+    }
 }
 
 
@@ -475,15 +592,11 @@ function initInterface() {
 
     setupMobileMenu();
 
+    setupQuickQuestionsPopup();
+
     setupSmoothNavigation();
 
     setupCurrentYear();
-
-    /*
-     * Inicializa o popup.
-     */
-    setupPaymentPopup();
-
 
     document.documentElement.classList.add(
         "js-ready"
@@ -492,7 +605,6 @@ function initInterface() {
     document.body.classList.add(
         "site-ready"
     );
-
 
     console.info(
         "Katlen Ariane — interface inicializada."
@@ -512,23 +624,20 @@ function initSite() {
             "Katlen Ariane — iniciando..."
         );
 
-
         initInterface();
 
-
         /*
-         * Espera o v8-loader.js terminar
-         * antes de esconder campos dinâmicos.
+         * Espera o v8-loader.js terminar (sucesso ou falha) antes de
+         * decidir quais campos [data-dynamic] ficam escondidos — evita
+         * esconder algo que seria preenchido um instante depois, já que
+         * o loader busca os dados de forma assíncrona.
          */
 
         document.addEventListener(
             "v8loader:done",
             removeEmptyDynamicElements,
-            {
-                once: true
-            }
+            { once: true }
         );
-
 
     } catch (error) {
 
@@ -544,9 +653,7 @@ function initSite() {
    DOM READY
    ========================================================= */
 
-if (
-    document.readyState === "loading"
-) {
+if (document.readyState === "loading") {
 
     document.addEventListener(
         "DOMContentLoaded",
