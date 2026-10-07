@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Obrigada | Katlen Ariane</title>
+
+    <meta name="description" content="Obrigada pela sua confiança. Envie suas 3 perguntas pelo WhatsApp.">
+    <meta name="theme-color" content="#F9F7F4">
+
+    <!-- Página de pós-pagamento: não deve aparecer no Google -->
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="icon" href="assets/katlen-logo.png" type="image/png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;500;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+    /* =========================================================
+       PÁGINA DE OBRIGADO — complementa css/style.css
+       ========================================================= */
+
+    .thanks-header .nav-inner {
+        justify-content: space-between;
+    }
+
+    .thanks-header .btn {
+        min-height: 44px;
+        padding: 0 20px;
+        font-size: 13px;
+    }
+
+    .thanks-main {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 150px 0 80px;
+        background:
+            radial-gradient(circle at 15% 20%, var(--purple-light) 0, transparent 45%),
+            radial-gradient(circle at 85% 80%, var(--coral-light) 0, transparent 45%),
+            var(--bg);
+    }
+
+    .thanks-card {
+        max-width: 680px;
+        margin-inline: auto;
+        padding: 56px 48px;
+        text-align: center;
+        background: var(--bg-white);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .thanks-icon {
+        width: 76px;
+        height: 76px;
+        margin: 0 auto 22px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--green-soft);
+        color: var(--green-dark);
+    }
+
+    .thanks-icon svg {
+        width: 38px;
+        height: 38px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2.4;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .thanks-card .eyebrow {
+        margin-bottom: 14px;
+    }
+
+    .thanks-card h1 {
+        margin: 0 0 18px;
+        font-size: clamp(36px, 6vw, 54px);
+        line-height: 1.1;
+    }
+
+    .thanks-lead {
+        margin: 0 auto 30px;
+        max-width: 520px;
+        font-size: 18px;
+        line-height: 1.7;
+    }
+
+    .thanks-steps {
+        display: grid;
+        gap: 12px;
+        margin: 0 0 32px;
+        padding: 0;
+        list-style: none;
+        text-align: left;
+    }
+
+    .thanks-steps li {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 18px;
+        background: var(--bg-soft);
+        border-radius: var(--radius-sm);
+        color: var(--ink-soft);
+        font-size: 15px;
+    }
+
+    .thanks-steps li span {
+        flex: 0 0 30px;
+        height: 30px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--purple);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .btn-whatsapp {
+        gap: 10px;
+        width: 100%;
+        min-height: 58px;
+        background: var(--green);
+        color: #fff;
+        font-size: 15px;
+        box-shadow: 0 12px 28px rgba(37, 211, 102, .28);
+    }
+
+    .btn-whatsapp:hover {
+        background: var(--green-dark);
+        box-shadow: 0 16px 34px rgba(37, 211, 102, .34);
+    }
+
+    .btn-whatsapp svg {
+        width: 22px;
+        height: 22px;
+        fill: currentColor;
+    }
+
+    .thanks-note {
+        display: block;
+        margin-top: 16px;
+        color: var(--muted);
+        font-size: 13px;
+    }
+
+    .thanks-fallback {
+        margin: 0;
+        color: var(--ink-soft);
+    }
+
+    .thanks-footer {
+        padding: 28px 0;
+    }
+
+    .thanks-footer .footer-bottom {
+        padding-top: 0;
+        border-top: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .thanks-footer .brand-name {
+        color: #fff;
+    }
+
+    @media (max-width: 640px) {
+        .thanks-main {
+            padding: 120px 0 50px;
+        }
+
+        .thanks-card {
+            padding: 38px 22px;
+            border-radius: var(--radius-md);
+        }
+
+        .thanks-lead {
+            font-size: 16px;
+        }
+
+        .thanks-header .brand {
+            min-width: 0;
+        }
+
+        .thanks-header .brand-sub {
+            display: none;
+        }
+    }
+
+    /* garante que [hidden] vença os display: dos botões */
+    [hidden] {
+        display: none !important;
+    }
+    </style>
+
+    <!-- V8 LOADER (Pixel/Analytics, contato e WhatsApp vêm do painel) -->
+    <script
+        src="js/v8-loader.js"
+        data-project-id="be844101-c846-491b-bcf8-87626d91cffe"
+        data-api-url="https://v8adminuniversal.aisermelk.workers.dev">
+    </script>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="site-header thanks-header">
+        <div class="container nav-inner">
+
+            <a class="brand" href="/" aria-label="Katlen Ariane - voltar ao site">
+
+                <picture class="brand-logo">
+                    <img
+                        src="assets/katlen-logo.png"
+                        alt=""
+                        aria-hidden="true"
+                        width="42"
+                        height="42"
+                        loading="eager">
+                </picture>
+
+                <span class="brand-text">
+                    <span class="brand-name">Katlen Ariane</span>
+                    <span class="brand-sub">TERAPEUTA &amp; CARTOMANTE</span>
+                </span>
+
+            </a>
+
+            <a class="btn btn-outline" href="/">Voltar ao site</a>
+
+        </div>
+    </header>
+
+
+    <!-- AGRADECIMENTO -->
+    <main class="thanks-main">
+        <div class="container">
+
+            <section class="thanks-card" aria-labelledby="thanksTitle">
+
+                <div class="thanks-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" focusable="false">
+                        <path d="M5 12.5l4.5 4.5L19 7.5" />
+                    </svg>
+                </div>
+
+                <span class="eyebrow">3 perguntas</span>
+
+                <h1 id="thanksTitle">Obrigada pela sua confiança</h1>
+
+                <p class="thanks-lead">
+                    Pix recebido, pode enviar suas 3 perguntas agora e lhe
+                    respondo assim que visualizar sua mensagem.
+                </p>
+
+                <ol class="thanks-steps">
+                    <li><span>1</span> Toque no botão abaixo para abrir o WhatsApp</li>
+                    <li><span>2</span> Escreva suas 3 perguntas e envie</li>
+                    <li><span>3</span> Aguarde a minha resposta com carinho</li>
+                </ol>
+
+                <a
+                    class="btn btn-whatsapp"
+                    id="thanksWhatsapp"
+                    href="#"
+                    target="_blank"
+                    rel="noopener"
+                    data-v8-event="Contact"
+                    hidden>
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.198-.497.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.64 9.64 0 01-4.902-1.348l-.352-.209-3.627.951.969-3.537-.23-.363a9.63 9.63 0 01-1.476-5.142c.001-5.317 4.327-9.642 9.649-9.642 2.577.001 5.001 1.005 6.823 2.827a9.58 9.58 0 012.825 6.814c-.002 5.319-4.329 9.645-9.645 9.649m8.204-17.853A11.48 11.48 0 0012.05 0C5.495 0 .16 5.335.157 11.89c0 2.096.547 4.142 1.588 5.946L.07 24l6.304-1.654a11.9 11.9 0 005.674 1.447h.005c6.554 0 11.89-5.335 11.893-11.89a11.83 11.83 0 00-3.691-8.571" />
+                    </svg>
+
+                    <span>Enviar minhas 3 perguntas no WhatsApp</span>
+                </a>
+
+                <p class="thanks-fallback" id="thanksFallback" hidden>
+                    Volte ao site e fale comigo pelo WhatsApp para enviar suas perguntas.
+                </p>
+
+                <small class="thanks-note" id="thanksNote" hidden>
+                    Se quiser, anexe o comprovante do pagamento na conversa.
+                </small>
+
+            </section>
+
+        </div>
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="site-footer thanks-footer">
+        <div class="container footer-bottom">
+            <span data-current-year>© 2026 Katlen Ariane. Todos os direitos reservados.</span>
+            <a href="/" style="color:rgba(255,255,255,.6)">Voltar ao site</a>
+        </div>
+    </footer>
+
+
+    <script>
+        (function () {
+            "use strict";
+
+            var button = document.getElementById("thanksWhatsapp");
+            var fallback = document.getElementById("thanksFallback");
+            var note = document.getElementById("thanksNote");
+            var title = document.title;
+
+            var message =
+                "Olá, Katlen! Acabei de pagar as 3 perguntas. " +
+                "Seguem as minhas perguntas:\n\n1) \n2) \n3) ";
+
+            // Ano do rodapé
+            document.querySelectorAll("[data-current-year]").forEach(function (el) {
+                el.textContent = "© " + new Date().getFullYear() + " Katlen Ariane. Todos os direitos reservados.";
+            });
+
+            function setup() {
+                // O loader pode sobrescrever título/robots com o SEO da home: aqui mantemos os desta página.
+                document.title = title;
+                var robots = document.head.querySelector('meta[name="robots"]');
+                if (robots) robots.setAttribute("content", "noindex, nofollow");
+
+                var number = String((window.V8 && window.V8.field && window.V8.field("contact.whatsapp")) || "")
+                    .replace(/\D/g, "");
+
+                if (!number) {
+                    fallback.hidden = false;
+                    return;
+                }
+
+                if (number.length <= 11) number = "55" + number;
+
+                button.href = "https://wa.me/" + number + "?text=" + encodeURIComponent(message);
+                button.hidden = false;
+                note.hidden = false;
+            }
+
+            if (window.V8 && window.V8.ready) {
+                window.V8.ready.then(setup, setup);
+            } else {
+                setup();
+            }
+        })();
+    </script>
+
+</body>
+
+</html>
