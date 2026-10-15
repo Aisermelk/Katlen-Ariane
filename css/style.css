@@ -3713,16 +3713,36 @@ body.quick-questions-open {
     }
 }
 
-/* WHATSAPP — CANTO INFERIOR DIREITO */
-.whatsapp-float {
-    left: auto;
-    right: 24px;
-    bottom: 24px;
-    transform: none;
+
+
+/* =========================================================
+   AJUSTE SOLICITADO — IMAGEM DA SEÇÃO SOBRE TOTALMENTE OVAL
+   ========================================================= */
+.about-image {
+    aspect-ratio: 4 / 5;
+    min-height: 0;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
-.whatsapp-float:hover {
-    transform: translateY(-4px);
+.about-image picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.about-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.about-image::after,
+.about-image i,
+.about-image span {
+    display: none;
 }
 
 /* BOTÃO 3 PERGUNTAS — CENTRO INFERIOR */
