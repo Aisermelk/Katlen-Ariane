@@ -2711,32 +2711,26 @@ textarea:focus-visible {
 
 
     /* =====================================================
-   SOBRE
-   ===================================================== */
+       SOBRE
+       ===================================================== */
 
-   .about-grid {
-       grid-template-columns: 1fr;
-       gap: 50px;
-   }
+    .about-grid {
+        grid-template-columns: 1fr;
 
-   .about-image {
-       min-height: 450px;
-       max-width: 500px;
-       width: 100%;
-       aspect-ratio: 1 / 1;
-       margin-inline: auto;
-       border-radius: 50%;
-       overflow: hidden;
-   }
+        gap: 50px;
+    }
 
-   .about-image img {
-       width: 100%;
-       height: 100%;
-       display: block;
-       object-fit: cover;
-       border-radius: 50%;
-   }
-   
+    .about-image {
+        min-height: 450px;
+
+        max-width: 500px;
+
+        margin-inline: auto;
+
+        width: 100%;
+    }
+
+
     /* =====================================================
        HEADINGS
        ===================================================== */
@@ -3718,6 +3712,7 @@ body.quick-questions-open {
         background: rgba(250, 247, 243, .78);
     }
 }
+
 /* WHATSAPP — CANTO INFERIOR DIREITO */
 .whatsapp-float {
     left: auto;
