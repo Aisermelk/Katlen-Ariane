@@ -3713,3 +3713,34 @@ body.quick-questions-open {
     }
 }
 
+
+
+/* =========================================================
+   AJUSTE SOLICITADO — IMAGEM DA SEÇÃO SOBRE TOTALMENTE OVAL
+   ========================================================= */
+.about-image {
+    aspect-ratio: 4 / 5;
+    min-height: 0;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.about-image picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.about-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.about-image::after,
+.about-image i,
+.about-image span {
+    display: none;
+}
