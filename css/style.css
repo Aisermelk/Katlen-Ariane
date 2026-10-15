@@ -3744,3 +3744,69 @@ body.quick-questions-open {
 .about-image span {
     display: none;
 }
+/* BOTÃO WHATSAPP CENTRALIZADO NA PARTE INFERIOR — PC E MOBILE */
+.whatsapp-float {
+    position: fixed;
+    left: 50%;
+    right: auto;
+    bottom: 24px;
+    transform: translateX(-50%);
+    z-index: 9999;
+}
+
+.whatsapp-float:hover {
+    transform: translate(-50%, -4px);
+}
+
+/* MOBILE */
+@media (max-width: 820px) {
+    .whatsapp-float {
+        left: 50%;
+        right: auto;
+        bottom: 18px;
+        transform: translateX(-50%);
+    }
+
+    .whatsapp-float:hover {
+        transform: translate(-50%, -3px);
+    }
+}
+
+@media (max-width: 520px) {
+    .whatsapp-float {
+        left: 50%;
+        right: auto;
+        bottom: 14px;
+        width: 52px;
+        height: 52px;
+        min-height: 52px;
+        padding: 0;
+        border-radius: 50%;
+        gap: 0;
+    }
+
+    .whatsapp-float span {
+        display: none;
+    }
+
+    .whatsapp-float svg {
+        width: 28px;
+        height: 28px;
+        display: block;
+        fill: currentColor;
+    }
+}
+
+@media (max-width: 360px) {
+    .whatsapp-float {
+        bottom: 12px;
+        width: 50px;
+        height: 50px;
+        min-height: 50px;
+    }
+
+    .whatsapp-float svg {
+        width: 26px;
+        height: 26px;
+    }
+}
