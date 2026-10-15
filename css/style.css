@@ -3603,3 +3603,105 @@ body.quick-questions-open {
         max-width: calc(100% - 28px);
     }
 }
+
+/* =========================================================
+   AJUSTE DO HERO — BANNER EM TELA CHEIA
+   A imagem do hero passa a preencher todo o fundo da seção.
+   ========================================================= */
+.hero {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding: clamp(125px, 15vh, 175px) 0 clamp(80px, 10vh, 110px);
+    overflow: hidden;
+    background-color: var(--bg);
+    background-image: url('../assets/katlen-hero.png');
+    background-size: cover;
+    background-position: center 42%;
+    background-repeat: no-repeat;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(
+        90deg,
+        rgba(250, 247, 243, .94) 0%,
+        rgba(250, 247, 243, .86) 38%,
+        rgba(250, 247, 243, .48) 68%,
+        rgba(250, 247, 243, .18) 100%
+    );
+}
+
+.hero-grid {
+    position: relative;
+    z-index: 2;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+}
+
+.hero-copy {
+    max-width: 700px;
+    z-index: 3;
+}
+
+/* A foto já é o fundo do banner; evita repetir a mesma imagem no conteúdo. */
+.hero-visual {
+    display: none;
+}
+
+.hero-bottom {
+    z-index: 1;
+    pointer-events: none;
+}
+
+.hero-orb,
+.hero-stroke {
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        min-height: 100svh;
+        padding: 130px 0 85px;
+        background-position: 55% center;
+    }
+
+    .hero::before {
+        background: linear-gradient(
+            180deg,
+            rgba(250, 247, 243, .88) 0%,
+            rgba(250, 247, 243, .80) 48%,
+            rgba(250, 247, 243, .60) 100%
+        );
+    }
+
+    .hero-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .hero-copy {
+        width: 100%;
+        max-width: 620px;
+        margin-inline: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        background-position: 54% center;
+        padding-top: 120px;
+    }
+
+    .hero::before {
+        background: rgba(250, 247, 243, .78);
+    }
+}
+
