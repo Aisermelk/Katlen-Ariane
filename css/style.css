@@ -3782,18 +3782,3 @@ body.quick-questions-open {
     .quick-questions-trigger {
         bottom: 12px;
     }
-
-/* IMAGEM SOBRE — FORMATO CIRCULAR EM TODAS AS TELAS */
-.about-image {
-    aspect-ratio: 1 / 1;
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-.about-image img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-    border-radius: 50%;
-}
