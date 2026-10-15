@@ -2711,26 +2711,32 @@ textarea:focus-visible {
 
 
     /* =====================================================
-       SOBRE
-       ===================================================== */
+   SOBRE
+   ===================================================== */
 
-    .about-grid {
-        grid-template-columns: 1fr;
+   .about-grid {
+       grid-template-columns: 1fr;
+       gap: 50px;
+   }
 
-        gap: 50px;
-    }
+   .about-image {
+       min-height: 450px;
+       max-width: 500px;
+       width: 100%;
+       aspect-ratio: 1 / 1;
+       margin-inline: auto;
+       border-radius: 50%;
+       overflow: hidden;
+   }
 
-    .about-image {
-        min-height: 450px;
-
-        max-width: 500px;
-
-        margin-inline: auto;
-
-        width: 100%;
-    }
-
-
+   .about-image img {
+       width: 100%;
+       height: 100%;
+       display: block;
+       object-fit: cover;
+       border-radius: 50%;
+   }
+   
     /* =====================================================
        HEADINGS
        ===================================================== */
