@@ -2595,8 +2595,35 @@ textarea:focus-visible {
         display: none;
     }
 
+    .site-header .nav-inner {
+        gap: 8px;
+    }
+
+    .site-header .brand {
+        flex: 1 1 0;
+        overflow: hidden;
+    }
+
+    .site-header .brand-text {
+        overflow: hidden;
+    }
+
+    .site-header .brand-name,
+    .site-header .brand-sub {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     .header-cta {
-        display: none;
+        display: inline-flex;
+        flex-shrink: 0;
+        min-height: 44px;
+        padding: 0 12px;
+    }
+
+    .site-header .mobile-toggle {
+        flex-shrink: 0;
+        margin-left: 0;
     }
 
     .mobile-toggle {
