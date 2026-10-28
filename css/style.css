@@ -3826,26 +3826,16 @@ body.quick-questions-open {
     }
 
 
-/* Instagram: texto no desktop e ícone SVG no celular. */
-.header-instagram-icon {
-    display: none;
+/* Instagram: somente ícone SVG em todas as telas. */
+.site-header .header-cta {
+    display: inline-flex;
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+    flex-shrink: 0;
 }
 
-@media (max-width: 820px) {
-    .site-header .header-cta {
-        display: inline-flex;
-        width: 44px;
-        height: 44px;
-        min-height: 44px;
-        padding: 0;
-        flex-shrink: 0;
-    }
-
-    .header-instagram-icon {
-        display: block;
-    }
-
-    .header-instagram-label {
-        display: none;
-    }
+.header-instagram-icon {
+    display: block;
 }
